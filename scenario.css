@@ -6,7 +6,7 @@
 /* --- Scenario Hero Banner --- */
 .scenario-hero {
   position: relative;
-  height: 320px;
+  height: 480px;
   overflow: hidden;
   margin-top: 68px;
 }
@@ -1137,7 +1137,7 @@
    RESPONSIVE
    ============================================ */
 @media (max-width: 768px) {
-  .scenario-hero { height: 240px; }
+  .scenario-hero { height: 340px; }
 
   .scenario-hero-title { font-size: 1.6rem; }
 
@@ -1179,7 +1179,7 @@
 }
 
 @media (max-width: 480px) {
-  .scenario-hero { height: 200px; margin-top: 60px; }
+  .scenario-hero { height: 260px; margin-top: 60px; }
 
   .scenario-hero-icon { font-size: 2rem; }
 

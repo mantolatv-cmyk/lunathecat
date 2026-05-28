@@ -1,0 +1,533 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>🍎 Vocabulary Match-Up — Learn with Luna</title>
+  <meta name="description" content="Interactive matching game to learn vocabulary." />
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🐱</text></svg>" />
+  <link rel="stylesheet" href="styles.css" />
+  <style>
+    body {
+      background: var(--bg-color);
+      display: flex;
+      flex-direction: column;
+      min-height: 100vh;
+      margin: 0;
+    }
+    
+    .game-header {
+      background: white;
+      padding: 1rem 2rem;
+      box-shadow: 0 4px 12px var(--shadow-soft);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      z-index: 10;
+    }
+    
+    .game-title {
+      font-family: var(--font-display);
+      font-size: 1.5rem;
+      color: var(--green-dark);
+      margin: 0;
+    }
+    
+    .back-btn-game {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.4rem;
+      font-family: var(--font-body);
+      font-weight: 600;
+      color: var(--text-secondary);
+      text-decoration: none;
+      padding: 0.5rem 1rem;
+      border-radius: var(--radius-full);
+      background: var(--card-bg);
+      border: 1px solid var(--border-soft);
+      transition: all 0.3s;
+    }
+    
+    .back-btn-game:hover {
+      color: var(--green-dark);
+      background: var(--green-mint);
+    }
+
+    .game-container {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: 2rem 1rem;
+      max-width: 900px;
+      margin: 0 auto;
+      width: 100%;
+    }
+    
+    .game-instructions {
+      font-size: 1.2rem;
+      font-weight: 600;
+      color: var(--text-secondary);
+      margin-bottom: 2rem;
+      text-align: center;
+    }
+
+    .match-board {
+      display: flex;
+      width: 100%;
+      gap: 2rem;
+      justify-content: space-between;
+    }
+
+    .words-column, .pictures-column {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      gap: 1.5rem;
+      align-items: center;
+    }
+
+    .word-block {
+      background: white;
+      border: 3px solid var(--border-soft);
+      border-radius: var(--radius-lg);
+      padding: 1rem 2rem;
+      font-family: var(--font-display);
+      font-size: 1.5rem;
+      font-weight: 700;
+      color: var(--text-primary);
+      box-shadow: 0 4px 10px var(--shadow-soft);
+      cursor: grab;
+      user-select: none;
+      transition: transform 0.2s, box-shadow 0.2s;
+      width: 200px;
+      text-align: center;
+      touch-action: none; /* Crucial for custom touch drag */
+    }
+
+    .word-block:active {
+      cursor: grabbing;
+    }
+
+    .word-block.dragging {
+      opacity: 0.8;
+      box-shadow: 0 10px 25px rgba(0,0,0,0.2);
+      border-color: var(--green-accent);
+      z-index: 100;
+    }
+    
+    .word-block.matched {
+      visibility: hidden; /* Hide from original column once matched */
+    }
+
+    .picture-row {
+      display: flex;
+      align-items: center;
+      gap: 1.5rem;
+      background: white;
+      padding: 1rem;
+      border-radius: var(--radius-lg);
+      box-shadow: 0 4px 10px var(--shadow-soft);
+      width: 100%;
+      max-width: 400px;
+    }
+
+    .picture-emoji {
+      font-size: 4rem;
+      filter: drop-shadow(0 4px 8px rgba(0,0,0,0.1));
+      width: 80px;
+      text-align: center;
+    }
+
+    .drop-zone {
+      flex: 1;
+      height: 60px;
+      border: 3px dashed var(--border-soft);
+      border-radius: var(--radius-md);
+      background: #f8f9fa;
+      transition: all 0.3s;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .drop-zone.drag-over {
+      background: #e6fcf5;
+      border-color: var(--green-accent);
+      transform: scale(1.02);
+    }
+    
+    .drop-zone.matched {
+      border: 3px solid var(--green-accent);
+      background: var(--green-mint);
+    }
+    
+    .drop-zone .matched-word {
+      font-family: var(--font-display);
+      font-size: 1.5rem;
+      font-weight: 700;
+      color: var(--green-dark);
+      animation: tabFadeIn 0.5s ease;
+    }
+
+    /* Celebration Screen */
+    .game-complete {
+      display: none;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      background: white;
+      border-radius: var(--radius-xl);
+      padding: 3rem;
+      box-shadow: 0 8px 30px var(--shadow-soft);
+      text-align: center;
+      margin-top: 2rem;
+      width: 100%;
+      max-width: 600px;
+      animation: tabFadeIn 0.5s ease;
+    }
+    
+    .game-complete.active {
+      display: flex;
+    }
+    
+    .game-complete-emoji {
+      font-size: 6rem;
+      margin-bottom: 1rem;
+      animation: popBounce 1s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    }
+    
+    .game-complete-title {
+      font-family: var(--font-display);
+      font-size: 2.5rem;
+      color: var(--green-dark);
+      margin-bottom: 1rem;
+    }
+    
+    .game-replay-btn {
+      background: var(--green-accent);
+      color: white;
+      border: none;
+      padding: 1rem 2rem;
+      font-size: 1.2rem;
+      font-family: var(--font-display);
+      border-radius: var(--radius-full);
+      cursor: pointer;
+      box-shadow: 0 4px 15px rgba(34, 197, 94, 0.3);
+      transition: transform 0.3s, box-shadow 0.3s;
+      margin-top: 1.5rem;
+    }
+    
+    .game-replay-btn:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 6px 20px rgba(34, 197, 94, 0.4);
+    }
+    
+    @keyframes popBounce {
+      0% { transform: scale(0); }
+      70% { transform: scale(1.2); }
+      100% { transform: scale(1); }
+    }
+    
+    @keyframes tabFadeIn {
+      from { opacity: 0; transform: translateY(10px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    @media (max-width: 768px) {
+      .match-board {
+        flex-direction: column-reverse; /* Words on bottom for easier reaching */
+      }
+      .words-column {
+        flex-direction: row;
+        flex-wrap: wrap;
+        justify-content: center;
+      }
+      .word-block {
+        width: 120px;
+        padding: 0.8rem 1rem;
+        font-size: 1.1rem;
+      }
+      .picture-emoji {
+        font-size: 3rem;
+        width: 60px;
+      }
+      .drop-zone {
+        height: 50px;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <header class="game-header">
+    <a href="index.html#printables" class="back-btn-game">← Back to Printables</a>
+    <h1 class="game-title">🍎 Vocabulary Match-Up</h1>
+    <div></div>
+  </header>
+
+  <main class="game-container">
+    <div id="game-area" style="width: 100%;">
+      <p class="game-instructions">Drag the English words to the correct pictures!</p>
+      
+      <div class="match-board">
+        <div class="words-column" id="words-container">
+          <!-- Words rendered by JS -->
+        </div>
+        
+        <div class="pictures-column" id="pictures-container">
+          <!-- Pictures & Drop Zones rendered by JS -->
+        </div>
+      </div>
+    </div>
+    
+    <div class="game-complete" id="game-complete">
+      <div class="game-complete-emoji">🎉</div>
+      <h2 class="game-complete-title">You Did It!</h2>
+      <p style="font-size: 1.2rem; color: var(--text-secondary);">You matched all the words perfectly!</p>
+      <button class="game-replay-btn" id="game-replay-btn">🔄 Play Again!</button>
+    </div>
+  </main>
+
+  <script>
+    // Game Data
+    const vocabData = [
+      { word: 'Apple', emoji: '🍎', id: 'apple' },
+      { word: 'Dog', emoji: '🐶', id: 'dog' },
+      { word: 'Blue', emoji: '🔵', id: 'blue' },
+      { word: 'Banana', emoji: '🍌', id: 'banana' },
+      { word: 'Cow', emoji: '🐄', id: 'cow' }
+    ];
+
+    let matchesMade = 0;
+    
+    const wordsContainer = document.getElementById('words-container');
+    const picturesContainer = document.getElementById('pictures-container');
+    
+    function initGame() {
+      matchesMade = 0;
+      wordsContainer.innerHTML = '';
+      picturesContainer.innerHTML = '';
+      
+      document.getElementById('game-area').style.display = 'block';
+      document.getElementById('game-complete').classList.remove('active');
+      
+      // Shuffle data for words
+      const shuffledWords = [...vocabData].sort(() => Math.random() - 0.5);
+      // Shuffle data for pictures
+      const shuffledPics = [...vocabData].sort(() => Math.random() - 0.5);
+      
+      // Render Words
+      shuffledWords.forEach(item => {
+        const wordBlock = document.createElement('div');
+        wordBlock.className = 'word-block';
+        wordBlock.textContent = item.word;
+        wordBlock.draggable = true;
+        wordBlock.dataset.id = item.id;
+        
+        // Mouse Drag Events
+        wordBlock.addEventListener('dragstart', handleDragStart);
+        wordBlock.addEventListener('dragend', handleDragEnd);
+        
+        // Touch Drag Events
+        wordBlock.addEventListener('touchstart', handleTouchStart, {passive: false});
+        wordBlock.addEventListener('touchmove', handleTouchMove, {passive: false});
+        wordBlock.addEventListener('touchend', handleTouchEnd);
+        
+        wordsContainer.appendChild(wordBlock);
+      });
+      
+      // Render Pictures & Drop Zones
+      shuffledPics.forEach(item => {
+        const row = document.createElement('div');
+        row.className = 'picture-row';
+        
+        const emoji = document.createElement('div');
+        emoji.className = 'picture-emoji';
+        emoji.textContent = item.emoji;
+        
+        const dropZone = document.createElement('div');
+        dropZone.className = 'drop-zone';
+        dropZone.dataset.id = item.id;
+        
+        // Mouse Drop Events
+        dropZone.addEventListener('dragover', handleDragOver);
+        dropZone.addEventListener('dragleave', handleDragLeave);
+        dropZone.addEventListener('drop', handleDrop);
+        
+        row.appendChild(emoji);
+        row.appendChild(dropZone);
+        picturesContainer.appendChild(row);
+      });
+    }
+
+    // --- MOUSE DRAG & DROP LOGIC ---
+    let draggedItem = null;
+
+    function handleDragStart(e) {
+      draggedItem = this;
+      e.dataTransfer.setData('text/plain', this.dataset.id);
+      setTimeout(() => this.classList.add('dragging'), 0);
+    }
+
+    function handleDragEnd(e) {
+      this.classList.remove('dragging');
+      draggedItem = null;
+    }
+
+    function handleDragOver(e) {
+      e.preventDefault(); // Necessary to allow dropping
+      if (!this.classList.contains('matched')) {
+        this.classList.add('drag-over');
+      }
+    }
+
+    function handleDragLeave(e) {
+      this.classList.remove('drag-over');
+    }
+
+    function handleDrop(e) {
+      e.preventDefault();
+      this.classList.remove('drag-over');
+      
+      if (this.classList.contains('matched')) return;
+      
+      const droppedId = e.dataTransfer.getData('text/plain');
+      const targetId = this.dataset.id;
+      
+      if (droppedId === targetId) {
+        processMatch(draggedItem, this, targetId);
+      } else {
+        // Wrong match visual feedback could go here
+      }
+    }
+
+    // --- TOUCH DRAG & DROP LOGIC ---
+    let currentTouchItem = null;
+    let initialX, initialY;
+
+    function handleTouchStart(e) {
+      if (this.classList.contains('matched')) return;
+      currentTouchItem = this;
+      this.classList.add('dragging');
+      
+      // We need absolute positioning to move it freely
+      // But adding it directly jumps the element. So we clone it for visual dragging.
+      const touch = e.targetTouches[0];
+      const rect = this.getBoundingClientRect();
+      
+      initialX = touch.clientX - rect.left;
+      initialY = touch.clientY - rect.top;
+      
+      // Make original invisible but keep space
+      this.style.opacity = '0.01';
+      
+      // Create clone
+      const clone = this.cloneNode(true);
+      clone.id = 'drag-clone';
+      clone.style.position = 'fixed';
+      clone.style.left = (touch.clientX - initialX) + 'px';
+      clone.style.top = (touch.clientY - initialY) + 'px';
+      clone.style.width = rect.width + 'px';
+      clone.style.height = rect.height + 'px';
+      clone.style.margin = '0';
+      clone.style.pointerEvents = 'none'; // so we can find dropzone beneath it
+      document.body.appendChild(clone);
+    }
+
+    function handleTouchMove(e) {
+      if (!currentTouchItem) return;
+      e.preventDefault(); // Prevent scroll
+      
+      const touch = e.targetTouches[0];
+      const clone = document.getElementById('drag-clone');
+      if (clone) {
+        clone.style.left = (touch.clientX - initialX) + 'px';
+        clone.style.top = (touch.clientY - initialY) + 'px';
+      }
+      
+      // Highlight drop zone beneath
+      document.querySelectorAll('.drop-zone').forEach(zone => {
+        if (zone.classList.contains('matched')) return;
+        const rect = zone.getBoundingClientRect();
+        if (
+          touch.clientX >= rect.left &&
+          touch.clientX <= rect.right &&
+          touch.clientY >= rect.top &&
+          touch.clientY <= rect.bottom
+        ) {
+          zone.classList.add('drag-over');
+        } else {
+          zone.classList.remove('drag-over');
+        }
+      });
+    }
+
+    function handleTouchEnd(e) {
+      if (!currentTouchItem) return;
+      
+      const touch = e.changedTouches[0];
+      
+      // Remove clone
+      const clone = document.getElementById('drag-clone');
+      if (clone) clone.remove();
+      
+      // Restore original visually
+      currentTouchItem.style.opacity = '';
+      currentTouchItem.classList.remove('dragging');
+      
+      // Find dropzone
+      let targetZone = null;
+      document.querySelectorAll('.drop-zone').forEach(zone => {
+        zone.classList.remove('drag-over');
+        if (zone.classList.contains('matched')) return;
+        const rect = zone.getBoundingClientRect();
+        if (
+          touch.clientX >= rect.left &&
+          touch.clientX <= rect.right &&
+          touch.clientY >= rect.top &&
+          touch.clientY <= rect.bottom
+        ) {
+          targetZone = zone;
+        }
+      });
+      
+      if (targetZone) {
+        const droppedId = currentTouchItem.dataset.id;
+        const targetId = targetZone.dataset.id;
+        if (droppedId === targetId) {
+          processMatch(currentTouchItem, targetZone, targetId);
+        }
+      }
+      
+      currentTouchItem = null;
+    }
+
+    // --- COMMON MATCH LOGIC ---
+    function processMatch(wordEl, dropZone, id) {
+      // Mark as matched
+      wordEl.classList.add('matched');
+      dropZone.classList.add('matched');
+      
+      // Add text inside drop zone
+      const wordObj = vocabData.find(v => v.id === id);
+      dropZone.innerHTML = `<span class="matched-word">${wordObj.word}</span>`;
+      
+      matchesMade++;
+      if (matchesMade === vocabData.length) {
+        setTimeout(showComplete, 500);
+      }
+    }
+
+    function showComplete() {
+      document.getElementById('game-area').style.display = 'none';
+      document.getElementById('game-complete').classList.add('active');
+    }
+
+    document.getElementById('game-replay-btn').addEventListener('click', initGame);
+
+    // Start Game
+    initGame();
+  </script>
+</body>
+</html>

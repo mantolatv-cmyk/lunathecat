@@ -1,0 +1,425 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>🧸 Toys & Fun — Learn with Luna</title>
+  <meta name="description" content="Learn English toy names with Luna the Cat! Interactive stories, flashcards, and a hidden object game." />
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🐱</text></svg>" />
+  <link rel="stylesheet" href="styles.css" />
+  <link rel="stylesheet" href="scenario.css" />
+</head>
+<body>
+
+  <header class="header scrolled" id="app-header">
+    <div class="header-inner">
+      <a href="index.html" class="logo">
+        <img src="images/luna-logo.png" alt="Luna the Cat" class="logo-icon" />
+        <span class="logo-text">Learn with <span>Luna</span></span>
+      </a>
+      <nav class="nav-links">
+        <a href="index.html" class="nav-link">Home</a>
+        <a href="index.html#videos" class="nav-link active">Videos</a>
+        <a href="index.html#printables" class="nav-link">Printables</a>
+        <a href="index.html#about" class="nav-link">About</a>
+      </nav>
+      <button class="menu-toggle" id="menu-toggle" aria-label="Toggle menu"><span></span></button>
+    </div>
+    <nav class="nav-mobile" id="nav-mobile">
+      <a href="index.html" class="nav-link">Home</a>
+      <a href="index.html#videos" class="nav-link">Videos</a>
+      <a href="index.html#printables" class="nav-link">Printables</a>
+      <a href="index.html#about" class="nav-link">About</a>
+    </nav>
+  </header>
+
+  <section class="scenario-hero">
+    <img src="images/scene-toys.png" alt="Luna in a playroom with toys" class="scenario-hero-img" />
+    <div class="scenario-hero-overlay">
+      <div class="scenario-hero-icon">🧸</div>
+      <h1 class="scenario-hero-title">Toys & Fun</h1>
+      <p class="scenario-hero-subtitle">Playtime! Let's learn toy names in English.</p>
+    </div>
+  </section>
+
+  <div class="scenario-container">
+    <a href="index.html" class="back-btn">← Back to Home</a>
+
+    <div class="scenario-tabs">
+      <button class="scenario-tab active" data-tab="story">💬 Story Time</button>
+      <button class="scenario-tab" data-tab="vocab">📖 Learn Words</button>
+      <button class="scenario-tab" data-tab="game">🎮 Find the Toy</button>
+      <button class="scenario-tab" data-tab="memory">🃏 Matching Pairs</button>
+    </div>
+
+    <!-- TAB 1: Story Time -->
+    <div class="tab-panel active" id="tab-story">
+      <div class="dialogue-container" id="dialogue-container"></div>
+      <button class="dialogue-next-btn" id="dialogue-next-btn">Next Line →</button>
+      <button class="dialogue-restart-btn" id="dialogue-restart-btn">🔄 Start Over</button>
+    </div>
+
+    <!-- TAB 2: Sequential Flashcards -->
+    <div class="tab-panel" id="tab-vocab">
+      <div class="seq-card-container">
+        <div class="seq-card" id="seq-card">
+          <div class="seq-emoji" id="seq-emoji">⚽</div>
+          <div class="seq-word" id="seq-word">Ball</div>
+          <button class="seq-translation-btn" id="seq-translation-btn">Show Portuguese</button>
+          <div class="seq-translation-text" id="seq-translation-text">Bola</div>
+        </div>
+        <div class="seq-nav">
+          <button class="seq-nav-btn" id="seq-prev-btn" aria-label="Previous">←</button>
+          <button class="seq-nav-btn" id="seq-next-btn" aria-label="Next">→</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- TAB 3: Find the Toy Game -->
+    <div class="tab-panel" id="tab-game">
+      <div class="game-area" id="game-area">
+        <div class="game-score" id="game-score">⭐ Found: <strong>0</strong> / <span>10</span></div>
+        <div class="game-progress"><div class="game-progress-bar" id="game-progress-bar"></div></div>
+        
+        <div style="text-align: center;">
+          <div class="find-toy-prompt" id="find-toy-prompt">
+            Can you find the <span class="find-toy-target" id="find-toy-target">🧸</span> ?
+          </div>
+        </div>
+
+        <div class="messy-room" id="messy-room">
+          <!-- Toys will be scattered here by JS -->
+        </div>
+      </div>
+
+      <div class="game-complete" id="game-complete">
+        <div class="game-complete-emoji">✨</div>
+        <h2 class="game-complete-title">Room Cleaned!</h2>
+        <p class="game-complete-score" id="game-final-score">You found all the toys!</p>
+        <div class="game-stars" id="game-stars">⭐⭐⭐</div>
+        <button class="game-replay-btn" id="game-replay-btn">🔄 Play Again!</button>
+      </div>
+    </div>
+
+    
+    <!-- TAB 4: Matching Pairs -->
+    <div class="tab-panel" id="tab-memory">
+      <div class="pairs-board" id="pairs-board"></div>
+      <div class="game-complete" id="pairs-complete" style="display: none; flex-direction: column; align-items: center;">
+        <div class="game-complete-emoji">🎉</div>
+        <h2 class="game-complete-title">You Did It!</h2>
+        <p class="game-complete-score" style="font-size:1.2rem; color:var(--text-secondary);">You found all the pairs!</p>
+        <button class="game-replay-btn" id="pairs-replay-btn">🔄 Play Again!</button>
+      </div>
+    </div>
+  </div>
+  </div>
+
+  <footer class="footer">
+    <div class="footer-inner">
+      <p class="footer-message">Luna loves playing and learning! <span class="paw-emoji">🐾</span></p>
+      <p class="footer-copy">Made with <span class="heart">♥</span> by Learn with Luna · © 2026</p>
+    </div>
+  </footer>
+
+  <script>
+    // DATA
+    const dialogues = [
+      { speaker: 'luna', en: "Welcome to my playroom! 🧸", pt: "Bem-vindo ao meu quarto de brinquedos! 🧸" },
+      { speaker: 'child', en: "Wow! So many toys!", pt: "Uau! Tantos brinquedos!" },
+      { speaker: 'luna', en: "I love playing with my BALL ⚽!", pt: "Eu adoro brincar com a minha BALL (Bola) ⚽!" },
+      { speaker: 'child', en: "Can we play with the CAR 🚗 too?", pt: "Podemos brincar com o CAR (Carro) 🚗 também?" },
+      { speaker: 'luna', en: "Yes! Vroom vroom! And look at my ROBOT 🤖!", pt: "Sim! Vrum vrum! E olhe o meu ROBOT (Robô) 🤖!" },
+      { speaker: 'child', en: "The robot is so cool! Beep boop!", pt: "O robô é muito legal! Bip bop!" },
+      { speaker: 'luna', en: "Let's learn all the toy names together! 🪁", pt: "Vamos aprender o nome de todos os brinquedos juntos! 🪁" }
+    ];
+
+    const vocabulary = [
+      { emoji: '⚽', word: 'Ball', pt: 'Bola' },
+      { emoji: '🎎', word: 'Doll', pt: 'Boneca' },
+      { emoji: '🧸', word: 'Teddy Bear', pt: 'Urso de Pelúcia' },
+      { emoji: '🤖', word: 'Robot', pt: 'Robô' },
+      { emoji: '🚗', word: 'Car', pt: 'Carro' },
+      { emoji: '🪁', word: 'Kite', pt: 'Pipa' },
+      { emoji: '🛹', word: 'Skate Board', pt: 'Skate' },
+      { emoji: '🚲', word: 'Bike', pt: 'Bicicleta' },
+      { emoji: '🛝', word: 'Playground', pt: 'Parquinho' },
+      { emoji: '<svg viewBox="0 0 100 100" width="1em" height="1em" xmlns="http://www.w3.org/2000/svg" style="vertical-align: -0.125em;"><rect x="10" y="30" width="80" height="60" rx="5" fill="#ef4444" /><rect x="10" y="85" width="80" height="5" rx="2" fill="#b91c1c" /><rect x="20" y="15" width="20" height="15" rx="3" fill="#ef4444" /><rect x="20" y="15" width="20" height="5" rx="2" fill="#fca5a5" /><rect x="60" y="15" width="20" height="15" rx="3" fill="#ef4444" /><rect x="60" y="15" width="20" height="5" rx="2" fill="#fca5a5" /></svg>', word: 'Lego', pt: 'Lego' }
+    ];
+
+    
+
+    // TABS
+    document.querySelectorAll('.scenario-tab').forEach(tab => {
+      tab.addEventListener('click', () => {
+        document.querySelectorAll('.scenario-tab').forEach(t => t.classList.remove('active'));
+        document.querySelectorAll('.tab-panel').forEach(p => p.classList.remove('active'));
+        tab.classList.add('active');
+        document.getElementById('tab-' + tab.dataset.tab).classList.add('active');
+      });
+    });
+    document.getElementById('menu-toggle').addEventListener('click', () => {
+      document.getElementById('menu-toggle').classList.toggle('active');
+      document.getElementById('nav-mobile').classList.toggle('open');
+    });
+
+    // DIALOGUES
+    let dIdx = 0;
+    const dc = document.getElementById('dialogue-container');
+    const nb = document.getElementById('dialogue-next-btn');
+    const rb = document.getElementById('dialogue-restart-btn');
+
+    function renderNext() {
+      if (dIdx >= dialogues.length) { 
+        nb.disabled = true; 
+        nb.textContent = '✅ Story Complete!'; 
+        rb.classList.add('visible'); 
+        return; 
+      }
+      const d = dialogues[dIdx];
+      const b = document.createElement('div');
+      b.className = `dialogue-bubble ${d.speaker}`;
+      b.innerHTML = `<div class="dialogue-speaker"><span>${d.speaker === 'luna' ? '🐱' : '👧'}</span><span>${d.speaker === 'luna' ? 'Luna the Cat' : 'Little Friend'}</span></div><div class="dialogue-english">${d.en}</div><div class="dialogue-portuguese">🇧🇷 ${d.pt}</div>`;
+      dc.appendChild(b);
+      requestAnimationFrame(() => b.classList.add('visible'));
+      dIdx++;
+      b.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+    }
+    nb.addEventListener('click', renderNext);
+    rb.addEventListener('click', () => { 
+      dIdx = 0; 
+      dc.innerHTML = ''; 
+      nb.disabled = false; 
+      nb.textContent = 'Next Line →'; 
+      rb.classList.remove('visible'); 
+      renderNext(); 
+    });
+    renderNext();
+
+    // SEQUENTIAL FLASHCARDS
+    let flashcardIndex = 0;
+    const emojiEl = document.getElementById('seq-emoji');
+    const wordEl = document.getElementById('seq-word');
+    const transBtn = document.getElementById('seq-translation-btn');
+    const transText = document.getElementById('seq-translation-text');
+    const prevBtn = document.getElementById('seq-prev-btn');
+    const nextBtn = document.getElementById('seq-next-btn');
+
+    function renderFlashcard() {
+      const v = vocabulary[flashcardIndex];
+      emojiEl.innerHTML = v.emoji;
+      wordEl.textContent = v.word;
+      transText.textContent = `🇧🇷 ${v.pt}`;
+      transText.classList.remove('visible');
+      transBtn.style.display = 'block';
+
+      prevBtn.disabled = flashcardIndex === 0;
+      nextBtn.disabled = flashcardIndex === vocabulary.length - 1;
+    }
+
+    transBtn.addEventListener('click', () => {
+      transBtn.style.display = 'none';
+      transText.classList.add('visible');
+    });
+
+    prevBtn.addEventListener('click', () => {
+      if (flashcardIndex > 0) { flashcardIndex--; renderFlashcard(); }
+    });
+
+    nextBtn.addEventListener('click', () => {
+      if (flashcardIndex < vocabulary.length - 1) { flashcardIndex++; renderFlashcard(); }
+    });
+    renderFlashcard();
+
+    // GAME — FIND THE TOY
+    const room = document.getElementById('messy-room');
+    const targetEl = document.getElementById('find-toy-target');
+    let toysFound = 0;
+    let toysToFind = [];
+    const totalToys = vocabulary.length;
+
+    function initFindGame() {
+      toysFound = 0;
+      room.innerHTML = '';
+      document.getElementById('game-score').innerHTML = `⭐ Found: <strong>0</strong> / <span>${totalToys}</span>`;
+      document.getElementById('game-progress-bar').style.width = '0%';
+      
+      // Shuffle toys to find
+      toysToFind = [...vocabulary].sort(() => Math.random() - 0.5);
+      setNextTarget();
+
+      // Scatter toys in the room
+      const allToys = [...vocabulary].sort(() => Math.random() - 0.5);
+      
+      allToys.forEach(v => {
+        const item = document.createElement('div');
+        item.className = 'hidden-toy';
+        item.innerHTML = v.emoji;
+        item.dataset.word = v.word;
+        
+        // Random Position (keep within safe bounds)
+        // Room is up to 800x500. Item is ~60x60.
+        const safeWidth = 100; 
+        const safeHeight = 100;
+        
+        // Use percentages for responsive scattering
+        const randomX = Math.floor(Math.random() * 80) + 5; // 5% to 85%
+        const randomY = Math.floor(Math.random() * 80) + 5; // 5% to 85%
+        const randomRotation = Math.floor(Math.random() * 90) - 45; // -45deg to 45deg
+        
+        item.style.left = `${randomX}%`;
+        item.style.top = `${randomY}%`;
+        item.style.transform = `rotate(${randomRotation}deg)`;
+
+        item.addEventListener('click', () => handleToyClick(item, v.word));
+        
+        room.appendChild(item);
+      });
+    }
+
+    function setNextTarget() {
+      if (toysToFind.length > 0) {
+        targetEl.innerHTML = toysToFind[0].emoji;
+      }
+    }
+
+    function handleToyClick(item, clickedWord) {
+      if (item.classList.contains('found')) return;
+      
+      const targetWord = toysToFind[0].word;
+      
+      if (clickedWord === targetWord) {
+        // Correct!
+        item.classList.add('found');
+        toysFound++;
+        toysToFind.shift(); // Remove from queue
+        
+        document.getElementById('game-score').innerHTML = `⭐ Found: <strong>${toysFound}</strong> / <span>${totalToys}</span>`;
+        document.getElementById('game-progress-bar').style.width = ((toysFound / totalToys) * 100) + '%';
+        
+        if (toysFound === totalToys) {
+          setTimeout(showFindComplete, 800);
+        } else {
+          setNextTarget();
+        }
+      } else {
+        // Wrong!
+        item.classList.remove('wiggle');
+        // Trigger reflow to restart animation
+        void item.offsetWidth;
+        item.classList.add('wiggle');
+      }
+    }
+
+    function showFindComplete() {
+      document.getElementById('game-area').style.display = 'none';
+      document.getElementById('game-complete').classList.add('active');
+      document.getElementById('game-progress-bar').style.width = '100%';
+    }
+
+    document.getElementById('game-replay-btn').addEventListener('click', () => {
+      document.getElementById('game-area').style.display = 'block';
+      document.getElementById('game-complete').classList.remove('active');
+      initFindGame();
+    });
+
+    initFindGame();
+
+    // MATCHING PAIRS GAME
+    const pairsBoard = document.getElementById('pairs-board');
+    const pairsComplete = document.getElementById('pairs-complete');
+    let hasFlippedCard = false;
+    let lockBoard = false;
+    let firstCard, secondCard;
+    let pairsFound = 0;
+
+    function initPairsGame() {
+      pairsBoard.innerHTML = '';
+      pairsComplete.style.display = 'none';
+      pairsBoard.style.display = 'grid';
+      pairsFound = 0;
+      hasFlippedCard = false;
+      lockBoard = false;
+      firstCard = null;
+      secondCard = null;
+
+      const numPairs = Math.min(6, vocabulary.length);
+      const gameItems = [...vocabulary].sort(() => 0.5 - Math.random()).slice(0, numPairs);
+      const cards = [...gameItems, ...gameItems].sort(() => 0.5 - Math.random());
+
+      cards.forEach((item, index) => {
+        const card = document.createElement('div');
+        card.classList.add('pairs-card');
+        card.dataset.word = item.word;
+        card.innerHTML = `
+          <div class="pairs-card-inner">
+            <div class="pairs-front">${index + 1}</div>
+            <div class="pairs-back"><div class="pairs-emoji">${item.emoji}</div><div class="pairs-word">${item.word}</div></div>
+          </div>
+        `;
+        card.addEventListener('click', flipCard);
+        pairsBoard.appendChild(card);
+      });
+    }
+
+    function flipCard() {
+      if (lockBoard) return;
+      if (this === firstCard) return;
+
+      this.classList.add('flipped');
+
+      if (!hasFlippedCard) {
+        hasFlippedCard = true;
+        firstCard = this;
+        return;
+      }
+
+      secondCard = this;
+      checkForMatch();
+    }
+
+    function checkForMatch() {
+      let isMatch = firstCard.dataset.word === secondCard.dataset.word;
+
+      if (isMatch) {
+        disableCards();
+        pairsFound++;
+        const numPairs = Math.min(6, vocabulary.length);
+        if (pairsFound === numPairs) {
+          setTimeout(() => {
+            pairsBoard.style.display = 'none';
+            pairsComplete.style.display = 'flex';
+          }, 800);
+        }
+      } else {
+        unflipCards();
+      }
+    }
+
+    function disableCards() {
+      firstCard.removeEventListener('click', flipCard);
+      secondCard.removeEventListener('click', flipCard);
+      firstCard.classList.add('matched');
+      secondCard.classList.add('matched');
+      resetBoard();
+    }
+
+    function unflipCards() {
+      lockBoard = true;
+      setTimeout(() => {
+        firstCard.classList.remove('flipped');
+        secondCard.classList.remove('flipped');
+        resetBoard();
+      }, 1000);
+    }
+
+    function resetBoard() {
+      [hasFlippedCard, lockBoard] = [false, false];
+      [firstCard, secondCard] = [null, null];
+    }
+
+    document.getElementById('pairs-replay-btn').addEventListener('click', initPairsGame);
+    initPairsGame();
+  </script>
+</body>
+</html>

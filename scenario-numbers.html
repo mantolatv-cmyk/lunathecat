@@ -1,0 +1,356 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>🔢 Number Adventure — Learn with Luna</title>
+  <meta name="description" content="Learn numbers in English with Luna the Cat! Interactive story, vocabulary flashcards, and fun counting games." />
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🐱</text></svg>" />
+  <link rel="stylesheet" href="styles.css" />
+  <link rel="stylesheet" href="scenario.css" />
+</head>
+<body>
+
+  <header class="header scrolled" id="app-header">
+    <div class="header-inner">
+      <a href="index.html" class="logo">
+        <img src="images/luna-logo.png" alt="Luna the Cat" class="logo-icon" />
+        <span class="logo-text">Learn with <span>Luna</span></span>
+      </a>
+      <nav class="nav-links">
+        <a href="index.html" class="nav-link">Home</a>
+        <a href="index.html#videos" class="nav-link active">Videos</a>
+        <a href="index.html#printables" class="nav-link">Printables</a>
+        <a href="index.html#about" class="nav-link">About</a>
+      </nav>
+      <button class="menu-toggle" id="menu-toggle" aria-label="Toggle menu"><span></span></button>
+    </div>
+    <nav class="nav-mobile" id="nav-mobile">
+      <a href="index.html" class="nav-link">Home</a>
+      <a href="index.html#videos" class="nav-link">Videos</a>
+      <a href="index.html#printables" class="nav-link">Printables</a>
+      <a href="index.html#about" class="nav-link">About</a>
+    </nav>
+  </header>
+
+  <section class="scenario-hero">
+    <img src="images/scene-numbers.png" alt="Luna counting glowing stars in a magical night sky" class="scenario-hero-img" />
+    <div class="scenario-hero-overlay">
+      <div class="scenario-hero-icon">🔢</div>
+      <h1 class="scenario-hero-title">Count with Luna</h1>
+      <p class="scenario-hero-subtitle">Numbers are everywhere — let's count!</p>
+    </div>
+  </section>
+
+  <div class="scenario-container">
+    <a href="index.html" class="back-btn">← Back to Home</a>
+
+    <div class="scenario-tabs">
+      <button class="scenario-tab active" data-tab="story">💬 Story Time</button>
+      <button class="scenario-tab" data-tab="vocab">📖 Word Garden</button>
+      <button class="scenario-tab" data-tab="game">🎮 Play & Learn</button>
+      <button class="scenario-tab" data-tab="memory">🃏 Matching Pairs</button>
+    </div>
+
+    <div class="tab-panel active" id="tab-story">
+      <div class="dialogue-container" id="dialogue-container"></div>
+      <button class="dialogue-next-btn" id="dialogue-next-btn">Next Line →</button>
+      <button class="dialogue-restart-btn" id="dialogue-restart-btn">🔄 Start Over</button>
+    </div>
+
+    <div class="tab-panel" id="tab-vocab">
+      <div class="vocab-grid" id="vocab-grid"></div>
+    </div>
+
+    <div class="tab-panel" id="tab-game">
+      <div class="game-area" id="game-area">
+        <div class="game-score" id="game-score">⭐ Score: <strong>0</strong> / <span>0</span></div>
+        <div class="game-progress"><div class="game-progress-bar" id="game-progress-bar"></div></div>
+        <div class="game-prompt">
+          <div class="game-prompt-label">How many objects do you see?</div>
+          <div class="game-prompt-content" id="game-prompt" style="font-size: 2.5rem;"></div>
+        </div>
+        <div class="game-options" id="game-options"></div>
+        <div class="game-feedback" id="game-feedback"></div>
+      </div>
+      <div class="game-complete" id="game-complete">
+        <div class="game-complete-emoji">🌟</div>
+        <h2 class="game-complete-title">Counting Champion!</h2>
+        <p class="game-complete-score" id="game-final-score"></p>
+        <div class="game-stars" id="game-stars"></div>
+        <button class="game-replay-btn" id="game-replay-btn">🔄 Play Again!</button>
+      </div>
+    </div>
+
+    
+    <!-- TAB 4: Matching Pairs -->
+    <div class="tab-panel" id="tab-memory">
+      <div class="pairs-board" id="pairs-board"></div>
+      <div class="game-complete" id="pairs-complete" style="display: none; flex-direction: column; align-items: center;">
+        <div class="game-complete-emoji">🎉</div>
+        <h2 class="game-complete-title">You Did It!</h2>
+        <p class="game-complete-score" style="font-size:1.2rem; color:var(--text-secondary);">You found all the pairs!</p>
+        <button class="game-replay-btn" id="pairs-replay-btn">🔄 Play Again!</button>
+      </div>
+    </div>
+  </div>
+  </div>
+
+  <footer class="footer">
+    <div class="footer-inner">
+      <p class="footer-message">Keep counting with Luna! <span class="paw-emoji">🐾</span></p>
+      <p class="footer-copy">Made with <span class="heart">♥</span> by Learn with Luna · © 2026</p>
+    </div>
+  </footer>
+
+  <script>
+    const dialogues = [
+      { speaker: 'luna', en: "Let's count the stars! 🌟", pt: "Vamos contar as estrelas! 🌟" },
+      { speaker: 'child', en: "Okay! I see ONE. ☝️", pt: "Ok! Eu vejo ONE (Uma). ☝️" },
+      { speaker: 'luna', en: "Great! Now TWO and THREE! 🌟🌟🌟", pt: "Ótimo! Agora TWO (Duas) e THREE (Três)! 🌟🌟🌟" },
+      { speaker: 'child', en: "One, two, three!", pt: "One, two, three!" },
+      { speaker: 'luna', en: "FOUR and FIVE! 🖐️", pt: "FOUR (Quatro) e FIVE (Cinco)! 🖐️" },
+      { speaker: 'child', en: "Five fingers! 🖐️", pt: "Cinco dedos! 🖐️" },
+      { speaker: 'luna', en: "Let's keep going up to TEN! 🔟", pt: "Vamos continuar até TEN (Dez)! 🔟" },
+      { speaker: 'child', en: "Six, seven, eight, nine, ten!", pt: "Six, seven, eight, nine, ten!" },
+      { speaker: 'luna', en: "You are so smart! 🌟", pt: "Você é muito inteligente! 🌟" },
+      { speaker: 'child', en: "Counting is easy!", pt: "Contar é fácil!" }
+    ];
+
+    const vocabulary = [
+      { emoji: '1️⃣', word: 'One', num: '1', pt: 'Um' },
+      { emoji: '2️⃣', word: 'Two', num: '2', pt: 'Dois' },
+      { emoji: '3️⃣', word: 'Three', num: '3', pt: 'Três' },
+      { emoji: '4️⃣', word: 'Four', num: '4', pt: 'Quatro' },
+      { emoji: '5️⃣', word: 'Five', num: '5', pt: 'Cinco' },
+      { emoji: '6️⃣', word: 'Six', num: '6', pt: 'Seis' },
+      { emoji: '7️⃣', word: 'Seven', num: '7', pt: 'Sete' },
+      { emoji: '8️⃣', word: 'Eight', num: '8', pt: 'Oito' },
+      { emoji: '9️⃣', word: 'Nine', num: '9', pt: 'Nove' },
+      { emoji: '🔟', word: 'Ten', num: '10', pt: 'Dez' },
+      { emoji: '⭐', word: 'Eleven', num: '11', pt: 'Onze' },
+      { emoji: '⭐', word: 'Twelve', num: '12', pt: 'Doze' },
+      { emoji: '⭐', word: 'Thirteen', num: '13', pt: 'Treze' },
+      { emoji: '⭐', word: 'Fourteen', num: '14', pt: 'Quatorze' },
+      { emoji: '⭐', word: 'Fifteen', num: '15', pt: 'Quinze' },
+      { emoji: '⭐', word: 'Sixteen', num: '16', pt: 'Dezesseis' },
+      { emoji: '⭐', word: 'Seventeen', num: '17', pt: 'Dezessete' },
+      { emoji: '⭐', word: 'Eighteen', num: '18', pt: 'Dezoito' },
+      { emoji: '⭐', word: 'Nineteen', num: '19', pt: 'Dezenove' },
+      { emoji: '🌟', word: 'Twenty', num: '20', pt: 'Vinte' }
+    ];
+
+    const emojis = ['⭐','🌟','❤️','🌸','🦋','🐟','🎈','🍀'];
+    const gameQuestions = [];
+    for (let i = 1; i <= 10; i++) {
+      const e = emojis[Math.floor(Math.random() * emojis.length)];
+      const display = (e + ' ').repeat(i);
+      const word = vocabulary[i - 1].word;
+      const wrongWords = vocabulary.filter((_, idx) => idx !== i - 1 && idx < 10)
+        .sort(() => Math.random() - 0.5).slice(0, 3).map(v => v.word);
+      gameQuestions.push({ display, correct: word, options: [...wrongWords, word] });
+    }
+
+    
+
+    // TABS
+    document.querySelectorAll('.scenario-tab').forEach(tab => {
+      tab.addEventListener('click', () => {
+        document.querySelectorAll('.scenario-tab').forEach(t => t.classList.remove('active'));
+        document.querySelectorAll('.tab-panel').forEach(p => p.classList.remove('active'));
+        tab.classList.add('active');
+        document.getElementById('tab-' + tab.dataset.tab).classList.add('active');
+      });
+    });
+    document.getElementById('menu-toggle').addEventListener('click', () => {
+      document.getElementById('menu-toggle').classList.toggle('active');
+      document.getElementById('nav-mobile').classList.toggle('open');
+    });
+
+    // DIALOGUES
+    let dialogueIndex = 0;
+    const dc = document.getElementById('dialogue-container');
+    const nb = document.getElementById('dialogue-next-btn');
+    const rb = document.getElementById('dialogue-restart-btn');
+
+    function renderNext() {
+      if (dialogueIndex >= dialogues.length) { nb.disabled = true; nb.textContent = '✅ Story Complete!'; rb.classList.add('visible'); return; }
+      const d = dialogues[dialogueIndex];
+      const b = document.createElement('div');
+      b.className = `dialogue-bubble ${d.speaker}`;
+      b.innerHTML = `<div class="dialogue-speaker"><span>${d.speaker === 'luna' ? '🐱' : '👧'}</span><span>${d.speaker === 'luna' ? 'Luna the Cat' : 'Little Friend'}</span></div><div class="dialogue-english">${d.en}</div><div class="dialogue-portuguese">🇧🇷 ${d.pt}</div>`;
+      dc.appendChild(b);
+      requestAnimationFrame(() => b.classList.add('visible'));
+      dialogueIndex++;
+      b.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+    }
+    nb.addEventListener('click', renderNext);
+    rb.addEventListener('click', () => { dialogueIndex = 0; dc.innerHTML = ''; nb.disabled = false; nb.textContent = 'Next Line →'; rb.classList.remove('visible'); renderNext(); });
+    renderNext();
+
+    // VOCABULARY
+    const vg = document.getElementById('vocab-grid');
+    vocabulary.forEach(v => {
+      const c = document.createElement('div');
+      c.className = 'vocab-card';
+      c.innerHTML = `<div class="vocab-card-inner"><div class="vocab-card-front"><div class="vocab-emoji">${v.emoji}</div><div class="vocab-word">${v.num} — ${v.word}</div><div class="vocab-hint">tap to flip</div></div><div class="vocab-card-back"><div class="vocab-emoji">${v.emoji}</div><div class="vocab-translation">${v.pt}</div><div class="vocab-back-word">${v.word}</div></div></div>`;
+      c.addEventListener('click', () => c.classList.toggle('flipped'));
+      vg.appendChild(c);
+    });
+
+    // GAME — Count & Match
+    let gi = 0, gs = 0, ga = false;
+    const sq = [...gameQuestions].sort(() => Math.random() - 0.5);
+    const tq = sq.length;
+
+    function renderQ() {
+      ga = false;
+      const q = sq[gi];
+      document.getElementById('game-prompt').textContent = q.display;
+      document.getElementById('game-score').innerHTML = `⭐ Score: <strong>${gs}</strong> / <span>${tq}</span>`;
+      document.getElementById('game-progress-bar').style.width = ((gi / tq) * 100) + '%';
+      document.getElementById('game-feedback').textContent = '';
+      document.getElementById('game-feedback').className = 'game-feedback';
+      const oe = document.getElementById('game-options');
+      oe.innerHTML = '';
+      const so = [...q.options].sort(() => Math.random() - 0.5);
+      so.forEach(opt => {
+        const btn = document.createElement('button');
+        btn.className = 'game-option';
+        btn.textContent = opt;
+        btn.addEventListener('click', () => handleA(btn, opt, q.correct));
+        oe.appendChild(btn);
+      });
+    }
+
+    function handleA(btn, sel, cor) {
+      if (ga) return; ga = true;
+      const fb = document.getElementById('game-feedback');
+      document.querySelectorAll('.game-option').forEach(o => o.classList.add('disabled'));
+      if (sel === cor) {
+        gs++; btn.classList.add('correct');
+        fb.textContent = '🎉 Correct! Great counting!'; fb.className = 'game-feedback correct-msg';
+      } else {
+        btn.classList.add('wrong');
+        document.querySelectorAll('.game-option').forEach(o => { if (o.textContent === cor) o.classList.add('correct'); });
+        fb.textContent = `❌ The answer is "${cor}"!`; fb.className = 'game-feedback wrong-msg';
+      }
+      document.getElementById('game-score').innerHTML = `⭐ Score: <strong>${gs}</strong> / <span>${tq}</span>`;
+      setTimeout(() => { gi++; if (gi < tq) renderQ(); else showComplete(); }, 1500);
+    }
+
+    function showComplete() {
+      document.getElementById('game-area').style.display = 'none';
+      document.getElementById('game-complete').classList.add('active');
+      const p = Math.round((gs / tq) * 100);
+      document.getElementById('game-final-score').textContent = `You got ${gs} out of ${tq} correct! (${p}%)`;
+      document.getElementById('game-stars').textContent = p >= 90 ? '⭐⭐⭐' : p >= 60 ? '⭐⭐' : '⭐';
+      document.getElementById('game-progress-bar').style.width = '100%';
+    }
+
+    document.getElementById('game-replay-btn').addEventListener('click', () => {
+      gi = 0; gs = 0; sq.sort(() => Math.random() - 0.5);
+      document.getElementById('game-area').style.display = 'block';
+      document.getElementById('game-complete').classList.remove('active');
+      renderQ();
+    });
+    renderQ();
+
+    // MATCHING PAIRS GAME
+    const pairsBoard = document.getElementById('pairs-board');
+    const pairsComplete = document.getElementById('pairs-complete');
+    let hasFlippedCard = false;
+    let lockBoard = false;
+    let firstCard, secondCard;
+    let pairsFound = 0;
+
+    function initPairsGame() {
+      pairsBoard.innerHTML = '';
+      pairsComplete.style.display = 'none';
+      pairsBoard.style.display = 'grid';
+      pairsFound = 0;
+      hasFlippedCard = false;
+      lockBoard = false;
+      firstCard = null;
+      secondCard = null;
+
+      const numPairs = Math.min(6, vocabulary.length);
+      const gameItems = [...vocabulary].sort(() => 0.5 - Math.random()).slice(0, numPairs);
+      const cards = [...gameItems, ...gameItems].sort(() => 0.5 - Math.random());
+
+      cards.forEach((item, index) => {
+        const card = document.createElement('div');
+        card.classList.add('pairs-card');
+        card.dataset.word = item.word;
+        card.innerHTML = `
+          <div class="pairs-card-inner">
+            <div class="pairs-front">${index + 1}</div>
+            <div class="pairs-back"><div class="pairs-emoji">${item.emoji}</div><div class="pairs-word">${item.word}</div></div>
+          </div>
+        `;
+        card.addEventListener('click', flipCard);
+        pairsBoard.appendChild(card);
+      });
+    }
+
+    function flipCard() {
+      if (lockBoard) return;
+      if (this === firstCard) return;
+
+      this.classList.add('flipped');
+
+      if (!hasFlippedCard) {
+        hasFlippedCard = true;
+        firstCard = this;
+        return;
+      }
+
+      secondCard = this;
+      checkForMatch();
+    }
+
+    function checkForMatch() {
+      let isMatch = firstCard.dataset.word === secondCard.dataset.word;
+
+      if (isMatch) {
+        disableCards();
+        pairsFound++;
+        const numPairs = Math.min(6, vocabulary.length);
+        if (pairsFound === numPairs) {
+          setTimeout(() => {
+            pairsBoard.style.display = 'none';
+            pairsComplete.style.display = 'flex';
+          }, 800);
+        }
+      } else {
+        unflipCards();
+      }
+    }
+
+    function disableCards() {
+      firstCard.removeEventListener('click', flipCard);
+      secondCard.removeEventListener('click', flipCard);
+      firstCard.classList.add('matched');
+      secondCard.classList.add('matched');
+      resetBoard();
+    }
+
+    function unflipCards() {
+      lockBoard = true;
+      setTimeout(() => {
+        firstCard.classList.remove('flipped');
+        secondCard.classList.remove('flipped');
+        resetBoard();
+      }, 1000);
+    }
+
+    function resetBoard() {
+      [hasFlippedCard, lockBoard] = [false, false];
+      [firstCard, secondCard] = [null, null];
+    }
+
+    document.getElementById('pairs-replay-btn').addEventListener('click', initPairsGame);
+    initPairsGame();
+  </script>
+</body>
+</html>

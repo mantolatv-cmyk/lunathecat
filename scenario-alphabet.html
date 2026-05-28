@@ -1,0 +1,462 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>🔤 Alphabet Adventure — Learn with Luna</title>
+  <meta name="description" content="Learn the English alphabet with Luna the Cat! Interactive story, vocabulary flashcards, and fun letter matching games." />
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🐱</text></svg>" />
+  <link rel="stylesheet" href="styles.css" />
+  <link rel="stylesheet" href="scenario.css" />
+</head>
+<body>
+
+  <!-- Header -->
+  <header class="header scrolled" id="app-header">
+    <div class="header-inner">
+      <a href="index.html" class="logo">
+        <img src="images/luna-logo.png" alt="Luna the Cat" class="logo-icon" />
+        <span class="logo-text">Learn with <span>Luna</span></span>
+      </a>
+      <nav class="nav-links">
+        <a href="index.html" class="nav-link">Home</a>
+        <a href="index.html#videos" class="nav-link active">Videos</a>
+        <a href="index.html#printables" class="nav-link">Printables</a>
+        <a href="index.html#about" class="nav-link">About</a>
+      </nav>
+      <button class="menu-toggle" id="menu-toggle" aria-label="Toggle menu"><span></span></button>
+    </div>
+    <nav class="nav-mobile" id="nav-mobile">
+      <a href="index.html" class="nav-link">Home</a>
+      <a href="index.html#videos" class="nav-link">Videos</a>
+      <a href="index.html#printables" class="nav-link">Printables</a>
+      <a href="index.html#about" class="nav-link">About</a>
+    </nav>
+  </header>
+
+  <!-- Hero Banner -->
+  <section class="scenario-hero">
+    <img src="images/scene-alphabet.png" alt="Luna in a magical classroom with floating alphabet letters" class="scenario-hero-img" />
+    <div class="scenario-hero-overlay">
+      <div class="scenario-hero-icon">🔤</div>
+      <h1 class="scenario-hero-title">Alphabet Adventure</h1>
+      <p class="scenario-hero-subtitle">Learn all 26 letters with Luna!</p>
+    </div>
+  </section>
+
+  <!-- Content -->
+  <div class="scenario-container">
+    <a href="index.html" class="back-btn">← Back to Home</a>
+
+    <!-- Tabs -->
+    <div class="scenario-tabs" id="scenario-tabs">
+      <button class="scenario-tab active" data-tab="story">💬 Story Time</button>
+      <button class="scenario-tab" data-tab="vocab">📖 Word Garden</button>
+      <button class="scenario-tab" data-tab="game">🎮 Play & Learn</button>
+      <button class="scenario-tab" data-tab="memory">🃏 Matching Pairs</button>
+    </div>
+
+    <!-- ========== TAB 1: Story Time ========== -->
+    <div class="tab-panel active" id="tab-story">
+      <div class="dialogue-container" id="dialogue-container">
+        <!-- Dialogues rendered by JS -->
+      </div>
+      <button class="dialogue-next-btn" id="dialogue-next-btn">Next Line →</button>
+      <button class="dialogue-restart-btn" id="dialogue-restart-btn">🔄 Start Over</button>
+    </div>
+
+    <!-- ========== TAB 2: Word Garden ========== -->
+    <div class="tab-panel" id="tab-vocab">
+      <div class="vocab-grid" id="vocab-grid">
+        <!-- Vocabulary cards rendered by JS -->
+      </div>
+    </div>
+
+    <!-- ========== TAB 3: Find the Letter ========== -->
+    <div class="tab-panel" id="tab-game">
+      <div class="game-area" id="game-area">
+        <div class="game-score" id="game-score">⭐ Score: <strong>0</strong> / <span>12</span></div>
+        <div class="game-progress"><div class="game-progress-bar" id="game-progress-bar"></div></div>
+        <div class="game-feedback" id="game-feedback">Which one is the matching lowercase letter?</div>
+        
+        <div class="find-letter-prompt" style="font-size: 6rem; text-align: center; margin: 1rem 0; font-family: var(--font-display); color: var(--text-primary); text-shadow: 0 4px 10px rgba(0,0,0,0.1);" id="game-prompt">
+          A
+        </div>
+
+        <div class="game-options" id="game-options">
+          <!-- Buttons rendered by JS -->
+        </div>
+      </div>
+      <div class="game-complete" id="game-complete">
+        <div class="game-complete-emoji">🎉</div>
+        <h2 class="game-complete-title">Alphabet Master!</h2>
+        <p class="game-complete-score" id="game-final-score"></p>
+        <div class="game-stars" id="game-stars">⭐⭐⭐</div>
+        <button class="game-replay-btn" id="game-replay-btn">🔄 Play Again!</button>
+      </div>
+    </div>
+
+    
+    <!-- TAB 4: Matching Pairs -->
+    <div class="tab-panel" id="tab-memory">
+      <div class="pairs-board" id="pairs-board"></div>
+      <div class="game-complete" id="pairs-complete" style="display: none; flex-direction: column; align-items: center;">
+        <div class="game-complete-emoji">🎉</div>
+        <h2 class="game-complete-title">You Did It!</h2>
+        <p class="game-complete-score" style="font-size:1.2rem; color:var(--text-secondary);">You found all the pairs!</p>
+        <button class="game-replay-btn" id="pairs-replay-btn">🔄 Play Again!</button>
+      </div>
+    </div>
+  </div>
+  </div>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="footer-inner">
+      <p class="footer-message">Keep exploring with Luna! <span class="paw-emoji">🐾</span></p>
+      <p class="footer-copy">Made with <span class="heart">♥</span> by Learn with Luna · © 2026</p>
+    </div>
+  </footer>
+
+  <script>
+    // ==========================================
+    // DATA
+    // ==========================================
+    const dialogues = [
+      { speaker: 'luna', en: "Hello! 🐾 I am Luna.", pt: "Olá! 🐾 Eu sou a Luna." },
+      { speaker: 'child', en: "Hi Luna! What are we doing today?", pt: "Oi Luna! O que vamos fazer hoje?" },
+      { speaker: 'luna', en: "Let's learn the ABCs! 🎵", pt: "Vamos aprender o ABC! 🎵" },
+      { speaker: 'child', en: "Yay! How does it start?", pt: "Eba! Como começa?" },
+      { speaker: 'luna', en: "A is for Apple! 🍎", pt: "A é de Apple (Maçã)! 🍎" },
+      { speaker: 'child', en: "I like apples!", pt: "Eu gosto de maçãs!" },
+      { speaker: 'luna', en: "B is for Ball! ⚽", pt: "B é de Ball (Bola)! ⚽" },
+      { speaker: 'child', en: "C is for Cat! Like you, Luna! 🐱", pt: "C é de Cat (Gato)! Como você, Luna! 🐱" },
+      { speaker: 'luna', en: "Yes! Good job! 🌟", pt: "Sim! Muito bem! 🌟" },
+      { speaker: 'child', en: "This is fun! What's next?", pt: "Isso é divertido! Qual é a próxima?" },
+      { speaker: 'luna', en: "D is for Dog! 🐶", pt: "D é de Dog (Cachorro)! 🐶" },
+      { speaker: 'child', en: "Woof! Let's learn them all!", pt: "Au au! Vamos aprender todas!" }
+    ];
+
+    const vocabulary = [
+      { emoji: '🍎', word: 'Apple', letter: 'A', pt: 'Maçã' },
+      { emoji: '⚽', word: 'Ball', letter: 'B', pt: 'Bola' },
+      { emoji: '🐱', word: 'Cat', letter: 'C', pt: 'Gato' },
+      { emoji: '🐶', word: 'Dog', letter: 'D', pt: 'Cachorro' },
+      { emoji: '🐘', word: 'Elephant', letter: 'E', pt: 'Elefante' },
+      { emoji: '🐟', word: 'Fish', letter: 'F', pt: 'Peixe' },
+      { emoji: '🍇', word: 'Grapes', letter: 'G', pt: 'Uvas' },
+      { emoji: '❤️', word: 'Heart', letter: 'H', pt: 'Coração' },
+      { emoji: '🍦', word: 'Ice cream', letter: 'I', pt: 'Sorvete' },
+      { emoji: '🤹', word: 'Juggle', letter: 'J', pt: 'Malabarismo' },
+      { emoji: '🪁', word: 'Kite', letter: 'K', pt: 'Pipa' },
+      { emoji: '🦁', word: 'Lion', letter: 'L', pt: 'Leão' },
+      { emoji: '🌙', word: 'Moon', letter: 'M', pt: 'Lua' },
+      { emoji: '🌙', word: 'Night', letter: 'N', pt: 'Noite' },
+      { emoji: '🍊', word: 'Orange', letter: 'O', pt: 'Laranja' },
+      { emoji: '🐧', word: 'Penguin', letter: 'P', pt: 'Pinguim' },
+      { emoji: '👑', word: 'Queen', letter: 'Q', pt: 'Rainha' },
+      { emoji: '🌈', word: 'Rainbow', letter: 'R', pt: 'Arco-íris' },
+      { emoji: '⭐', word: 'Star', letter: 'S', pt: 'Estrela' },
+      { emoji: '🐢', word: 'Turtle', letter: 'T', pt: 'Tartaruga' },
+      { emoji: '☂️', word: 'Umbrella', letter: 'U', pt: 'Guarda-chuva' },
+      { emoji: '🎻', word: 'Violin', letter: 'V', pt: 'Violino' },
+      { emoji: '🐋', word: 'Whale', letter: 'W', pt: 'Baleia' },
+      { emoji: '🎸', word: 'Xylophone', letter: 'X', pt: 'Xilofone' },
+      { emoji: '💛', word: 'Yellow', letter: 'Y', pt: 'Amarelo' },
+      { emoji: '🦓', word: 'Zebra', letter: 'Z', pt: 'Zebra' }
+    ];
+
+    const gameQuestions = [
+      { upper: 'A', lower: 'a', options: ['a', 'd', 'e', 'o'] },
+      { upper: 'B', lower: 'b', options: ['d', 'b', 'p', 'q'] },
+      { upper: 'D', lower: 'd', options: ['b', 'p', 'd', 'q'] },
+      { upper: 'E', lower: 'e', options: ['e', 'a', 'c', 'o'] },
+      { upper: 'G', lower: 'g', options: ['q', 'p', 'j', 'g'] },
+      { upper: 'H', lower: 'h', options: ['n', 'h', 'b', 'k'] },
+      { upper: 'M', lower: 'm', options: ['n', 'w', 'm', 'u'] },
+      { upper: 'N', lower: 'n', options: ['m', 'n', 'u', 'h'] },
+      { upper: 'P', lower: 'p', options: ['q', 'b', 'd', 'p'] },
+      { upper: 'Q', lower: 'q', options: ['p', 'q', 'g', 'd'] },
+      { upper: 'R', lower: 'r', options: ['n', 'r', 't', 'v'] },
+      { upper: 'W', lower: 'w', options: ['m', 'v', 'u', 'w'] }
+    ];
+
+    
+
+    // ==========================================
+    // SHARED: Tabs, Mobile Menu
+    // ==========================================
+    document.querySelectorAll('.scenario-tab').forEach(tab => {
+      tab.addEventListener('click', () => {
+        document.querySelectorAll('.scenario-tab').forEach(t => t.classList.remove('active'));
+        document.querySelectorAll('.tab-panel').forEach(p => p.classList.remove('active'));
+        tab.classList.add('active');
+        document.getElementById('tab-' + tab.dataset.tab).classList.add('active');
+      });
+    });
+
+    const menuToggle = document.getElementById('menu-toggle');
+    const navMobile = document.getElementById('nav-mobile');
+    menuToggle.addEventListener('click', () => {
+      menuToggle.classList.toggle('active');
+      navMobile.classList.toggle('open');
+    });
+
+    // ==========================================
+    // DIALOGUES
+    // ==========================================
+    let dialogueIndex = 0;
+    const dialogueContainer = document.getElementById('dialogue-container');
+    const nextBtn = document.getElementById('dialogue-next-btn');
+    const restartBtn = document.getElementById('dialogue-restart-btn');
+
+    function renderNextDialogue() {
+      if (dialogueIndex >= dialogues.length) {
+        nextBtn.disabled = true;
+        nextBtn.textContent = '✅ Story Complete!';
+        restartBtn.classList.add('visible');
+        return;
+      }
+      const d = dialogues[dialogueIndex];
+      const bubble = document.createElement('div');
+      bubble.className = `dialogue-bubble ${d.speaker}`;
+      bubble.innerHTML = `
+        <div class="dialogue-speaker">
+          <span>${d.speaker === 'luna' ? '🐱' : '👧'}</span>
+          <span>${d.speaker === 'luna' ? 'Luna the Cat' : 'Little Friend'}</span>
+        </div>
+        <div class="dialogue-english">${d.en}</div>
+        <div class="dialogue-portuguese">🇧🇷 ${d.pt}</div>
+      `;
+      dialogueContainer.appendChild(bubble);
+      requestAnimationFrame(() => { bubble.classList.add('visible'); });
+      dialogueIndex++;
+      bubble.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+    }
+
+    nextBtn.addEventListener('click', renderNextDialogue);
+    restartBtn.addEventListener('click', () => {
+      dialogueIndex = 0;
+      dialogueContainer.innerHTML = '';
+      nextBtn.disabled = false;
+      nextBtn.textContent = 'Next Line →';
+      restartBtn.classList.remove('visible');
+    });
+
+    // Show first bubble
+    renderNextDialogue();
+
+    // ==========================================
+    // VOCABULARY
+    // ==========================================
+    const vocabGrid = document.getElementById('vocab-grid');
+    vocabulary.forEach(v => {
+      const card = document.createElement('div');
+      card.className = 'vocab-card';
+      card.innerHTML = `
+        <div class="vocab-card-inner">
+          <div class="vocab-card-front">
+            <div class="vocab-emoji">${v.emoji}</div>
+            <div class="vocab-word">${v.letter} — ${v.word}</div>
+            <div class="vocab-hint">tap to flip</div>
+          </div>
+          <div class="vocab-card-back">
+            <div class="vocab-emoji">${v.emoji}</div>
+            <div class="vocab-translation">${v.pt}</div>
+            <div class="vocab-back-word">${v.word}</div>
+          </div>
+        </div>
+      `;
+      card.addEventListener('click', () => card.classList.toggle('flipped'));
+      vocabGrid.appendChild(card);
+    });
+
+    // ==========================================
+    // GAME — Find the Letter
+    // ==========================================
+    let gameIndex = 0;
+    let gameScore = 0;
+    let gameAnswered = false;
+    const shuffledQuestions = [...gameQuestions].sort(() => Math.random() - 0.5);
+    const totalQ = shuffledQuestions.length;
+
+    function renderQuestion() {
+      gameAnswered = false;
+      const q = shuffledQuestions[gameIndex];
+      const prompt = document.getElementById('game-prompt');
+      prompt.textContent = q.upper;
+      
+      document.getElementById('game-score').innerHTML = `⭐ Score: <strong>${gameScore}</strong> / <span>${totalQ}</span>`;
+      document.getElementById('game-progress-bar').style.width = ((gameIndex / totalQ) * 100) + '%';
+      
+      const feedback = document.getElementById('game-feedback');
+      feedback.textContent = 'Which one is the matching lowercase letter?';
+      feedback.className = 'game-feedback';
+
+      const optionsEl = document.getElementById('game-options');
+      optionsEl.innerHTML = '';
+      
+      const opts = [...q.options].sort(() => Math.random() - 0.5);
+      
+      opts.forEach(opt => {
+        const btn = document.createElement('button');
+        btn.className = 'game-option';
+        btn.textContent = opt;
+        btn.style.textTransform = 'none'; // keep lowercase
+        btn.addEventListener('click', () => handleGameAnswer(opt, q.lower, btn));
+        optionsEl.appendChild(btn);
+      });
+    }
+
+    function handleGameAnswer(selected, correct, btn) {
+      if (gameAnswered) return;
+      gameAnswered = true;
+
+      const feedback = document.getElementById('game-feedback');
+      document.querySelectorAll('.game-option').forEach(o => o.classList.add('disabled'));
+
+      if (selected === correct) {
+        gameScore++;
+        btn.classList.add('correct');
+        feedback.textContent = '🎉 Correct!';
+        feedback.className = 'game-feedback correct-msg';
+      } else {
+        btn.classList.add('wrong');
+        document.querySelectorAll('.game-option').forEach(o => { 
+          if (o.textContent === correct) o.classList.add('correct'); 
+        });
+        feedback.textContent = `❌ Oops! It's ${correct}`;
+        feedback.className = 'game-feedback wrong-msg';
+      }
+      
+      document.getElementById('game-score').innerHTML = `⭐ Score: <strong>${gameScore}</strong> / <span>${totalQ}</span>`;
+
+      setTimeout(() => {
+        gameIndex++;
+        if (gameIndex < totalQ) {
+          renderQuestion();
+        } else {
+          showGameComplete();
+        }
+      }, 1500);
+    }
+
+    function showGameComplete() {
+      document.getElementById('game-area').style.display = 'none';
+      document.getElementById('game-complete').classList.add('active');
+      const pct = Math.round((gameScore / totalQ) * 100);
+      document.getElementById('game-final-score').textContent = `You got ${gameScore} out of ${totalQ} correct!`;
+      document.getElementById('game-stars').textContent = pct >= 90 ? '⭐⭐⭐' : pct >= 60 ? '⭐⭐' : '⭐';
+      document.getElementById('game-progress-bar').style.width = '100%';
+    }
+
+    document.getElementById('game-replay-btn').addEventListener('click', () => {
+      gameIndex = 0; 
+      gameScore = 0; 
+      shuffledQuestions.sort(() => Math.random() - 0.5);
+      document.getElementById('game-area').style.display = 'block';
+      document.getElementById('game-complete').classList.remove('active');
+      renderQuestion();
+    });
+
+    renderQuestion();
+
+    // ==========================================
+    // MATCHING PAIRS GAME
+    const pairsBoard = document.getElementById('pairs-board');
+    const pairsComplete = document.getElementById('pairs-complete');
+    let hasFlippedCard = false;
+    let lockBoard = false;
+    let firstCard, secondCard;
+    let pairsFound = 0;
+
+    function initPairsGame() {
+      pairsBoard.innerHTML = '';
+      pairsComplete.style.display = 'none';
+      pairsBoard.style.display = 'grid';
+      pairsFound = 0;
+      hasFlippedCard = false;
+      lockBoard = false;
+      firstCard = null;
+      secondCard = null;
+
+      const numPairs = Math.min(6, vocabulary.length);
+      const gameItems = [...vocabulary].sort(() => 0.5 - Math.random()).slice(0, numPairs);
+      const cards = [...gameItems, ...gameItems].sort(() => 0.5 - Math.random());
+
+      cards.forEach((item, index) => {
+        const card = document.createElement('div');
+        card.classList.add('pairs-card');
+        card.dataset.word = item.word;
+        card.innerHTML = `
+          <div class="pairs-card-inner">
+            <div class="pairs-front">${index + 1}</div>
+            <div class="pairs-back"><div class="pairs-emoji">${item.emoji}</div><div class="pairs-word">${item.word}</div></div>
+          </div>
+        `;
+        card.addEventListener('click', flipCard);
+        pairsBoard.appendChild(card);
+      });
+    }
+
+    function flipCard() {
+      if (lockBoard) return;
+      if (this === firstCard) return;
+
+      this.classList.add('flipped');
+
+      if (!hasFlippedCard) {
+        hasFlippedCard = true;
+        firstCard = this;
+        return;
+      }
+
+      secondCard = this;
+      checkForMatch();
+    }
+
+    function checkForMatch() {
+      let isMatch = firstCard.dataset.word === secondCard.dataset.word;
+
+      if (isMatch) {
+        disableCards();
+        pairsFound++;
+        const numPairs = Math.min(6, vocabulary.length);
+        if (pairsFound === numPairs) {
+          setTimeout(() => {
+            pairsBoard.style.display = 'none';
+            pairsComplete.style.display = 'flex';
+          }, 800);
+        }
+      } else {
+        unflipCards();
+      }
+    }
+
+    function disableCards() {
+      firstCard.removeEventListener('click', flipCard);
+      secondCard.removeEventListener('click', flipCard);
+      firstCard.classList.add('matched');
+      secondCard.classList.add('matched');
+      resetBoard();
+    }
+
+    function unflipCards() {
+      lockBoard = true;
+      setTimeout(() => {
+        firstCard.classList.remove('flipped');
+        secondCard.classList.remove('flipped');
+        resetBoard();
+      }, 1000);
+    }
+
+    function resetBoard() {
+      [hasFlippedCard, lockBoard] = [false, false];
+      [firstCard, secondCard] = [null, null];
+    }
+
+    document.getElementById('pairs-replay-btn').addEventListener('click', initPairsGame);
+    initPairsGame();
+  </script>
+</body>
+</html>

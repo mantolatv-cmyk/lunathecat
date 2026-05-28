@@ -1,0 +1,409 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Learn with Luna — Fun English for Kids! 🐱✨</title>
+  <meta name="description" content="Join Luna the Cat on a magical journey to learn English! Fun videos, songs, games, and free printables for children." />
+  <meta name="author" content="Learn with Luna" />
+  <meta name="keywords" content="learn English kids, English for children, Luna the Cat, English songs, English printables, educational games" />
+  <meta property="og:title" content="Learn with Luna — Fun English for Kids!" />
+  <meta property="og:description" content="Join Luna the Cat on a magical journey to learn English with fun songs, games, and free printables!" />
+  <meta property="og:type" content="website" />
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="Learn with Luna — Fun English for Kids!" />
+  <meta name="twitter:description" content="Join Luna the Cat on a magical journey to learn English with fun songs, games, and free printables!" />
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🐱</text></svg>" />
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+
+  <!-- ✦ Sparkle Particles ✦ -->
+  <div class="sparkle-container" aria-hidden="true">
+    <div class="sparkle"></div>
+    <div class="sparkle"></div>
+    <div class="sparkle"></div>
+    <div class="sparkle"></div>
+    <div class="sparkle"></div>
+    <div class="sparkle"></div>
+    <div class="sparkle"></div>
+    <div class="sparkle"></div>
+    <div class="sparkle"></div>
+    <div class="sparkle"></div>
+  </div>
+
+  <!-- 🐾 Floating Paw Prints 🐾 -->
+  <div class="paw-container" aria-hidden="true">
+    <div class="paw-print">🐾</div>
+    <div class="paw-print">🐾</div>
+    <div class="paw-print">🐾</div>
+    <div class="paw-print">🐾</div>
+    <div class="paw-print">🐾</div>
+    <div class="paw-print">🐾</div>
+  </div>
+
+  <!-- ============================================
+       HEADER / NAVIGATION
+       ============================================ -->
+  <header class="header" id="app-header">
+    <div class="header-inner">
+      <a href="#" class="logo" id="logo-link">
+        <img src="images/luna-logo.png" alt="Luna the Cat" class="logo-icon" />
+        <span class="logo-text">Learn with <span>Luna</span></span>
+      </a>
+
+      <nav class="nav-links" id="nav-desktop">
+        <a href="#home" class="nav-link active" id="nav-home">Home</a>
+        <a href="#videos" class="nav-link" id="nav-videos">Videos</a>
+        <a href="#printables" class="nav-link" id="nav-printables">Printables</a>
+        <a href="#about" class="nav-link" id="nav-about">About</a>
+      </nav>
+
+      <button class="menu-toggle" id="menu-toggle" aria-label="Toggle navigation menu">
+        <span></span>
+      </button>
+    </div>
+
+    <!-- Mobile Navigation -->
+    <nav class="nav-mobile" id="nav-mobile">
+      <a href="#home" class="nav-link" id="nav-mobile-home">Home</a>
+      <a href="#videos" class="nav-link" id="nav-mobile-videos">Videos</a>
+      <a href="#printables" class="nav-link" id="nav-mobile-printables">Printables</a>
+      <a href="#about" class="nav-link" id="nav-mobile-about">About</a>
+    </nav>
+  </header>
+
+  <!-- ============================================
+       HERO SECTION
+       ============================================ -->
+  <section class="hero" id="home">
+    <div class="hero-content">
+      <div class="hero-text">
+        <div class="hero-badge">
+          <span class="paw-icon">🐾</span>
+          Learning English is Magic!
+        </div>
+        <h1 class="hero-title" id="hero-title">
+          Welcome to <span class="highlight">Luna's</span><br />
+          Magical World!
+        </h1>
+        <p class="hero-subtitle" id="hero-subtitle">
+          Let's learn English together with fun songs, games, and magic! Join Luna the Cat on an amazing adventure full of colors, numbers, and new words. ✨
+        </p>
+        <a href="#videos" class="hero-cta" id="hero-cta">
+          <span class="cta-sparkle">✨</span>
+          Start Learning!
+        </a>
+      </div>
+      <div class="hero-image-wrapper">
+        <div class="hero-image-glow" aria-hidden="true"></div>
+        <img
+          src="images/luna-hero.png"
+          alt="Luna the Cat waving happily in a magical world full of sparkles and stars"
+          class="hero-image"
+          id="hero-image"
+        />
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================
+       VIDEOS SECTION — Sing & Learn with Luna
+       ============================================ -->
+  <section class="section videos-section" id="videos">
+    <div class="section-header">
+      <div class="section-icon" aria-hidden="true">🎵</div>
+      <h2 class="section-title" id="videos-title">Sing & Learn with Luna</h2>
+      <p class="section-subtitle">Watch fun videos, sing along, and learn English with Luna's magical lessons!</p>
+    </div>
+
+    <div class="videos-grid">
+      <!-- Video Card 1 — Alphabet -->
+      <a href="scenario-alphabet.html" class="video-card scroll-reveal" id="video-card-abc">
+        <div class="video-card-thumb">
+          <img src="images/thumb-abc.png" alt="Luna teaching the ABC alphabet with colorful letters" />
+          <div class="play-button" aria-label="Start Alphabet Adventure"></div>
+        </div>
+        <div class="video-card-body">
+          <h3 class="video-card-title">🔤 Alphabet Adventure</h3>
+          <p class="video-card-desc">Learn all 26 letters with stories, games, and vocabulary!</p>
+          <span class="video-card-tag">Alphabet</span>
+        </div>
+      </a>
+
+      <!-- Video Card 2 — Colors -->
+      <a href="scenario-colors.html" class="video-card scroll-reveal" id="video-card-colors">
+        <div class="video-card-thumb">
+          <img src="images/thumb-colors.png" alt="Luna teaching colors with paint splashes" />
+          <div class="play-button" aria-label="Start Color Adventure"></div>
+        </div>
+        <div class="video-card-body">
+          <h3 class="video-card-title">🎨 Luna's Color Adventure</h3>
+          <p class="video-card-desc">Discover all the colors with interactive games and fun stories!</p>
+          <span class="video-card-tag">Colors</span>
+        </div>
+      </a>
+
+      <!-- Video Card 3 — Numbers -->
+      <a href="scenario-numbers.html" class="video-card scroll-reveal" id="video-card-numbers">
+        <div class="video-card-thumb">
+          <img src="images/thumb-numbers.png" alt="Luna counting with colorful numbers" />
+          <div class="play-button" aria-label="Start Number Adventure"></div>
+        </div>
+        <div class="video-card-body">
+          <h3 class="video-card-title">🔢 Count with Luna</h3>
+          <p class="video-card-desc">1, 2, 3... learn numbers with counting games and stories!</p>
+          <span class="video-card-tag">Numbers</span>
+        </div>
+      </a>
+
+      <!-- Video Card 4 — Animals -->
+      <a href="scenario-animals.html" class="video-card scroll-reveal" id="video-card-animals">
+        <div class="video-card-thumb">
+          <img src="images/thumb-animals.png" alt="Luna with her animal friends learning names" />
+          <div class="play-button" aria-label="Start Animal Adventure"></div>
+        </div>
+        <div class="video-card-body">
+          <h3 class="video-card-title">🐾 Animal Friends</h3>
+          <p class="video-card-desc">Meet Luna's farm friends, learn sounds, and play matching games!</p>
+          <span class="video-card-tag">Animals</span>
+        </div>
+      </a>
+      <!-- Video Card 5 — Foods & Drinks -->
+      <a href="scenario-foods.html" class="video-card scroll-reveal" id="video-card-foods">
+        <div class="video-card-thumb">
+          <img src="images/video-thumb-foods.png" alt="Luna with foods and drinks" />
+          <div class="play-button" aria-label="Start Foods Adventure"></div>
+        </div>
+        <div class="video-card-body">
+          <h3 class="video-card-title">🍎 Foods & Drinks</h3>
+          <p class="video-card-desc">Learn about yummy foods and drinks, and feed Luna in the restaurant!</p>
+          <span class="video-card-tag">Foods</span>
+        </div>
+      </a>
+      <!-- Video Card 6 — Toys & Fun -->
+      <a href="scenario-toys.html" class="video-card scroll-reveal" id="video-card-toys">
+        <div class="video-card-thumb">
+          <img src="images/video-thumb-toys.png" alt="Luna with toys" />
+          <div class="play-button" aria-label="Start Toys Adventure"></div>
+        </div>
+        <div class="video-card-body">
+          <h3 class="video-card-title">🧸 Toys & Fun</h3>
+          <p class="video-card-desc">Play with Luna's favorite toys and clean up the messy room!</p>
+          <span class="video-card-tag">Toys</span>
+        </div>
+      </a>
+    </div>
+  </section>
+
+  <!-- ============================================
+       PRINTABLES SECTION — Fun Printables & Worksheets
+       ============================================ -->
+  <section class="section printables-section" id="printables">
+    <div class="section-header">
+      <div class="section-icon" aria-hidden="true">📝</div>
+      <h2 class="section-title" id="printables-title">Fun Printables & Worksheets</h2>
+      <p class="section-subtitle">Interactive digital coloring pages — color, learn, and practice online with Luna!</p>
+    </div>
+
+    <div class="printables-grid">
+      <!-- Printable Card 1 -->
+      <article class="printable-card scroll-reveal" id="printable-card-coloring">
+        <div class="printable-card-image">
+          <img src="images/printable-coloring.png" alt="ABC Coloring Pages featuring Luna and alphabet letters" />
+          <span class="printable-card-badge">Free</span>
+        </div>
+        <div class="printable-card-body">
+          <h3 class="printable-card-title">🖍️ ABC Coloring Pages</h3>
+          <p class="printable-card-desc">Color adorable letters with Luna! Great for learning the alphabet while having fun with crayons.</p>
+          <a href="coloring-canvas.html?img=printable-coloring.png&title=ABC+Coloring+Pages" class="download-btn" id="download-coloring" aria-label="Play ABC Coloring Pages">
+            <span class="btn-icon">🎨</span>
+            Play Now
+          </a>
+        </div>
+      </article>
+
+      <!-- Printable Card 2 -->
+      <article class="printable-card scroll-reveal" id="printable-card-worksheet">
+        <div class="printable-card-image">
+          <img src="images/printable-worksheet.png" alt="Vocabulary matching worksheet with fruits" />
+          <span class="printable-card-badge">Free</span>
+        </div>
+        <div class="printable-card-body">
+          <h3 class="printable-card-title">🍎 Vocabulary Match-Up</h3>
+          <p class="printable-card-desc">Match English words to pictures! Practice fruits, animals, and colors with fun exercises.</p>
+          <a href="interactive-match.html" class="download-btn" id="download-worksheet" aria-label="Play Vocabulary Match-Up">
+            <span class="btn-icon">🎮</span>
+            Play Now
+          </a>
+        </div>
+      </article>
+
+      <!-- Printable Card 3 -->
+      <article class="printable-card scroll-reveal" id="printable-card-flashcards">
+        <div class="printable-card-image">
+          <img src="images/printable-flashcards.png" alt="Colorful flashcards with vocabulary words and pictures" />
+          <span class="printable-card-badge">Free</span>
+        </div>
+        <div class="printable-card-body">
+          <h3 class="printable-card-title">🌟 Magic Flashcards</h3>
+          <p class="printable-card-desc">Cut out and play with Luna's magic flashcards! Learn new words with beautiful pictures.</p>
+          <a href="interactive-flashcards.html" class="download-btn" id="download-flashcards" aria-label="Play Magic Flashcards">
+            <span class="btn-icon">✨</span>
+            Play Now
+          </a>
+        </div>
+      </article>
+    </div>
+  </section>
+
+  <!-- ============================================
+       FOOTER
+       ============================================ -->
+  <footer class="footer" id="about">
+    <div class="footer-inner">
+      <p class="footer-message">
+        See you next time! <span class="paw-emoji">🐾</span>
+      </p>
+      <p class="footer-sub">
+        Luna loves learning with you! Come back soon for more magical English adventures. ✨
+      </p>
+
+      <div class="footer-social">
+        <a href="#" class="social-link" id="social-youtube" aria-label="YouTube">🎬</a>
+        <a href="#" class="social-link" id="social-instagram" aria-label="Instagram">📷</a>
+        <a href="#" class="social-link" id="social-tiktok" aria-label="TikTok">🎵</a>
+        <a href="#" class="social-link" id="social-email" aria-label="Email">📧</a>
+      </div>
+
+      <div class="footer-divider" aria-hidden="true"></div>
+
+      <nav class="footer-links">
+        <a href="#home" class="footer-link">Home</a>
+        <a href="#videos" class="footer-link">Videos</a>
+        <a href="#printables" class="footer-link">Printables</a>
+        <a href="#about" class="footer-link">About</a>
+      </nav>
+
+      <p class="footer-copy">
+        Made with <span class="heart">♥</span> by Learn with Luna · © 2026 · All rights reserved.
+      </p>
+    </div>
+  </footer>
+
+  <!-- ============================================
+       JAVASCRIPT — Interactions & Animations
+       ============================================ -->
+  <script>
+    // === Header scroll effect ===
+    const header = document.getElementById('app-header');
+    let lastScroll = 0;
+
+    window.addEventListener('scroll', () => {
+      const currentScroll = window.pageYOffset;
+      if (currentScroll > 50) {
+        header.classList.add('scrolled');
+      } else {
+        header.classList.remove('scrolled');
+      }
+      lastScroll = currentScroll;
+    });
+
+    // === Mobile menu toggle ===
+    const menuToggle = document.getElementById('menu-toggle');
+    const navMobile = document.getElementById('nav-mobile');
+
+    menuToggle.addEventListener('click', () => {
+      menuToggle.classList.toggle('active');
+      navMobile.classList.toggle('open');
+    });
+
+    // Close mobile menu on link click
+    document.querySelectorAll('.nav-mobile .nav-link').forEach(link => {
+      link.addEventListener('click', () => {
+        menuToggle.classList.remove('active');
+        navMobile.classList.remove('open');
+      });
+    });
+
+    // === Active nav link based on scroll ===
+    const sections = document.querySelectorAll('section[id], footer[id]');
+    const navLinks = document.querySelectorAll('.nav-links .nav-link');
+
+    function updateActiveNav() {
+      let current = '';
+      sections.forEach(section => {
+        const sectionTop = section.offsetTop - 120;
+        if (window.pageYOffset >= sectionTop) {
+          current = section.getAttribute('id');
+        }
+      });
+
+      navLinks.forEach(link => {
+        link.classList.remove('active');
+        if (link.getAttribute('href') === '#' + current) {
+          link.classList.add('active');
+        }
+      });
+    }
+
+    window.addEventListener('scroll', updateActiveNav);
+
+    // === Scroll Reveal (Intersection Observer) ===
+    const observerOptions = {
+      root: null,
+      rootMargin: '0px 0px -80px 0px',
+      threshold: 0.1
+    };
+
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('revealed');
+          observer.unobserve(entry.target);
+        }
+      });
+    }, observerOptions);
+
+    document.querySelectorAll('.scroll-reveal').forEach(el => {
+      observer.observe(el);
+    });
+
+    // === Smooth scroll for anchor links ===
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+      anchor.addEventListener('click', function (e) {
+        e.preventDefault();
+        const target = document.querySelector(this.getAttribute('href'));
+        if (target) {
+          const headerOffset = 80;
+          const elementPosition = target.getBoundingClientRect().top;
+          const offsetPosition = elementPosition + window.pageYOffset - headerOffset;
+
+          window.scrollTo({
+            top: offsetPosition,
+            behavior: 'smooth'
+          });
+        }
+      });
+    });
+
+    // === Download button feedback ===
+    document.querySelectorAll('.download-btn').forEach(btn => {
+      btn.addEventListener('click', function() {
+        const originalText = this.innerHTML;
+        this.innerHTML = '<span class="btn-icon">✅</span> Coming Soon!';
+        this.style.background = 'linear-gradient(135deg, #5CD85C, #3DB83D)';
+        setTimeout(() => {
+          this.innerHTML = originalText;
+          this.style.background = '';
+        }, 2000);
+      });
+    });
+
+    // === Console welcome message ===
+    console.log('%c🐱 Welcome to Luna\'s Magical World! ✨', 'font-size: 18px; color: #5CD85C; font-weight: bold;');
+    console.log('%cLearn English with fun!', 'font-size: 14px; color: #7EE87E;');
+  </script>
+
+</body>
+</html>

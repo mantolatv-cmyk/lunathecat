@@ -535,7 +535,8 @@
       const gameItems = [...vocabulary].sort(() => 0.5 - Math.random()).slice(0, numPairs);
       let cards = [];
       gameItems.forEach(item => {
-        cards.push({ word: item.word, display: `<div class="pairs-emoji" style="font-size: 4rem; margin: 0;">${item.emoji}</div>` });
+        // Use item.num instead of item.emoji for the numbers scenario to avoid duplicate stars for 11-20
+        cards.push({ word: item.word, display: `<div class="pairs-emoji" style="font-size: 4rem; margin: 0; font-family: var(--font-display); color: var(--green-dark);">${item.num}</div>` });
         cards.push({ word: item.word, display: `<div class="pairs-word" style="font-size: 1.8rem; margin: 0;">${item.word}</div>` });
       });
       cards = cards.sort(() => 0.5 - Math.random());

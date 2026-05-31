@@ -79,7 +79,7 @@ html {
 body {
   font-family: var(--font-body);
   color: var(--text-primary);
-  background-color: var(--bg-pearl);
+  background-color: var(--bg-mint-soft);
   line-height: 1.6;
   overflow-x: hidden;
   -webkit-font-smoothing: antialiased;
@@ -391,7 +391,7 @@ body::before {
     170deg,
     var(--bg-cream) 0%,
     var(--bg-mint-soft) 40%,
-    var(--bg-pearl) 100%
+    var(--bg-mint-soft) 100%
   );
   overflow: hidden;
 }
@@ -633,9 +633,9 @@ body::before {
 .videos-section {
   background: linear-gradient(
     180deg,
-    var(--bg-pearl) 0%,
+    var(--bg-mint-soft) 0%,
     var(--bg-warm) 50%,
-    var(--bg-pearl) 100%
+    var(--bg-mint-soft) 100%
   );
 }
 
@@ -749,9 +749,9 @@ body::before {
 .printables-section {
   background: linear-gradient(
     180deg,
-    var(--bg-pearl) 0%,
+    var(--bg-mint-soft) 0%,
     var(--bg-mint-soft) 50%,
-    var(--bg-pearl) 100%
+    var(--bg-mint-soft) 100%
   );
 }
 
@@ -864,7 +864,7 @@ body::before {
 .footer {
   background: linear-gradient(
     180deg,
-    var(--bg-pearl) 0%,
+    var(--bg-mint-soft) 0%,
     var(--green-mint) 100%
   );
   padding: var(--space-3xl) 1.5rem var(--space-xl);

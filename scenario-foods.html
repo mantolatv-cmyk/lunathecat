@@ -50,6 +50,7 @@
       <button class="scenario-tab" data-tab="vocab">📖 Learn Words</button>
       <button class="scenario-tab" data-tab="game">🎮 Feed Luna</button>
       <button class="scenario-tab" data-tab="memory">🃏 Matching Pairs</button>
+      <button class="scenario-tab" data-tab="like">❓ Do You Like?</button>
     </div>
 
     <!-- TAB 1: Story Time -->
@@ -109,6 +110,28 @@
         <h2 class="game-complete-title">You Did It!</h2>
         <p class="game-complete-score" style="font-size:1.2rem; color:var(--text-secondary);">You found all the pairs!</p>
         <button class="game-replay-btn" id="pairs-replay-btn">🔄 Play Again!</button>
+      </div>
+    </div>
+
+    <!-- TAB 5: Do You Like -->
+    <div class="tab-panel" id="tab-like">
+      <div class="game-area" style="text-align: center; padding: 3rem 1rem;">
+        <div id="like-game-content">
+          <div id="like-animal" style="font-size: 7rem; margin-bottom: 1.5rem; transition: transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);">🐶</div>
+          <div class="dialogue-bubble child" style="display: inline-block; cursor: default; margin-bottom: 2.5rem; transform: none; max-width: 90%;">
+            <div class="dialogue-english" id="like-question" style="font-size: 2.2rem; margin: 0; padding: 1rem;">Do you like Apple 🍎?</div>
+          </div>
+          <div style="display: flex; gap: 1.5rem; justify-content: center; flex-wrap: wrap;">
+            <button class="game-replay-btn" id="like-btn-yes" style="background: linear-gradient(135deg, #7EE87E, #3DB83D); font-size: 1.4rem;">👍 Yes, I do!</button>
+            <button class="game-replay-btn" id="like-btn-no" style="background: linear-gradient(135deg, #ff758c, #ff7eb3); color: white; font-size: 1.4rem;">👎 No, I don't!</button>
+          </div>
+        </div>
+        <div class="game-complete" id="like-game-complete" style="display: none; flex-direction: column; align-items: center;">
+          <div class="game-complete-emoji">🌟</div>
+          <h2 class="game-complete-title">Great Job!</h2>
+          <p class="game-complete-score">You answered all the questions!</p>
+          <button class="game-replay-btn" id="like-replay-btn">🔄 Play Again!</button>
+        </div>
       </div>
     </div>
   </div>
@@ -489,6 +512,53 @@
 
     document.getElementById('pairs-replay-btn').addEventListener('click', initPairsGame);
     initPairsGame();
+
+    // GAME - DO YOU LIKE
+    const likeAnimals = ['🐶', '🐱', '🐘', '🦁', '🐰', '🐼', '🐵', '🐸', '🐯', '🐻'];
+    let likeGameItems = [];
+    let likeIndex = 0;
+    const likeGameContent = document.getElementById('like-game-content');
+    const likeGameComplete = document.getElementById('like-game-complete');
+    const likeAnimalEl = document.getElementById('like-animal');
+    const likeQuestionEl = document.getElementById('like-question');
+    
+    function initLikeGame() {
+      likeGameItems = [...vocabulary];
+      likeIndex = 0;
+      likeGameComplete.style.display = 'none';
+      likeGameContent.style.display = 'block';
+      renderLikeQuestion();
+    }
+    
+    function renderLikeQuestion() {
+      if (likeIndex >= likeGameItems.length) {
+        likeGameContent.style.display = 'none';
+        likeGameComplete.style.display = 'flex';
+        return;
+      }
+      const v = likeGameItems[likeIndex];
+      const randomAnimal = likeAnimals[Math.floor(Math.random() * likeAnimals.length)];
+      
+      // Animate animal entry
+      likeAnimalEl.style.transform = 'scale(0) rotate(-20deg)';
+      setTimeout(() => {
+        likeAnimalEl.textContent = randomAnimal;
+        likeAnimalEl.style.transform = 'scale(1) rotate(0deg)';
+      }, 50);
+      
+      likeQuestionEl.innerHTML = `Do you like <strong>${v.word}</strong> ${v.emoji}?`;
+    }
+    
+    function handleLikeAnswer() {
+      likeIndex++;
+      renderLikeQuestion();
+    }
+    
+    document.getElementById('like-btn-yes').addEventListener('click', handleLikeAnswer);
+    document.getElementById('like-btn-no').addEventListener('click', handleLikeAnswer);
+    document.getElementById('like-replay-btn').addEventListener('click', initLikeGame);
+    
+    initLikeGame();
   </script>
 </body>
 </html>

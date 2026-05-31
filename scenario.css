@@ -1181,6 +1181,153 @@
 }
 
 /* ============================================
+   JUMP COUNTING GAME
+   ============================================ */
+.jump-scene {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1.5rem;
+  padding: 2rem 1.5rem;
+  background: linear-gradient(180deg, #e8f5e9 0%, #c8e6c9 50%, #a5d6a7 100%);
+  border-radius: var(--radius-lg);
+  min-height: 380px;
+  position: relative;
+  overflow: hidden;
+}
+
+.jump-luna {
+  font-size: 5rem;
+  filter: drop-shadow(0 4px 10px rgba(0,0,0,0.15));
+  transition: transform 0.3s;
+  z-index: 2;
+}
+
+.jump-luna.animating {
+  animation: luna-jump-action 0.6s ease-out;
+}
+
+@keyframes luna-jump-action {
+  0% { transform: translateY(0) scale(1); }
+  30% { transform: translateY(-40px) scale(1.1); }
+  50% { transform: translateY(-50px) scale(1.15) rotate(5deg); }
+  70% { transform: translateY(-20px) scale(1.05) rotate(-3deg); }
+  100% { transform: translateY(0) scale(1) rotate(0); }
+}
+
+.jump-progress {
+  font-family: var(--font-display);
+  font-size: 1rem;
+  color: var(--text-secondary);
+  z-index: 2;
+}
+
+.jump-card {
+  background: white;
+  border-radius: var(--radius-lg);
+  padding: 2rem 2.5rem;
+  text-align: center;
+  box-shadow: 0 8px 30px rgba(0,0,0,0.1);
+  cursor: pointer;
+  transition: all 0.3s;
+  z-index: 2;
+  max-width: 400px;
+  width: 100%;
+  animation: jump-card-enter 0.5s ease-out;
+}
+
+@keyframes jump-card-enter {
+  from { transform: scale(0.8) translateY(30px); opacity: 0; }
+  to { transform: scale(1) translateY(0); opacity: 1; }
+}
+
+.jump-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 12px 40px rgba(0,0,0,0.15);
+}
+
+.jump-card:active {
+  transform: scale(0.97);
+}
+
+.jump-card-action {
+  font-size: 3rem;
+  margin-bottom: 0.5rem;
+}
+
+.jump-card-text {
+  font-family: var(--font-display);
+  font-size: 1.8rem;
+  color: var(--text-primary);
+  line-height: 1.3;
+}
+
+.jump-card-text strong {
+  color: var(--green-dark);
+  font-size: 2.2rem;
+}
+
+.jump-card-hint {
+  margin-top: 1rem;
+  font-family: var(--font-body);
+  font-size: 0.9rem;
+  color: var(--text-muted);
+}
+
+.jump-card-pt {
+  margin-top: 0.5rem;
+  font-size: 1rem;
+  color: var(--text-secondary);
+}
+
+.jump-complete {
+  display: none;
+  flex-direction: column;
+  align-items: center;
+  gap: 1rem;
+  z-index: 2;
+  animation: jump-card-enter 0.5s ease-out;
+}
+
+.jump-complete.active {
+  display: flex;
+}
+
+.jump-complete-emoji {
+  font-size: 5rem;
+}
+
+.jump-complete-title {
+  font-family: var(--font-display);
+  font-size: 2rem;
+  color: var(--green-dark);
+}
+
+.jump-complete-msg {
+  font-family: var(--font-body);
+  font-size: 1.1rem;
+  color: var(--text-secondary);
+}
+
+.jump-replay-btn {
+  padding: 0.8rem 2rem;
+  border: none;
+  border-radius: 50px;
+  background: linear-gradient(135deg, var(--green-glow), var(--green-accent));
+  color: #fff;
+  font-family: var(--font-display);
+  font-size: 1.1rem;
+  font-weight: 700;
+  cursor: pointer;
+  box-shadow: 0 4px 15px rgba(126,232,126,0.4);
+  transition: all 0.3s;
+}
+
+.jump-replay-btn:hover {
+  transform: scale(1.05) translateY(-2px);
+}
+
+/* ============================================
    FIND THE TOY GAME
    ============================================ */
 .messy-room {

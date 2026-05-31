@@ -52,6 +52,7 @@
       <button class="scenario-tab" data-tab="memory">🃏 Matching Pairs</button>
       <button class="scenario-tab" data-tab="feed">🐱 Feed Luna</button>
       <button class="scenario-tab" data-tab="birthday">🎂 Happy Birthday</button>
+      <button class="scenario-tab" data-tab="jump">🤸 Jump Counting</button>
     </div>
 
     <div class="tab-panel active" id="tab-story">
@@ -133,6 +134,23 @@
         <button class="birthday-celebrate-btn" id="birthday-celebrate">🎉 Celebrate! 🎉</button>
         
         <div class="birthday-confetti" id="birthday-confetti"></div>
+      </div>
+    </div>
+
+    <!-- TAB 8: Jump Counting -->
+    <div class="tab-panel" id="tab-jump">
+      <div class="jump-scene" id="jump-scene">
+        <div class="jump-luna" id="jump-luna">🐱</div>
+        <div class="jump-progress" id="jump-progress">1 / 7</div>
+        <div class="jump-card" id="jump-card">
+          <!-- Rendered by JS -->
+        </div>
+        <div class="jump-complete" id="jump-complete">
+          <div class="jump-complete-emoji">🎉</div>
+          <h2 class="jump-complete-title">Great Exercise!</h2>
+          <p class="jump-complete-msg">You completed all the actions! Luna is so proud of you! 🐱💪</p>
+          <button class="jump-replay-btn" id="jump-replay">🔄 Play Again!</button>
+        </div>
       </div>
     </div>
 
@@ -635,6 +653,74 @@
     });
 
     updateBirthday();
+
+    // ==========================================
+    // JUMP COUNTING GAME
+    // ==========================================
+    const jumpActions = [
+      { emoji: '👏', action: 'Clap', number: 10, word: 'Ten', pt: 'Bata 10 palmas!' },
+      { emoji: '🤸', action: 'Jump', number: 7, word: 'Seven', pt: 'Pule 7 vezes!' },
+      { emoji: '🌀', action: 'Spin', number: 5, word: 'Five', pt: 'Gire 5 vezes!' },
+      { emoji: '👣', action: 'Stomp', number: 8, word: 'Eight', pt: 'Bata o pé 8 vezes!' },
+      { emoji: '🤚', action: 'Wave', number: 3, word: 'Three', pt: 'Acene 3 vezes!' },
+      { emoji: '⭐', action: 'Touch your toes', number: 6, word: 'Six', pt: 'Toque os dedos do pé 6 vezes!' },
+      { emoji: '🤷', action: 'Shrug', number: 4, word: 'Four', pt: 'Dê de ombros 4 vezes!' }
+    ];
+
+    let jumpIndex = 0;
+    const jumpCard = document.getElementById('jump-card');
+    const jumpLuna = document.getElementById('jump-luna');
+    const jumpProgress = document.getElementById('jump-progress');
+    const jumpComplete = document.getElementById('jump-complete');
+
+    function renderJumpCard() {
+      if (jumpIndex >= jumpActions.length) {
+        jumpCard.style.display = 'none';
+        jumpComplete.classList.add('active');
+        jumpLuna.textContent = '😻';
+        return;
+      }
+
+      jumpCard.style.display = 'block';
+      jumpComplete.classList.remove('active');
+      const a = jumpActions[jumpIndex];
+      jumpProgress.textContent = `${jumpIndex + 1} / ${jumpActions.length}`;
+      jumpLuna.textContent = '🐱';
+
+      // Re-trigger animation
+      jumpCard.style.animation = 'none';
+      jumpCard.offsetHeight;
+      jumpCard.style.animation = 'jump-card-enter 0.5s ease-out';
+
+      jumpCard.innerHTML = `
+        <div class="jump-card-action">${a.emoji}</div>
+        <div class="jump-card-text">${a.action} <strong>${a.word} (${a.number})</strong> times!</div>
+        <div class="jump-card-pt">🇧🇷 ${a.pt}</div>
+        <div class="jump-card-hint">Do it and tap to continue →</div>
+      `;
+    }
+
+    jumpCard.addEventListener('click', () => {
+      // Animate Luna
+      jumpLuna.classList.remove('animating');
+      jumpLuna.offsetHeight;
+      jumpLuna.classList.add('animating');
+      jumpLuna.textContent = '😸';
+
+      setTimeout(() => {
+        jumpLuna.classList.remove('animating');
+        jumpIndex++;
+        renderJumpCard();
+      }, 700);
+    });
+
+    document.getElementById('jump-replay').addEventListener('click', () => {
+      jumpIndex = 0;
+      jumpActions.sort(() => Math.random() - 0.5);
+      renderJumpCard();
+    });
+
+    renderJumpCard();
   </script>
 </body>
 </html>

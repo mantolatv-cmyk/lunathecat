@@ -458,7 +458,12 @@
 
       const numPairs = Math.min(6, vocabulary.length);
       const gameItems = [...vocabulary].sort(() => 0.5 - Math.random()).slice(0, numPairs);
-      const cards = [...gameItems, ...gameItems].sort(() => 0.5 - Math.random());
+      let cards = [];
+      gameItems.forEach(item => {
+        cards.push({ word: item.word, display: `<div class="pairs-emoji" style="font-size: 4rem; margin: 0;">${item.emoji}</div>` });
+        cards.push({ word: item.word, display: `<div class="pairs-word" style="font-size: 1.8rem; margin: 0;">${item.word}</div>` });
+      });
+      cards = cards.sort(() => 0.5 - Math.random());
 
       cards.forEach((item, index) => {
         const card = document.createElement('div');
@@ -467,7 +472,7 @@
         card.innerHTML = `
           <div class="pairs-card-inner">
             <div class="pairs-front">${index + 1}</div>
-            <div class="pairs-back"><div class="pairs-emoji">${item.emoji}</div><div class="pairs-word">${item.word}</div></div>
+            <div class="pairs-back" style="flex-direction: column; justify-content: center;">${item.display}</div>
           </div>
         `;
         card.addEventListener('click', flipCard);

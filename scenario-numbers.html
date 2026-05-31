@@ -51,6 +51,7 @@
       <button class="scenario-tab" data-tab="game">🎮 Play & Learn</button>
       <button class="scenario-tab" data-tab="memory">🃏 Matching Pairs</button>
       <button class="scenario-tab" data-tab="feed">🐱 Feed Luna</button>
+      <button class="scenario-tab" data-tab="birthday">🎂 Happy Birthday</button>
     </div>
 
     <div class="tab-panel active" id="tab-story">
@@ -106,6 +107,32 @@
         <p class="game-complete-score" id="feed-final-score">Luna ate all the numbers!</p>
         <div class="game-stars">⭐⭐⭐</div>
         <button class="game-replay-btn" id="feed-replay-btn">🔄 Play Again!</button>
+      </div>
+    </div>
+
+    <!-- TAB 7: Happy Birthday -->
+    <div class="tab-panel" id="tab-birthday">
+      <div class="birthday-scene" id="birthday-scene">
+        <div class="birthday-luna" id="birthday-luna">😺</div>
+        <div class="birthday-message" id="birthday-msg">🎉 It's Luna's Birthday! 🎉</div>
+        
+        <div class="birthday-age-selector">
+          <label>How old is Luna?</label>
+          <button class="birthday-age-btn" id="age-minus">−</button>
+          <div class="birthday-age-display" id="age-display">1</div>
+          <button class="birthday-age-btn" id="age-plus">+</button>
+        </div>
+        
+        <div class="birthday-age-word" id="age-word">Luna is turning <strong>One</strong>!</div>
+        
+        <div class="birthday-cake-area">
+          <div class="birthday-candles" id="birthday-candles"></div>
+          <div class="birthday-cake">🎂</div>
+        </div>
+        
+        <button class="birthday-celebrate-btn" id="birthday-celebrate">🎉 Celebrate! 🎉</button>
+        
+        <div class="birthday-confetti" id="birthday-confetti"></div>
       </div>
     </div>
 
@@ -533,6 +560,81 @@
 
     document.getElementById('pairs-replay-btn').addEventListener('click', initPairsGame);
     initPairsGame();
+
+    // ==========================================
+    // HAPPY BIRTHDAY GAME
+    // ==========================================
+    const numberWords = ['One','Two','Three','Four','Five','Six','Seven','Eight','Nine','Ten',
+      'Eleven','Twelve','Thirteen','Fourteen','Fifteen','Sixteen','Seventeen','Eighteen','Nineteen','Twenty'];
+    
+    let lunaAge = 1;
+    const ageDisplay = document.getElementById('age-display');
+    const ageWord = document.getElementById('age-word');
+    const candlesEl = document.getElementById('birthday-candles');
+    const bdayLuna = document.getElementById('birthday-luna');
+    const confettiEl = document.getElementById('birthday-confetti');
+    const bdayMsg = document.getElementById('birthday-msg');
+    const candleColors = ['#ff69b4','#87ceeb','#ffd700','#98fb98','#dda0dd','#f0e68c','#ffa07a','#add8e6'];
+
+    function updateBirthday() {
+      ageDisplay.textContent = lunaAge;
+      const word = numberWords[lunaAge - 1] || lunaAge;
+      ageWord.innerHTML = `Luna is turning <strong>${word}</strong>!`;
+      bdayMsg.textContent = '🎉 It\'s Luna\'s Birthday! 🎉';
+      bdayLuna.textContent = '😺';
+      confettiEl.innerHTML = '';
+      
+      // Render candles
+      candlesEl.innerHTML = '';
+      for (let i = 0; i < lunaAge; i++) {
+        const candle = document.createElement('div');
+        candle.className = 'birthday-candle';
+        candle.style.animationDelay = (i * 0.08) + 's';
+        const color = candleColors[i % candleColors.length];
+        candle.innerHTML = `<div class="candle-flame">🔥</div><div class="candle-body" style="background: linear-gradient(180deg, ${color} 0%, ${color}99 100%);"></div>`;
+        candlesEl.appendChild(candle);
+      }
+    }
+
+    document.getElementById('age-minus').addEventListener('click', () => {
+      if (lunaAge > 1) { lunaAge--; updateBirthday(); }
+    });
+
+    document.getElementById('age-plus').addEventListener('click', () => {
+      if (lunaAge < 20) { lunaAge++; updateBirthday(); }
+    });
+
+    document.getElementById('birthday-celebrate').addEventListener('click', () => {
+      const word = numberWords[lunaAge - 1] || lunaAge;
+      bdayLuna.textContent = '😻';
+      bdayMsg.textContent = `🎂 Happy Birthday Luna! You are ${word}! 🎂`;
+
+      // Launch confetti
+      confettiEl.innerHTML = '';
+      const colors = ['#ff69b4','#ffd700','#87ceeb','#98fb98','#ff6347','#dda0dd','#ffa500','#00ced1'];
+      for (let i = 0; i < 60; i++) {
+        const piece = document.createElement('div');
+        piece.className = 'confetti-piece';
+        piece.style.left = Math.random() * 100 + '%';
+        piece.style.top = '-10px';
+        piece.style.background = colors[Math.floor(Math.random() * colors.length)];
+        piece.style.animationDelay = (Math.random() * 1.5) + 's';
+        piece.style.animationDuration = (2 + Math.random() * 2) + 's';
+        piece.style.width = (6 + Math.random() * 8) + 'px';
+        piece.style.height = (6 + Math.random() * 8) + 'px';
+        piece.style.borderRadius = Math.random() > 0.5 ? '50%' : '2px';
+        confettiEl.appendChild(piece);
+      }
+
+      // Reset after celebration
+      setTimeout(() => {
+        confettiEl.innerHTML = '';
+        bdayLuna.textContent = '😺';
+        bdayMsg.textContent = '🎉 It\'s Luna\'s Birthday! 🎉';
+      }, 4000);
+    });
+
+    updateBirthday();
   </script>
 </body>
 </html>

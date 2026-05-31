@@ -202,11 +202,28 @@
   margin-bottom: 0.4rem;
 }
 
+.dialogue-bubble {
+  cursor: pointer;
+  transition: transform 0.2s;
+}
+
+.dialogue-bubble:hover {
+  transform: translateY(-2px);
+}
+
 .dialogue-portuguese {
+  display: none;
   font-family: var(--font-body);
   font-size: 1.1rem;
   color: var(--text-muted);
   line-height: 1.4;
+  margin-top: 0.5rem;
+  padding-top: 0.5rem;
+  border-top: 1px dashed var(--border-soft);
+}
+
+.dialogue-bubble.show-pt .dialogue-portuguese {
+  display: block;
 }
 
 .dialogue-next-btn {

@@ -280,6 +280,7 @@
       const b = document.createElement('div');
       b.className = `dialogue-bubble ${d.speaker}`;
       b.innerHTML = `<div class="dialogue-speaker"><span>${d.speaker === 'luna' ? '🐱' : '👧'}</span><span>${d.speaker === 'luna' ? 'Luna the Cat' : 'Little Friend'}</span></div><div class="dialogue-english">${d.en}</div><div class="dialogue-portuguese">🇧🇷 ${d.pt}</div>`;
+      b.addEventListener('click', () => b.classList.toggle('show-pt'));
       dc.appendChild(b);
       requestAnimationFrame(() => b.classList.add('visible'));
       dialogueIndex++;

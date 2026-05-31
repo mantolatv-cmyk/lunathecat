@@ -1580,7 +1580,8 @@
 }
 
 .help-sidebar {
-  width: 120px;
+  width: 140px;
+  min-height: 160px;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -1594,19 +1595,21 @@
 
 .help-sidebar-hint {
   position: absolute;
-  bottom: -25px;
-  font-size: 0.8rem;
+  bottom: 10px;
+  font-size: 0.85rem;
   color: var(--text-muted);
   white-space: nowrap;
+  font-family: var(--font-body);
 }
 
 .help-item {
-  font-size: 4rem;
+  font-size: 5rem;
   cursor: grab;
   user-select: none;
   touch-action: none;
   transition: transform 0.2s;
   filter: drop-shadow(0 4px 8px rgba(0,0,0,0.2));
+  z-index: 10;
 }
 
 .help-item:active {
@@ -1628,7 +1631,7 @@
 }
 
 .help-cat {
-  font-size: 5rem;
+  font-size: 6rem;
   margin-bottom: -1rem;
   z-index: 1;
 }
@@ -1644,7 +1647,7 @@
 
 .help-table {
   width: 100%;
-  height: 200px;
+  height: 240px;
   background: #deb887;
   border-radius: 20px 20px 10px 10px;
   box-shadow: inset 0 -20px 0 rgba(0,0,0,0.1), 0 10px 20px rgba(0,0,0,0.15);
@@ -1653,8 +1656,8 @@
   flex-wrap: wrap;
   align-content: flex-start;
   justify-content: center;
-  gap: 0.5rem;
-  padding: 1.5rem;
+  gap: 0.8rem;
+  padding: 2rem;
   z-index: 2;
   transition: all 0.3s;
 }
@@ -1665,9 +1668,10 @@
 }
 
 .help-dropped-item {
-  font-size: 3rem;
+  font-size: 3.5rem;
   animation: drop-bounce 0.4s ease-out;
   filter: drop-shadow(0 2px 4px rgba(0,0,0,0.2));
+  pointer-events: none; /* Prevents blocking dragover on the table */
 }
 
 @keyframes drop-bounce {

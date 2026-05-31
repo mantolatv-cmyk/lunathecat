@@ -817,6 +817,11 @@
       helpTable.classList.add('drag-over');
     });
 
+    helpTable.addEventListener('dragenter', (e) => {
+      e.preventDefault();
+      helpTable.classList.add('drag-over');
+    });
+
     helpTable.addEventListener('dragleave', () => {
       helpTable.classList.remove('drag-over');
     });

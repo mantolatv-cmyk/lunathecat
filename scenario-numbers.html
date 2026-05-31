@@ -50,6 +50,7 @@
       <button class="scenario-tab" data-tab="vocab">📖 Word Garden</button>
       <button class="scenario-tab" data-tab="game">🎮 Play & Learn</button>
       <button class="scenario-tab" data-tab="memory">🃏 Matching Pairs</button>
+      <button class="scenario-tab" data-tab="feed">🐱 Feed Luna</button>
     </div>
 
     <div class="tab-panel active" id="tab-story">
@@ -83,7 +84,32 @@
     </div>
 
     
-    <!-- TAB 4: Matching Pairs -->
+    <!-- TAB 5: Feed Luna -->
+    <div class="tab-panel" id="tab-feed">
+      <div class="game-area" id="feed-game-area">
+        <div class="game-score" id="feed-game-score">⭐ Fed: <strong>0</strong> / <span>0</span></div>
+        <div class="game-progress"><div class="game-progress-bar" id="feed-progress-bar"></div></div>
+        <div class="game-feedback" id="feed-game-feedback">Drag items to feed Luna! 🐱</div>
+        
+        <div class="feed-game-area">
+          <div class="feed-scene">
+            <div class="feed-cat" id="feed-cat">🐱</div>
+            <div class="feed-items-container" id="feed-items-container">
+              <!-- Draggable items rendered by JS -->
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="game-complete" id="feed-complete">
+        <div class="game-complete-emoji">😻</div>
+        <h2 class="game-complete-title">Number Feast!</h2>
+        <p class="game-complete-score" id="feed-final-score">Luna ate all the numbers!</p>
+        <div class="game-stars">⭐⭐⭐</div>
+        <button class="game-replay-btn" id="feed-replay-btn">🔄 Play Again!</button>
+      </div>
+    </div>
+
+        <!-- TAB 4: Matching Pairs -->
     <div class="tab-panel" id="tab-memory">
       <div class="pairs-board" id="pairs-board"></div>
       <div class="game-complete" id="pairs-complete" style="display: none; flex-direction: column; align-items: center;">
@@ -256,7 +282,163 @@
     });
     renderQ();
 
-    // MATCHING PAIRS GAME
+    // ==========================================
+    // FEED LUNA GAME
+    // ==========================================
+    const feedItemsContainer = document.getElementById('feed-items-container');
+    const feedCatEl = document.getElementById('feed-cat');
+    let feedItemsEaten = 0;
+    const feedTotalItems = vocabulary.length;
+
+    function initFeedGame() {
+      feedItemsEaten = 0;
+      feedItemsContainer.innerHTML = '';
+      document.getElementById('feed-game-score').innerHTML = `⭐ Fed: <strong>0</strong> / <span>${feedTotalItems}</span>`;
+      document.getElementById('feed-progress-bar').style.width = '0%';
+      document.getElementById('feed-game-feedback').textContent = 'Drag items to feed Luna! 🐱';
+      feedCatEl.textContent = '🐱';
+      document.getElementById('feed-game-area').style.display = 'block';
+      document.getElementById('feed-complete').classList.remove('active');
+
+      const shuffled = [...vocabulary].sort(() => Math.random() - 0.5);
+      
+      shuffled.forEach(v => {
+        const item = document.createElement('div');
+        item.className = 'feed-item';
+        item.textContent = v.emoji;
+        item.draggable = true;
+        item.dataset.word = v.word;
+
+        // Mouse Events
+        item.addEventListener('dragstart', (e) => {
+          e.dataTransfer.setData('text/plain', v.emoji);
+          setTimeout(() => item.classList.add('feed-dragging'), 0);
+          feedCatEl.textContent = '😸';
+        });
+
+        item.addEventListener('dragend', () => {
+          item.classList.remove('feed-dragging');
+          feedCatEl.textContent = '🐱';
+          feedCatEl.classList.remove('drag-over');
+        });
+
+        // Touch Events for Mobile
+        item.addEventListener('touchstart', feedHandleTouchStart, {passive: false});
+        item.addEventListener('touchmove', feedHandleTouchMove, {passive: false});
+        item.addEventListener('touchend', feedHandleTouchEnd);
+
+        feedItemsContainer.appendChild(item);
+      });
+    }
+
+    // Drag over cat
+    feedCatEl.addEventListener('dragover', (e) => {
+      e.preventDefault();
+      feedCatEl.classList.add('drag-over');
+    });
+
+    feedCatEl.addEventListener('dragleave', () => {
+      feedCatEl.classList.remove('drag-over');
+    });
+
+    feedCatEl.addEventListener('drop', (e) => {
+      e.preventDefault();
+      feedCatEl.classList.remove('drag-over');
+      const draggingItem = document.querySelector('.feed-item.feed-dragging');
+      if (draggingItem) {
+        feedEatItem(draggingItem);
+      }
+    });
+
+    // Touch Support for Mobile
+    let feedCurrentDraggingItem = null;
+    function feedHandleTouchStart(e) {
+      feedCurrentDraggingItem = this;
+      this.classList.add('feed-dragging');
+      feedCatEl.textContent = '😸';
+    }
+
+    function feedHandleTouchMove(e) {
+      e.preventDefault();
+      const touchLocation = e.targetTouches[0];
+      
+      this.style.position = 'absolute';
+      this.style.left = touchLocation.pageX - (this.offsetWidth / 2) + 'px';
+      this.style.top = touchLocation.pageY - (this.offsetHeight / 2) + 'px';
+
+      const catRect = feedCatEl.getBoundingClientRect();
+      if (
+        touchLocation.clientX >= catRect.left &&
+        touchLocation.clientX <= catRect.right &&
+        touchLocation.clientY >= catRect.top &&
+        touchLocation.clientY <= catRect.bottom
+      ) {
+        feedCatEl.classList.add('drag-over');
+      } else {
+        feedCatEl.classList.remove('drag-over');
+      }
+    }
+
+    function feedHandleTouchEnd(e) {
+      if (!feedCurrentDraggingItem) return;
+      
+      const changedTouch = e.changedTouches[0];
+      const catRect = feedCatEl.getBoundingClientRect();
+      
+      feedCurrentDraggingItem.style.position = '';
+      feedCurrentDraggingItem.style.left = '';
+      feedCurrentDraggingItem.style.top = '';
+      feedCurrentDraggingItem.classList.remove('feed-dragging');
+      feedCatEl.textContent = '🐱';
+      feedCatEl.classList.remove('drag-over');
+
+      if (
+        changedTouch.clientX >= catRect.left &&
+        changedTouch.clientX <= catRect.right &&
+        changedTouch.clientY >= catRect.top &&
+        changedTouch.clientY <= catRect.bottom
+      ) {
+        feedEatItem(feedCurrentDraggingItem);
+      }
+      feedCurrentDraggingItem = null;
+    }
+
+    function feedEatItem(item) {
+      const word = item.dataset.word;
+      item.remove();
+      feedItemsEaten++;
+      
+      feedCatEl.textContent = '😻';
+      feedCatEl.classList.add('eating');
+      setTimeout(() => {
+        feedCatEl.classList.remove('eating');
+        feedCatEl.textContent = '🐱';
+      }, 500);
+
+      document.getElementById('feed-game-score').innerHTML = `⭐ Fed: <strong>${feedItemsEaten}</strong> / <span>${feedTotalItems}</span>`;
+      document.getElementById('feed-progress-bar').style.width = ((feedItemsEaten / feedTotalItems) * 100) + '%';
+      document.getElementById('feed-game-feedback').textContent = `Yummy ${word}! 😋`;
+
+      if (feedItemsEaten === feedTotalItems) {
+        setTimeout(showFeedComplete, 800);
+      }
+    }
+
+    function showFeedComplete() {
+      document.getElementById('feed-game-area').style.display = 'none';
+      document.getElementById('feed-complete').classList.add('active');
+      document.getElementById('feed-progress-bar').style.width = '100%';
+    }
+
+    document.getElementById('feed-replay-btn').addEventListener('click', () => {
+      document.getElementById('feed-game-area').style.display = 'block';
+      document.getElementById('feed-complete').classList.remove('active');
+      initFeedGame();
+    });
+
+    initFeedGame();
+
+        // MATCHING PAIRS GAME
     const pairsBoard = document.getElementById('pairs-board');
     const pairsComplete = document.getElementById('pairs-complete');
     let hasFlippedCard = false;

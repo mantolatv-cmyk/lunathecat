@@ -53,6 +53,7 @@
       <button class="scenario-tab" data-tab="feed">🐱 Feed Luna</button>
       <button class="scenario-tab" data-tab="birthday">🎂 Happy Birthday</button>
       <button class="scenario-tab" data-tab="jump">🤸 Jump Counting</button>
+      <button class="scenario-tab" data-tab="help">🍽️ Help the Cat</button>
     </div>
 
     <div class="tab-panel active" id="tab-story">
@@ -150,6 +151,35 @@
           <h2 class="jump-complete-title">Great Exercise!</h2>
           <p class="jump-complete-msg">You completed all the actions! Luna is so proud of you! 🐱💪</p>
           <button class="jump-replay-btn" id="jump-replay">🔄 Play Again!</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- TAB 9: Help the Cat -->
+    <div class="tab-panel" id="tab-help">
+      <div class="help-scene" id="help-scene">
+        <div class="help-prompt" id="help-prompt">Put 6 Cupcakes on the table!</div>
+        <div class="help-progress" id="help-progress">0 / 6</div>
+        
+        <div class="help-workspace">
+          <div class="help-sidebar" id="help-sidebar">
+            <div class="help-item" id="help-draggable-item" draggable="true">🧁</div>
+            <div class="help-sidebar-hint">Drag from here!</div>
+          </div>
+          
+          <div class="help-table-area">
+            <div class="help-cat" id="help-cat">😺</div>
+            <div class="help-table" id="help-table">
+              <!-- Dropped items go here -->
+            </div>
+          </div>
+        </div>
+
+        <div class="help-complete" id="help-complete">
+          <div class="jump-complete-emoji">🎉</div>
+          <h2 class="jump-complete-title">Table is Ready!</h2>
+          <p class="jump-complete-msg">Thank you for helping Luna organize the table!</p>
+          <button class="jump-replay-btn" id="help-replay">🔄 Play Again!</button>
         </div>
       </div>
     </div>
@@ -721,6 +751,164 @@
     });
 
     renderJumpCard();
+
+    // ==========================================
+    // HELP THE CAT GAME
+    // ==========================================
+    const helpTasks = [
+      { obj: 'cupcakes', emoji: '🧁', count: 6 },
+      { obj: 'balloons', emoji: '🎈', count: 9 },
+      { obj: 'plates', emoji: '🍽️', count: 7 },
+      { obj: 'cups', emoji: '🥤', count: 3 },
+      { obj: 'napkins', emoji: '🧻', count: 8 },
+      { obj: 'forks', emoji: '🍴', count: 2 }
+    ];
+
+    let helpTaskIndex = 0;
+    let helpCurrentCount = 0;
+
+    const helpPrompt = document.getElementById('help-prompt');
+    const helpProgress = document.getElementById('help-progress');
+    const helpDraggable = document.getElementById('help-draggable-item');
+    const helpTable = document.getElementById('help-table');
+    const helpCat = document.getElementById('help-cat');
+    const helpComplete = document.getElementById('help-complete');
+
+    function renderHelpTask() {
+      if (helpTaskIndex >= helpTasks.length) {
+        document.querySelector('.help-workspace').style.display = 'none';
+        helpPrompt.style.display = 'none';
+        helpProgress.style.display = 'none';
+        helpComplete.classList.add('active');
+        return;
+      }
+
+      document.querySelector('.help-workspace').style.display = 'flex';
+      helpPrompt.style.display = 'block';
+      helpProgress.style.display = 'block';
+      helpComplete.classList.remove('active');
+
+      const task = helpTasks[helpTaskIndex];
+      helpCurrentCount = 0;
+      helpDraggable.textContent = task.emoji;
+      helpTable.innerHTML = '';
+      helpPrompt.innerHTML = `Put <strong>${task.count} ${task.obj}</strong> on the table!`;
+      updateHelpProgress();
+      helpCat.textContent = '😺';
+    }
+
+    function updateHelpProgress() {
+      const task = helpTasks[helpTaskIndex];
+      helpProgress.textContent = `${helpCurrentCount} / ${task.count}`;
+    }
+
+    helpDraggable.addEventListener('dragstart', (e) => {
+      e.dataTransfer.setData('text/plain', helpDraggable.textContent);
+      setTimeout(() => helpDraggable.classList.add('dragging'), 0);
+    });
+
+    helpDraggable.addEventListener('dragend', () => {
+      helpDraggable.classList.remove('dragging');
+      helpTable.classList.remove('drag-over');
+    });
+
+    helpTable.addEventListener('dragover', (e) => {
+      e.preventDefault();
+      helpTable.classList.add('drag-over');
+    });
+
+    helpTable.addEventListener('dragleave', () => {
+      helpTable.classList.remove('drag-over');
+    });
+
+    helpTable.addEventListener('drop', (e) => {
+      e.preventDefault();
+      helpTable.classList.remove('drag-over');
+      handleHelpDrop();
+    });
+
+    // Mobile touch
+    let helpCurrentDragging = false;
+    helpDraggable.addEventListener('touchstart', function(e) {
+      helpCurrentDragging = true;
+      this.classList.add('dragging');
+    }, {passive: false});
+
+    helpDraggable.addEventListener('touchmove', function(e) {
+      if(!helpCurrentDragging) return;
+      e.preventDefault();
+      const touch = e.targetTouches[0];
+      
+      this.style.position = 'fixed';
+      this.style.left = touch.clientX - (this.offsetWidth / 2) + 'px';
+      this.style.top = touch.clientY - (this.offsetHeight / 2) + 'px';
+      this.style.zIndex = '1000';
+
+      const rect = helpTable.getBoundingClientRect();
+      if (touch.clientX >= rect.left && touch.clientX <= rect.right &&
+          touch.clientY >= rect.top && touch.clientY <= rect.bottom) {
+        helpTable.classList.add('drag-over');
+      } else {
+        helpTable.classList.remove('drag-over');
+      }
+    }, {passive: false});
+
+    helpDraggable.addEventListener('touchend', function(e) {
+      if(!helpCurrentDragging) return;
+      helpCurrentDragging = false;
+      const touch = e.changedTouches[0];
+      
+      this.style.position = '';
+      this.style.left = '';
+      this.style.top = '';
+      this.style.zIndex = '';
+      this.classList.remove('dragging');
+      helpTable.classList.remove('drag-over');
+
+      const rect = helpTable.getBoundingClientRect();
+      if (touch.clientX >= rect.left && touch.clientX <= rect.right &&
+          touch.clientY >= rect.top && touch.clientY <= rect.bottom) {
+        handleHelpDrop();
+      }
+    });
+
+    function handleHelpDrop() {
+      const task = helpTasks[helpTaskIndex];
+      if (helpCurrentCount >= task.count) return;
+
+      const item = document.createElement('div');
+      item.className = 'help-dropped-item';
+      item.textContent = task.emoji;
+      
+      // Random slight rotation for organic look
+      const rot = Math.floor(Math.random() * 30) - 15;
+      item.style.transform = `rotate(${rot}deg)`;
+      
+      helpTable.appendChild(item);
+      helpCurrentCount++;
+      updateHelpProgress();
+
+      helpCat.classList.remove('happy');
+      void helpCat.offsetWidth; // trigger reflow
+      helpCat.classList.add('happy');
+      helpCat.textContent = '😻';
+      setTimeout(() => { if(helpCat.textContent === '😻') helpCat.textContent = '😺'; }, 500);
+
+      if (helpCurrentCount === task.count) {
+        helpCat.textContent = '😸';
+        setTimeout(() => {
+          helpTaskIndex++;
+          renderHelpTask();
+        }, 1500);
+      }
+    }
+
+    document.getElementById('help-replay').addEventListener('click', () => {
+      helpTaskIndex = 0;
+      renderHelpTask();
+    });
+
+    renderHelpTask();
   </script>
 </body>
 </html>

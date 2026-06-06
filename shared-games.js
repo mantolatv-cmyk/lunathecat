@@ -10,7 +10,6 @@ document.addEventListener('DOMContentLoaded', () => {
   const tabsContainer = document.getElementById('scenario-tabs') || document.querySelector('.scenario-tabs');
   if (tabsContainer) {
     tabsContainer.insertAdjacentHTML('beforeend', `
-      <button class="scenario-tab" data-tab="listen">🔊 Listen & Find</button>
       <button class="scenario-tab" data-tab="sentence">🧱 Build a Sentence</button>
       <button class="scenario-tab" data-tab="scramble">✏️ Spelling Scramble</button>
     `);
@@ -20,32 +19,6 @@ document.addEventListener('DOMContentLoaded', () => {
   const container = document.querySelector('.scenario-container');
   if (container) {
     container.insertAdjacentHTML('beforeend', `
-      <!-- TAB: Listen & Find -->
-      <div class="tab-panel" id="tab-listen">
-        <div class="game-area" id="listen-game-area" style="text-align: center;">
-          <div class="game-score" id="listen-game-score">⭐ Score: <strong>0</strong> / <span>10</span></div>
-          <div class="game-progress"><div class="game-progress-bar" id="listen-progress-bar"></div></div>
-          
-          <div class="listen-scene">
-            <div class="listen-instruction" id="listen-feedback">Listen and click the right picture!</div>
-            <div class="listen-btn-container">
-              <button class="listen-play-btn" id="listen-play-btn" aria-label="Play audio">🔊</button>
-            </div>
-            <div class="listen-options" id="listen-options">
-              <!-- Rendered by JS -->
-            </div>
-          </div>
-        </div>
-        
-        <div class="game-complete" id="listen-complete" style="display: none; flex-direction: column; align-items: center;">
-          <div class="game-complete-emoji">🎧</div>
-          <h2 class="game-complete-title">Great Listening!</h2>
-          <p class="game-complete-score" id="listen-final-score">You found all the words!</p>
-          <div class="game-stars" id="listen-stars">⭐⭐⭐</div>
-          <button class="game-replay-btn" id="listen-replay-btn">🔄 Play Again!</button>
-        </div>
-      </div>
-
       <!-- TAB: Sentence Builder -->
       <div class="tab-panel" id="tab-sentence">
         <div class="game-area" id="sentence-game-area" style="text-align: center;">
@@ -104,112 +77,7 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   });
 
-  // ==========================================
-  // GAME - LISTEN & FIND
-  // ==========================================
-  let listenGameItems = [];
-  let listenIndex = 0;
-  let listenScore = 0;
-  let listenAnswered = false;
-  let currentListenWord = "";
-  const listenTotalItems = Math.min(10, vocabulary.length);
-  
-  const listenPlayBtn = document.getElementById('listen-play-btn');
-  const listenOptions = document.getElementById('listen-options');
-  const listenFeedback = document.getElementById('listen-feedback');
-  const listenGameArea = document.getElementById('listen-game-area');
-  const listenComplete = document.getElementById('listen-complete');
-  
-  function initListenGame() {
-    listenGameItems = [...vocabulary].sort(() => Math.random() - 0.5).slice(0, listenTotalItems);
-    listenIndex = 0;
-    listenScore = 0;
-    listenGameArea.style.display = 'block';
-    listenComplete.style.display = 'none';
-    
-    updateListenScore();
-    renderListenQuestion();
-  }
-  
-  function updateListenScore() {
-    document.getElementById('listen-game-score').innerHTML = `⭐ Score: <strong>${listenScore}</strong> / <span>${listenTotalItems}</span>`;
-    document.getElementById('listen-progress-bar').style.width = ((listenIndex / listenTotalItems) * 100) + '%';
-  }
-  
-  function renderListenQuestion() {
-    if (listenIndex >= listenTotalItems) {
-      listenGameArea.style.display = 'none';
-      listenComplete.style.display = 'flex';
-      const pct = Math.round((listenScore / listenTotalItems) * 100);
-      document.getElementById('listen-final-score').textContent = `You got ${listenScore} out of ${listenTotalItems} correct!`;
-      document.getElementById('listen-stars').textContent = pct >= 90 ? '⭐⭐⭐' : pct >= 60 ? '⭐⭐' : '⭐';
-      document.getElementById('listen-progress-bar').style.width = '100%';
-      return;
-    }
-    
-    listenAnswered = false;
-    const targetItem = listenGameItems[listenIndex];
-    currentListenWord = targetItem.word;
-    listenFeedback.textContent = "Listen and click the right picture!";
-    listenFeedback.style.color = "var(--text-primary)";
-    
-    let options = [targetItem];
-    const otherVocab = vocabulary.filter(v => v.word !== targetItem.word);
-    const wrongOptions = [...otherVocab].sort(() => Math.random() - 0.5).slice(0, 3);
-    options = [...options, ...wrongOptions].sort(() => Math.random() - 0.5);
-    
-    listenOptions.innerHTML = '';
-    options.forEach(opt => {
-      const btn = document.createElement('div');
-      btn.className = 'listen-option';
-      btn.textContent = opt.emoji;
-      btn.addEventListener('click', () => handleListenAnswer(opt, targetItem, btn));
-      listenOptions.appendChild(btn);
-    });
-    
-    setTimeout(playListenAudio, 300);
-  }
-  
-  function playListenAudio() {
-    if (!currentListenWord) return;
-    window.speechSynthesis.cancel();
-    listenPlayBtn.classList.add('playing');
-    const utterance = new SpeechSynthesisUtterance(currentListenWord);
-    utterance.lang = 'en-US';
-    utterance.rate = 0.9;
-    utterance.onend = () => listenPlayBtn.classList.remove('playing');
-    utterance.onerror = () => listenPlayBtn.classList.remove('playing');
-    window.speechSynthesis.speak(utterance);
-  }
-  
-  function handleListenAnswer(selected, correct, btn) {
-    if (listenAnswered) return;
-    listenAnswered = true;
-    const isCorrect = selected.word === correct.word;
-    
-    Array.from(listenOptions.children).forEach(child => {
-      child.style.pointerEvents = 'none';
-      if (child.textContent === correct.emoji && !isCorrect) child.classList.add('correct');
-    });
-    
-    if (isCorrect) {
-      listenScore++;
-      btn.classList.add('correct');
-      listenFeedback.textContent = '🎉 Correct! ' + selected.word;
-      listenFeedback.style.color = 'var(--green-dark)';
-    } else {
-      btn.classList.add('wrong');
-      listenFeedback.textContent = '❌ Oops! It was ' + correct.word;
-      listenFeedback.style.color = '#dc2626';
-    }
-    updateListenScore();
-    setTimeout(() => { listenIndex++; renderListenQuestion(); }, 2000);
-  }
-  
-  if (listenPlayBtn) listenPlayBtn.addEventListener('click', playListenAudio);
-  const listenReplayBtn = document.getElementById('listen-replay-btn');
-  if (listenReplayBtn) listenReplayBtn.addEventListener('click', initListenGame);
-  
+
   // ==========================================
   // GAME - SENTENCE BUILDER
   // ==========================================
@@ -556,7 +424,6 @@ document.addEventListener('DOMContentLoaded', () => {
   if (scrambleReplayBtn) scrambleReplayBtn.addEventListener('click', initScrambleGame);
   
   // Initialize games once the DOM is loaded
-  initListenGame();
   initSentenceGame();
   initScrambleGame();
 });

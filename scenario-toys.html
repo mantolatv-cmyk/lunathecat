@@ -1,14 +1,18 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>🧸 Toys & Fun — Learn with Luna</title>
-  <meta name="description" content="Learn English toy names with Luna the Cat! Interactive stories, flashcards, and a hidden object game." />
-  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🐱</text></svg>" />
+  <meta name="description"
+    content="Learn English toy names with Luna the Cat! Interactive stories, flashcards, and a hidden object game." />
+  <link rel="icon"
+    href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🐱</text></svg>" />
   <link rel="stylesheet" href="styles.css" />
   <link rel="stylesheet" href="scenario.css" />
 </head>
+
 <body>
 
   <header class="header scrolled" id="app-header">
@@ -80,8 +84,10 @@
     <div class="tab-panel" id="tab-game">
       <div class="game-area" id="game-area">
         <div class="game-score" id="game-score">⭐ Found: <strong>0</strong> / <span>10</span></div>
-        <div class="game-progress"><div class="game-progress-bar" id="game-progress-bar"></div></div>
-        
+        <div class="game-progress">
+          <div class="game-progress-bar" id="game-progress-bar"></div>
+        </div>
+
         <div style="text-align: center;">
           <div class="find-toy-prompt" id="find-toy-prompt">
             Can you find the <span class="find-toy-target" id="find-toy-target">🧸</span> ?
@@ -102,14 +108,16 @@
       </div>
     </div>
 
-    
+
     <!-- TAB 5: Feed Luna -->
     <div class="tab-panel" id="tab-feed">
       <div class="game-area" id="feed-game-area">
         <div class="game-score" id="feed-game-score">⭐ Fed: <strong>0</strong> / <span>0</span></div>
-        <div class="game-progress"><div class="game-progress-bar" id="feed-progress-bar"></div></div>
+        <div class="game-progress">
+          <div class="game-progress-bar" id="feed-progress-bar"></div>
+        </div>
         <div class="game-feedback" id="feed-game-feedback">Drag items to feed Luna! 🐱</div>
-        
+
         <div class="feed-game-area">
           <div class="feed-scene">
             <div class="feed-cat" id="feed-cat">🐱</div>
@@ -128,13 +136,15 @@
       </div>
     </div>
 
-        <!-- TAB 4: Matching Pairs -->
+    <!-- TAB 4: Matching Pairs -->
     <div class="tab-panel" id="tab-memory">
       <div class="pairs-board" id="pairs-board"></div>
-      <div class="game-complete" id="pairs-complete" style="display: none; flex-direction: column; align-items: center;">
+      <div class="game-complete" id="pairs-complete"
+        style="display: none; flex-direction: column; align-items: center;">
         <div class="game-complete-emoji">🎉</div>
         <h2 class="game-complete-title">You Did It!</h2>
-        <p class="game-complete-score" style="font-size:1.2rem; color:var(--text-secondary);">You found all the pairs!</p>
+        <p class="game-complete-score" style="font-size:1.2rem; color:var(--text-secondary);">You found all the pairs!
+        </p>
         <button class="game-replay-btn" id="pairs-replay-btn">🔄 Play Again!</button>
       </div>
     </div>
@@ -160,6 +170,24 @@
       { speaker: 'luna', en: "Let's learn all the toy names together! 🪁", pt: "Vamos aprender o nome de todos os brinquedos juntos! 🪁" }
     ];
 
+    const gameSentences = [
+      { en: "I play with blocks", pt: "Eu brinco com blocos" },
+      { en: "The doll is pretty", pt: "A boneca é bonita" },
+      { en: "I have a ball", pt: "Eu tenho uma bola" },
+      { en: "The kite flies high", pt: "A pipa voa alto" },
+      { en: "My teddy bear", pt: "Meu urso de pelúcia" },
+      { en: "A red fast car", pt: "Um carro rápido e vermelho" },
+      { en: "The robot can walk", pt: "O robô sabe andar" },
+      { en: "I ride my bike", pt: "Eu ando na minha bicicleta" },
+      { en: "The train is loud", pt: "O trem é barulhento" },
+      { en: "A big puzzle", pt: "Um grande quebra-cabeça" },
+      { en: "Building a castle", pt: "Construindo um castelo" },
+      { en: "Playing in the sun", pt: "Brincando no sol" },
+      { en: "Happy little toys", pt: "Brinquedinhos felizes" },
+      { en: "Time to tidy up", pt: "Hora de arrumar" },
+      { en: "Learning is fun", pt: "Aprender é divertido" }
+    ];
+
     const vocabulary = [
       { emoji: '⚽', word: 'Ball', pt: 'Bola' },
       { emoji: '🎎', word: 'Doll', pt: 'Boneca' },
@@ -173,7 +201,7 @@
       { emoji: '<svg viewBox="0 0 100 100" width="1em" height="1em" xmlns="http://www.w3.org/2000/svg" style="vertical-align: -0.125em;"><rect x="10" y="30" width="80" height="60" rx="5" fill="#ef4444" /><rect x="10" y="85" width="80" height="5" rx="2" fill="#b91c1c" /><rect x="20" y="15" width="20" height="15" rx="3" fill="#ef4444" /><rect x="20" y="15" width="20" height="5" rx="2" fill="#fca5a5" /><rect x="60" y="15" width="20" height="15" rx="3" fill="#ef4444" /><rect x="60" y="15" width="20" height="5" rx="2" fill="#fca5a5" /></svg>', word: 'Lego', pt: 'Lego' }
     ];
 
-    
+
 
     // TABS
     document.querySelectorAll('.scenario-tab').forEach(tab => {
@@ -196,11 +224,11 @@
     const rb = document.getElementById('dialogue-restart-btn');
 
     function renderNext() {
-      if (dIdx >= dialogues.length) { 
-        nb.disabled = true; 
-        nb.textContent = '✅ Story Complete!'; 
-        rb.classList.add('visible'); 
-        return; 
+      if (dIdx >= dialogues.length) {
+        nb.disabled = true;
+        nb.textContent = '✅ Story Complete!';
+        rb.classList.add('visible');
+        return;
       }
       const d = dialogues[dIdx];
       const b = document.createElement('div');
@@ -213,13 +241,13 @@
       b.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
     }
     nb.addEventListener('click', renderNext);
-    rb.addEventListener('click', () => { 
-      dIdx = 0; 
-      dc.innerHTML = ''; 
-      nb.disabled = false; 
-      nb.textContent = 'Next Line →'; 
-      rb.classList.remove('visible'); 
-      renderNext(); 
+    rb.addEventListener('click', () => {
+      dIdx = 0;
+      dc.innerHTML = '';
+      nb.disabled = false;
+      nb.textContent = 'Next Line →';
+      rb.classList.remove('visible');
+      renderNext();
     });
     renderNext();
 
@@ -270,36 +298,36 @@
       room.innerHTML = '';
       document.getElementById('game-score').innerHTML = `⭐ Found: <strong>0</strong> / <span>${totalToys}</span>`;
       document.getElementById('game-progress-bar').style.width = '0%';
-      
+
       // Shuffle toys to find
       toysToFind = [...vocabulary].sort(() => Math.random() - 0.5);
       setNextTarget();
 
       // Scatter toys in the room
       const allToys = [...vocabulary].sort(() => Math.random() - 0.5);
-      
+
       allToys.forEach(v => {
         const item = document.createElement('div');
         item.className = 'hidden-toy';
         item.innerHTML = v.emoji;
         item.dataset.word = v.word;
-        
+
         // Random Position (keep within safe bounds)
         // Room is up to 800x500. Item is ~60x60.
-        const safeWidth = 100; 
+        const safeWidth = 100;
         const safeHeight = 100;
-        
+
         // Use percentages for responsive scattering
         const randomX = Math.floor(Math.random() * 80) + 5; // 5% to 85%
         const randomY = Math.floor(Math.random() * 80) + 5; // 5% to 85%
         const randomRotation = Math.floor(Math.random() * 90) - 45; // -45deg to 45deg
-        
+
         item.style.left = `${randomX}%`;
         item.style.top = `${randomY}%`;
         item.style.transform = `rotate(${randomRotation}deg)`;
 
         item.addEventListener('click', () => handleToyClick(item, v.word));
-        
+
         room.appendChild(item);
       });
     }
@@ -312,18 +340,18 @@
 
     function handleToyClick(item, clickedWord) {
       if (item.classList.contains('found')) return;
-      
+
       const targetWord = toysToFind[0].word;
-      
+
       if (clickedWord === targetWord) {
         // Correct!
         item.classList.add('found');
         toysFound++;
         toysToFind.shift(); // Remove from queue
-        
+
         document.getElementById('game-score').innerHTML = `⭐ Found: <strong>${toysFound}</strong> / <span>${totalToys}</span>`;
         document.getElementById('game-progress-bar').style.width = ((toysFound / totalToys) * 100) + '%';
-        
+
         if (toysFound === totalToys) {
           setTimeout(showFindComplete, 800);
         } else {
@@ -371,7 +399,7 @@
       document.getElementById('feed-complete').classList.remove('active');
 
       const shuffled = [...vocabulary].sort(() => Math.random() - 0.5);
-      
+
       shuffled.forEach(v => {
         const item = document.createElement('div');
         item.className = 'feed-item';
@@ -393,8 +421,8 @@
         });
 
         // Touch Events for Mobile
-        item.addEventListener('touchstart', feedHandleTouchStart, {passive: false});
-        item.addEventListener('touchmove', feedHandleTouchMove, {passive: false});
+        item.addEventListener('touchstart', feedHandleTouchStart, { passive: false });
+        item.addEventListener('touchmove', feedHandleTouchMove, { passive: false });
         item.addEventListener('touchend', feedHandleTouchEnd);
 
         feedItemsContainer.appendChild(item);
@@ -431,7 +459,7 @@
     function feedHandleTouchMove(e) {
       e.preventDefault();
       const touchLocation = e.targetTouches[0];
-      
+
       this.style.position = 'absolute';
       this.style.left = touchLocation.pageX - (this.offsetWidth / 2) + 'px';
       this.style.top = touchLocation.pageY - (this.offsetHeight / 2) + 'px';
@@ -451,10 +479,10 @@
 
     function feedHandleTouchEnd(e) {
       if (!feedCurrentDraggingItem) return;
-      
+
       const changedTouch = e.changedTouches[0];
       const catRect = feedCatEl.getBoundingClientRect();
-      
+
       feedCurrentDraggingItem.style.position = '';
       feedCurrentDraggingItem.style.left = '';
       feedCurrentDraggingItem.style.top = '';
@@ -477,7 +505,7 @@
       const word = item.dataset.word;
       item.remove();
       feedItemsEaten++;
-      
+
       feedCatEl.textContent = '😻';
       feedCatEl.classList.add('eating');
       setTimeout(() => {
@@ -508,7 +536,7 @@
 
     initFeedGame();
 
-        // MATCHING PAIRS GAME
+    // MATCHING PAIRS GAME
     const pairsBoard = document.getElementById('pairs-board');
     const pairsComplete = document.getElementById('pairs-complete');
     let hasFlippedCard = false;
@@ -608,16 +636,8 @@
 
     document.getElementById('pairs-replay-btn').addEventListener('click', initPairsGame);
     initPairsGame();
-    
-    // Configuração dos novos jogos
-    const gameSentences = [
-      { en: "I play with blocks", pt: "Eu brinco com blocos" },
-      { en: "The doll is pretty", pt: "A boneca é bonita" },
-      { en: "I have a ball", pt: "Eu tenho uma bola" },
-      { en: "The kite flies high", pt: "A pipa voa alto" },
-      { en: "My teddy bear", pt: "Meu urso de pelúcia" }
-    ];
   </script>
   <script src="shared-games.js"></script>
 </body>
+
 </html>

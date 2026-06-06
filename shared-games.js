@@ -22,7 +22,7 @@ document.addEventListener('DOMContentLoaded', () => {
       <!-- TAB: Sentence Builder -->
       <div class="tab-panel" id="tab-sentence">
         <div class="game-area" id="sentence-game-area" style="text-align: center;">
-          <div class="game-score" id="sentence-game-score">⭐ Score: <strong>0</strong> / <span>5</span></div>
+          <div class="game-score" id="sentence-game-score">⭐ Score: <strong>0</strong> / <span>10</span></div>
           <div class="game-progress"><div class="game-progress-bar" id="sentence-progress-bar"></div></div>
           
           <div class="sentence-scene">
@@ -43,7 +43,7 @@ document.addEventListener('DOMContentLoaded', () => {
       <!-- TAB: Spelling Scramble -->
       <div class="tab-panel" id="tab-scramble">
         <div class="game-area" id="scramble-game-area" style="text-align: center;">
-          <div class="game-score" id="scramble-game-score">⭐ Score: <strong>0</strong> / <span>5</span></div>
+          <div class="game-score" id="scramble-game-score">⭐ Score: <strong>0</strong> / <span>10</span></div>
           <div class="game-progress"><div class="game-progress-bar" id="scramble-progress-bar"></div></div>
           
           <div class="scramble-scene">
@@ -263,7 +263,7 @@ document.addEventListener('DOMContentLoaded', () => {
   let scrambleSlotsFilled = 0;
   
   function initScrambleGame() {
-    scrambleWords = [...vocabulary].sort(() => Math.random() - 0.5).slice(0, 5);
+    scrambleWords = [...vocabulary].sort(() => Math.random() - 0.5).slice(0, 10);
     scrambleIndex = 0;
     scrambleScore = 0;
     document.getElementById('scramble-game-area').style.display = 'block';

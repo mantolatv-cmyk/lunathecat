@@ -403,7 +403,7 @@
       shuffled.forEach(v => {
         const item = document.createElement('div');
         item.className = 'feed-item';
-        item.textContent = v.emoji;
+        item.innerHTML = v.emoji;
         item.draggable = true;
         item.dataset.word = v.word;
 

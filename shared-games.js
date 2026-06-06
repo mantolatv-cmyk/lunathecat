@@ -87,8 +87,10 @@ document.addEventListener('DOMContentLoaded', () => {
   let sentenceSlotsFilled = 0;
   let initX, initY;
   
+  const getSentences = () => typeof gameSentences !== 'undefined' ? gameSentences : [];
+  
   function initSentenceGame() {
-    if (!window.gameSentences || window.gameSentences.length === 0) return;
+    if (getSentences().length === 0) return;
     sentenceIndex = 0;
     sentenceScore = 0;
     document.getElementById('sentence-game-area').style.display = 'block';
@@ -97,16 +99,17 @@ document.addEventListener('DOMContentLoaded', () => {
   }
   
   function renderSentence() {
-    if (sentenceIndex >= window.gameSentences.length) {
+    const sentences = getSentences();
+    if (sentenceIndex >= sentences.length) {
       document.getElementById('sentence-game-area').style.display = 'none';
       document.getElementById('sentence-complete').style.display = 'flex';
       return;
     }
     
-    const currentSentence = window.gameSentences[sentenceIndex];
+    const currentSentence = sentences[sentenceIndex];
     document.getElementById('sentence-hint').textContent = `🇧🇷 Hint: "${currentSentence.pt}"`;
-    document.getElementById('sentence-game-score').innerHTML = `⭐ Score: <strong>${sentenceScore}</strong> / <span>${window.gameSentences.length}</span>`;
-    document.getElementById('sentence-progress-bar').style.width = ((sentenceIndex / window.gameSentences.length) * 100) + '%';
+    document.getElementById('sentence-game-score').innerHTML = `⭐ Score: <strong>${sentenceScore}</strong> / <span>${sentences.length}</span>`;
+    document.getElementById('sentence-progress-bar').style.width = ((sentenceIndex / sentences.length) * 100) + '%';
     
     const words = currentSentence.en.split(' ');
     sentenceCurrentWords = words;
@@ -241,6 +244,9 @@ document.addEventListener('DOMContentLoaded', () => {
         sentenceScore++;
         setTimeout(() => { sentenceIndex++; renderSentence(); }, 1500);
       }
+    } else {
+      wordEl.classList.add('wrong-pos');
+      setTimeout(() => wordEl.classList.remove('wrong-pos'), 400);
     }
   }
   

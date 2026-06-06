@@ -1,14 +1,18 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>🍎 Foods & Drinks — Learn with Luna</title>
-  <meta name="description" content="Learn about yummy foods and drinks in English with Luna the Cat! Interactive stories, flashcards, and a feeding game." />
-  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🐱</text></svg>" />
+  <meta name="description"
+    content="Learn about yummy foods and drinks in English with Luna the Cat! Interactive stories, flashcards, and a feeding game." />
+  <link rel="icon"
+    href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🐱</text></svg>" />
   <link rel="stylesheet" href="styles.css" />
   <link rel="stylesheet" href="scenario.css" />
 </head>
+
 <body>
 
   <header class="header scrolled" id="app-header">
@@ -34,7 +38,8 @@
   </header>
 
   <section class="scenario-hero">
-    <img src="images/scene-foods.png" alt="Luna sitting at a table with lots of yummy foods" class="scenario-hero-img" />
+    <img src="images/scene-foods.png" alt="Luna sitting at a table with lots of yummy foods"
+      class="scenario-hero-img" />
     <div class="scenario-hero-overlay">
       <div class="scenario-hero-icon">🍎</div>
       <h1 class="scenario-hero-title">Yummy Foods & Drinks</h1>
@@ -48,9 +53,11 @@
     <div class="scenario-tabs">
       <button class="scenario-tab active" data-tab="story">💬 Story Time</button>
       <button class="scenario-tab" data-tab="vocab">📖 Learn Words</button>
-      <button class="scenario-tab" data-tab="game">🎮 Feed Luna</button>
       <button class="scenario-tab" data-tab="memory">🃏 Matching Pairs</button>
       <button class="scenario-tab" data-tab="like">❓ Do You Like?</button>
+      <button class="scenario-tab" data-tab="listen">🔊 Listen & Find</button>
+      <button class="scenario-tab" data-tab="sentence">🧱 Build a Sentence</button>
+      <button class="scenario-tab" data-tab="scramble">✏️ Spelling Scramble</button>
     </div>
 
     <!-- TAB 1: Story Time -->
@@ -80,9 +87,11 @@
     <div class="tab-panel" id="tab-game">
       <div class="game-area" id="game-area">
         <div class="game-score" id="game-score">⭐ Eaten: <strong>0</strong> / <span>11</span></div>
-        <div class="game-progress"><div class="game-progress-bar" id="game-progress-bar"></div></div>
+        <div class="game-progress">
+          <div class="game-progress-bar" id="game-progress-bar"></div>
+        </div>
         <div class="game-feedback" id="game-feedback">Drag the food to feed Luna!</div>
-        
+
         <div class="feed-game-area">
           <div class="feed-scene">
             <div class="feed-cat" id="feed-cat">🐱</div>
@@ -99,16 +108,24 @@
         <div class="game-stars" id="game-stars">⭐⭐⭐</div>
         <button class="game-replay-btn" id="game-replay-btn">🔄 Play Again!</button>
       </div>
+      <div class="game-complete" id="listen-complete" style="display: none; flex-direction: column; align-items: center;">
+        <div class="game-complete-emoji">🎧</div>
+        <h2 class="game-complete-title">Great Listening!</h2>
+        <p class="game-complete-score" id="listen-final-score">You found all the foods!</p>
+        <div class="game-stars" id="listen-stars">⭐⭐⭐</div>
+        <button class="game-replay-btn" id="listen-replay-btn">🔄 Play Again!</button>
+      </div>
     </div>
 
-    
     <!-- TAB 4: Matching Pairs -->
     <div class="tab-panel" id="tab-memory">
       <div class="pairs-board" id="pairs-board"></div>
-      <div class="game-complete" id="pairs-complete" style="display: none; flex-direction: column; align-items: center;">
+      <div class="game-complete" id="pairs-complete"
+        style="display: none; flex-direction: column; align-items: center;">
         <div class="game-complete-emoji">🎉</div>
         <h2 class="game-complete-title">You Did It!</h2>
-        <p class="game-complete-score" style="font-size:1.2rem; color:var(--text-secondary);">You found all the pairs!</p>
+        <p class="game-complete-score" style="font-size:1.2rem; color:var(--text-secondary);">You found all the pairs!
+        </p>
         <button class="game-replay-btn" id="pairs-replay-btn">🔄 Play Again!</button>
       </div>
     </div>
@@ -118,15 +135,19 @@
       <div class="game-area" style="text-align: center; padding: 3rem 1rem;">
         <div id="like-game-content">
           <div id="like-animal" style="font-size: 7rem; margin-bottom: 1.5rem; transition: transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);">🐶</div>
-          <div class="dialogue-bubble child" style="display: inline-block; cursor: default; margin-bottom: 2.5rem; transform: none; max-width: 90%;">
+          <div class="dialogue-bubble child visible" style="display: inline-block; cursor: default; margin-bottom: 2.5rem; transform: none; max-width: 90%; opacity: 1;">
             <div class="dialogue-english" id="like-question" style="font-size: 2.2rem; margin: 0; padding: 1rem;">Do you like Apple 🍎?</div>
           </div>
           <div style="display: flex; gap: 1.5rem; justify-content: center; flex-wrap: wrap;">
-            <button class="game-replay-btn" id="like-btn-yes" style="background: linear-gradient(135deg, #7EE87E, #3DB83D); font-size: 1.4rem;">👍 Yes, I do!</button>
-            <button class="game-replay-btn" id="like-btn-no" style="background: linear-gradient(135deg, #ff758c, #ff7eb3); color: white; font-size: 1.4rem;">👎 No, I don't!</button>
+            <button class="game-replay-btn" id="like-btn-yes"
+              style="background: linear-gradient(135deg, #7EE87E, #3DB83D); font-size: 1.4rem;">👍 Yes, I do!</button>
+            <button class="game-replay-btn" id="like-btn-no"
+              style="background: linear-gradient(135deg, #ff758c, #ff7eb3); color: white; font-size: 1.4rem;">👎 No, I
+              don't!</button>
           </div>
         </div>
-        <div class="game-complete" id="like-game-complete" style="display: none; flex-direction: column; align-items: center;">
+        <div class="game-complete" id="like-game-complete"
+          style="display: none; flex-direction: column; align-items: center;">
           <div class="game-complete-emoji">🌟</div>
           <h2 class="game-complete-title">Great Job!</h2>
           <p class="game-complete-score">You answered all the questions!</p>
@@ -134,7 +155,49 @@
         </div>
       </div>
     </div>
-  </div>
+
+    <!-- TAB 7: Sentence Builder -->
+    <div class="tab-panel" id="tab-sentence">
+      <div class="game-area" id="sentence-game-area" style="text-align: center;">
+        <div class="game-score" id="sentence-game-score">⭐ Score: <strong>0</strong> / <span>5</span></div>
+        <div class="game-progress"><div class="game-progress-bar" id="sentence-progress-bar"></div></div>
+        
+        <div class="sentence-scene">
+          <div class="sentence-hint" id="sentence-hint"></div>
+          <div class="sentence-slots" id="sentence-slots"></div>
+          <div class="sentence-words" id="sentence-words"></div>
+        </div>
+      </div>
+      
+      <div class="game-complete" id="sentence-complete" style="display: none; flex-direction: column; align-items: center;">
+        <div class="game-complete-emoji">🧱</div>
+        <h2 class="game-complete-title">Great Builder!</h2>
+        <p class="game-complete-score" id="sentence-final-score">You built all the sentences!</p>
+        <button class="game-replay-btn" id="sentence-replay-btn">🔄 Play Again!</button>
+      </div>
+    </div>
+
+    <!-- TAB 8: Spelling Scramble -->
+    <div class="tab-panel" id="tab-scramble">
+      <div class="game-area" id="scramble-game-area" style="text-align: center;">
+        <div class="game-score" id="scramble-game-score">⭐ Score: <strong>0</strong> / <span>5</span></div>
+        <div class="game-progress"><div class="game-progress-bar" id="scramble-progress-bar"></div></div>
+        
+        <div class="scramble-scene">
+          <div class="scramble-emoji" id="scramble-emoji">🍎</div>
+          <div class="sentence-hint" id="scramble-hint">Maçã</div>
+          <div class="scramble-slots" id="scramble-slots"></div>
+          <div class="scramble-letters" id="scramble-letters"></div>
+        </div>
+      </div>
+      
+      <div class="game-complete" id="scramble-complete" style="display: none; flex-direction: column; align-items: center;">
+        <div class="game-complete-emoji">✏️</div>
+        <h2 class="game-complete-title">Super Speller!</h2>
+        <p class="game-complete-score" id="scramble-final-score">You spelled everything right!</p>
+        <button class="game-replay-btn" id="scramble-replay-btn">🔄 Play Again!</button>
+      </div>
+    </div>
   </div>
 
   <footer class="footer">
@@ -172,7 +235,7 @@
       { emoji: '🍦', word: 'Ice Cream', pt: 'Sorvete' }
     ];
 
-    
+
 
     // TABS
     document.querySelectorAll('.scenario-tab').forEach(tab => {
@@ -195,11 +258,11 @@
     const rb = document.getElementById('dialogue-restart-btn');
 
     function renderNext() {
-      if (dIdx >= dialogues.length) { 
-        nb.disabled = true; 
-        nb.textContent = '✅ Story Complete!'; 
-        rb.classList.add('visible'); 
-        return; 
+      if (dIdx >= dialogues.length) {
+        nb.disabled = true;
+        nb.textContent = '✅ Story Complete!';
+        rb.classList.add('visible');
+        return;
       }
       const d = dialogues[dIdx];
       const b = document.createElement('div');
@@ -212,13 +275,13 @@
       b.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
     }
     nb.addEventListener('click', renderNext);
-    rb.addEventListener('click', () => { 
-      dIdx = 0; 
-      dc.innerHTML = ''; 
-      nb.disabled = false; 
-      nb.textContent = 'Next Line →'; 
-      rb.classList.remove('visible'); 
-      renderNext(); 
+    rb.addEventListener('click', () => {
+      dIdx = 0;
+      dc.innerHTML = '';
+      nb.disabled = false;
+      nb.textContent = 'Next Line →';
+      rb.classList.remove('visible');
+      renderNext();
     });
     renderNext();
 
@@ -272,7 +335,7 @@
       catEl.textContent = '🐱';
 
       const shuffled = [...vocabulary].sort(() => Math.random() - 0.5);
-      
+
       shuffled.forEach(v => {
         const item = document.createElement('div');
         item.className = 'feed-item';
@@ -294,8 +357,8 @@
         });
 
         // Touch Events for Mobile
-        item.addEventListener('touchstart', handleTouchStart, {passive: false});
-        item.addEventListener('touchmove', handleTouchMove, {passive: false});
+        item.addEventListener('touchstart', handleTouchStart, { passive: false });
+        item.addEventListener('touchmove', handleTouchMove, { passive: false });
         item.addEventListener('touchend', handleTouchEnd);
 
         feedItemsContainer.appendChild(item);
@@ -332,7 +395,7 @@
     function handleTouchMove(e) {
       e.preventDefault(); // prevent scrolling
       const touchLocation = e.targetTouches[0];
-      
+
       // Move element visually
       this.style.position = 'absolute';
       this.style.left = touchLocation.pageX - (this.offsetWidth / 2) + 'px';
@@ -354,10 +417,10 @@
 
     function handleTouchEnd(e) {
       if (!currentDraggingItem) return;
-      
+
       const changedTouch = e.changedTouches[0];
       const catRect = catEl.getBoundingClientRect();
-      
+
       currentDraggingItem.style.position = '';
       currentDraggingItem.style.left = '';
       currentDraggingItem.style.top = '';
@@ -380,7 +443,7 @@
       const word = item.dataset.word;
       item.remove();
       itemsEaten++;
-      
+
       // Cat animation
       catEl.textContent = '😻';
       catEl.classList.add('eating');
@@ -521,7 +584,7 @@
     const likeGameComplete = document.getElementById('like-game-complete');
     const likeAnimalEl = document.getElementById('like-animal');
     const likeQuestionEl = document.getElementById('like-question');
-    
+
     function initLikeGame() {
       likeGameItems = [...vocabulary];
       likeIndex = 0;
@@ -529,7 +592,7 @@
       likeGameContent.style.display = 'block';
       renderLikeQuestion();
     }
-    
+
     function renderLikeQuestion() {
       if (likeIndex >= likeGameItems.length) {
         likeGameContent.style.display = 'none';
@@ -538,27 +601,390 @@
       }
       const v = likeGameItems[likeIndex];
       const randomAnimal = likeAnimals[Math.floor(Math.random() * likeAnimals.length)];
-      
+
       // Animate animal entry
       likeAnimalEl.style.transform = 'scale(0) rotate(-20deg)';
       setTimeout(() => {
         likeAnimalEl.textContent = randomAnimal;
         likeAnimalEl.style.transform = 'scale(1) rotate(0deg)';
       }, 50);
-      
+
       likeQuestionEl.innerHTML = `Do you like <strong>${v.word}</strong> ${v.emoji}?`;
     }
-    
+
     function handleLikeAnswer() {
       likeIndex++;
       renderLikeQuestion();
     }
-    
+
     document.getElementById('like-btn-yes').addEventListener('click', handleLikeAnswer);
     document.getElementById('like-btn-no').addEventListener('click', handleLikeAnswer);
     document.getElementById('like-replay-btn').addEventListener('click', initLikeGame);
-    
+
     initLikeGame();
+    
+    // ==========================================
+    // GAME - SENTENCE BUILDER
+    // ==========================================
+    const foodSentences = [
+      { en: "I like pizza", pt: "Eu gosto de pizza" },
+      { en: "The apple is red", pt: "A maçã é vermelha" },
+      { en: "I drink water", pt: "Eu bebo água" },
+      { en: "The banana is yellow", pt: "A banana é amarela" },
+      { en: "Luna loves ice cream", pt: "Luna ama sorvete" }
+    ];
+    
+    let sentenceIndex = 0;
+    let sentenceScore = 0;
+    let sentenceCurrentWords = [];
+    let sentenceSlotsFilled = 0;
+    let initX, initY;
+    
+    function initSentenceGame() {
+      sentenceIndex = 0;
+      sentenceScore = 0;
+      document.getElementById('sentence-game-area').style.display = 'block';
+      document.getElementById('sentence-complete').style.display = 'none';
+      renderSentence();
+    }
+    
+    function renderSentence() {
+      if (sentenceIndex >= foodSentences.length) {
+        document.getElementById('sentence-game-area').style.display = 'none';
+        document.getElementById('sentence-complete').style.display = 'flex';
+        return;
+      }
+      
+      const currentSentence = foodSentences[sentenceIndex];
+      document.getElementById('sentence-hint').textContent = `🇧🇷 Hint: "${currentSentence.pt}"`;
+      document.getElementById('sentence-game-score').innerHTML = `⭐ Score: <strong>${sentenceScore}</strong> / <span>${foodSentences.length}</span>`;
+      document.getElementById('sentence-progress-bar').style.width = ((sentenceIndex / foodSentences.length) * 100) + '%';
+      
+      const words = currentSentence.en.split(' ');
+      sentenceCurrentWords = words;
+      sentenceSlotsFilled = 0;
+      
+      const slotsContainer = document.getElementById('sentence-slots');
+      slotsContainer.innerHTML = '';
+      words.forEach((w, i) => {
+        const slot = document.createElement('div');
+        slot.className = 'sentence-slot';
+        slot.dataset.index = i;
+        slot.dataset.word = w;
+        setupSentenceSlot(slot);
+        slotsContainer.appendChild(slot);
+      });
+      
+      const wordsContainer = document.getElementById('sentence-words');
+      wordsContainer.innerHTML = '';
+      const shuffledWords = [...words].sort(() => Math.random() - 0.5);
+      shuffledWords.forEach((w, i) => {
+        const wordEl = document.createElement('div');
+        wordEl.className = 'sentence-word';
+        wordEl.textContent = w;
+        wordEl.draggable = true;
+        wordEl.dataset.word = w;
+        setupSentenceWord(wordEl);
+        wordsContainer.appendChild(wordEl);
+      });
+    }
+    
+    let currentSentenceWord = null;
+    let currentSentenceClone = null;
+    
+    function setupSentenceWord(el) {
+      el.addEventListener('dragstart', (e) => {
+        currentSentenceWord = el;
+        e.dataTransfer.setData('text/plain', el.dataset.word);
+        setTimeout(() => el.classList.add('dragging'), 0);
+      });
+      el.addEventListener('dragend', () => {
+        el.classList.remove('dragging');
+        currentSentenceWord = null;
+        document.querySelectorAll('.sentence-slot').forEach(s => s.classList.remove('drag-over'));
+      });
+      
+      el.addEventListener('touchstart', (e) => {
+        currentSentenceWord = el;
+        el.classList.add('dragging');
+        const touch = e.targetTouches[0];
+        const rect = el.getBoundingClientRect();
+        initX = touch.clientX - rect.left;
+        initY = touch.clientY - rect.top;
+        
+        el.style.opacity = '0.01';
+        currentSentenceClone = el.cloneNode(true);
+        currentSentenceClone.id = 'sentence-drag-clone';
+        currentSentenceClone.style.position = 'fixed';
+        currentSentenceClone.style.left = (touch.clientX - initX) + 'px';
+        currentSentenceClone.style.top = (touch.clientY - initY) + 'px';
+        currentSentenceClone.style.margin = '0';
+        currentSentenceClone.style.pointerEvents = 'none';
+        currentSentenceClone.style.opacity = '0.8';
+        document.body.appendChild(currentSentenceClone);
+      }, {passive: false});
+      
+      el.addEventListener('touchmove', (e) => {
+        if (!currentSentenceWord) return;
+        e.preventDefault();
+        const touch = e.targetTouches[0];
+        if (currentSentenceClone) {
+          currentSentenceClone.style.left = (touch.clientX - initX) + 'px';
+          currentSentenceClone.style.top = (touch.clientY - initY) + 'px';
+        }
+        
+        document.querySelectorAll('.sentence-slot').forEach(zone => {
+          if (zone.classList.contains('filled')) return;
+          const rect = zone.getBoundingClientRect();
+          if (touch.clientX >= rect.left && touch.clientX <= rect.right &&
+              touch.clientY >= rect.top && touch.clientY <= rect.bottom) {
+            zone.classList.add('drag-over');
+          } else {
+            zone.classList.remove('drag-over');
+          }
+        });
+      }, {passive: false});
+      
+      el.addEventListener('touchend', (e) => {
+        if (!currentSentenceWord) return;
+        const touch = e.changedTouches[0];
+        if (currentSentenceClone) currentSentenceClone.remove();
+        
+        currentSentenceWord.style.opacity = '';
+        currentSentenceWord.classList.remove('dragging');
+        
+        let targetZone = null;
+        document.querySelectorAll('.sentence-slot').forEach(zone => {
+          zone.classList.remove('drag-over');
+          if (zone.classList.contains('filled')) return;
+          const rect = zone.getBoundingClientRect();
+          if (touch.clientX >= rect.left && touch.clientX <= rect.right &&
+              touch.clientY >= rect.top && touch.clientY <= rect.bottom) {
+            targetZone = zone;
+          }
+        });
+        
+        if (targetZone) {
+          processSentenceDrop(currentSentenceWord, targetZone);
+        }
+        currentSentenceWord = null;
+      });
+    }
+    
+    function setupSentenceSlot(slot) {
+      slot.addEventListener('dragover', (e) => {
+        e.preventDefault();
+        if (!slot.classList.contains('filled')) slot.classList.add('drag-over');
+      });
+      slot.addEventListener('dragleave', () => slot.classList.remove('drag-over'));
+      slot.addEventListener('drop', (e) => {
+        e.preventDefault();
+        slot.classList.remove('drag-over');
+        if (slot.classList.contains('filled') || !currentSentenceWord) return;
+        processSentenceDrop(currentSentenceWord, slot);
+      });
+    }
+    
+    function processSentenceDrop(wordEl, slot) {
+      if (wordEl.dataset.word === slot.dataset.word) {
+        slot.classList.add('filled');
+        slot.appendChild(wordEl);
+        wordEl.style.pointerEvents = 'none'; // Lock it
+        sentenceSlotsFilled++;
+        
+        if (sentenceSlotsFilled === sentenceCurrentWords.length) {
+          sentenceScore++;
+          setTimeout(() => {
+            sentenceIndex++;
+            renderSentence();
+          }, 1500);
+        }
+      }
+    }
+    
+    document.getElementById('sentence-replay-btn').addEventListener('click', initSentenceGame);
+    initSentenceGame();
+    
+    // ==========================================
+    // GAME - SPELLING SCRAMBLE
+    // ==========================================
+    let scrambleWords = [];
+    let scrambleIndex = 0;
+    let scrambleScore = 0;
+    let scrambleCurrentLetters = [];
+    let scrambleSlotsFilled = 0;
+    
+    function initScrambleGame() {
+      scrambleWords = [...vocabulary].sort(() => Math.random() - 0.5).slice(0, 5);
+      scrambleIndex = 0;
+      scrambleScore = 0;
+      document.getElementById('scramble-game-area').style.display = 'block';
+      document.getElementById('scramble-complete').style.display = 'none';
+      renderScramble();
+    }
+    
+    function renderScramble() {
+      if (scrambleIndex >= scrambleWords.length) {
+        document.getElementById('scramble-game-area').style.display = 'none';
+        document.getElementById('scramble-complete').style.display = 'flex';
+        return;
+      }
+      
+      const currentWord = scrambleWords[scrambleIndex];
+      document.getElementById('scramble-emoji').textContent = currentWord.emoji;
+      document.getElementById('scramble-hint').textContent = `🇧🇷 Hint: ${currentWord.pt}`;
+      document.getElementById('scramble-game-score').innerHTML = `⭐ Score: <strong>${scrambleScore}</strong> / <span>${scrambleWords.length}</span>`;
+      document.getElementById('scramble-progress-bar').style.width = ((scrambleIndex / scrambleWords.length) * 100) + '%';
+      
+      const letters = currentWord.word.toUpperCase().split('');
+      scrambleCurrentLetters = letters;
+      scrambleSlotsFilled = 0;
+      
+      const slotsContainer = document.getElementById('scramble-slots');
+      slotsContainer.innerHTML = '';
+      letters.forEach((l, i) => {
+        const slot = document.createElement('div');
+        slot.className = 'scramble-slot';
+        slot.dataset.index = i;
+        slot.dataset.letter = l;
+        setupScrambleSlot(slot);
+        slotsContainer.appendChild(slot);
+      });
+      
+      const lettersContainer = document.getElementById('scramble-letters');
+      lettersContainer.innerHTML = '';
+      const shuffledLetters = [...letters].sort(() => Math.random() - 0.5);
+      shuffledLetters.forEach((l, i) => {
+        const letterEl = document.createElement('div');
+        letterEl.className = 'scramble-letter';
+        letterEl.textContent = l;
+        letterEl.draggable = true;
+        letterEl.dataset.letter = l;
+        setupScrambleLetter(letterEl);
+        lettersContainer.appendChild(letterEl);
+      });
+    }
+    
+    let currentScrambleLetter = null;
+    let currentScrambleClone = null;
+    
+    function setupScrambleLetter(el) {
+      el.addEventListener('dragstart', (e) => {
+        currentScrambleLetter = el;
+        e.dataTransfer.setData('text/plain', el.dataset.letter);
+        setTimeout(() => el.classList.add('dragging'), 0);
+      });
+      el.addEventListener('dragend', () => {
+        el.classList.remove('dragging');
+        currentScrambleLetter = null;
+        document.querySelectorAll('.scramble-slot').forEach(s => s.classList.remove('drag-over'));
+      });
+      
+      el.addEventListener('touchstart', (e) => {
+        currentScrambleLetter = el;
+        el.classList.add('dragging');
+        const touch = e.targetTouches[0];
+        const rect = el.getBoundingClientRect();
+        initX = touch.clientX - rect.left;
+        initY = touch.clientY - rect.top;
+        
+        el.style.opacity = '0.01';
+        currentScrambleClone = el.cloneNode(true);
+        currentScrambleClone.id = 'scramble-drag-clone';
+        currentScrambleClone.style.position = 'fixed';
+        currentScrambleClone.style.left = (touch.clientX - initX) + 'px';
+        currentScrambleClone.style.top = (touch.clientY - initY) + 'px';
+        currentScrambleClone.style.margin = '0';
+        currentScrambleClone.style.pointerEvents = 'none';
+        currentScrambleClone.style.opacity = '0.8';
+        document.body.appendChild(currentScrambleClone);
+      }, {passive: false});
+      
+      el.addEventListener('touchmove', (e) => {
+        if (!currentScrambleLetter) return;
+        e.preventDefault();
+        const touch = e.targetTouches[0];
+        if (currentScrambleClone) {
+          currentScrambleClone.style.left = (touch.clientX - initX) + 'px';
+          currentScrambleClone.style.top = (touch.clientY - initY) + 'px';
+        }
+        
+        document.querySelectorAll('.scramble-slot').forEach(zone => {
+          if (zone.classList.contains('filled')) return;
+          const rect = zone.getBoundingClientRect();
+          if (touch.clientX >= rect.left && touch.clientX <= rect.right &&
+              touch.clientY >= rect.top && touch.clientY <= rect.bottom) {
+            zone.classList.add('drag-over');
+          } else {
+            zone.classList.remove('drag-over');
+          }
+        });
+      }, {passive: false});
+      
+      el.addEventListener('touchend', (e) => {
+        if (!currentScrambleLetter) return;
+        const touch = e.changedTouches[0];
+        if (currentScrambleClone) currentScrambleClone.remove();
+        
+        currentScrambleLetter.style.opacity = '';
+        currentScrambleLetter.classList.remove('dragging');
+        
+        let targetZone = null;
+        document.querySelectorAll('.scramble-slot').forEach(zone => {
+          zone.classList.remove('drag-over');
+          if (zone.classList.contains('filled')) return;
+          const rect = zone.getBoundingClientRect();
+          if (touch.clientX >= rect.left && touch.clientX <= rect.right &&
+              touch.clientY >= rect.top && touch.clientY <= rect.bottom) {
+            targetZone = zone;
+          }
+        });
+        
+        if (targetZone) {
+          processScrambleDrop(currentScrambleLetter, targetZone);
+        }
+        currentScrambleLetter = null;
+      });
+    }
+    
+    function setupScrambleSlot(slot) {
+      slot.addEventListener('dragover', (e) => {
+        e.preventDefault();
+        if (!slot.classList.contains('filled')) slot.classList.add('drag-over');
+      });
+      slot.addEventListener('dragleave', () => slot.classList.remove('drag-over'));
+      slot.addEventListener('drop', (e) => {
+        e.preventDefault();
+        slot.classList.remove('drag-over');
+        if (slot.classList.contains('filled') || !currentScrambleLetter) return;
+        processScrambleDrop(currentScrambleLetter, slot);
+      });
+    }
+    
+    function processScrambleDrop(letterEl, slot) {
+      if (letterEl.dataset.letter === slot.dataset.letter) {
+        slot.classList.add('filled');
+        slot.appendChild(letterEl);
+        letterEl.classList.add('correct-pos');
+        letterEl.style.pointerEvents = 'none';
+        scrambleSlotsFilled++;
+        
+        if (scrambleSlotsFilled === scrambleCurrentLetters.length) {
+          scrambleScore++;
+          setTimeout(() => {
+            scrambleIndex++;
+            renderScramble();
+          }, 1500);
+        }
+      } else {
+        letterEl.classList.add('wrong-pos');
+        setTimeout(() => letterEl.classList.remove('wrong-pos'), 400);
+      }
+    }
+    
+    document.getElementById('scramble-replay-btn').addEventListener('click', initScrambleGame);
+    initScrambleGame();
   </script>
 </body>
+
 </html>

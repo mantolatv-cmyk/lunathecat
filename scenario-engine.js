@@ -126,7 +126,7 @@ document.addEventListener('DOMContentLoaded', () => {
     function renderFlashcard() {
       const v = vocabulary[flashcardIndex];
       seqEmoji.innerHTML = v.emoji;
-      seqWord.textContent = v.word;
+      seqWord.style.display = 'none';
       if (seqTransText) {
         seqTransText.textContent = `🇧🇷 ${v.pt}`;
         seqTransText.classList.remove('visible');

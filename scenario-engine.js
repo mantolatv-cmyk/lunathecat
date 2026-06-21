@@ -126,12 +126,20 @@ document.addEventListener('DOMContentLoaded', () => {
     function renderFlashcard() {
       const v = vocabulary[flashcardIndex];
       seqEmoji.innerHTML = v.emoji;
-      seqWord.style.display = 'none';
+      
+      // Show Portuguese word initially
+      seqWord.textContent = `🇧🇷 ${v.pt}`;
+      seqWord.style.display = 'block';
+
       if (seqTransText) {
-        seqTransText.textContent = `🇧🇷 ${v.pt}`;
+        // English word to be revealed
+        seqTransText.textContent = `🇺🇸 ${v.word}`;
         seqTransText.classList.remove('visible');
       }
-      if (seqTransBtn) seqTransBtn.style.display = 'block';
+      if (seqTransBtn) {
+        seqTransBtn.textContent = "Show English";
+        seqTransBtn.style.display = 'block';
+      }
       if (seqPrevBtn) seqPrevBtn.disabled = flashcardIndex === 0;
       if (seqNextBtn) seqNextBtn.disabled = flashcardIndex === vocabulary.length - 1;
     }

@@ -1582,9 +1582,9 @@
    ============================================ */
 .pairs-board {
   display: grid;
-  grid-template-columns: repeat(4, 1fr);
+  grid-template-columns: repeat(6, 1fr);
   gap: 1rem;
-  max-width: 600px;
+  max-width: 900px;
   margin: 0 auto 2rem;
 }
 
@@ -2088,6 +2088,10 @@
 
   .game-prompt-content {
     font-size: 2rem;
+  }
+
+  .pairs-board {
+    grid-template-columns: repeat(4, 1fr);
   }
 }
 

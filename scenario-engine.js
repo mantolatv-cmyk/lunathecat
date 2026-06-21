@@ -127,9 +127,8 @@ document.addEventListener('DOMContentLoaded', () => {
       const v = vocabulary[flashcardIndex];
       seqEmoji.innerHTML = v.emoji;
       
-      // Show Portuguese word initially
-      seqWord.textContent = `🇧🇷 ${v.pt}`;
-      seqWord.style.display = 'block';
+      // Hide the word element initially (we only want emoji + Show English button)
+      seqWord.style.display = 'none';
 
       if (seqTransText) {
         // English word to be revealed

@@ -34,7 +34,7 @@
   </header>
 
   <section class="scenario-hero">
-    <img src="images/scene-animals.png" alt="Luna visiting a magical farm with animal friends" class="scenario-hero-img" />
+    <img src="images/scene-animals.png" alt="Luna visiting a magical farm with animal friends" class="scenario-hero-img" loading="lazy" />
     <div class="scenario-hero-overlay">
       <div class="scenario-hero-icon">🐾</div>
       <h1 class="scenario-hero-title">Luna's Animal Friends</h1>
@@ -45,10 +45,10 @@
   <div class="scenario-container">
     <a href="index.html" class="back-btn">← Back to Home</a>
 
-    <div class="scenario-tabs">
+    <div class="scenario-tabs" id="scenario-tabs">
       <button class="scenario-tab active" data-tab="story">💬 Story Time</button>
       <button class="scenario-tab" data-tab="vocab">📖 Word Garden</button>
-      <button class="scenario-tab" data-tab="game">🎮 Play & Learn</button>
+      <button class="scenario-tab" data-tab="game">🎮 Play &amp; Learn</button>
       <button class="scenario-tab" data-tab="memory">🃏 Matching Pairs</button>
       <button class="scenario-tab" data-tab="feed">🐱 Feed Luna</button>
     </div>
@@ -83,20 +83,16 @@
       </div>
     </div>
 
-    
     <!-- TAB 5: Feed Luna -->
     <div class="tab-panel" id="tab-feed">
       <div class="game-area" id="feed-game-area">
         <div class="game-score" id="feed-game-score">⭐ Fed: <strong>0</strong> / <span>0</span></div>
         <div class="game-progress"><div class="game-progress-bar" id="feed-progress-bar"></div></div>
         <div class="game-feedback" id="feed-game-feedback">Drag items to feed Luna! 🐱</div>
-        
         <div class="feed-game-area">
           <div class="feed-scene">
             <div class="feed-cat" id="feed-cat">🐱</div>
-            <div class="feed-items-container" id="feed-items-container">
-              <!-- Draggable items rendered by JS -->
-            </div>
+            <div class="feed-items-container" id="feed-items-container"></div>
           </div>
         </div>
       </div>
@@ -109,7 +105,7 @@
       </div>
     </div>
 
-        <!-- TAB 4: Matching Pairs -->
+    <!-- TAB 4: Matching Pairs -->
     <div class="tab-panel" id="tab-memory">
       <div class="pairs-board" id="pairs-board"></div>
       <div class="game-complete" id="pairs-complete" style="display: none; flex-direction: column; align-items: center;">
@@ -172,55 +168,20 @@
       { sound: '🐟 "Blub blub!"', correct: 'Fish', emoji: '🐟' }
     ];
 
-    
+    const gameSentences = [
+      { en: "The dog barks", pt: "O cachorro late" },
+      { en: "The cat is cute", pt: "O gato é fofo" },
+      { en: "Lions are big", pt: "Leões são grandes" },
+      { en: "The fish swims", pt: "O peixe nada" },
+      { en: "I like dogs", pt: "Eu gosto de cachorros" },
+      { en: "The bird flies", pt: "O pássaro voa" },
+      { en: "A fast horse", pt: "Um cavalo rápido" },
+      { en: "The frog jumps", pt: "O sapo pula" },
+      { en: "Pigs are pink", pt: "Porcos são rosas" },
+      { en: "Monkeys love bananas", pt: "Macacos amam bananas" }
+    ];
 
-    // TABS
-    document.querySelectorAll('.scenario-tab').forEach(tab => {
-      tab.addEventListener('click', () => {
-        document.querySelectorAll('.scenario-tab').forEach(t => t.classList.remove('active'));
-        document.querySelectorAll('.tab-panel').forEach(p => p.classList.remove('active'));
-        tab.classList.add('active');
-        document.getElementById('tab-' + tab.dataset.tab).classList.add('active');
-      });
-    });
-    document.getElementById('menu-toggle').addEventListener('click', () => {
-      document.getElementById('menu-toggle').classList.toggle('active');
-      document.getElementById('nav-mobile').classList.toggle('open');
-    });
-
-    // DIALOGUES
-    let dIdx = 0;
-    const dc = document.getElementById('dialogue-container');
-    const nb = document.getElementById('dialogue-next-btn');
-    const rb = document.getElementById('dialogue-restart-btn');
-
-    function renderNext() {
-      if (dIdx >= dialogues.length) { nb.disabled = true; nb.textContent = '✅ Story Complete!'; rb.classList.add('visible'); return; }
-      const d = dialogues[dIdx];
-      const b = document.createElement('div');
-      b.className = `dialogue-bubble ${d.speaker}`;
-      b.innerHTML = `<div class="dialogue-speaker"><span>${d.speaker === 'luna' ? '🐱' : '👧'}</span><span>${d.speaker === 'luna' ? 'Luna the Cat' : 'Little Friend'}</span></div><div class="dialogue-english">${d.en}</div><div class="dialogue-portuguese">🇧🇷 ${d.pt}</div>`;
-      b.addEventListener('click', () => b.classList.toggle('show-pt'));
-      dc.appendChild(b);
-      requestAnimationFrame(() => b.classList.add('visible'));
-      dIdx++;
-      b.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
-    }
-    nb.addEventListener('click', renderNext);
-    rb.addEventListener('click', () => { dIdx = 0; dc.innerHTML = ''; nb.disabled = false; nb.textContent = 'Next Line →'; rb.classList.remove('visible'); renderNext(); });
-    renderNext();
-
-    // VOCABULARY
-    const vg = document.getElementById('vocab-grid');
-    vocabulary.forEach(v => {
-      const c = document.createElement('div');
-      c.className = 'vocab-card';
-      c.innerHTML = `<div class="vocab-card-inner"><div class="vocab-card-front"><div class="vocab-emoji">${v.emoji}</div><div class="vocab-word">${v.word}</div><div class="vocab-hint">${v.sound}</div></div><div class="vocab-card-back"><div class="vocab-emoji">${v.emoji}</div><div class="vocab-translation">${v.pt}</div><div class="vocab-back-word">${v.word}</div></div></div>`;
-      c.addEventListener('click', () => c.classList.toggle('flipped'));
-      vg.appendChild(c);
-    });
-
-    // GAME — Sound Match
+    // GAME — Sound Match (unique to animals)
     let gi = 0, gs = 0, ga = false;
     const sq = [...gameData].sort(() => Math.random() - 0.5);
     const tq = sq.length;
@@ -282,278 +243,8 @@
       renderQ();
     });
     renderQ();
-
-    // ==========================================
-    // FEED LUNA GAME
-    // ==========================================
-    const feedItemsContainer = document.getElementById('feed-items-container');
-    const feedCatEl = document.getElementById('feed-cat');
-    let feedItemsEaten = 0;
-    const feedTotalItems = vocabulary.length;
-
-    function initFeedGame() {
-      feedItemsEaten = 0;
-      feedItemsContainer.innerHTML = '';
-      document.getElementById('feed-game-score').innerHTML = `⭐ Fed: <strong>0</strong> / <span>${feedTotalItems}</span>`;
-      document.getElementById('feed-progress-bar').style.width = '0%';
-      document.getElementById('feed-game-feedback').textContent = 'Drag items to feed Luna! 🐱';
-      feedCatEl.textContent = '🐱';
-      document.getElementById('feed-game-area').style.display = 'block';
-      document.getElementById('feed-complete').classList.remove('active');
-
-      const shuffled = [...vocabulary].sort(() => Math.random() - 0.5);
-      
-      shuffled.forEach(v => {
-        const item = document.createElement('div');
-        item.className = 'feed-item';
-        item.textContent = v.emoji;
-        item.draggable = true;
-        item.dataset.word = v.word;
-
-        // Mouse Events
-        item.addEventListener('dragstart', (e) => {
-          e.dataTransfer.setData('text/plain', v.emoji);
-          setTimeout(() => item.classList.add('feed-dragging'), 0);
-          feedCatEl.textContent = '😸';
-        });
-
-        item.addEventListener('dragend', () => {
-          item.classList.remove('feed-dragging');
-          feedCatEl.textContent = '🐱';
-          feedCatEl.classList.remove('drag-over');
-        });
-
-        // Touch Events for Mobile
-        item.addEventListener('touchstart', feedHandleTouchStart, {passive: false});
-        item.addEventListener('touchmove', feedHandleTouchMove, {passive: false});
-        item.addEventListener('touchend', feedHandleTouchEnd);
-
-        feedItemsContainer.appendChild(item);
-      });
-    }
-
-    // Drag over cat
-    feedCatEl.addEventListener('dragover', (e) => {
-      e.preventDefault();
-      feedCatEl.classList.add('drag-over');
-    });
-
-    feedCatEl.addEventListener('dragleave', () => {
-      feedCatEl.classList.remove('drag-over');
-    });
-
-    feedCatEl.addEventListener('drop', (e) => {
-      e.preventDefault();
-      feedCatEl.classList.remove('drag-over');
-      const draggingItem = document.querySelector('.feed-item.feed-dragging');
-      if (draggingItem) {
-        feedEatItem(draggingItem);
-      }
-    });
-
-    // Touch Support for Mobile
-    let feedCurrentDraggingItem = null;
-    function feedHandleTouchStart(e) {
-      feedCurrentDraggingItem = this;
-      this.classList.add('feed-dragging');
-      feedCatEl.textContent = '😸';
-    }
-
-    function feedHandleTouchMove(e) {
-      e.preventDefault();
-      const touchLocation = e.targetTouches[0];
-      
-      this.style.position = 'absolute';
-      this.style.left = touchLocation.pageX - (this.offsetWidth / 2) + 'px';
-      this.style.top = touchLocation.pageY - (this.offsetHeight / 2) + 'px';
-
-      const catRect = feedCatEl.getBoundingClientRect();
-      if (
-        touchLocation.clientX >= catRect.left &&
-        touchLocation.clientX <= catRect.right &&
-        touchLocation.clientY >= catRect.top &&
-        touchLocation.clientY <= catRect.bottom
-      ) {
-        feedCatEl.classList.add('drag-over');
-      } else {
-        feedCatEl.classList.remove('drag-over');
-      }
-    }
-
-    function feedHandleTouchEnd(e) {
-      if (!feedCurrentDraggingItem) return;
-      
-      const changedTouch = e.changedTouches[0];
-      const catRect = feedCatEl.getBoundingClientRect();
-      
-      feedCurrentDraggingItem.style.position = '';
-      feedCurrentDraggingItem.style.left = '';
-      feedCurrentDraggingItem.style.top = '';
-      feedCurrentDraggingItem.classList.remove('feed-dragging');
-      feedCatEl.textContent = '🐱';
-      feedCatEl.classList.remove('drag-over');
-
-      if (
-        changedTouch.clientX >= catRect.left &&
-        changedTouch.clientX <= catRect.right &&
-        changedTouch.clientY >= catRect.top &&
-        changedTouch.clientY <= catRect.bottom
-      ) {
-        feedEatItem(feedCurrentDraggingItem);
-      }
-      feedCurrentDraggingItem = null;
-    }
-
-    function feedEatItem(item) {
-      const word = item.dataset.word;
-      item.remove();
-      feedItemsEaten++;
-      
-      feedCatEl.textContent = '😻';
-      feedCatEl.classList.add('eating');
-      setTimeout(() => {
-        feedCatEl.classList.remove('eating');
-        feedCatEl.textContent = '🐱';
-      }, 500);
-
-      document.getElementById('feed-game-score').innerHTML = `⭐ Fed: <strong>${feedItemsEaten}</strong> / <span>${feedTotalItems}</span>`;
-      document.getElementById('feed-progress-bar').style.width = ((feedItemsEaten / feedTotalItems) * 100) + '%';
-      document.getElementById('feed-game-feedback').textContent = `Yummy ${word}! 😋`;
-
-      if (feedItemsEaten === feedTotalItems) {
-        setTimeout(showFeedComplete, 800);
-      }
-    }
-
-    function showFeedComplete() {
-      document.getElementById('feed-game-area').style.display = 'none';
-      document.getElementById('feed-complete').classList.add('active');
-      document.getElementById('feed-progress-bar').style.width = '100%';
-    }
-
-    document.getElementById('feed-replay-btn').addEventListener('click', () => {
-      document.getElementById('feed-game-area').style.display = 'block';
-      document.getElementById('feed-complete').classList.remove('active');
-      initFeedGame();
-    });
-
-    initFeedGame();
-
-        // MATCHING PAIRS GAME
-    const pairsBoard = document.getElementById('pairs-board');
-    const pairsComplete = document.getElementById('pairs-complete');
-    let hasFlippedCard = false;
-    let lockBoard = false;
-    let firstCard, secondCard;
-    let pairsFound = 0;
-
-    function initPairsGame() {
-      pairsBoard.innerHTML = '';
-      pairsComplete.style.display = 'none';
-      pairsBoard.style.display = 'grid';
-      pairsFound = 0;
-      hasFlippedCard = false;
-      lockBoard = false;
-      firstCard = null;
-      secondCard = null;
-
-      const numPairs = Math.min(6, vocabulary.length);
-      const gameItems = [...vocabulary].sort(() => 0.5 - Math.random()).slice(0, numPairs);
-      let cards = [];
-      gameItems.forEach(item => {
-        cards.push({ word: item.word, display: `<div class="pairs-emoji" style="font-size: 4rem; margin: 0;">${item.emoji}</div>` });
-        cards.push({ word: item.word, display: `<div class="pairs-word" style="font-size: 1.8rem; margin: 0;">${item.word}</div>` });
-      });
-      cards = cards.sort(() => 0.5 - Math.random());
-
-      cards.forEach((item, index) => {
-        const card = document.createElement('div');
-        card.classList.add('pairs-card');
-        card.dataset.word = item.word;
-        card.innerHTML = `
-          <div class="pairs-card-inner">
-            <div class="pairs-front">${index + 1}</div>
-            <div class="pairs-back" style="flex-direction: column; justify-content: center;">${item.display}</div>
-          </div>
-        `;
-        card.addEventListener('click', flipCard);
-        pairsBoard.appendChild(card);
-      });
-    }
-
-    function flipCard() {
-      if (lockBoard) return;
-      if (this === firstCard) return;
-
-      this.classList.add('flipped');
-
-      if (!hasFlippedCard) {
-        hasFlippedCard = true;
-        firstCard = this;
-        return;
-      }
-
-      secondCard = this;
-      checkForMatch();
-    }
-
-    function checkForMatch() {
-      let isMatch = firstCard.dataset.word === secondCard.dataset.word;
-
-      if (isMatch) {
-        disableCards();
-        pairsFound++;
-        const numPairs = Math.min(6, vocabulary.length);
-        if (pairsFound === numPairs) {
-          setTimeout(() => {
-            pairsBoard.style.display = 'none';
-            pairsComplete.style.display = 'flex';
-          }, 800);
-        }
-      } else {
-        unflipCards();
-      }
-    }
-
-    function disableCards() {
-      firstCard.removeEventListener('click', flipCard);
-      secondCard.removeEventListener('click', flipCard);
-      firstCard.classList.add('matched');
-      secondCard.classList.add('matched');
-      resetBoard();
-    }
-
-    function unflipCards() {
-      lockBoard = true;
-      setTimeout(() => {
-        firstCard.classList.remove('flipped');
-        secondCard.classList.remove('flipped');
-        resetBoard();
-      }, 1000);
-    }
-
-    function resetBoard() {
-      [hasFlippedCard, lockBoard] = [false, false];
-      [firstCard, secondCard] = [null, null];
-    }
-
-    document.getElementById('pairs-replay-btn').addEventListener('click', initPairsGame);
-    initPairsGame();
-    
-    // Configuração dos novos jogos
-    const gameSentences = [
-      { en: "The dog barks", pt: "O cachorro late" },
-      { en: "The cat is cute", pt: "O gato é fofo" },
-      { en: "Lions are big", pt: "Leões são grandes" },
-      { en: "The fish swims", pt: "O peixe nada" },
-      { en: "I like dogs", pt: "Eu gosto de cachorros" },
-      { en: "The bird flies", pt: "O pássaro voa" },
-      { en: "A fast horse", pt: "Um cavalo rápido" },
-      { en: "The frog jumps", pt: "O sapo pula" },
-      { en: "Pigs are pink", pt: "Porcos são rosas" },
-      { en: "Monkeys love bananas", pt: "Macacos amam bananas" }
-    ];
   </script>
+  <script src="scenario-engine.js"></script>
   <script src="shared-games.js"></script>
 </body>
 </html>

@@ -4,7 +4,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>🍎 Foods & Drinks — Learn with Luna</title>
+  <title>🍎 Foods &amp; Drinks — Learn with Luna</title>
   <meta name="description"
     content="Learn about yummy foods and drinks in English with Luna the Cat! Interactive stories, flashcards, and a feeding game." />
   <link rel="icon"
@@ -39,10 +39,10 @@
 
   <section class="scenario-hero">
     <img src="images/scene-foods.png" alt="Luna sitting at a table with lots of yummy foods"
-      class="scenario-hero-img" />
+      class="scenario-hero-img" loading="lazy" />
     <div class="scenario-hero-overlay">
       <div class="scenario-hero-icon">🍎</div>
-      <h1 class="scenario-hero-title">Yummy Foods & Drinks</h1>
+      <h1 class="scenario-hero-title">Yummy Foods &amp; Drinks</h1>
       <p class="scenario-hero-subtitle">Let's eat! Learn delicious words in English.</p>
     </div>
   </section>
@@ -83,28 +83,26 @@
 
     <!-- TAB 3: Feed the Cat Game -->
     <div class="tab-panel" id="tab-game">
-      <div class="game-area" id="game-area">
-        <div class="game-score" id="game-score">⭐ Eaten: <strong>0</strong> / <span>11</span></div>
+      <div class="game-area" id="feed-game-area">
+        <div class="game-score" id="feed-game-score">⭐ Eaten: <strong>0</strong> / <span>11</span></div>
         <div class="game-progress">
-          <div class="game-progress-bar" id="game-progress-bar"></div>
+          <div class="game-progress-bar" id="feed-progress-bar"></div>
         </div>
-        <div class="game-feedback" id="game-feedback">Drag the food to feed Luna!</div>
+        <div class="game-feedback" id="feed-game-feedback">Drag the food to feed Luna!</div>
 
         <div class="feed-game-area">
           <div class="feed-scene">
             <div class="feed-cat" id="feed-cat">🐱</div>
-            <div class="feed-items-container" id="feed-items-container">
-              <!-- Draggable items rendered by JS -->
-            </div>
+            <div class="feed-items-container" id="feed-items-container"></div>
           </div>
         </div>
       </div>
-      <div class="game-complete" id="game-complete">
+      <div class="game-complete" id="feed-complete">
         <div class="game-complete-emoji">😋</div>
         <h2 class="game-complete-title">Yummy! I'm full!</h2>
-        <p class="game-complete-score" id="game-final-score">You fed Luna all the foods!</p>
+        <p class="game-complete-score" id="feed-final-score">You fed Luna all the foods!</p>
         <div class="game-stars" id="game-stars">⭐⭐⭐</div>
-        <button class="game-replay-btn" id="game-replay-btn">🔄 Play Again!</button>
+        <button class="game-replay-btn" id="feed-replay-btn">🔄 Play Again!</button>
       </div>
     </div>
 
@@ -183,348 +181,20 @@
       { emoji: '🍦', word: 'Ice Cream', pt: 'Sorvete' }
     ];
 
+    const gameSentences = [
+      { en: "I like pizza", pt: "Eu gosto de pizza" },
+      { en: "The apple is red", pt: "A maçã é vermelha" },
+      { en: "I drink water", pt: "Eu bebo água" },
+      { en: "The banana is yellow", pt: "A banana é amarela" },
+      { en: "Luna loves ice cream", pt: "Luna ama sorvete" },
+      { en: "I eat an orange", pt: "Eu como uma laranja" },
+      { en: "Milk is good", pt: "Leite é bom" },
+      { en: "The bread is hot", pt: "O pão está quente" },
+      { en: "I want a cookie", pt: "Eu quero um biscoito" },
+      { en: "Grapes are sweet", pt: "Uvas são doces" }
+    ];
 
-
-    // TABS
-    document.querySelectorAll('.scenario-tab').forEach(tab => {
-      tab.addEventListener('click', () => {
-        document.querySelectorAll('.scenario-tab').forEach(t => t.classList.remove('active'));
-        document.querySelectorAll('.tab-panel').forEach(p => p.classList.remove('active'));
-        tab.classList.add('active');
-        document.getElementById('tab-' + tab.dataset.tab).classList.add('active');
-      });
-    });
-    document.getElementById('menu-toggle').addEventListener('click', () => {
-      document.getElementById('menu-toggle').classList.toggle('active');
-      document.getElementById('nav-mobile').classList.toggle('open');
-    });
-
-    // DIALOGUES
-    let dIdx = 0;
-    const dc = document.getElementById('dialogue-container');
-    const nb = document.getElementById('dialogue-next-btn');
-    const rb = document.getElementById('dialogue-restart-btn');
-
-    function renderNext() {
-      if (dIdx >= dialogues.length) {
-        nb.disabled = true;
-        nb.textContent = '✅ Story Complete!';
-        rb.classList.add('visible');
-        return;
-      }
-      const d = dialogues[dIdx];
-      const b = document.createElement('div');
-      b.className = `dialogue-bubble ${d.speaker}`;
-      b.innerHTML = `<div class="dialogue-speaker"><span>${d.speaker === 'luna' ? '🐱' : '👧'}</span><span>${d.speaker === 'luna' ? 'Luna the Cat' : 'Little Friend'}</span></div><div class="dialogue-english">${d.en}</div><div class="dialogue-portuguese">🇧🇷 ${d.pt}</div>`;
-      b.addEventListener('click', () => b.classList.toggle('show-pt'));
-      dc.appendChild(b);
-      requestAnimationFrame(() => b.classList.add('visible'));
-      dIdx++;
-      b.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
-    }
-    nb.addEventListener('click', renderNext);
-    rb.addEventListener('click', () => {
-      dIdx = 0;
-      dc.innerHTML = '';
-      nb.disabled = false;
-      nb.textContent = 'Next Line →';
-      rb.classList.remove('visible');
-      renderNext();
-    });
-    renderNext();
-
-    // SEQUENTIAL FLASHCARDS
-    let flashcardIndex = 0;
-    const emojiEl = document.getElementById('seq-emoji');
-    const wordEl = document.getElementById('seq-word');
-    const transBtn = document.getElementById('seq-translation-btn');
-    const transText = document.getElementById('seq-translation-text');
-    const prevBtn = document.getElementById('seq-prev-btn');
-    const nextBtn = document.getElementById('seq-next-btn');
-
-    function renderFlashcard() {
-      const v = vocabulary[flashcardIndex];
-      emojiEl.textContent = v.emoji;
-      wordEl.textContent = v.word;
-      transText.textContent = `🇧🇷 ${v.pt}`;
-      transText.classList.remove('visible');
-      transBtn.style.display = 'block';
-
-      prevBtn.disabled = flashcardIndex === 0;
-      nextBtn.disabled = flashcardIndex === vocabulary.length - 1;
-    }
-
-    transBtn.addEventListener('click', () => {
-      transBtn.style.display = 'none';
-      transText.classList.add('visible');
-    });
-
-    prevBtn.addEventListener('click', () => {
-      if (flashcardIndex > 0) { flashcardIndex--; renderFlashcard(); }
-    });
-
-    nextBtn.addEventListener('click', () => {
-      if (flashcardIndex < vocabulary.length - 1) { flashcardIndex++; renderFlashcard(); }
-    });
-    renderFlashcard();
-
-    // GAME — FEED LUNA
-    const feedItemsContainer = document.getElementById('feed-items-container');
-    const catEl = document.getElementById('feed-cat');
-    let itemsEaten = 0;
-    const totalItems = vocabulary.length;
-
-    function initFeedGame() {
-      itemsEaten = 0;
-      feedItemsContainer.innerHTML = '';
-      document.getElementById('game-score').innerHTML = `⭐ Eaten: <strong>0</strong> / <span>${totalItems}</span>`;
-      document.getElementById('game-progress-bar').style.width = '0%';
-      document.getElementById('game-feedback').textContent = 'Drag the food to feed Luna!';
-      catEl.textContent = '🐱';
-
-      const shuffled = [...vocabulary].sort(() => Math.random() - 0.5);
-
-      shuffled.forEach(v => {
-        const item = document.createElement('div');
-        item.className = 'feed-item';
-        item.textContent = v.emoji;
-        item.draggable = true;
-        item.dataset.word = v.word;
-
-        // Mouse Events
-        item.addEventListener('dragstart', (e) => {
-          e.dataTransfer.setData('text/plain', v.emoji);
-          setTimeout(() => item.classList.add('dragging'), 0);
-          catEl.textContent = '😸'; // open mouth
-        });
-
-        item.addEventListener('dragend', () => {
-          item.classList.remove('dragging');
-          catEl.textContent = '🐱'; // close mouth
-          catEl.classList.remove('drag-over');
-        });
-
-        // Touch Events for Mobile
-        item.addEventListener('touchstart', handleTouchStart, { passive: false });
-        item.addEventListener('touchmove', handleTouchMove, { passive: false });
-        item.addEventListener('touchend', handleTouchEnd);
-
-        feedItemsContainer.appendChild(item);
-      });
-    }
-
-    // Drag over cat
-    catEl.addEventListener('dragover', (e) => {
-      e.preventDefault();
-      catEl.classList.add('drag-over');
-    });
-
-    catEl.addEventListener('dragleave', () => {
-      catEl.classList.remove('drag-over');
-    });
-
-    catEl.addEventListener('drop', (e) => {
-      e.preventDefault();
-      catEl.classList.remove('drag-over');
-      const draggingItem = document.querySelector('.feed-item.dragging');
-      if (draggingItem) {
-        eatItem(draggingItem);
-      }
-    });
-
-    // Touch Support for Mobile
-    let currentDraggingItem = null;
-    function handleTouchStart(e) {
-      currentDraggingItem = this;
-      this.classList.add('dragging');
-      catEl.textContent = '😸';
-    }
-
-    function handleTouchMove(e) {
-      e.preventDefault(); // prevent scrolling
-      const touchLocation = e.targetTouches[0];
-
-      // Move element visually
-      this.style.position = 'absolute';
-      this.style.left = touchLocation.pageX - (this.offsetWidth / 2) + 'px';
-      this.style.top = touchLocation.pageY - (this.offsetHeight / 2) + 'px';
-
-      // Check if over cat
-      const catRect = catEl.getBoundingClientRect();
-      if (
-        touchLocation.clientX >= catRect.left &&
-        touchLocation.clientX <= catRect.right &&
-        touchLocation.clientY >= catRect.top &&
-        touchLocation.clientY <= catRect.bottom
-      ) {
-        catEl.classList.add('drag-over');
-      } else {
-        catEl.classList.remove('drag-over');
-      }
-    }
-
-    function handleTouchEnd(e) {
-      if (!currentDraggingItem) return;
-
-      const changedTouch = e.changedTouches[0];
-      const catRect = catEl.getBoundingClientRect();
-
-      currentDraggingItem.style.position = '';
-      currentDraggingItem.style.left = '';
-      currentDraggingItem.style.top = '';
-      currentDraggingItem.classList.remove('dragging');
-      catEl.textContent = '🐱';
-      catEl.classList.remove('drag-over');
-
-      if (
-        changedTouch.clientX >= catRect.left &&
-        changedTouch.clientX <= catRect.right &&
-        changedTouch.clientY >= catRect.top &&
-        changedTouch.clientY <= catRect.bottom
-      ) {
-        eatItem(currentDraggingItem);
-      }
-      currentDraggingItem = null;
-    }
-
-    function eatItem(item) {
-      const word = item.dataset.word;
-      item.remove();
-      itemsEaten++;
-
-      // Cat animation
-      catEl.textContent = '😻';
-      catEl.classList.add('eating');
-      setTimeout(() => {
-        catEl.classList.remove('eating');
-        catEl.textContent = '🐱';
-      }, 500);
-
-      document.getElementById('game-score').innerHTML = `⭐ Eaten: <strong>${itemsEaten}</strong> / <span>${totalItems}</span>`;
-      document.getElementById('game-progress-bar').style.width = ((itemsEaten / totalItems) * 100) + '%';
-      document.getElementById('game-feedback').textContent = `Yummy ${word}!`;
-
-      if (itemsEaten === totalItems) {
-        setTimeout(showFeedComplete, 800);
-      }
-    }
-
-    function showFeedComplete() {
-      document.getElementById('game-area').style.display = 'none';
-      document.getElementById('game-complete').classList.add('active');
-      document.getElementById('game-progress-bar').style.width = '100%';
-    }
-
-    document.getElementById('game-replay-btn').addEventListener('click', () => {
-      document.getElementById('game-area').style.display = 'block';
-      document.getElementById('game-complete').classList.remove('active');
-      initFeedGame();
-    });
-
-    initFeedGame();
-
-    // MATCHING PAIRS GAME
-    const pairsBoard = document.getElementById('pairs-board');
-    const pairsComplete = document.getElementById('pairs-complete');
-    let hasFlippedCard = false;
-    let lockBoard = false;
-    let firstCard, secondCard;
-    let pairsFound = 0;
-
-    function initPairsGame() {
-      pairsBoard.innerHTML = '';
-      pairsComplete.style.display = 'none';
-      pairsBoard.style.display = 'grid';
-      pairsFound = 0;
-      hasFlippedCard = false;
-      lockBoard = false;
-      firstCard = null;
-      secondCard = null;
-
-      const numPairs = Math.min(6, vocabulary.length);
-      const gameItems = [...vocabulary].sort(() => 0.5 - Math.random()).slice(0, numPairs);
-      let cards = [];
-      gameItems.forEach(item => {
-        cards.push({ word: item.word, display: `<div class="pairs-emoji" style="font-size: 4rem; margin: 0;">${item.emoji}</div>` });
-        cards.push({ word: item.word, display: `<div class="pairs-word" style="font-size: 1.8rem; margin: 0;">${item.word}</div>` });
-      });
-      cards = cards.sort(() => 0.5 - Math.random());
-
-      cards.forEach((item, index) => {
-        const card = document.createElement('div');
-        card.classList.add('pairs-card');
-        card.dataset.word = item.word;
-        card.innerHTML = `
-          <div class="pairs-card-inner">
-            <div class="pairs-front">${index + 1}</div>
-            <div class="pairs-back" style="flex-direction: column; justify-content: center;">${item.display}</div>
-          </div>
-        `;
-        card.addEventListener('click', flipCard);
-        pairsBoard.appendChild(card);
-      });
-    }
-
-    function flipCard() {
-      if (lockBoard) return;
-      if (this === firstCard) return;
-
-      this.classList.add('flipped');
-
-      if (!hasFlippedCard) {
-        hasFlippedCard = true;
-        firstCard = this;
-        return;
-      }
-
-      secondCard = this;
-      checkForMatch();
-    }
-
-    function checkForMatch() {
-      let isMatch = firstCard.dataset.word === secondCard.dataset.word;
-
-      if (isMatch) {
-        disableCards();
-        pairsFound++;
-        const numPairs = Math.min(6, vocabulary.length);
-        if (pairsFound === numPairs) {
-          setTimeout(() => {
-            pairsBoard.style.display = 'none';
-            pairsComplete.style.display = 'flex';
-          }, 800);
-        }
-      } else {
-        unflipCards();
-      }
-    }
-
-    function disableCards() {
-      firstCard.removeEventListener('click', flipCard);
-      secondCard.removeEventListener('click', flipCard);
-      firstCard.classList.add('matched');
-      secondCard.classList.add('matched');
-      resetBoard();
-    }
-
-    function unflipCards() {
-      lockBoard = true;
-      setTimeout(() => {
-        firstCard.classList.remove('flipped');
-        secondCard.classList.remove('flipped');
-        resetBoard();
-      }, 1000);
-    }
-
-    function resetBoard() {
-      [hasFlippedCard, lockBoard] = [false, false];
-      [firstCard, secondCard] = [null, null];
-    }
-
-    document.getElementById('pairs-replay-btn').addEventListener('click', initPairsGame);
-    initPairsGame();
-
-    // GAME - DO YOU LIKE
+    // GAME — Do You Like (unique to foods)
     const likeAnimals = ['🐶', '🐱', '🐘', '🦁', '🐰', '🐼', '🐵', '🐸', '🐯', '🐻'];
     let likeGameItems = [];
     let likeIndex = 0;
@@ -550,7 +220,6 @@
       const v = likeGameItems[likeIndex];
       const randomAnimal = likeAnimals[Math.floor(Math.random() * likeAnimals.length)];
 
-      // Animate animal entry
       likeAnimalEl.style.transform = 'scale(0) rotate(-20deg)';
       setTimeout(() => {
         likeAnimalEl.textContent = randomAnimal;
@@ -570,21 +239,8 @@
     document.getElementById('like-replay-btn').addEventListener('click', initLikeGame);
 
     initLikeGame();
-    
-    // Configuração dos novos jogos
-    const gameSentences = [
-      { en: "I like pizza", pt: "Eu gosto de pizza" },
-      { en: "The apple is red", pt: "A maçã é vermelha" },
-      { en: "I drink water", pt: "Eu bebo água" },
-      { en: "The banana is yellow", pt: "A banana é amarela" },
-      { en: "Luna loves ice cream", pt: "Luna ama sorvete" },
-      { en: "I eat an orange", pt: "Eu como uma laranja" },
-      { en: "Milk is good", pt: "Leite é bom" },
-      { en: "The bread is hot", pt: "O pão está quente" },
-      { en: "I want a cookie", pt: "Eu quero um biscoito" },
-      { en: "Grapes are sweet", pt: "Uvas são doces" }
-    ];
   </script>
+  <script src="scenario-engine.js"></script>
   <script src="shared-games.js"></script>
 </body>
 

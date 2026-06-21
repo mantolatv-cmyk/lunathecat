@@ -360,7 +360,7 @@ document.addEventListener('DOMContentLoaded', () => {
       if (isMatch) {
         disableCards();
         pairsFound++;
-        const numPairs = Math.min(6, vocabulary.length);
+        const numPairs = Math.min(12, vocabulary.length);
         if (pairsFound === numPairs) {
           setTimeout(() => {
             pairsBoard.style.display = 'none';
@@ -404,7 +404,7 @@ document.addEventListener('DOMContentLoaded', () => {
       firstCard = null;
       secondCard = null;
 
-      const numPairs = Math.min(6, vocabulary.length);
+      const numPairs = Math.min(12, vocabulary.length);
       const gameItems = [...vocabulary].sort(() => 0.5 - Math.random()).slice(0, numPairs);
       let cards = [];
       gameItems.forEach(item => {

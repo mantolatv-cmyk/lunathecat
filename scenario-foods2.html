@@ -157,27 +157,16 @@
     // DATA
     const dialogues = [
       { speaker: 'luna', en: "Welcome back to the restaurant! 🍽️", pt: "Bem-vindo de volta ao restaurante! 🍽️" },
-      { speaker: 'child', en: "Hi Luna! I am so hungry!", pt: "Oi Luna! Eu estou com tanta fome!" },
-      { speaker: 'luna', en: "We have 25 delicious foods today!", pt: "Temos 25 comidas deliciosas hoje!" },
+      { speaker: 'child', en: "Hi Luna! I am ready for more yummy foods!", pt: "Oi Luna! Estou pronto para mais comidas deliciosas!" },
+      { speaker: 'luna', en: "We have 25 new delicious foods today!", pt: "Temos 25 novas comidas deliciosas hoje!" },
       { speaker: 'child', en: "Wow! Do you have a BURGER 🍔?", pt: "Uau! Vocês têm HAMBÚRGUER 🍔?" },
       { speaker: 'luna', en: "Yes! And we also have HOT DOGS 🌭 and TACOS 🌮!", pt: "Sim! E também temos CACHORROS-QUENTES 🌭 e TACOS 🌮!" },
-      { speaker: 'child', en: "I want to eat everything!", pt: "Eu quero comer tudo!" },
-      { speaker: 'luna', en: "Don't forget the CAKE 🍰 and COOKIES 🍪!", pt: "Não se esqueça do BOLO 🍰 e dos BISCOITOS 🍪!" },
-      { speaker: 'child', en: "Yummy! Let's learn all the 25 foods!", pt: "Que delícia! Vamos aprender as 25 comidas!" }
+      { speaker: 'child', en: "I want to eat everything! Do you have sweets?", pt: "Eu quero comer tudo! Vocês têm doces?" },
+      { speaker: 'luna', en: "Of course! We have CAKE 🍰, COOKIES 🍪, and DONUTS 🍩!", pt: "Claro! Temos BOLO 🍰, BISCOITOS 🍪 e ROSQUINHAS 🍩!" },
+      { speaker: 'child', en: "Yummy! Let's learn all these new foods!", pt: "Que delícia! Vamos aprender todas essas novas comidas!" }
     ];
 
     const vocabulary = [
-      { emoji: '🍎', word: 'Apple', pt: 'Maçã' },
-      { emoji: '🍌', word: 'Banana', pt: 'Banana' },
-      { emoji: '🍓', word: 'Strawberry', pt: 'Morango' },
-      { emoji: '🍉', word: 'Watermelon', pt: 'Melancia' },
-      { emoji: '🥕', word: 'Carrot', pt: 'Cenoura' },
-      { emoji: '🥦', word: 'Broccoli', pt: 'Brócolis' },
-      { emoji: '💧', word: 'Water', pt: 'Água' },
-      { emoji: '🥛', word: 'Milk', pt: 'Leite' },
-      { emoji: '🧃', word: 'Juice', pt: 'Suco' },
-      { emoji: '🍕', word: 'Pizza', pt: 'Pizza' },
-      { emoji: '🍦', word: 'Ice Cream', pt: 'Sorvete' },
       { emoji: '🍔', word: 'Burger', pt: 'Hambúrguer' },
       { emoji: '🌭', word: 'Hot Dog', pt: 'Cachorro-quente' },
       { emoji: '🥪', word: 'Sandwich', pt: 'Sanduíche' },
@@ -191,20 +180,31 @@
       { emoji: '🍇', word: 'Grapes', pt: 'Uvas' },
       { emoji: '🍊', word: 'Orange', pt: 'Laranja' },
       { emoji: '🍍', word: 'Pineapple', pt: 'Abacaxi' },
-      { emoji: '🍒', word: 'Cherry', pt: 'Cereja' }
+      { emoji: '🍒', word: 'Cherry', pt: 'Cereja' },
+      { emoji: '🥑', word: 'Avocado', pt: 'Abacate' },
+      { emoji: '🍅', word: 'Tomato', pt: 'Tomate' },
+      { emoji: '🥔', word: 'Potato', pt: 'Batata' },
+      { emoji: '🧅', word: 'Onion', pt: 'Cebola' },
+      { emoji: '🍄', word: 'Mushroom', pt: 'Cogumelo' },
+      { emoji: '🍋', word: 'Lemon', pt: 'Limão' },
+      { emoji: '🍑', word: 'Peach', pt: 'Pêssego' },
+      { emoji: '🍈', word: 'Melon', pt: 'Melão' },
+      { emoji: '🍩', word: 'Donut', pt: 'Rosquinha' },
+      { emoji: '🍫', word: 'Chocolate', pt: 'Chocolate' },
+      { emoji: '🍿', word: 'Popcorn', pt: 'Pipoca' }
     ];
 
     const gameSentences = [
-      { en: "I like pizza", pt: "Eu gosto de pizza" },
-      { en: "The apple is red", pt: "A maçã é vermelha" },
-      { en: "I drink water", pt: "Eu bebo água" },
-      { en: "The banana is yellow", pt: "A banana é amarela" },
-      { en: "Luna loves ice cream", pt: "Luna ama sorvete" },
-      { en: "I eat an orange", pt: "Eu como uma laranja" },
-      { en: "Milk is good", pt: "Leite é bom" },
-      { en: "The bread is hot", pt: "O pão está quente" },
+      { en: "I like burgers", pt: "Eu gosto de hambúrgueres" },
+      { en: "The lemon is sour", pt: "O limão é azedo" },
+      { en: "I eat a sandwich", pt: "Eu como um sanduíche" },
+      { en: "The cheese is yellow", pt: "O queijo é amarelo" },
+      { en: "Luna loves donuts", pt: "Luna ama rosquinhas" },
       { en: "I want a cookie", pt: "Eu quero um biscoito" },
-      { en: "Grapes are sweet", pt: "Uvas são doces" }
+      { en: "Chocolate is sweet", pt: "Chocolate é doce" },
+      { en: "The bread is hot", pt: "O pão está quente" },
+      { en: "Grapes are purple", pt: "Uvas são roxas" },
+      { en: "Popcorn for the movie", pt: "Pipoca para o filme" }
     ];
 
     // GAME — Do You Like (unique to foods)

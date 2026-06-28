@@ -217,10 +217,9 @@
       const oe = document.getElementById('game-options');
       oe.innerHTML = '';
       opts.forEach(opt => {
-        const emoji = gameData.find(g => g.correct === opt)?.emoji || '❓';
         const btn = document.createElement('button');
         btn.className = 'game-option';
-        btn.textContent = `${emoji} ${opt}`;
+        btn.textContent = opt;
         btn.addEventListener('click', () => handleA(btn, opt, q.correct));
         oe.appendChild(btn);
       });

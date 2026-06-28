@@ -1,0 +1,228 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>⏰ Daily Routines — Learn with Luna</title>
+  <meta name="description" content="Learn daily routines in English with Luna the Cat! Interactive story, vocabulary flashcards, and fun games." />
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🐱</text></svg>" />
+  <link rel="stylesheet" href="styles.css" />
+  <link rel="stylesheet" href="scenario.css" />
+</head>
+<body>
+
+  <header class="header scrolled" id="app-header">
+    <div class="header-inner">
+      <a href="index.html" class="logo">
+        <img src="images/luna-logo.png" alt="Luna the Cat" class="logo-icon" />
+        <span class="logo-text">Learn with <span>Luna</span></span>
+      </a>
+      <nav class="nav-links">
+        <a href="index.html" class="nav-link">Home</a>
+        <a href="index.html#videos" class="nav-link active">Videos</a>
+        <a href="index.html#printables" class="nav-link">Printables</a>
+        <a href="index.html#about" class="nav-link">About</a>
+      </nav>
+      <button class="menu-toggle" id="menu-toggle" aria-label="Toggle menu"><span></span></button>
+    </div>
+    <nav class="nav-mobile" id="nav-mobile">
+      <a href="index.html" class="nav-link">Home</a>
+      <a href="index.html#videos" class="nav-link">Videos</a>
+      <a href="index.html#printables" class="nav-link">Printables</a>
+      <a href="index.html#about" class="nav-link">About</a>
+    </nav>
+  </header>
+
+  <section class="scenario-hero">
+    <img src="images/scene-routines.png" alt="Luna getting ready for the day" class="scenario-hero-img" loading="lazy" />
+    <div class="scenario-hero-overlay">
+      <div class="scenario-hero-icon">⏰</div>
+      <h1 class="scenario-hero-title">Daily Routines</h1>
+      <p class="scenario-hero-subtitle">Get ready for the day with Luna!</p>
+    </div>
+  </section>
+
+  <div class="scenario-container">
+    <a href="index.html" class="back-btn">← Back to Home</a>
+
+    <div class="scenario-tabs" id="scenario-tabs">
+      <button class="scenario-tab active" data-tab="story">💬 Story Time</button>
+      <button class="scenario-tab" data-tab="vocab">📖 Word Garden</button>
+      <button class="scenario-tab" data-tab="game">🎮 Play &amp; Learn</button>
+      <button class="scenario-tab" data-tab="memory">🃏 Matching Pairs</button>
+    </div>
+
+    <div class="tab-panel active" id="tab-story">
+      <div class="dialogue-container" id="dialogue-container"></div>
+      <button class="dialogue-next-btn" id="dialogue-next-btn">Next Line →</button>
+      <button class="dialogue-restart-btn" id="dialogue-restart-btn">🔄 Start Over</button>
+    </div>
+
+    <div class="tab-panel" id="tab-vocab">
+      <div class="vocab-grid" id="vocab-grid"></div>
+    </div>
+
+    <div class="tab-panel" id="tab-game">
+      <div class="game-area" id="game-area">
+        <div class="game-score" id="game-score">⭐ Score: <strong>0</strong> / <span>0</span></div>
+        <div class="game-progress"><div class="game-progress-bar" id="game-progress-bar"></div></div>
+        <div class="game-prompt">
+          <div class="game-prompt-label">Which routine sounds like...</div>
+          <div class="game-prompt-content" id="game-prompt" style="font-size: 2rem;"></div>
+        </div>
+        <div class="game-options" id="game-options"></div>
+        <div class="game-feedback" id="game-feedback"></div>
+      </div>
+      <div class="game-complete" id="game-complete">
+        <div class="game-complete-emoji">⏰</div>
+        <h2 class="game-complete-title">Routine Master!</h2>
+        <p class="game-complete-score" id="game-final-score"></p>
+        <div class="game-stars" id="game-stars"></div>
+        <button class="game-replay-btn" id="game-replay-btn">🔄 Play Again!</button>
+      </div>
+    </div>
+
+    <!-- TAB 4: Matching Pairs -->
+    <div class="tab-panel" id="tab-memory">
+      <div class="pairs-board" id="pairs-board"></div>
+      <div class="game-complete" id="pairs-complete" style="display: none; flex-direction: column; align-items: center;">
+        <div class="game-complete-emoji">🎉</div>
+        <h2 class="game-complete-title">You Did It!</h2>
+        <p class="game-complete-score" style="font-size:1.2rem; color:var(--text-secondary);">You found all the pairs!</p>
+        <button class="game-replay-btn" id="pairs-replay-btn">🔄 Play Again!</button>
+      </div>
+    </div>
+  </div>
+
+  <footer class="footer">
+    <div class="footer-inner">
+      <p class="footer-message">Luna loves learning with you! <span class="paw-emoji">🐾</span></p>
+      <p class="footer-copy">Made with <span class="heart">♥</span> by Learn with Luna · © 2026</p>
+    </div>
+  </footer>
+
+  <script>
+    const dialogues = [
+      { speaker: 'luna', en: "Good morning! 🌅", pt: "Bom dia! 🌅" },
+      { speaker: 'child', en: "Time to wake up! 🛏️", pt: "Hora de acordar! 🛏️" },
+      { speaker: 'luna', en: "Yes! First, I brush my teeth. 🪥", pt: "Sim! Primeiro, eu escovo os dentes. 🪥" },
+      { speaker: 'child', en: "And wash your face! 🧼", pt: "E lavar o rosto! 🧼" },
+      { speaker: 'luna', en: "Then I comb my hair. 🪮", pt: "Então eu penteio o meu cabelo. 🪮" },
+      { speaker: 'child', en: "Ready to get dressed? 👕", pt: "Pronta para se vestir? 👕" },
+      { speaker: 'luna', en: "Yes! Now I eat breakfast. 🥞", pt: "Sim! Agora eu tomo café da manhã. 🥞" },
+      { speaker: 'child', en: "Yummy! Time to go to school! 🎒", pt: "Que delícia! Hora de ir para a escola! 🎒" },
+      { speaker: 'luna', en: "Later, we eat lunch. 🥪", pt: "Mais tarde, nós almoçamos. 🥪" },
+      { speaker: 'child', en: "And then we play! ⚽", pt: "E depois nós brincamos! ⚽" },
+      { speaker: 'luna', en: "At night, we eat dinner and sleep! 🌙", pt: "De noite, nós jantamos e dormimos! 🌙" }
+    ];
+
+    const vocabulary = [
+      { emoji: '🌅', word: 'Wake up', pt: 'Acordar', sound: 'Yawn!' },
+      { emoji: '🪥', word: 'Brush teeth', pt: 'Escovar os dentes', sound: 'Brush brush!' },
+      { emoji: '🧼', word: 'Wash face', pt: 'Lavar o rosto', sound: 'Splash!' },
+      { emoji: '🪮', word: 'Comb hair', pt: 'Pentear o cabelo', sound: 'Swish!' },
+      { emoji: '👕', word: 'Get dressed', pt: 'Vestir-se', sound: 'Zip!' },
+      { emoji: '🥞', word: 'Eat breakfast', pt: 'Tomar café', sound: 'Munch!' },
+      { emoji: '🎒', word: 'Go to school', pt: 'Ir para a escola', sound: 'Bye bye!' },
+      { emoji: '🥪', word: 'Eat lunch', pt: 'Almoçar', sound: 'Yum yum!' },
+      { emoji: '⚽', word: 'Play', pt: 'Brincar', sound: 'Yay!' },
+      { emoji: '📚', word: 'Do homework', pt: 'Fazer lição', sound: 'Hmm!' },
+      { emoji: '🍲', word: 'Eat dinner', pt: 'Jantar', sound: 'Delicious!' },
+      { emoji: '🛏️', word: 'Sleep', pt: 'Dormir', sound: 'Zzzz!' }
+    ];
+
+    const gameData = [
+      { sound: '🌅 "Yawn!"', correct: 'Wake up', emoji: '🌅' },
+      { sound: '🪥 "Brush brush!"', correct: 'Brush teeth', emoji: '🪥' },
+      { sound: '🧼 "Splash!"', correct: 'Wash face', emoji: '🧼' },
+      { sound: '🪮 "Swish!"', correct: 'Comb hair', emoji: '🪮' },
+      { sound: '👕 "Zip!"', correct: 'Get dressed', emoji: '👕' },
+      { sound: '🥞 "Munch!"', correct: 'Eat breakfast', emoji: '🥞' },
+      { sound: '🎒 "Bye bye!"', correct: 'Go to school', emoji: '🎒' },
+      { sound: '🥪 "Yum yum!"', correct: 'Eat lunch', emoji: '🥪' },
+      { sound: '⚽ "Yay!"', correct: 'Play', emoji: '⚽' },
+      { sound: '🛏️ "Zzzz!"', correct: 'Sleep', emoji: '🛏️' }
+    ];
+
+    const gameSentences = [
+      { en: "I wake up early in the morning", pt: "Eu acordo cedo de manhã" },
+      { en: "Luna brushes her teeth carefully", pt: "Luna escova os dentes com cuidado" },
+      { en: "We wash our faces every day", pt: "Nós lavamos o rosto todo dia" },
+      { en: "I comb my hair to look nice", pt: "Eu penteio meu cabelo para ficar bonito" },
+      { en: "She gets dressed for school", pt: "Ela se veste para a escola" },
+      { en: "We eat breakfast together", pt: "Nós tomamos café da manhã juntos" },
+      { en: "The students go to school", pt: "Os alunos vão para a escola" },
+      { en: "He eats a sandwich for lunch", pt: "Ele come um sanduíche de almoço" },
+      { en: "Kids love to play outside", pt: "Crianças amam brincar lá fora" },
+      { en: "I do my homework carefully", pt: "Eu faço minha lição com cuidado" },
+      { en: "My family eats dinner at night", pt: "Minha família janta de noite" },
+      { en: "Luna sleeps in a soft bed", pt: "Luna dorme numa cama macia" }
+    ];
+
+    // GAME — Sound Match
+    let gi = 0, gs = 0, ga = false;
+    const sq = [...gameData].sort(() => Math.random() - 0.5);
+    const tq = sq.length;
+    const allNames = gameData.map(g => g.correct);
+
+    function renderQ() {
+      ga = false;
+      const q = sq[gi];
+      document.getElementById('game-prompt').textContent = q.sound;
+      document.getElementById('game-score').innerHTML = `⭐ Score: <strong>${gs}</strong> / <span>${tq}</span>`;
+      document.getElementById('game-progress-bar').style.width = ((gi / tq) * 100) + '%';
+      document.getElementById('game-feedback').textContent = '';
+      document.getElementById('game-feedback').className = 'game-feedback';
+
+      const wrongs = allNames.filter(n => n !== q.correct).sort(() => Math.random() - 0.5).slice(0, 3);
+      const opts = [...wrongs, q.correct].sort(() => Math.random() - 0.5);
+
+      const oe = document.getElementById('game-options');
+      oe.innerHTML = '';
+      opts.forEach(opt => {
+        const emoji = gameData.find(g => g.correct === opt)?.emoji || '❓';
+        const btn = document.createElement('button');
+        btn.className = 'game-option';
+        btn.textContent = `${emoji} ${opt}`;
+        btn.addEventListener('click', () => handleA(btn, opt, q.correct));
+        oe.appendChild(btn);
+      });
+    }
+
+    function handleA(btn, sel, cor) {
+      if (ga) return; ga = true;
+      const fb = document.getElementById('game-feedback');
+      document.querySelectorAll('.game-option').forEach(o => o.classList.add('disabled'));
+      if (sel === cor) {
+        gs++; btn.classList.add('correct');
+        fb.textContent = '🎉 Correct! You know your routines!'; fb.className = 'game-feedback correct-msg';
+      } else {
+        btn.classList.add('wrong');
+        document.querySelectorAll('.game-option').forEach(o => { if (o.textContent.includes(cor)) o.classList.add('correct'); });
+        fb.textContent = `❌ That's the ${cor} routine!`; fb.className = 'game-feedback wrong-msg';
+      }
+      document.getElementById('game-score').innerHTML = `⭐ Score: <strong>${gs}</strong> / <span>${tq}</span>`;
+      setTimeout(() => { gi++; if (gi < tq) renderQ(); else showComplete(); }, 1500);
+    }
+
+    function showComplete() {
+      document.getElementById('game-area').style.display = 'none';
+      document.getElementById('game-complete').classList.add('active');
+      const p = Math.round((gs / tq) * 100);
+      document.getElementById('game-final-score').textContent = `You got ${gs} out of ${tq} correct! (${p}%)`;
+      document.getElementById('game-stars').textContent = p >= 90 ? '⭐⭐⭐' : p >= 60 ? '⭐⭐' : '⭐';
+      document.getElementById('game-progress-bar').style.width = '100%';
+    }
+
+    document.getElementById('game-replay-btn').addEventListener('click', () => {
+      gi = 0; gs = 0; sq.sort(() => Math.random() - 0.5);
+      document.getElementById('game-area').style.display = 'block';
+      document.getElementById('game-complete').classList.remove('active');
+      renderQ();
+    });
+    renderQ();
+  </script>
+  <script src="scenario-engine.js"></script>
+  <script src="shared-games.js"></script>
+</body>
+</html>

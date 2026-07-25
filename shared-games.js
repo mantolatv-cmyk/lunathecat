@@ -29,7 +29,8 @@ document.addEventListener('DOMContentLoaded', () => {
           <div class="tf-card">
             <div class="tf-emoji" id="tf-emoji">🤔</div>
             <div class="tf-statement-en" id="tf-statement-en">Loading...</div>
-            <div class="tf-statement-pt" id="tf-statement-pt">...</div>
+            <button class="tf-show-translation-btn" id="tf-show-translation-btn">🇧🇷 Show Translation</button>
+            <div class="tf-statement-pt" id="tf-statement-pt" style="display: none;">...</div>
             <div class="tf-buttons">
               <button class="tf-btn tf-btn-true" id="tf-btn-true">✅ TRUE</button>
               <button class="tf-btn tf-btn-false" id="tf-btn-false">❌ FALSE</button>
@@ -135,7 +136,18 @@ document.addEventListener('DOMContentLoaded', () => {
     }
     
     const currentSentence = sentences[sentenceIndex];
-    document.getElementById('sentence-hint').textContent = `🇧🇷 Hint: "${currentSentence.pt}"`;
+    const sentenceHintContainer = document.getElementById('sentence-hint');
+    if (sentenceHintContainer) {
+      sentenceHintContainer.innerHTML = `<button class="tf-show-translation-btn" id="sentence-hint-btn">🇧🇷 Show Translation Hint</button><div id="sentence-hint-text" style="display: none; margin-bottom: 1rem;">🇧🇷 Hint: "${currentSentence.pt}"</div>`;
+      const hintBtn = document.getElementById('sentence-hint-btn');
+      if (hintBtn) {
+        hintBtn.addEventListener('click', () => {
+          hintBtn.style.display = 'none';
+          const hintText = document.getElementById('sentence-hint-text');
+          if (hintText) hintText.style.display = 'block';
+        });
+      }
+    }
     document.getElementById('sentence-game-score').innerHTML = `⭐ Score: <strong>${sentenceScore}</strong> / <span>${sentences.length}</span>`;
     document.getElementById('sentence-progress-bar').style.width = ((sentenceIndex / sentences.length) * 100) + '%';
     
@@ -536,9 +548,18 @@ document.addEventListener('DOMContentLoaded', () => {
     const btnTrue = document.getElementById('tf-btn-true');
     const btnFalse = document.getElementById('tf-btn-false');
 
+    const showTransBtn = document.getElementById('tf-show-translation-btn');
+
     if (emojiEl) emojiEl.innerHTML = q.emoji || '🤔';
     if (enEl) enEl.textContent = q.statement;
-    if (ptEl) ptEl.textContent = `🇧🇷 ${q.pt}`;
+    if (ptEl) {
+      ptEl.textContent = `🇧🇷 ${q.pt}`;
+      ptEl.style.display = 'none';
+    }
+    if (showTransBtn) {
+      showTransBtn.style.display = 'inline-block';
+      showTransBtn.textContent = '🇧🇷 Show Translation';
+    }
     if (scoreEl) scoreEl.innerHTML = `⭐ Score: <strong>${tfScore}</strong> / <span>${currentTFList.length}</span>`;
     if (progressEl) progressEl.style.width = ((tfIndex / currentTFList.length) * 100) + '%';
 
@@ -588,6 +609,19 @@ document.addEventListener('DOMContentLoaded', () => {
   const btnTrue = document.getElementById('tf-btn-true');
   const btnFalse = document.getElementById('tf-btn-false');
   const btnReplay = document.getElementById('tf-replay-btn');
+  const tfShowTransBtn = document.getElementById('tf-show-translation-btn');
+
+  if (tfShowTransBtn) {
+    tfShowTransBtn.addEventListener('click', () => {
+      tfShowTransBtn.style.display = 'none';
+      const ptEl = document.getElementById('tf-statement-pt');
+      if (ptEl) ptEl.style.display = 'block';
+    });
+  }
+
+  if (btnTrue) btnTrue.addEventListener('click', () => handleTFAnswer(true));
+  if (btnFalse) btnFalse.addEventListener('click', () => handleTFAnswer(false));
+  if (btnReplay) btnReplay.addEventListener('click', initTFGame);
 
   if (btnTrue) btnTrue.addEventListener('click', () => handleTFAnswer(true));
   if (btnFalse) btnFalse.addEventListener('click', () => handleTFAnswer(false));

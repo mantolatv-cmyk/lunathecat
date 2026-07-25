@@ -10,6 +10,7 @@ document.addEventListener('DOMContentLoaded', () => {
   const tabsContainer = document.getElementById('scenario-tabs') || document.querySelector('.scenario-tabs');
   if (tabsContainer) {
     tabsContainer.insertAdjacentHTML('beforeend', `
+      <button class="scenario-tab" data-tab="findmistake">🔍 Find the Mistake</button>
       <button class="scenario-tab" data-tab="truefalse">🤔 True or False</button>
       <button class="scenario-tab" data-tab="sentence">🧱 Build a Sentence</button>
       <button class="scenario-tab" data-tab="scramble">✏️ Spelling Scramble</button>
@@ -20,6 +21,40 @@ document.addEventListener('DOMContentLoaded', () => {
   const container = document.querySelector('.scenario-container');
   if (container) {
     container.insertAdjacentHTML('beforeend', `
+      <!-- TAB: Find the Mistake -->
+      <div class="tab-panel" id="tab-findmistake">
+        <div class="game-area" id="fm-game-area" style="text-align: center;">
+          <div class="game-score" id="fm-game-score">⭐ Progress: <strong>1</strong> / <span>6</span></div>
+          <div class="game-progress"><div class="game-progress-bar" id="fm-progress-bar"></div></div>
+          
+          <div class="fm-card">
+            <div class="fm-emoji" id="fm-emoji">🔍</div>
+            <div class="fm-wrong-box">
+              <div class="fm-wrong-title">⚠️ Find the mistake in this sentence:</div>
+              <div class="fm-wrong-text" id="fm-wrong-text">Loading...</div>
+            </div>
+            
+            <button class="fm-toggle-btn" id="fm-toggle-btn">💡 Show Correct Answer & Translation</button>
+            
+            <div class="fm-correct-box" id="fm-correct-box">
+              <div class="fm-correct-title">✅ Correct Sentence & Hint:</div>
+              <div class="fm-correct-text" id="fm-correct-text">...</div>
+            </div>
+
+            <div>
+              <button class="fm-next-btn" id="fm-next-btn">Next Sentence →</button>
+            </div>
+          </div>
+        </div>
+        
+        <div class="game-complete" id="fm-complete" style="display: none; flex-direction: column; align-items: center;">
+          <div class="game-complete-emoji">🎓</div>
+          <h2 class="game-complete-title">Great Job Detective!</h2>
+          <p class="game-complete-score" id="fm-final-score">You spotted all the vocabulary mistakes!</p>
+          <div class="game-stars" style="font-size: 2rem; margin: 0.5rem 0 1rem;">⭐⭐⭐</div>
+          <button class="game-replay-btn" id="fm-replay-btn">🔄 Play Again!</button>
+        </div>
+      </div>
       <!-- TAB: True or False -->
       <div class="tab-panel" id="tab-truefalse">
         <div class="game-area" id="tf-game-area" style="text-align: center;">
@@ -623,12 +658,102 @@ document.addEventListener('DOMContentLoaded', () => {
   if (btnFalse) btnFalse.addEventListener('click', () => handleTFAnswer(false));
   if (btnReplay) btnReplay.addEventListener('click', initTFGame);
 
-  if (btnTrue) btnTrue.addEventListener('click', () => handleTFAnswer(true));
-  if (btnFalse) btnFalse.addEventListener('click', () => handleTFAnswer(false));
-  if (btnReplay) btnReplay.addEventListener('click', initTFGame);
+  // ==========================================
+  // GAME - FIND THE MISTAKE
+  // ==========================================
+  let fmIndex = 0;
+  let currentFMList = [];
+
+  const getFMQuestions = () => {
+    if (typeof findMistakeQuestions !== 'undefined' && findMistakeQuestions.length > 0) {
+      return findMistakeQuestions;
+    }
+    if (typeof vocabulary !== 'undefined' && vocabulary.length > 0) {
+      const generated = [];
+      vocabulary.forEach((v, i) => {
+        const wrongObj = vocabulary[(i + 2) % vocabulary.length];
+        generated.push({
+          wrong: `I use a ${v.word} to eat ${wrongObj.pt || wrongObj.word}.`,
+          correct: `A ${v.word} is "${v.pt}"!`,
+          pt: `Eu uso um(a) ${v.pt} para comer ${wrongObj.pt}.`,
+          emoji: v.emoji
+        });
+      });
+      return generated;
+    }
+    return [];
+  };
+
+  function initFindMistakeGame() {
+    const questions = getFMQuestions();
+    if (questions.length === 0) return;
+    currentFMList = [...questions];
+    fmIndex = 0;
+    const gameArea = document.getElementById('fm-game-area');
+    const completeArea = document.getElementById('fm-complete');
+    if (gameArea) gameArea.style.display = 'block';
+    if (completeArea) completeArea.style.display = 'none';
+    renderFMSentence();
+  }
+
+  function renderFMSentence() {
+    if (fmIndex >= currentFMList.length) {
+      const gameArea = document.getElementById('fm-game-area');
+      const completeArea = document.getElementById('fm-complete');
+      if (gameArea) gameArea.style.display = 'none';
+      if (completeArea) completeArea.style.display = 'flex';
+      return;
+    }
+
+    const q = currentFMList[fmIndex];
+    const emojiEl = document.getElementById('fm-emoji');
+    const wrongEl = document.getElementById('fm-wrong-text');
+    const correctEl = document.getElementById('fm-correct-text');
+    const correctBox = document.getElementById('fm-correct-box');
+    const toggleBtn = document.getElementById('fm-toggle-btn');
+    const scoreEl = document.getElementById('fm-game-score');
+    const progressEl = document.getElementById('fm-progress-bar');
+
+    if (emojiEl) emojiEl.innerHTML = q.emoji || '🔍';
+    if (wrongEl) wrongEl.textContent = `"${q.wrong}"`;
+    if (correctEl) correctEl.innerHTML = `✨ <strong>Correct:</strong> "${q.correct}"<br/><span style="font-size:0.95rem; font-weight:500; color:#475569; margin-top:0.4rem; display:block;">🇧🇷 ${q.pt || ''}</span>`;
+
+    if (correctBox) correctBox.style.display = 'none';
+    if (toggleBtn) {
+      toggleBtn.style.display = 'inline-block';
+      toggleBtn.textContent = '💡 Show Correct Answer & Translation';
+    }
+
+    if (scoreEl) scoreEl.innerHTML = `⭐ Progress: <strong>${fmIndex + 1}</strong> / <span>${currentFMList.length}</span>`;
+    if (progressEl) progressEl.style.width = (((fmIndex + 1) / currentFMList.length) * 100) + '%';
+  }
+
+  const fmNextBtn = document.getElementById('fm-next-btn');
+  const fmToggleBtn = document.getElementById('fm-toggle-btn');
+  const fmReplayBtn = document.getElementById('fm-replay-btn');
+
+  if (fmToggleBtn) {
+    fmToggleBtn.addEventListener('click', () => {
+      fmToggleBtn.style.display = 'none';
+      const correctBox = document.getElementById('fm-correct-box');
+      if (correctBox) correctBox.style.display = 'block';
+    });
+  }
+
+  if (fmNextBtn) {
+    fmNextBtn.addEventListener('click', () => {
+      fmIndex++;
+      renderFMSentence();
+    });
+  }
+
+  if (fmReplayBtn) {
+    fmReplayBtn.addEventListener('click', initFindMistakeGame);
+  }
 
   // Initialize games once the DOM is loaded
   initSentenceGame();
   initScrambleGame();
   initTFGame();
+  initFindMistakeGame();
 });

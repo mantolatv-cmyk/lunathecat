@@ -182,6 +182,15 @@
       { statement: "Cartoons are animated movies with fun characters and music.", pt: "Desenhos animados são filmes de animação com personagens e músicas divertidas.", isTrue: true, emoji: "🎬", explanation: "Cartoons bring vibrant magic to the big screen!" }
     ];
 
+    const findMistakeQuestions = [
+      { wrong: "I put on my 3D glasses to eat popcorn with a silver fork.", correct: "3D glasses are for watching 3D movie pictures pop out! 👓", pt: "Eu coloco meus óculos 3D para comer pipoca com um garfo de prata.", emoji: "👓" },
+      { wrong: "The Disney princess lives inside a small pencil sharpener.", correct: "A princess lives in a grand magical CASTLE! 🏰", pt: "A princesa da Disney mora dentro de um apontador de lápis pequeno.", emoji: "🏰" },
+      { wrong: "The fairy godmother uses a heavy shoe to cast magic spells.", correct: "The fairy uses a sparkly MAGIC WAND! 🪄", pt: "A fada madrinha usa um sapato pesado para fazer feitiços mágicos.", emoji: "🪄" },
+      { wrong: "The movie hero tries to make all the children sad and cry.", correct: "The hero saves the day and brings happiness! 🦸‍♀️", pt: "O herói do filme tenta fazer todas as crianças ficarem tristes e chorarem.", emoji: "🦸‍♀️" },
+      { wrong: "We buy our movie tickets at the swimming pool.", correct: "We buy movie tickets at the cinema / theater box office! 🎟️", pt: "Compramos nossos ingressos de filme na piscina.", emoji: "🎟️" },
+      { wrong: "A dragon in fairy tales flies around drinking soup.", correct: "A dragon flies around breathing fiery flames! 🐲", pt: "Um dragão em contos de fadas voa bebendo sopa.", emoji: "🐲" }
+    ];
+
     // GAME — Sound Match
     let gi = 0, gs = 0, ga = false;
     const sq = [...gameData].sort(() => Math.random() - 0.5).slice(0, 8);

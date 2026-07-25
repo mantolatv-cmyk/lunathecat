@@ -188,6 +188,15 @@
       { statement: "A sharpener makes blunt pencils sharp again.", pt: "Um apontador deixa lápis sem ponta afiados novamente.", isTrue: true, emoji: sharpenerSvg, explanation: "A sharpener sharpens your pencil point!" }
     ];
 
+    const findMistakeQuestions = [
+      { wrong: "I use my yellow pencil to cut paper into pieces.", correct: "I use scissors to cut paper! (Pencils write and draw!)", pt: "Eu uso meu lápis amarelo para cortar papel em pedaços.", emoji: "✏️" },
+      { wrong: "My soft eraser is for drinking cold water.", correct: "An eraser removes pencil mistakes! (Glasses hold cold water!)", pt: "Minha borracha macia é para beber água gelada.", emoji: "🧽" },
+      { wrong: "I carry my heavy notebooks inside a small sharpener.", correct: "You carry books inside a backpack! (Sharpeners sharpen pencils!)", pt: "Eu carrego meus cadernos pesados dentro de um apontador pequeno.", emoji: sharpenerSvg },
+      { wrong: "We use a ruler to color a rainbow picture.", correct: "We use crayons or markers to color! (Rulers measure lines!)", pt: "Usamos uma régua para colorir um desenho de arco-íris.", emoji: "📏" },
+      { wrong: "The teacher writes ABC on the lunchbox.", correct: "The teacher writes on the board or in a notebook! (Lunchbox holds food!)", pt: "A professora escreve ABC na lancheira.", emoji: "🍱" },
+      { wrong: "I use sticky glue to erase my math mistake.", correct: "An eraser removes mistakes! (Glue sticks crafts together!)", pt: "Eu uso cola pegajosa para apagar meu erro de matemática.", emoji: "🧴" }
+    ];
+
     // GAME — Sound Match
     let gi = 0, gs = 0, ga = false;
     const sq = [...gameData].sort(() => Math.random() - 0.5).slice(0, 8);

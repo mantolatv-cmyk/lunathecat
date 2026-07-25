@@ -179,6 +179,15 @@
       { statement: "Water slides let you splash into refreshing pools of water.", pt: "Tobogãs de água permitem que você faça um splash em piscinas refrescantes.", isTrue: true, emoji: "🌊", explanation: "Water slides are super fun on warm sunny days!" }
     ];
 
+    const findMistakeQuestions = [
+      { wrong: "A roller coaster moves very slow like a sleepy turtle.", correct: "A roller coaster goes super FAST with big drops and loops! 🎢", pt: "Uma montanha-russa se move muito devagar como uma tartaruga com sono.", emoji: "🎢" },
+      { wrong: "Cotton candy is a salty green vegetable grown under the soil.", correct: "Cotton candy is a sweet, fluffy pink carnival treat! 🍧", pt: "Algodão-doce é um vegetal verde salgado cultivado debaixo do solo.", emoji: "🍧" },
+      { wrong: "Fireworks happen under the water inside the ocean.", correct: "Fireworks light up the night sky over the magical castle! 🎆", pt: "Fogos de artifício acontecem debaixo da água dentro do oceano.", emoji: "🎆" },
+      { wrong: "A Fast Pass makes you wait 5 extra hours in line.", correct: "A Fast Pass lets you skip the long line! 🎫", pt: "Um Fast Pass faz você esperar 5 horas extras na fila.", emoji: "🎫" },
+      { wrong: "The carousel flies up into space like a space rocket.", correct: "The carousel spins gently around with wooden horses! 🎠", pt: "O carrossel voa para o espaço como um foguete espacial.", emoji: "🎠" },
+      { wrong: "We meet theme park mascots to wash our dirty dishes.", correct: "We meet mascots to take photos and give high fives! 🤡", pt: "Encontramos mascotes de parque temático para lavar nossa louça suja.", emoji: "🤡" }
+    ];
+
     // GAME — Sound Match
     let gi = 0, gs = 0, ga = false;
     const sq = [...gameData].sort(() => Math.random() - 0.5).slice(0, 8);

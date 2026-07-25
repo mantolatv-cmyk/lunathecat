@@ -196,6 +196,15 @@
       { statement: "A menu lists all the delicious dishes and drinks you can order.", pt: "Um cardápio lista todos os pratos deliciosos e bebidas que você pode pedir.", isTrue: true, emoji: "📋", explanation: "The menu shows all restaurant options!" }
     ];
 
+    const findMistakeQuestions = [
+      { wrong: "The friendly waiter brings a heavy backpack to our restaurant table.", correct: "The waiter brings a MENU and delicious food! 📋", pt: "O garçom amigável traz uma mochila pesada para nossa mesa no restaurante.", emoji: "👨‍🍳" },
+      { wrong: "We brush our teeth with hot cheese pizza slices.", correct: "Pizza is yummy food to eat for lunch or dinner! 🍕", pt: "Escovamos nossos dentes com fatias de pizza de queijo quente.", emoji: "🍕" },
+      { wrong: "I ask the waiter for a pencil case to pay for the meal.", correct: "You ask for the CHECK or BILL to pay! 🧾", pt: "Peço ao garçom um estojo para pagar pela refeição.", emoji: "🧾" },
+      { wrong: "Cold chocolate ice cream is served hot in a coffee mug.", correct: "Ice cream is a cold, sweet, and delicious dessert! 🍦", pt: "Sorvete frio de chocolate é servido quente em uma caneca de café.", emoji: "🍦" },
+      { wrong: "I drink fresh orange juice with my ears.", correct: "You drink orange juice with your mouth! 🍊", pt: "Eu bebo suco de laranja fresco com minhas orelhas.", emoji: "🍊" },
+      { wrong: "We read a notebook to order delicious pasta and drinks.", correct: "You read the MENU at the restaurant to order food! 📋", pt: "Lemos um caderno para pedir macarrão delicioso e bebidas.", emoji: "📋" }
+    ];
+
     // GAME — Sound Match
     let gi = 0, gs = 0, ga = false;
     const sq = [...gameData].sort(() => Math.random() - 0.5).slice(0, 8);

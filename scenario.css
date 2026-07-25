@@ -2240,6 +2240,119 @@
   border-color: #7dd3fc;
 }
 
+/* ============================================
+   FIND THE MISTAKE GAME STYLES
+   ============================================ */
+.fm-card {
+  background: var(--card-bg, #ffffff);
+  border: 2px solid var(--border-soft, #e2e8f0);
+  border-radius: 24px;
+  padding: 2.2rem 1.5rem;
+  max-width: 620px;
+  margin: 1.5rem auto;
+  box-shadow: 0 12px 28px rgba(0, 0, 0, 0.08);
+  text-align: center;
+  position: relative;
+}
+
+.fm-emoji {
+  font-size: 3.5rem;
+  margin-bottom: 1rem;
+  display: inline-block;
+}
+
+.fm-wrong-box {
+  background: #fef2f2;
+  border: 2px dashed #fca5a5;
+  border-radius: 16px;
+  padding: 1.2rem;
+  margin-bottom: 1.25rem;
+}
+
+.fm-wrong-title {
+  font-size: 0.85rem;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: #dc2626;
+  margin-bottom: 0.4rem;
+}
+
+.fm-wrong-text {
+  font-size: 1.3rem;
+  font-weight: 700;
+  color: #991b1b;
+  line-height: 1.4;
+}
+
+.fm-toggle-btn {
+  background: var(--card-bg, #f8fafc);
+  border: 1.5px dashed var(--border-soft, #cbd5e1);
+  color: var(--text-secondary, #64748b);
+  padding: 0.4rem 1.1rem;
+  border-radius: 20px;
+  font-size: 0.92rem;
+  font-weight: 600;
+  cursor: pointer;
+  margin: 0.4rem auto 1rem;
+  display: inline-block;
+  transition: all 0.2s ease;
+}
+
+.fm-toggle-btn:hover {
+  background: #f0fdf4;
+  color: #166534;
+  border-color: #86efac;
+}
+
+.fm-correct-box {
+  background: #f0fdf4;
+  border: 2px solid #86efac;
+  border-radius: 16px;
+  padding: 1.2rem;
+  margin-bottom: 1.5rem;
+  text-align: left;
+  display: none;
+}
+
+.fm-correct-title {
+  font-size: 0.85rem;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: #166534;
+  margin-bottom: 0.4rem;
+}
+
+.fm-correct-text {
+  font-size: 1.15rem;
+  font-weight: 700;
+  color: #14532d;
+  line-height: 1.4;
+}
+
+.fm-next-btn {
+  background: linear-gradient(135deg, #3b82f6, #1d4ed8);
+  color: #ffffff;
+  font-size: 1.25rem;
+  font-weight: 700;
+  padding: 0.9rem 2.5rem;
+  border-radius: 50px;
+  border: none;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  box-shadow: 0 4px 15px rgba(29, 78, 216, 0.3);
+  display: inline-flex;
+  align-items: center;
+  gap: 0.6rem;
+  margin-top: 0.5rem;
+}
+
+.fm-next-btn:hover {
+  background: linear-gradient(135deg, #2563eb, #1e40af);
+  transform: translateY(-2px) scale(1.03);
+}
+
 .tf-buttons {
   display: flex;
   justify-content: center;

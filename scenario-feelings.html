@@ -1,0 +1,240 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>😊 Feelings &amp; Emotions — Learn with Luna</title>
+  <meta name="description" content="Express feelings and emotions in English with Luna the Cat! Interactive story, flashcards, and fun games for kids." />
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🐱</text></svg>" />
+  <link rel="stylesheet" href="styles.css" />
+  <link rel="stylesheet" href="scenario.css" />
+</head>
+<body>
+
+  <header class="header scrolled" id="app-header">
+    <div class="header-inner">
+      <a href="index.html" class="logo">
+        <img src="images/luna-logo.png" alt="Luna the Cat" class="logo-icon" />
+        <span class="logo-text">Learn with <span>Luna</span></span>
+      </a>
+      <nav class="nav-links">
+        <a href="index.html" class="nav-link">Home</a>
+        <a href="index.html#videos" class="nav-link active">Videos</a>
+        <a href="index.html#printables" class="nav-link">Printables</a>
+        <a href="index.html#about" class="nav-link">About</a>
+      </nav>
+      <button class="menu-toggle" id="menu-toggle" aria-label="Toggle menu"><span></span></button>
+    </div>
+    <nav class="nav-mobile" id="nav-mobile">
+      <a href="index.html" class="nav-link">Home</a>
+      <a href="index.html#videos" class="nav-link">Videos</a>
+      <a href="index.html#printables" class="nav-link">Printables</a>
+      <a href="index.html#about" class="nav-link">About</a>
+    </nav>
+  </header>
+
+  <section class="scenario-hero">
+    <img src="images/scene-feelings.png" alt="Luna expressing magical feelings and emotions" class="scenario-hero-img" loading="lazy" />
+    <div class="scenario-hero-overlay">
+      <div class="scenario-hero-icon">😊</div>
+      <h1 class="scenario-hero-title">Feelings &amp; Emotions</h1>
+      <p class="scenario-hero-subtitle">How are you feeling today?</p>
+    </div>
+  </section>
+
+  <div class="scenario-container">
+    <a href="index.html" class="back-btn">← Back to Home</a>
+
+    <div class="scenario-tabs" id="scenario-tabs">
+      <button class="scenario-tab active" data-tab="story">💬 Story Time</button>
+      <button class="scenario-tab" data-tab="vocab">📖 Word Garden</button>
+      <button class="scenario-tab" data-tab="learnwords">📖 Learn Words</button>
+      <button class="scenario-tab" data-tab="game">🎮 Play &amp; Learn</button>
+      <button class="scenario-tab" data-tab="memory">🃏 Matching Pairs</button>
+    </div>
+
+    <!-- TAB 1: Story -->
+    <div class="tab-panel active" id="tab-story">
+      <div class="dialogue-container" id="dialogue-container"></div>
+      <button class="dialogue-next-btn" id="dialogue-next-btn">Next Line →</button>
+      <button class="dialogue-restart-btn" id="dialogue-restart-btn">🔄 Start Over</button>
+    </div>
+
+    <!-- TAB 2: Vocabulary Grid -->
+    <div class="tab-panel" id="tab-vocab">
+      <div class="vocab-grid" id="vocab-grid"></div>
+    </div>
+
+    <!-- TAB 3: Learn Words -->
+    <div class="tab-panel" id="tab-learnwords">
+      <div class="seq-card-container">
+        <div class="seq-card" id="seq-card">
+          <div class="seq-emoji" id="seq-emoji">😄</div>
+          <div class="seq-word" id="seq-word" style="display: none;"></div>
+          <button class="seq-translation-btn" id="seq-translation-btn">Show English</button>
+          <div class="seq-translation-text" id="seq-translation-text">🇺🇸 Happy</div>
+        </div>
+        <div class="seq-nav">
+          <button class="seq-nav-btn" id="seq-prev-btn" aria-label="Previous">←</button>
+          <button class="seq-nav-btn" id="seq-next-btn" aria-label="Next">→</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- TAB 4: Sound Match Game -->
+    <div class="tab-panel" id="tab-game">
+      <div class="game-area" id="game-area">
+        <div class="game-score" id="game-score">⭐ Score: <strong>0</strong> / <span>0</span></div>
+        <div class="game-progress"><div class="game-progress-bar" id="game-progress-bar"></div></div>
+        <div class="game-prompt">
+          <div class="game-prompt-label">Which feeling says...</div>
+          <div class="game-prompt-content" id="game-prompt" style="font-size: 2rem;"></div>
+        </div>
+        <div class="game-options" id="game-options"></div>
+        <div class="game-feedback" id="game-feedback"></div>
+      </div>
+      <div class="game-complete" id="game-complete">
+        <div class="game-complete-emoji">💖</div>
+        <h2 class="game-complete-title">Emotion Expert!</h2>
+        <p class="game-complete-score" id="game-final-score"></p>
+        <div class="game-stars" id="game-stars"></div>
+        <button class="game-replay-btn" id="game-replay-btn">🔄 Play Again!</button>
+      </div>
+    </div>
+
+    <!-- TAB 5: Matching Pairs -->
+    <div class="tab-panel" id="tab-memory">
+      <div class="pairs-board" id="pairs-board"></div>
+      <div class="game-complete" id="pairs-complete" style="display: none; flex-direction: column; align-items: center;">
+        <div class="game-complete-emoji">🎉</div>
+        <h2 class="game-complete-title">You Did It!</h2>
+        <p class="game-complete-score" style="font-size:1.2rem; color:var(--text-secondary);">You matched all the feelings!</p>
+        <button class="game-replay-btn" id="pairs-replay-btn">🔄 Play Again!</button>
+      </div>
+    </div>
+  </div>
+
+  <footer class="footer">
+    <div class="footer-inner">
+      <p class="footer-message">Luna feels so happy learning with you! <span class="paw-emoji">🐾</span></p>
+      <p class="footer-copy">Made with <span class="heart">♥</span> by Learn with Luna · © 2026</p>
+    </div>
+  </footer>
+
+  <script>
+    const dialogues = [
+      { speaker: 'luna', en: "Hello! How are you feeling today? 😊", pt: "Olá! Como você está se sentindo hoje? 😊" },
+      { speaker: 'child', en: "I am happy and excited to play! 😄", pt: "Eu estou feliz e empolgada para brincar! 😄" },
+      { speaker: 'luna', en: "That is great! When I play, I am excited too! ✨", pt: "Isso é ótimo! Quando brinco, eu fico empolgada também! ✨" },
+      { speaker: 'child', en: "Sometimes I feel tired after school. 😴", pt: "Às vezes me sinto cansada depois da escola. 😴" },
+      { speaker: 'luna', en: "When you are tired, take a nice rest! 💤", pt: "Quando você estiver cansada, descanse bastante! 💤" },
+      { speaker: 'child', en: "I felt brave when I spoke in English! 🦁", pt: "Me senti corajosa quando falei em inglês! 🦁" },
+      { speaker: 'luna', en: "I am so proud of you! You are very brave! 💖", pt: "Estou tão orgulhosa de você! Você é muito corajosa! 💖" },
+      { speaker: 'child', en: "Learning English makes me feel silly and happy! 😜", pt: "Aprender inglês me deixa engraçada e feliz! 😜" }
+    ];
+
+    const vocabulary = [
+      { emoji: '😄', word: 'Happy', pt: 'Feliz', sound: 'Big smile!' },
+      { emoji: '😢', word: 'Sad', pt: 'Triste', sound: 'Wipe tear!' },
+      { emoji: '😡', word: 'Angry', pt: 'Com raiva', sound: 'Grrr!' },
+      { emoji: '🤩', word: 'Excited', pt: 'Empolgado(a)', sound: 'Yay star eyes!' },
+      { emoji: '😴', word: 'Tired', pt: 'Cansado(a)', sound: 'Yawn bedtime!' },
+      { emoji: '😱', word: 'Scared', pt: 'Com medo', sound: 'Oh no!' },
+      { emoji: '😲', word: 'Surprised', pt: 'Surpreso(a)', sound: 'Wow!' },
+      { emoji: '🧘', word: 'Calm', pt: 'Calmo(a)', sound: 'Deep breath!' },
+      { emoji: '🏆', word: 'Proud', pt: 'Orgulhoso(a)', sound: 'I did it!' },
+      { emoji: '🙈', word: 'Shy', pt: 'Tímido(a)', sound: 'Peek-a-boo!' },
+      { emoji: '🍔', word: 'Hungry', pt: 'Com fome', sound: 'Tummy rumbles!' },
+      { emoji: '🦁', word: 'Brave', pt: 'Corajoso(a)', sound: 'Strong heart!' },
+      { emoji: '😜', word: 'Silly', pt: 'Engraçado(a)', sound: 'Funny face!' },
+      { emoji: '🧐', word: 'Curious', pt: 'Curioso(a)', sound: 'Hm let me see!' }
+    ];
+
+    const gameData = [
+      { sound: '😄 "Big smile!"', correct: 'Happy', emoji: '😄' },
+      { sound: '😢 "Wipe tear!"', correct: 'Sad', emoji: '😢' },
+      { sound: '😡 "Grrr!"', correct: 'Angry', emoji: '😡' },
+      { sound: '🤩 "Yay star eyes!"', correct: 'Excited', emoji: '🤩' },
+      { sound: '😴 "Yawn bedtime!"', correct: 'Tired', emoji: '😴' },
+      { sound: '😱 "Oh no!"', correct: 'Scared', emoji: '😱' },
+      { sound: '😲 "Wow!"', correct: 'Surprised', emoji: '😲' },
+      { sound: '🧘 "Deep breath!"', correct: 'Calm', emoji: '🧘' },
+      { sound: '🏆 "I did it!"', correct: 'Proud', emoji: '🏆' },
+      { sound: '🦁 "Strong heart!"', correct: 'Brave', emoji: '🦁' },
+      { sound: '😜 "Funny face!"', correct: 'Silly', emoji: '😜' }
+    ];
+
+    const gameSentences = [
+      { en: "I am happy when I play games", pt: "Eu estou feliz quando jogo jogos" },
+      { en: "Luna feels excited about the adventure", pt: "Luna se sente empolgada com a aventura" },
+      { en: "She is brave and very smart", pt: "Ela é corajosa e muito esperta" },
+      { en: "I am tired after playing outside", pt: "Estou cansada depois de brincar lá fora" },
+      { en: "We are proud of your English progress", pt: "Estamos orgulhosos do seu progresso no inglês" }
+    ];
+
+    // GAME — Sound Match
+    let gi = 0, gs = 0, ga = false;
+    const sq = [...gameData].sort(() => Math.random() - 0.5).slice(0, 8);
+    const tq = sq.length;
+    const allNames = gameData.map(g => g.correct);
+
+    function renderQ() {
+      ga = false;
+      const q = sq[gi];
+      document.getElementById('game-prompt').textContent = q.sound;
+      document.getElementById('game-score').innerHTML = `⭐ Score: <strong>${gs}</strong> / <span>${tq}</span>`;
+      document.getElementById('game-progress-bar').style.width = ((gi / tq) * 100) + '%';
+      document.getElementById('game-feedback').textContent = '';
+      document.getElementById('game-feedback').className = 'game-feedback';
+
+      const wrongs = allNames.filter(n => n !== q.correct).sort(() => Math.random() - 0.5).slice(0, 3);
+      const opts = [...wrongs, q.correct].sort(() => Math.random() - 0.5);
+
+      const oe = document.getElementById('game-options');
+      oe.innerHTML = '';
+      opts.forEach(opt => {
+        const btn = document.createElement('button');
+        btn.className = 'game-option';
+        btn.textContent = opt;
+        btn.addEventListener('click', () => handleA(btn, opt, q.correct));
+        oe.appendChild(btn);
+      });
+    }
+
+    function handleA(btn, sel, cor) {
+      if (ga) return; ga = true;
+      const fb = document.getElementById('game-feedback');
+      document.querySelectorAll('.game-option').forEach(o => o.classList.add('disabled'));
+      if (sel === cor) {
+        gs++; btn.classList.add('correct');
+        fb.textContent = '🎉 Correct! You know your emotions!'; fb.className = 'game-feedback correct-msg';
+      } else {
+        btn.classList.add('wrong');
+        document.querySelectorAll('.game-option').forEach(o => { if (o.textContent.includes(cor)) o.classList.add('correct'); });
+        fb.textContent = `❌ That's feeling ${cor}!`; fb.className = 'game-feedback wrong-msg';
+      }
+      document.getElementById('game-score').innerHTML = `⭐ Score: <strong>${gs}</strong> / <span>${tq}</span>`;
+      setTimeout(() => { gi++; if (gi < tq) renderQ(); else showComplete(); }, 1500);
+    }
+
+    function showComplete() {
+      document.getElementById('game-area').style.display = 'none';
+      document.getElementById('game-complete').classList.add('active');
+      const p = Math.round((gs / tq) * 100);
+      document.getElementById('game-final-score').textContent = `You got ${gs} out of ${tq} correct! (${p}%)`;
+      document.getElementById('game-stars').textContent = p >= 90 ? '⭐⭐⭐' : p >= 60 ? '⭐⭐' : '⭐';
+      document.getElementById('game-progress-bar').style.width = '100%';
+    }
+
+    document.getElementById('game-replay-btn').addEventListener('click', () => {
+      gi = 0; gs = 0; sq.sort(() => Math.random() - 0.5);
+      document.getElementById('game-area').style.display = 'block';
+      document.getElementById('game-complete').classList.remove('active');
+      renderQ();
+    });
+    renderQ();
+  </script>
+  <script src="scenario-engine.js"></script>
+  <script src="shared-games.js"></script>
+</body>
+</html>

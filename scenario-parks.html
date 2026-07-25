@@ -1,0 +1,237 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>🎡 Theme Park Adventure — Learn with Luna</title>
+  <meta name="description" content="Explore Disney & Universal theme parks, roller coasters, magic, and fireworks in English with Luna the Cat!" />
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🐱</text></svg>" />
+  <link rel="stylesheet" href="styles.css" />
+  <link rel="stylesheet" href="scenario.css" />
+</head>
+<body>
+
+  <header class="header scrolled" id="app-header">
+    <div class="header-inner">
+      <a href="index.html" class="logo">
+        <img src="images/luna-logo.png" alt="Luna the Cat" class="logo-icon" />
+        <span class="logo-text">Learn with <span>Luna</span></span>
+      </a>
+      <nav class="nav-links">
+        <a href="index.html" class="nav-link">Home</a>
+        <a href="index.html#videos" class="nav-link active">Videos</a>
+        <a href="index.html#printables" class="nav-link">Printables</a>
+        <a href="index.html#about" class="nav-link">About</a>
+      </nav>
+      <button class="menu-toggle" id="menu-toggle" aria-label="Toggle menu"><span></span></button>
+    </div>
+    <nav class="nav-mobile" id="nav-mobile">
+      <a href="index.html" class="nav-link">Home</a>
+      <a href="index.html#videos" class="nav-link">Videos</a>
+      <a href="index.html#printables" class="nav-link">Printables</a>
+      <a href="index.html#about" class="nav-link">About</a>
+    </nav>
+  </header>
+
+  <section class="scenario-hero">
+    <img src="images/scene-parks.png" alt="Luna at a magical theme park with castle and roller coaster" class="scenario-hero-img" loading="lazy" />
+    <div class="scenario-hero-overlay">
+      <div class="scenario-hero-icon">🎡</div>
+      <h1 class="scenario-hero-title">Theme Park Adventure</h1>
+      <p class="scenario-hero-subtitle">Roller coasters, fireworks, and theme park magic!</p>
+    </div>
+  </section>
+
+  <div class="scenario-container">
+    <a href="index.html" class="back-btn">← Back to Home</a>
+
+    <div class="scenario-tabs" id="scenario-tabs">
+      <button class="scenario-tab active" data-tab="story">💬 Story Time</button>
+      <button class="scenario-tab" data-tab="vocab">📖 Word Garden</button>
+      <button class="scenario-tab" data-tab="learnwords">📖 Learn Words</button>
+      <button class="scenario-tab" data-tab="game">🎮 Play &amp; Learn</button>
+      <button class="scenario-tab" data-tab="memory">🃏 Matching Pairs</button>
+    </div>
+
+    <!-- TAB 1: Story -->
+    <div class="tab-panel active" id="tab-story">
+      <div class="dialogue-container" id="dialogue-container"></div>
+      <button class="dialogue-next-btn" id="dialogue-next-btn">Next Line →</button>
+      <button class="dialogue-restart-btn" id="dialogue-restart-btn">🔄 Start Over</button>
+    </div>
+
+    <!-- TAB 2: Vocabulary Grid -->
+    <div class="tab-panel" id="tab-vocab">
+      <div class="vocab-grid" id="vocab-grid"></div>
+    </div>
+
+    <!-- TAB 3: Learn Words -->
+    <div class="tab-panel" id="tab-learnwords">
+      <div class="seq-card-container">
+        <div class="seq-card" id="seq-card">
+          <div class="seq-emoji" id="seq-emoji">🎢</div>
+          <div class="seq-word" id="seq-word" style="display: none;"></div>
+          <button class="seq-translation-btn" id="seq-translation-btn">Show English</button>
+          <div class="seq-translation-text" id="seq-translation-text">🇺🇸 Roller Coaster</div>
+        </div>
+        <div class="seq-nav">
+          <button class="seq-nav-btn" id="seq-prev-btn" aria-label="Previous">←</button>
+          <button class="seq-nav-btn" id="seq-next-btn" aria-label="Next">→</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- TAB 4: Sound Match Game -->
+    <div class="tab-panel" id="tab-game">
+      <div class="game-area" id="game-area">
+        <div class="game-score" id="game-score">⭐ Score: <strong>0</strong> / <span>0</span></div>
+        <div class="game-progress"><div class="game-progress-bar" id="game-progress-bar"></div></div>
+        <div class="game-prompt">
+          <div class="game-prompt-label">Which theme park attraction says...</div>
+          <div class="game-prompt-content" id="game-prompt" style="font-size: 2rem;"></div>
+        </div>
+        <div class="game-options" id="game-options"></div>
+        <div class="game-feedback" id="game-feedback"></div>
+      </div>
+      <div class="game-complete" id="game-complete">
+        <div class="game-complete-emoji">🎆</div>
+        <h2 class="game-complete-title">Theme Park Champion!</h2>
+        <p class="game-complete-score" id="game-final-score"></p>
+        <div class="game-stars" id="game-stars"></div>
+        <button class="game-replay-btn" id="game-replay-btn">🔄 Play Again!</button>
+      </div>
+    </div>
+
+    <!-- TAB 5: Matching Pairs -->
+    <div class="tab-panel" id="tab-memory">
+      <div class="pairs-board" id="pairs-board"></div>
+      <div class="game-complete" id="pairs-complete" style="display: none; flex-direction: column; align-items: center;">
+        <div class="game-complete-emoji">🎉</div>
+        <h2 class="game-complete-title">You Did It!</h2>
+        <p class="game-complete-score" style="font-size:1.2rem; color:var(--text-secondary);">You matched all theme park rides!</p>
+        <button class="game-replay-btn" id="pairs-replay-btn">🔄 Play Again!</button>
+      </div>
+    </div>
+  </div>
+
+  <footer class="footer">
+    <div class="footer-inner">
+      <p class="footer-message">Luna loves exploring theme parks with you! <span class="paw-emoji">🐾</span></p>
+      <p class="footer-copy">Made with <span class="heart">♥</span> by Learn with Luna · © 2026</p>
+    </div>
+  </footer>
+
+  <script>
+    const dialogues = [
+      { speaker: 'luna', en: "Welcome to the magical theme park! Look at the big castle! 🏰", pt: "Bem-vinda ao parque temático mágico! Olhe para o grande castelo! 🏰" },
+      { speaker: 'child', en: "Wow! Can we ride the fast roller coaster first? 🎢", pt: "Uau! Podemos ir na montanha-russa rápida primeiro? 🎢" },
+      { speaker: 'luna', en: "Yes! Use your Fast Pass to skip the long line! 🎫", pt: "Sim! Use seu Fast Pass para pular a fila longa! 🎫" },
+      { speaker: 'child', en: "Look at the big Ferris wheel and spinning carousel! 🎡🎠", pt: "Olhe para a grande roda-gigante e o carrossel giratório! 🎡🎠" },
+      { speaker: 'luna', en: "Let's eat sweet pink cotton candy! 🍧", pt: "Vamos comer algodão-doce rosa bem docinho! 🍧" },
+      { speaker: 'child', en: "Look! A parade with our favorite Disney and Universal characters! 🤡", pt: "Olhe! Um desfile com nossos personagens favoritos da Disney e Universal! 🤡" },
+      { speaker: 'luna', en: "At night, we will watch the magical fireworks show! 🎆", pt: "À noite, nós vamos assistir ao show mágico de fogos de artifício! 🎆" },
+      { speaker: 'child', en: "This is the most exciting theme park day ever! ✨", pt: "Este é o dia de parque temático mais emocionante de todos! ✨" }
+    ];
+
+    const vocabulary = [
+      { emoji: '🎢', word: 'Roller Coaster', pt: 'Montanha-Russa', sound: 'Whoosh fast speed!' },
+      { emoji: '🎡', word: 'Ferris Wheel', pt: 'Roda-Gigante', sound: 'Up in the sky!' },
+      { emoji: '🎠', word: 'Carousel', pt: 'Carrossel', sound: 'Spin around!' },
+      { emoji: '🏰', word: 'Magic Castle', pt: 'Castelo Mágico', sound: 'Kingdom center!' },
+      { emoji: '🎆', word: 'Fireworks', pt: 'Fogos de Artifício', sound: 'Boom sparkle night!' },
+      { emoji: '🍧', word: 'Cotton Candy', pt: 'Algodão-Doce', sound: 'Sweet pink treat!' },
+      { emoji: '🎫', word: 'Ticket / Fast Pass', pt: 'Ingresso / Fast Pass', sound: 'Skip the line!' },
+      { emoji: '🎪', word: 'Parade', pt: 'Desfile / Parada', sound: 'Music and dancers!' },
+      { emoji: '🌊', word: 'Water Slide', pt: 'Tobogã de Água', sound: 'Splash down!' },
+      { emoji: '🚗', word: 'Bumper Cars', pt: 'Carrinho Bate-Bate', sound: 'Bump bump!' },
+      { emoji: '🧸', word: 'Souvenir', pt: 'Lembrancinha', sound: 'Gift shop!' },
+      { emoji: '🤡', word: 'Mascot', pt: 'Mascote / Personagem', sound: 'Say hello!' }
+    ];
+
+    const gameData = [
+      { sound: '🎢 "Whoosh fast speed!"', correct: 'Roller Coaster', emoji: '🎢' },
+      { sound: '🎡 "Up in the sky!"', correct: 'Ferris Wheel', emoji: '🎡' },
+      { sound: '🎠 "Spin around!"', correct: 'Carousel', emoji: '🎠' },
+      { sound: '🏰 "Kingdom center!"', correct: 'Magic Castle', emoji: '🏰' },
+      { sound: '🎆 "Boom sparkle night!"', correct: 'Fireworks', emoji: '🎆' },
+      { sound: '🍧 "Sweet pink treat!"', correct: 'Cotton Candy', emoji: '🍧' },
+      { sound: '🎫 "Skip the line!"', correct: 'Ticket / Fast Pass', emoji: '🎫' },
+      { sound: '🎪 "Music and dancers!"', correct: 'Parade', emoji: '🎪' },
+      { sound: '🌊 "Splash down!"', correct: 'Water Slide', emoji: '🌊' },
+      { sound: '🚗 "Bump bump!"', correct: 'Bumper Cars', emoji: '🚗' }
+    ];
+
+    const gameSentences = [
+      { en: "The roller coaster goes very fast", pt: "A montanha-russa vai muito rápido" },
+      { en: "We watch beautiful fireworks over the castle", pt: "Nós assistimos aos belos fogos de artifício sobre o castelo" },
+      { en: "I eat sweet cotton candy at the theme park", pt: "Eu como algodão-doce doce no parque temático" },
+      { en: "The carousel spins around with happy music", pt: "O carrossel gira com música alegre" },
+      { en: "Use the fast pass for the best rides", pt: "Use o fast pass para os melhores brinquedos" }
+    ];
+
+    // GAME — Sound Match
+    let gi = 0, gs = 0, ga = false;
+    const sq = [...gameData].sort(() => Math.random() - 0.5).slice(0, 8);
+    const tq = sq.length;
+    const allNames = gameData.map(g => g.correct);
+
+    function renderQ() {
+      ga = false;
+      const q = sq[gi];
+      document.getElementById('game-prompt').textContent = q.sound;
+      document.getElementById('game-score').innerHTML = `⭐ Score: <strong>${gs}</strong> / <span>${tq}</span>`;
+      document.getElementById('game-progress-bar').style.width = ((gi / tq) * 100) + '%';
+      document.getElementById('game-feedback').textContent = '';
+      document.getElementById('game-feedback').className = 'game-feedback';
+
+      const wrongs = allNames.filter(n => n !== q.correct).sort(() => Math.random() - 0.5).slice(0, 3);
+      const opts = [...wrongs, q.correct].sort(() => Math.random() - 0.5);
+
+      const oe = document.getElementById('game-options');
+      oe.innerHTML = '';
+      opts.forEach(opt => {
+        const btn = document.createElement('button');
+        btn.className = 'game-option';
+        btn.textContent = opt;
+        btn.addEventListener('click', () => handleA(btn, opt, q.correct));
+        oe.appendChild(btn);
+      });
+    }
+
+    function handleA(btn, sel, cor) {
+      if (ga) return; ga = true;
+      const fb = document.getElementById('game-feedback');
+      document.querySelectorAll('.game-option').forEach(o => o.classList.add('disabled'));
+      if (sel === cor) {
+        gs++; btn.classList.add('correct');
+        fb.textContent = '🎉 Correct! You are a theme park expert!'; fb.className = 'game-feedback correct-msg';
+      } else {
+        btn.classList.add('wrong');
+        document.querySelectorAll('.game-option').forEach(o => { if (o.textContent.includes(cor)) o.classList.add('correct'); });
+        fb.textContent = `❌ That's ${cor}!`; fb.className = 'game-feedback wrong-msg';
+      }
+      document.getElementById('game-score').innerHTML = `⭐ Score: <strong>${gs}</strong> / <span>${tq}</span>`;
+      setTimeout(() => { gi++; if (gi < tq) renderQ(); else showComplete(); }, 1500);
+    }
+
+    function showComplete() {
+      document.getElementById('game-area').style.display = 'none';
+      document.getElementById('game-complete').classList.add('active');
+      const p = Math.round((gs / tq) * 100);
+      document.getElementById('game-final-score').textContent = `You got ${gs} out of ${tq} correct! (${p}%)`;
+      document.getElementById('game-stars').textContent = p >= 90 ? '⭐⭐⭐' : p >= 60 ? '⭐⭐' : '⭐';
+      document.getElementById('game-progress-bar').style.width = '100%';
+    }
+
+    document.getElementById('game-replay-btn').addEventListener('click', () => {
+      gi = 0; gs = 0; sq.sort(() => Math.random() - 0.5);
+      document.getElementById('game-area').style.display = 'block';
+      document.getElementById('game-complete').classList.remove('active');
+      renderQ();
+    });
+    renderQ();
+  </script>
+  <script src="scenario-engine.js"></script>
+  <script src="shared-games.js"></script>
+</body>
+</html>

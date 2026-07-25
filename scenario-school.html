@@ -1,0 +1,240 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>🎒 School Supplies — Learn with Luna</title>
+  <meta name="description" content="Learn school supplies and classroom vocabulary in English with Luna the Cat! Interactive story, flashcards, and fun games." />
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🐱</text></svg>" />
+  <link rel="stylesheet" href="styles.css" />
+  <link rel="stylesheet" href="scenario.css" />
+</head>
+<body>
+
+  <header class="header scrolled" id="app-header">
+    <div class="header-inner">
+      <a href="index.html" class="logo">
+        <img src="images/luna-logo.png" alt="Luna the Cat" class="logo-icon" />
+        <span class="logo-text">Learn with <span>Luna</span></span>
+      </a>
+      <nav class="nav-links">
+        <a href="index.html" class="nav-link">Home</a>
+        <a href="index.html#videos" class="nav-link active">Videos</a>
+        <a href="index.html#printables" class="nav-link">Printables</a>
+        <a href="index.html#about" class="nav-link">About</a>
+      </nav>
+      <button class="menu-toggle" id="menu-toggle" aria-label="Toggle menu"><span></span></button>
+    </div>
+    <nav class="nav-mobile" id="nav-mobile">
+      <a href="index.html" class="nav-link">Home</a>
+      <a href="index.html#videos" class="nav-link">Videos</a>
+      <a href="index.html#printables" class="nav-link">Printables</a>
+      <a href="index.html#about" class="nav-link">About</a>
+    </nav>
+  </header>
+
+  <section class="scenario-hero">
+    <img src="images/scene-school.png" alt="Luna with school supplies in a colorful classroom" class="scenario-hero-img" loading="lazy" />
+    <div class="scenario-hero-overlay">
+      <div class="scenario-hero-icon">🎒</div>
+      <h1 class="scenario-hero-title">School Supplies</h1>
+      <p class="scenario-hero-subtitle">Let's get ready for school with Luna!</p>
+    </div>
+  </section>
+
+  <div class="scenario-container">
+    <a href="index.html" class="back-btn">← Back to Home</a>
+
+    <div class="scenario-tabs" id="scenario-tabs">
+      <button class="scenario-tab active" data-tab="story">💬 Story Time</button>
+      <button class="scenario-tab" data-tab="vocab">📖 Word Garden</button>
+      <button class="scenario-tab" data-tab="learnwords">📖 Learn Words</button>
+      <button class="scenario-tab" data-tab="game">🎮 Play &amp; Learn</button>
+      <button class="scenario-tab" data-tab="memory">🃏 Matching Pairs</button>
+    </div>
+
+    <!-- TAB 1: Story -->
+    <div class="tab-panel active" id="tab-story">
+      <div class="dialogue-container" id="dialogue-container"></div>
+      <button class="dialogue-next-btn" id="dialogue-next-btn">Next Line →</button>
+      <button class="dialogue-restart-btn" id="dialogue-restart-btn">🔄 Start Over</button>
+    </div>
+
+    <!-- TAB 2: Vocabulary Grid -->
+    <div class="tab-panel" id="tab-vocab">
+      <div class="vocab-grid" id="vocab-grid"></div>
+    </div>
+
+    <!-- TAB 3: Learn Words -->
+    <div class="tab-panel" id="tab-learnwords">
+      <div class="seq-card-container">
+        <div class="seq-card" id="seq-card">
+          <div class="seq-emoji" id="seq-emoji">✏️</div>
+          <div class="seq-word" id="seq-word" style="display: none;"></div>
+          <button class="seq-translation-btn" id="seq-translation-btn">Show English</button>
+          <div class="seq-translation-text" id="seq-translation-text">🇺🇸 Pencil</div>
+        </div>
+        <div class="seq-nav">
+          <button class="seq-nav-btn" id="seq-prev-btn" aria-label="Previous">←</button>
+          <button class="seq-nav-btn" id="seq-next-btn" aria-label="Next">→</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- TAB 4: Sound Match Game -->
+    <div class="tab-panel" id="tab-game">
+      <div class="game-area" id="game-area">
+        <div class="game-score" id="game-score">⭐ Score: <strong>0</strong> / <span>0</span></div>
+        <div class="game-progress"><div class="game-progress-bar" id="game-progress-bar"></div></div>
+        <div class="game-prompt">
+          <div class="game-prompt-label">Which school item says...</div>
+          <div class="game-prompt-content" id="game-prompt" style="font-size: 2rem;"></div>
+        </div>
+        <div class="game-options" id="game-options"></div>
+        <div class="game-feedback" id="game-feedback"></div>
+      </div>
+      <div class="game-complete" id="game-complete">
+        <div class="game-complete-emoji">🎒</div>
+        <h2 class="game-complete-title">School Star!</h2>
+        <p class="game-complete-score" id="game-final-score"></p>
+        <div class="game-stars" id="game-stars"></div>
+        <button class="game-replay-btn" id="game-replay-btn">🔄 Play Again!</button>
+      </div>
+    </div>
+
+    <!-- TAB 5: Matching Pairs -->
+    <div class="tab-panel" id="tab-memory">
+      <div class="pairs-board" id="pairs-board"></div>
+      <div class="game-complete" id="pairs-complete" style="display: none; flex-direction: column; align-items: center;">
+        <div class="game-complete-emoji">🎉</div>
+        <h2 class="game-complete-title">You Did It!</h2>
+        <p class="game-complete-score" style="font-size:1.2rem; color:var(--text-secondary);">You matched all the school supplies!</p>
+        <button class="game-replay-btn" id="pairs-replay-btn">🔄 Play Again!</button>
+      </div>
+    </div>
+  </div>
+
+  <footer class="footer">
+    <div class="footer-inner">
+      <p class="footer-message">Luna loves getting ready for school with you! <span class="paw-emoji">🐾</span></p>
+      <p class="footer-copy">Made with <span class="heart">♥</span> by Learn with Luna · © 2026</p>
+    </div>
+  </footer>
+
+  <script>
+    const dialogues = [
+      { speaker: 'luna', en: "It's time for school! What is in your backpack? 🎒", pt: "É hora da escola! O que tem na sua mochila? 🎒" },
+      { speaker: 'child', en: "I have a colorful notebook and a yellow pencil! ✏️", pt: "Eu tenho um caderno colorido e um lápis amarelo! ✏️" },
+      { speaker: 'luna', en: "Don't forget your eraser and ruler! 📏", pt: "Não se esqueça da sua borracha e da sua régua! 📏" },
+      { speaker: 'child', en: "I love drawing with bright crayons! 🖍️", pt: "Eu amo desenhar com giz de cera brilhante! 🖍️" },
+      { speaker: 'luna', en: "We use glue and scissors for art class. ✂️", pt: "Nós usamos cola e tesoura na aula de artes. ✂️" },
+      { speaker: 'child', en: "My sharpener keeps my pencils sharp! ✏️", pt: "Meu apontador deixa meus lápis afiados! ✏️" },
+      { speaker: 'luna', en: "Put your lunchbox inside your backpack! 🥪", pt: "Coloque sua lancheira dentro da mochila! 🥪" },
+      { speaker: 'child', en: "I am ready for a fun day at school! ✨", pt: "Estou pronta para um dia divertido na escola! ✨" }
+    ];
+
+    const vocabulary = [
+      { emoji: '✏️', word: 'Pencil', pt: 'Lápis', sound: 'Write write!' },
+      { emoji: '🧽', word: 'Eraser', pt: 'Borracha', sound: 'Erase mistakes!' },
+      { emoji: '📓', word: 'Notebook', pt: 'Caderno', sound: 'Write notes!' },
+      { emoji: '🎒', word: 'Backpack', pt: 'Mochila', sound: 'Carry my books!' },
+      { emoji: '✂️', word: 'Scissors', pt: 'Tesoura', sound: 'Cut paper!' },
+      { emoji: '📏', word: 'Ruler', pt: 'Régua', sound: 'Measure lines!' },
+      { emoji: '🖍️', word: 'Crayons', pt: 'Giz de Cera', sound: 'Color pictures!' },
+      { emoji: '🧴', word: 'Glue', pt: 'Cola', sound: 'Stick together!' },
+      { emoji: '👝', word: 'Pencil Case', pt: 'Estojo', sound: 'Hold pencils!' },
+      { emoji: '🖊️', word: 'Marker', pt: 'Canetinha', sound: 'Bright colors!' },
+      { emoji: '🔪', word: 'Sharpener', pt: 'Apontador', sound: 'Sharp pencil!' },
+      { emoji: '🪑', word: 'Desk', pt: 'Carteira / Mesa', sound: 'Sit and learn!' },
+      { emoji: '📁', word: 'Folder', pt: 'Pasta', sound: 'Keep papers!' },
+      { emoji: '🍱', word: 'Lunchbox', pt: 'Lancheira', sound: 'Yummy lunch!' }
+    ];
+
+    const gameData = [
+      { sound: '✏️ "Write write!"', correct: 'Pencil', emoji: '✏️' },
+      { sound: '🧽 "Erase mistakes!"', correct: 'Eraser', emoji: '🧽' },
+      { sound: '📓 "Write notes!"', correct: 'Notebook', emoji: '📓' },
+      { sound: '🎒 "Carry my books!"', correct: 'Backpack', emoji: '🎒' },
+      { sound: '✂️ "Cut paper!"', correct: 'Scissors', emoji: '✂️' },
+      { sound: '📏 "Measure lines!"', correct: 'Ruler', emoji: '📏' },
+      { sound: '🖍️ "Color pictures!"', correct: 'Crayons', emoji: '🖍️' },
+      { sound: '🧴 "Stick together!"', correct: 'Glue', emoji: '🧴' },
+      { sound: '👝 "Hold pencils!"', correct: 'Pencil Case', emoji: '👝' },
+      { sound: '🖊️ "Bright colors!"', correct: 'Marker', emoji: '🖊️' },
+      { sound: '🍱 "Yummy lunch!"', correct: 'Lunchbox', emoji: '🍱' }
+    ];
+
+    const gameSentences = [
+      { en: "The yellow pencil is in my backpack", pt: "O lápis amarelo está na minha mochila" },
+      { en: "I draw with colorful crayons", pt: "Eu desenho com gizes de cera coloridos" },
+      { en: "Use scissors to cut paper", pt: "Use a tesoura para cortar papel" },
+      { en: "The eraser removes my mistake", pt: "A borracha remove meu erro" },
+      { en: "My notebook is full of drawings", pt: "Meu caderno está cheio de desenhos" }
+    ];
+
+    // GAME — Sound Match
+    let gi = 0, gs = 0, ga = false;
+    const sq = [...gameData].sort(() => Math.random() - 0.5).slice(0, 8);
+    const tq = sq.length;
+    const allNames = gameData.map(g => g.correct);
+
+    function renderQ() {
+      ga = false;
+      const q = sq[gi];
+      document.getElementById('game-prompt').textContent = q.sound;
+      document.getElementById('game-score').innerHTML = `⭐ Score: <strong>${gs}</strong> / <span>${tq}</span>`;
+      document.getElementById('game-progress-bar').style.width = ((gi / tq) * 100) + '%';
+      document.getElementById('game-feedback').textContent = '';
+      document.getElementById('game-feedback').className = 'game-feedback';
+
+      const wrongs = allNames.filter(n => n !== q.correct).sort(() => Math.random() - 0.5).slice(0, 3);
+      const opts = [...wrongs, q.correct].sort(() => Math.random() - 0.5);
+
+      const oe = document.getElementById('game-options');
+      oe.innerHTML = '';
+      opts.forEach(opt => {
+        const btn = document.createElement('button');
+        btn.className = 'game-option';
+        btn.textContent = opt;
+        btn.addEventListener('click', () => handleA(btn, opt, q.correct));
+        oe.appendChild(btn);
+      });
+    }
+
+    function handleA(btn, sel, cor) {
+      if (ga) return; ga = true;
+      const fb = document.getElementById('game-feedback');
+      document.querySelectorAll('.game-option').forEach(o => o.classList.add('disabled'));
+      if (sel === cor) {
+        gs++; btn.classList.add('correct');
+        fb.textContent = '🎉 Correct! You know your school supplies!'; fb.className = 'game-feedback correct-msg';
+      } else {
+        btn.classList.add('wrong');
+        document.querySelectorAll('.game-option').forEach(o => { if (o.textContent.includes(cor)) o.classList.add('correct'); });
+        fb.textContent = `❌ That's a ${cor}!`; fb.className = 'game-feedback wrong-msg';
+      }
+      document.getElementById('game-score').innerHTML = `⭐ Score: <strong>${gs}</strong> / <span>${tq}</span>`;
+      setTimeout(() => { gi++; if (gi < tq) renderQ(); else showComplete(); }, 1500);
+    }
+
+    function showComplete() {
+      document.getElementById('game-area').style.display = 'none';
+      document.getElementById('game-complete').classList.add('active');
+      const p = Math.round((gs / tq) * 100);
+      document.getElementById('game-final-score').textContent = `You got ${gs} out of ${tq} correct! (${p}%)`;
+      document.getElementById('game-stars').textContent = p >= 90 ? '⭐⭐⭐' : p >= 60 ? '⭐⭐' : '⭐';
+      document.getElementById('game-progress-bar').style.width = '100%';
+    }
+
+    document.getElementById('game-replay-btn').addEventListener('click', () => {
+      gi = 0; gs = 0; sq.sort(() => Math.random() - 0.5);
+      document.getElementById('game-area').style.display = 'block';
+      document.getElementById('game-complete').classList.remove('active');
+      renderQ();
+    });
+    renderQ();
+  </script>
+  <script src="scenario-engine.js"></script>
+  <script src="shared-games.js"></script>
+</body>
+</html>

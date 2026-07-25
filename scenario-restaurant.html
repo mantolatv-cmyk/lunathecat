@@ -1,0 +1,254 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>🍽️ At the Restaurant — Learn with Luna</title>
+  <meta name="description" content="Learn restaurant vocabulary and ordering food in English with Luna the Cat! Interactive story, flashcards, and fun games." />
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🐱</text></svg>" />
+  <link rel="stylesheet" href="styles.css" />
+  <link rel="stylesheet" href="scenario.css" />
+</head>
+<body>
+
+  <header class="header scrolled" id="app-header">
+    <div class="header-inner">
+      <a href="index.html" class="logo">
+        <img src="images/luna-logo.png" alt="Luna the Cat" class="logo-icon" />
+        <span class="logo-text">Learn with <span>Luna</span></span>
+      </a>
+      <nav class="nav-links">
+        <a href="index.html" class="nav-link">Home</a>
+        <a href="index.html#videos" class="nav-link active">Videos</a>
+        <a href="index.html#printables" class="nav-link">Printables</a>
+        <a href="index.html#about" class="nav-link">About</a>
+      </nav>
+      <button class="menu-toggle" id="menu-toggle" aria-label="Toggle menu"><span></span></button>
+    </div>
+    <nav class="nav-mobile" id="nav-mobile">
+      <a href="index.html" class="nav-link">Home</a>
+      <a href="index.html#videos" class="nav-link">Videos</a>
+      <a href="index.html#printables" class="nav-link">Printables</a>
+      <a href="index.html#about" class="nav-link">About</a>
+    </nav>
+  </header>
+
+  <section class="scenario-hero">
+    <img src="images/scene-restaurant.png" alt="Luna sitting at a table in a cozy restaurant" class="scenario-hero-img" loading="lazy" />
+    <div class="scenario-hero-overlay">
+      <div class="scenario-hero-icon">🍽️</div>
+      <h1 class="scenario-hero-title">At the Restaurant</h1>
+      <p class="scenario-hero-subtitle">Let's order delicious food with polite manners!</p>
+    </div>
+  </section>
+
+  <div class="scenario-container">
+    <a href="index.html" class="back-btn">← Back to Home</a>
+
+    <div class="scenario-tabs" id="scenario-tabs">
+      <button class="scenario-tab active" data-tab="story">💬 Story Time</button>
+      <button class="scenario-tab" data-tab="vocab">📖 Word Garden</button>
+      <button class="scenario-tab" data-tab="learnwords">📖 Learn Words</button>
+      <button class="scenario-tab" data-tab="game">🎮 Play &amp; Learn</button>
+      <button class="scenario-tab" data-tab="feed">🐱 Feed Luna</button>
+      <button class="scenario-tab" data-tab="memory">🃏 Matching Pairs</button>
+    </div>
+
+    <!-- TAB 1: Story -->
+    <div class="tab-panel active" id="tab-story">
+      <div class="dialogue-container" id="dialogue-container"></div>
+      <button class="dialogue-next-btn" id="dialogue-next-btn">Next Line →</button>
+      <button class="dialogue-restart-btn" id="dialogue-restart-btn">🔄 Start Over</button>
+    </div>
+
+    <!-- TAB 2: Vocabulary Grid -->
+    <div class="tab-panel" id="tab-vocab">
+      <div class="vocab-grid" id="vocab-grid"></div>
+    </div>
+
+    <!-- TAB 3: Learn Words -->
+    <div class="tab-panel" id="tab-learnwords">
+      <div class="seq-card-container">
+        <div class="seq-card" id="seq-card">
+          <div class="seq-emoji" id="seq-emoji">🍕</div>
+          <div class="seq-word" id="seq-word" style="display: none;"></div>
+          <button class="seq-translation-btn" id="seq-translation-btn">Show English</button>
+          <div class="seq-translation-text" id="seq-translation-text">🇺🇸 Pizza</div>
+        </div>
+        <div class="seq-nav">
+          <button class="seq-nav-btn" id="seq-prev-btn" aria-label="Previous">←</button>
+          <button class="seq-nav-btn" id="seq-next-btn" aria-label="Next">→</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- TAB 4: Sound Match Game -->
+    <div class="tab-panel" id="tab-game">
+      <div class="game-area" id="game-area">
+        <div class="game-score" id="game-score">⭐ Score: <strong>0</strong> / <span>0</span></div>
+        <div class="game-progress"><div class="game-progress-bar" id="game-progress-bar"></div></div>
+        <div class="game-prompt">
+          <div class="game-prompt-label">Which restaurant item says...</div>
+          <div class="game-prompt-content" id="game-prompt" style="font-size: 2rem;"></div>
+        </div>
+        <div class="game-options" id="game-options"></div>
+        <div class="game-feedback" id="game-feedback"></div>
+      </div>
+      <div class="game-complete" id="game-complete">
+        <div class="game-complete-emoji">👨‍🍳</div>
+        <h2 class="game-complete-title">Master Chef Guest!</h2>
+        <p class="game-complete-score" id="game-final-score"></p>
+        <div class="game-stars" id="game-stars"></div>
+        <button class="game-replay-btn" id="game-replay-btn">🔄 Play Again!</button>
+      </div>
+    </div>
+
+    <!-- TAB 5: Feed Luna -->
+    <div class="tab-panel" id="tab-feed">
+      <div class="game-area" id="feed-game-area">
+        <div class="game-score" id="feed-game-score">⭐ Fed: <strong>0</strong> / <span>0</span></div>
+        <div class="game-progress"><div class="game-progress-bar" id="feed-progress-bar"></div></div>
+        <div class="game-feedback" id="feed-game-feedback">Drag yummy food to feed Luna! 🐱</div>
+        <div class="feed-game-area">
+          <div class="feed-scene">
+            <div class="feed-cat" id="feed-cat">🐱</div>
+            <div class="feed-items-container" id="feed-items-container"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- TAB 6: Matching Pairs -->
+    <div class="tab-panel" id="tab-memory">
+      <div class="pairs-board" id="pairs-board"></div>
+      <div class="game-complete" id="pairs-complete" style="display: none; flex-direction: column; align-items: center;">
+        <div class="game-complete-emoji">🎉</div>
+        <h2 class="game-complete-title">You Did It!</h2>
+        <p class="game-complete-score" style="font-size:1.2rem; color:var(--text-secondary);">You matched all restaurant items!</p>
+        <button class="game-replay-btn" id="pairs-replay-btn">🔄 Play Again!</button>
+      </div>
+    </div>
+  </div>
+
+  <footer class="footer">
+    <div class="footer-inner">
+      <p class="footer-message">Luna loves eating out with you! Bon Appétit! <span class="paw-emoji">🐾</span></p>
+      <p class="footer-copy">Made with <span class="heart">♥</span> by Learn with Luna · © 2026</p>
+    </div>
+  </footer>
+
+  <script>
+    const dialogues = [
+      { speaker: 'luna', en: "Welcome to Luna's Restaurant! Here is your menu! 📋", pt: "Bem-vinda ao Restaurante da Luna! Aqui está o seu menu! 📋" },
+      { speaker: 'child', en: "Thank you! Can I see the delicious food options? 😋", pt: "Obrigada! Posso ver as opções de comida deliciosa? 😋" },
+      { speaker: 'luna', en: "What would you like to eat today? 🍕🍝", pt: "O que você gostaria de comer hoje? 🍕🍝" },
+      { speaker: 'child', en: "Can I have cheese pizza and orange juice, please? 🍕🍊", pt: "Posso pedir pizza de queijo e suco de laranja, por favor? 🍕🍊" },
+      { speaker: 'luna', en: "Sure! And for dessert, chocolate ice cream! 🍦", pt: "Claro! E de sobremesa, sorvete de chocolate! 🍦" },
+      { speaker: 'child', en: "Yummy! Everything looks so delicious! 😋", pt: "Gostoso! Tudo parece tão delicioso! 😋" },
+      { speaker: 'luna', en: "Here is your plate, fork, and napkin! 🍽️", pt: "Aqui está seu prato, garfo e guardanapo! 🍽️" },
+      { speaker: 'child', en: "Thank you! Can I have the check, please? 🧾", pt: "Obrigada! Pode me trazer a conta, por favor? 🧾" },
+      { speaker: 'luna', en: "Thank you for visiting! Have a wonderful day! ✨", pt: "Obrigada pela visita! Tenha um dia maravilhoso! ✨" }
+    ];
+
+    const vocabulary = [
+      { emoji: '📋', word: 'Menu', pt: 'Cardápio / Menu', sound: 'Check food options!' },
+      { emoji: '👨‍🍳', word: 'Waiter', pt: 'Garçom', sound: 'May I take your order?' },
+      { emoji: '🪑', word: 'Table', pt: 'Mesa', sound: 'Sit here!' },
+      { emoji: '🍕', word: 'Pizza', pt: 'Pizza', sound: 'Cheesy slice!' },
+      { emoji: '🍝', word: 'Pasta', pt: 'Macarrão / Pasta', sound: 'Yummy spaghetti!' },
+      { emoji: '🍔', word: 'Burger', pt: 'Hambúrguer', sound: 'Juicy burger!' },
+      { emoji: '🍊', word: 'Orange Juice', pt: 'Suco de Laranja', sound: 'Fresh juice!' },
+      { emoji: '💧', word: 'Water', pt: 'Água', sound: 'Cold water!' },
+      { emoji: '🍦', word: 'Ice Cream', pt: 'Sorvete', sound: 'Sweet dessert!' },
+      { emoji: '🍰', word: 'Cake', pt: 'Bolo', sound: 'Birthday cake!' },
+      { emoji: '🍽️', word: 'Plate & Cutlery', pt: 'Prato e Talheres', sound: 'Fork and spoon!' },
+      { emoji: '🧾', word: 'Check / Bill', pt: 'Conta', sound: 'Pay for meal!' },
+      { emoji: '😋', word: 'Delicious', pt: 'Delicioso', sound: 'So yummy!' }
+    ];
+
+    const gameData = [
+      { sound: '📋 "Check food options!"', correct: 'Menu', emoji: '📋' },
+      { sound: '👨‍🍳 "May I take your order?"', correct: 'Waiter', emoji: '👨‍🍳' },
+      { sound: '🍕 "Cheesy slice!"', correct: 'Pizza', emoji: '🍕' },
+      { sound: '🍝 "Yummy spaghetti!"', correct: 'Pasta', emoji: '🍝' },
+      { sound: '🍔 "Juicy burger!"', correct: 'Burger', emoji: '🍔' },
+      { sound: '🍊 "Fresh juice!"', correct: 'Orange Juice', emoji: '🍊' },
+      { sound: '🍦 "Sweet dessert!"', correct: 'Ice Cream', emoji: '🍦' },
+      { sound: '🧾 "Pay for meal!"', correct: 'Check / Bill', emoji: '🧾' },
+      { sound: '😋 "So yummy!"', correct: 'Delicious', emoji: '😋' }
+    ];
+
+    const gameSentences = [
+      { en: "Can I have pizza please", pt: "Posso pedir pizza por favor" },
+      { en: "The orange juice is very fresh", pt: "O suco de laranja é muito fresco" },
+      { en: "I like chocolate ice cream for dessert", pt: "Eu gosto de sorvete de chocolate de sobremesa" },
+      { en: "The friendly waiter brings the menu", pt: "O garçom amigável traz o cardápio" },
+      { en: "Thank you for the delicious food", pt: "Obrigada pela comida deliciosa" }
+    ];
+
+    // GAME — Sound Match
+    let gi = 0, gs = 0, ga = false;
+    const sq = [...gameData].sort(() => Math.random() - 0.5).slice(0, 8);
+    const tq = sq.length;
+    const allNames = gameData.map(g => g.correct);
+
+    function renderQ() {
+      ga = false;
+      const q = sq[gi];
+      document.getElementById('game-prompt').textContent = q.sound;
+      document.getElementById('game-score').innerHTML = `⭐ Score: <strong>${gs}</strong> / <span>${tq}</span>`;
+      document.getElementById('game-progress-bar').style.width = ((gi / tq) * 100) + '%';
+      document.getElementById('game-feedback').textContent = '';
+      document.getElementById('game-feedback').className = 'game-feedback';
+
+      const wrongs = allNames.filter(n => n !== q.correct).sort(() => Math.random() - 0.5).slice(0, 3);
+      const opts = [...wrongs, q.correct].sort(() => Math.random() - 0.5);
+
+      const oe = document.getElementById('game-options');
+      oe.innerHTML = '';
+      opts.forEach(opt => {
+        const btn = document.createElement('button');
+        btn.className = 'game-option';
+        btn.textContent = opt;
+        btn.addEventListener('click', () => handleA(btn, opt, q.correct));
+        oe.appendChild(btn);
+      });
+    }
+
+    function handleA(btn, sel, cor) {
+      if (ga) return; ga = true;
+      const fb = document.getElementById('game-feedback');
+      document.querySelectorAll('.game-option').forEach(o => o.classList.add('disabled'));
+      if (sel === cor) {
+        gs++; btn.classList.add('correct');
+        fb.textContent = '🎉 Correct! You ordered like a pro!'; fb.className = 'game-feedback correct-msg';
+      } else {
+        btn.classList.add('wrong');
+        document.querySelectorAll('.game-option').forEach(o => { if (o.textContent.includes(cor)) o.classList.add('correct'); });
+        fb.textContent = `❌ That's ${cor}!`; fb.className = 'game-feedback wrong-msg';
+      }
+      document.getElementById('game-score').innerHTML = `⭐ Score: <strong>${gs}</strong> / <span>${tq}</span>`;
+      setTimeout(() => { gi++; if (gi < tq) renderQ(); else showComplete(); }, 1500);
+    }
+
+    function showComplete() {
+      document.getElementById('game-area').style.display = 'none';
+      document.getElementById('game-complete').classList.add('active');
+      const p = Math.round((gs / tq) * 100);
+      document.getElementById('game-final-score').textContent = `You got ${gs} out of ${tq} correct! (${p}%)`;
+      document.getElementById('game-stars').textContent = p >= 90 ? '⭐⭐⭐' : p >= 60 ? '⭐⭐' : '⭐';
+      document.getElementById('game-progress-bar').style.width = '100%';
+    }
+
+    document.getElementById('game-replay-btn').addEventListener('click', () => {
+      gi = 0; gs = 0; sq.sort(() => Math.random() - 0.5);
+      document.getElementById('game-area').style.display = 'block';
+      document.getElementById('game-complete').classList.remove('active');
+      renderQ();
+    });
+    renderQ();
+  </script>
+  <script src="scenario-engine.js"></script>
+  <script src="shared-games.js"></script>
+</body>
+</html>

@@ -10,6 +10,7 @@ document.addEventListener('DOMContentLoaded', () => {
   const tabsContainer = document.getElementById('scenario-tabs') || document.querySelector('.scenario-tabs');
   if (tabsContainer) {
     tabsContainer.insertAdjacentHTML('beforeend', `
+      <button class="scenario-tab" data-tab="truefalse">🤔 True or False</button>
       <button class="scenario-tab" data-tab="sentence">🧱 Build a Sentence</button>
       <button class="scenario-tab" data-tab="scramble">✏️ Spelling Scramble</button>
     `);
@@ -19,6 +20,33 @@ document.addEventListener('DOMContentLoaded', () => {
   const container = document.querySelector('.scenario-container');
   if (container) {
     container.insertAdjacentHTML('beforeend', `
+      <!-- TAB: True or False -->
+      <div class="tab-panel" id="tab-truefalse">
+        <div class="game-area" id="tf-game-area" style="text-align: center;">
+          <div class="game-score" id="tf-game-score">⭐ Score: <strong>0</strong> / <span>7</span></div>
+          <div class="game-progress"><div class="game-progress-bar" id="tf-progress-bar"></div></div>
+          
+          <div class="tf-card">
+            <div class="tf-emoji" id="tf-emoji">🤔</div>
+            <div class="tf-statement-en" id="tf-statement-en">Loading...</div>
+            <div class="tf-statement-pt" id="tf-statement-pt">...</div>
+            <div class="tf-buttons">
+              <button class="tf-btn tf-btn-true" id="tf-btn-true">✅ TRUE</button>
+              <button class="tf-btn tf-btn-false" id="tf-btn-false">❌ FALSE</button>
+            </div>
+            <div class="tf-explanation" id="tf-explanation"></div>
+          </div>
+        </div>
+        
+        <div class="game-complete" id="tf-complete" style="display: none; flex-direction: column; align-items: center;">
+          <div class="game-complete-emoji">🎉</div>
+          <h2 class="game-complete-title">True or False Master!</h2>
+          <p class="game-complete-score" id="tf-final-score">You answered all the questions!</p>
+          <div class="game-stars" id="tf-stars">⭐⭐⭐</div>
+          <button class="game-replay-btn" id="tf-replay-btn">🔄 Play Again!</button>
+        </div>
+      </div>
+
       <!-- TAB: Sentence Builder -->
       <div class="tab-panel" id="tab-sentence">
         <div class="game-area" id="sentence-game-area" style="text-align: center;">
@@ -428,8 +456,145 @@ document.addEventListener('DOMContentLoaded', () => {
   
   const scrambleReplayBtn = document.getElementById('scramble-replay-btn');
   if (scrambleReplayBtn) scrambleReplayBtn.addEventListener('click', initScrambleGame);
-  
+
+  // ==========================================
+  // GAME - TRUE OR FALSE
+  // ==========================================
+  let tfIndex = 0;
+  let tfScore = 0;
+  let tfAnswered = false;
+  let currentTFList = [];
+
+  const getTFQuestions = () => {
+    if (typeof trueFalseQuestions !== 'undefined' && trueFalseQuestions.length > 0) {
+      return trueFalseQuestions;
+    }
+    if (typeof vocabulary !== 'undefined' && vocabulary.length > 0) {
+      const generated = [];
+      vocabulary.forEach((v, i) => {
+        const isTrue = i % 2 === 0;
+        if (isTrue) {
+          generated.push({
+            statement: `"${v.word}" means "${v.pt}" in Portuguese.`,
+            pt: `"${v.word}" significa "${v.pt}" em português.`,
+            isTrue: true,
+            emoji: v.emoji,
+            explanation: `Correct! "${v.word}" is indeed "${v.pt}".`
+          });
+        } else {
+          const other = vocabulary[(i + 1) % vocabulary.length];
+          generated.push({
+            statement: `"${v.word}" means "${other.pt}" in Portuguese.`,
+            pt: `"${v.word}" significa "${other.pt}" em português.`,
+            isTrue: false,
+            emoji: v.emoji,
+            explanation: `False! "${v.word}" means "${v.pt}", not "${other.pt}".`
+          });
+        }
+      });
+      return generated;
+    }
+    return [];
+  };
+
+  function initTFGame() {
+    const questions = getTFQuestions();
+    if (questions.length === 0) return;
+    currentTFList = [...questions].sort(() => Math.random() - 0.5);
+    tfIndex = 0;
+    tfScore = 0;
+    const gameArea = document.getElementById('tf-game-area');
+    const completeArea = document.getElementById('tf-complete');
+    if (gameArea) gameArea.style.display = 'block';
+    if (completeArea) completeArea.style.display = 'none';
+    renderTFQuestion();
+  }
+
+  function renderTFQuestion() {
+    if (tfIndex >= currentTFList.length) {
+      const gameArea = document.getElementById('tf-game-area');
+      const completeArea = document.getElementById('tf-complete');
+      if (gameArea) gameArea.style.display = 'none';
+      if (completeArea) completeArea.style.display = 'flex';
+      const p = Math.round((tfScore / currentTFList.length) * 100);
+      const finalScoreEl = document.getElementById('tf-final-score');
+      const starsEl = document.getElementById('tf-stars');
+      if (finalScoreEl) finalScoreEl.textContent = `You got ${tfScore} out of ${currentTFList.length} correct! (${p}%)`;
+      if (starsEl) starsEl.textContent = p >= 90 ? '⭐⭐⭐' : p >= 60 ? '⭐⭐' : '⭐';
+      return;
+    }
+
+    tfAnswered = false;
+    const q = currentTFList[tfIndex];
+
+    const emojiEl = document.getElementById('tf-emoji');
+    const enEl = document.getElementById('tf-statement-en');
+    const ptEl = document.getElementById('tf-statement-pt');
+    const scoreEl = document.getElementById('tf-game-score');
+    const progressEl = document.getElementById('tf-progress-bar');
+    const expEl = document.getElementById('tf-explanation');
+    const btnTrue = document.getElementById('tf-btn-true');
+    const btnFalse = document.getElementById('tf-btn-false');
+
+    if (emojiEl) emojiEl.innerHTML = q.emoji || '🤔';
+    if (enEl) enEl.textContent = q.statement;
+    if (ptEl) ptEl.textContent = `🇧🇷 ${q.pt}`;
+    if (scoreEl) scoreEl.innerHTML = `⭐ Score: <strong>${tfScore}</strong> / <span>${currentTFList.length}</span>`;
+    if (progressEl) progressEl.style.width = ((tfIndex / currentTFList.length) * 100) + '%';
+
+    if (expEl) {
+      expEl.className = 'tf-explanation';
+      expEl.textContent = '';
+    }
+    if (btnTrue) btnTrue.disabled = false;
+    if (btnFalse) btnFalse.disabled = false;
+  }
+
+  function handleTFAnswer(userChoice) {
+    if (tfAnswered) return;
+    tfAnswered = true;
+
+    const q = currentTFList[tfIndex];
+    const expEl = document.getElementById('tf-explanation');
+    const btnTrue = document.getElementById('tf-btn-true');
+    const btnFalse = document.getElementById('tf-btn-false');
+
+    if (btnTrue) btnTrue.disabled = true;
+    if (btnFalse) btnFalse.disabled = true;
+
+    const isCorrect = userChoice === q.isTrue;
+    if (isCorrect) tfScore++;
+
+    if (expEl) {
+      expEl.classList.add('visible');
+      if (isCorrect) {
+        expEl.classList.add('correct');
+        expEl.textContent = `🎉 Correct! ${q.explanation || ''}`;
+      } else {
+        expEl.classList.add('wrong');
+        expEl.textContent = `❌ Oops! ${q.explanation || ''}`;
+      }
+    }
+
+    const scoreEl = document.getElementById('tf-game-score');
+    if (scoreEl) scoreEl.innerHTML = `⭐ Score: <strong>${tfScore}</strong> / <span>${currentTFList.length}</span>`;
+
+    setTimeout(() => {
+      tfIndex++;
+      renderTFQuestion();
+    }, 2200);
+  }
+
+  const btnTrue = document.getElementById('tf-btn-true');
+  const btnFalse = document.getElementById('tf-btn-false');
+  const btnReplay = document.getElementById('tf-replay-btn');
+
+  if (btnTrue) btnTrue.addEventListener('click', () => handleTFAnswer(true));
+  if (btnFalse) btnFalse.addEventListener('click', () => handleTFAnswer(false));
+  if (btnReplay) btnReplay.addEventListener('click', initTFGame);
+
   // Initialize games once the DOM is loaded
   initSentenceGame();
   initScrambleGame();
+  initTFGame();
 });

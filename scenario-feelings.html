@@ -172,6 +172,16 @@
       { en: "We are proud of your English progress", pt: "Estamos orgulhosos do seu progresso no inglês" }
     ];
 
+    const trueFalseQuestions = [
+      { statement: "When you smile and laugh, you feel happy!", pt: "Quando você sorri e dá risada, você se sente feliz!", isTrue: true, emoji: "😄", explanation: "Big smiles mean you are happy!" },
+      { statement: "When you are sleepy, you have lots of energy to run around.", pt: "Quando você está com sono, você tem muita energia para sair correndo.", isTrue: false, emoji: "😴", explanation: "When you are sleepy, your body needs rest and sleep!" },
+      { statement: "When you win a trophy or complete a goal, you feel proud!", pt: "Quando você ganha um troféu ou completa um objetivo, você se sente orgulhosa!", isTrue: true, emoji: "🏆", explanation: "Achieving goals makes us feel proud of ourselves!" },
+      { statement: "If you feel scared, a warm hug can make you feel safer.", pt: "Se você se sente com medo, um abraço quentinho pode fazer você se sentir mais segura.", isTrue: true, emoji: "😱", explanation: "Hugs bring comfort when feeling scared." },
+      { statement: "Being brave means trying new things even if you feel nervous.", pt: "Ser corajosa significa tentar coisas novas mesmo se sentir nervosa.", isTrue: true, emoji: "🦁", explanation: "Speaking English takes bravery and courage!" },
+      { statement: "When your tummy rumbles loudly, you are feeling calm.", pt: "Quando sua barriga ronca alto, você está se sentindo calma.", isTrue: false, emoji: "🍔", explanation: "When your tummy rumbles, it means you are hungry!" },
+      { statement: "Making funny faces and laughing is something you do when feeling silly.", pt: "Fazer caretas engraçadas e rir é algo que você faz quando se sente engraçada/boba.", isTrue: true, emoji: "😜", explanation: "Silly faces bring laughter and joy!" }
+    ];
+
     // GAME — Sound Match
     let gi = 0, gs = 0, ga = false;
     const sq = [...gameData].sort(() => Math.random() - 0.5).slice(0, 8);

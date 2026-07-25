@@ -172,6 +172,16 @@
       { en: "The brave hero saves the kingdom", pt: "O herói corajoso salva o reino" }
     ];
 
+    const trueFalseQuestions = [
+      { statement: "We eat crunchy popcorn while watching movies at the cinema.", pt: "Comemos pipoca crocante enquanto assistimos a filmes no cinema.", isTrue: true, emoji: "🍿", explanation: "Popcorn is the most famous cinema snack!" },
+      { statement: "A fairy godmother uses a wooden ruler to cast magical spells.", pt: "Uma fada madrinha usa uma régua de madeira para lançar feitiços mágicos.", isTrue: false, emoji: "🪄", explanation: "Fairies use a sparkly magic wand, not a ruler!" },
+      { statement: "A Disney princess often lives in a beautiful magical castle.", pt: "Uma princesa da Disney geralmente mora em um lindo castelo mágico.", isTrue: true, emoji: "🏰", explanation: "Castles are iconic homes for fairy tale princesses!" },
+      { statement: "3D glasses help make movie effects pop out on screen.", pt: "Óculos 3D ajudam a fazer os efeitos do filme saltarem na tela.", isTrue: true, emoji: "👓", explanation: "3D glasses give realistic depth in theaters!" },
+      { statement: "A hero in animated movies tries to make everyone sad.", pt: "Um herói nos filmes de animação tenta deixar todo mundo triste.", isTrue: false, emoji: "🦸‍♀️", explanation: "Heroes save the day and bring joy!" },
+      { statement: "A dragon in fantasy tales can breathe bright flames of fire.", pt: "Um dragão em contos de fadas pode soltar chamas brilhantes de fogo.", isTrue: true, emoji: "🐲", explanation: "Dragons are famous for breathing fire!" },
+      { statement: "Cartoons are animated movies with fun characters and music.", pt: "Desenhos animados são filmes de animação com personagens e músicas divertidas.", isTrue: true, emoji: "🎬", explanation: "Cartoons bring vibrant magic to the big screen!" }
+    ];
+
     // GAME — Sound Match
     let gi = 0, gs = 0, ga = false;
     const sq = [...gameData].sort(() => Math.random() - 0.5).slice(0, 8);

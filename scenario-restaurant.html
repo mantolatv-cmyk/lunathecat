@@ -186,6 +186,16 @@
       { en: "Thank you for the delicious food", pt: "Obrigada pela comida deliciosa" }
     ];
 
+    const trueFalseQuestions = [
+      { statement: "A waiter brings the food menu to your restaurant table.", pt: "Um garçom traz o cardápio de comidas até a sua mesa no restaurante.", isTrue: true, emoji: "📋", explanation: "Waiters present the menu so you can order!" },
+      { statement: "We say 'Please' and 'Thank you' when ordering meals.", pt: "Dizemos 'Por favor' e 'Obrigado' ao pedir refeições.", isTrue: true, emoji: "😋", explanation: "Polite manners are super important at restaurants!" },
+      { statement: "Ice cream is served boiling hot in a soup bowl.", pt: "Sorvete é servido fervendo de quente em uma tigela de sopa.", isTrue: false, emoji: "🍦", explanation: "Ice cream is cold, sweet, and creamy!" },
+      { statement: "Fresh orange juice is a refreshing drink made from oranges.", pt: "Suco de laranja fresco é uma bebida refrescante feita de laranjas.", isTrue: true, emoji: "🍊", explanation: "Orange juice is sweet and natural!" },
+      { statement: "You ask for the check at the end to pay for your meal.", pt: "Você pede a conta no final para pagar pela sua refeição.", isTrue: true, emoji: "🧾", explanation: "The check lists the total meal price." },
+      { statement: "We brush our teeth with pizza slices.", pt: "Escovamos nossos dentes com fatias de pizza.", isTrue: false, emoji: "🍕", explanation: "Pizza is yummy food to eat, not a toothbrush!" },
+      { statement: "A menu lists all the delicious dishes and drinks you can order.", pt: "Um cardápio lista todos os pratos deliciosos e bebidas que você pode pedir.", isTrue: true, emoji: "📋", explanation: "The menu shows all restaurant options!" }
+    ];
+
     // GAME — Sound Match
     let gi = 0, gs = 0, ga = false;
     const sq = [...gameData].sort(() => Math.random() - 0.5).slice(0, 8);

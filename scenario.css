@@ -2181,3 +2181,114 @@
     flex-direction: row;
   }
 }
+
+/* ============================================
+   TRUE OR FALSE GAME STYLES
+   ============================================ */
+.tf-card {
+  background: var(--card-bg, #ffffff);
+  border: 2px solid var(--border-soft, #e2e8f0);
+  border-radius: 24px;
+  padding: 2.2rem 1.5rem;
+  max-width: 620px;
+  margin: 1.5rem auto;
+  box-shadow: 0 12px 28px rgba(0, 0, 0, 0.08);
+  text-align: center;
+  position: relative;
+  transition: transform 0.3s ease;
+}
+
+.tf-emoji {
+  font-size: 3.5rem;
+  margin-bottom: 1rem;
+  display: inline-block;
+  animation: bounceSlow 3s infinite ease-in-out;
+}
+
+.tf-statement-en {
+  font-size: 1.35rem;
+  font-weight: 700;
+  color: var(--text-primary, #1e293b);
+  margin-bottom: 0.5rem;
+  line-height: 1.4;
+}
+
+.tf-statement-pt {
+  font-size: 1.05rem;
+  font-weight: 500;
+  color: var(--text-secondary, #64748b);
+  margin-bottom: 1.5rem;
+}
+
+.tf-buttons {
+  display: flex;
+  justify-content: center;
+  gap: 1.25rem;
+  margin-top: 1rem;
+}
+
+.tf-btn {
+  font-size: 1.2rem;
+  font-weight: 700;
+  padding: 0.9rem 2.2rem;
+  border-radius: 50px;
+  border: none;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.15);
+}
+
+.tf-btn-true {
+  background: linear-gradient(135deg, #10b981, #059669);
+  color: #ffffff;
+}
+
+.tf-btn-true:hover {
+  background: linear-gradient(135deg, #059669, #047857);
+  transform: translateY(-2px) scale(1.04);
+}
+
+.tf-btn-false {
+  background: linear-gradient(135deg, #ef4444, #dc2626);
+  color: #ffffff;
+}
+
+.tf-btn-false:hover {
+  background: linear-gradient(135deg, #dc2626, #b91c1c);
+  transform: translateY(-2px) scale(1.04);
+}
+
+.tf-btn:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+  transform: none !important;
+}
+
+.tf-explanation {
+  margin-top: 1.25rem;
+  padding: 0.9rem 1.2rem;
+  border-radius: 14px;
+  font-weight: 600;
+  font-size: 1.05rem;
+  display: none;
+}
+
+.tf-explanation.visible {
+  display: block;
+  animation: fadeIn 0.3s ease-in;
+}
+
+.tf-explanation.correct {
+  background: #d1fae5;
+  color: #065f46;
+  border: 1px solid #a7f3d0;
+}
+
+.tf-explanation.wrong {
+  background: #fee2e2;
+  color: #991b1b;
+  border: 1px solid #fca5a5;
+}

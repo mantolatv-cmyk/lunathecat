@@ -169,6 +169,16 @@
       { en: "Use the fast pass for the best rides", pt: "Use o fast pass para os melhores brinquedos" }
     ];
 
+    const trueFalseQuestions = [
+      { statement: "A roller coaster goes super fast with exciting turns and drops.", pt: "Uma montanha-russa vai super rápido com curvas e descidas emocionantes.", isTrue: true, emoji: "🎢", explanation: "Roller coasters are famous high-speed rides!" },
+      { statement: "Cotton candy is a salty vegetable grown on farm trees.", pt: "Algodão-doce é um vegetal salgado cultivado em árvores de fazenda.", isTrue: false, emoji: "🍧", explanation: "Cotton candy is a fluffy, sweet pink carnival candy!" },
+      { statement: "Fireworks light up the night sky over the fairy tale castle.", pt: "Fogos de artifício iluminam o céu noturno sobre o castelo de fadas.", isTrue: true, emoji: "🎆", explanation: "Fireworks create magical night spectacles in Disney & Universal parks!" },
+      { statement: "A Fast Pass makes you wait in the longest line in the park.", pt: "Um Fast Pass faz você esperar na fila mais longa do parque.", isTrue: false, emoji: "🎫", explanation: "A Fast Pass skips long lines so you get on rides quickly!" },
+      { statement: "A carousel spins gently with colorful horses and happy music.", pt: "Um carrossel gira suavemente com cavalinhos coloridos e música alegre.", isTrue: true, emoji: "🎠", explanation: "Carousels are delightful, classic theme park rides!" },
+      { statement: "You can meet favorite mascots and take photos in theme parks.", pt: "Você pode encontrar mascotes favoritos e tirar fotos em parques temáticos.", isTrue: true, emoji: "🤡", explanation: "Characters love giving high fives and hugs!" },
+      { statement: "Water slides let you splash into refreshing pools of water.", pt: "Tobogãs de água permitem que você faça um splash em piscinas refrescantes.", isTrue: true, emoji: "🌊", explanation: "Water slides are super fun on warm sunny days!" }
+    ];
+
     // GAME — Sound Match
     let gi = 0, gs = 0, ga = false;
     const sq = [...gameData].sort(() => Math.random() - 0.5).slice(0, 8);

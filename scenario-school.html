@@ -178,6 +178,16 @@
       { en: "My notebook is full of drawings", pt: "Meu caderno está cheio de desenhos" }
     ];
 
+    const trueFalseQuestions = [
+      { statement: "We use a pencil to write notes in our notebook.", pt: "Usamos um lápis para escrever anotações no caderno.", isTrue: true, emoji: "✏️", explanation: "Pencils are made for writing and drawing!" },
+      { statement: "Scissors are used to erase pencil mistakes.", pt: "A tesoura é usada para apagar erros de lápis.", isTrue: false, emoji: "✂️", explanation: "Scissors cut paper! Erasers remove pencil mistakes." },
+      { statement: "A backpack is used to carry books and school items.", pt: "A mochila é usada para carregar livros e itens escolares.", isTrue: true, emoji: "🎒", explanation: "Backpacks hold all our school supplies!" },
+      { statement: "We use crayons to color beautiful pictures.", pt: "Nós usamos giz de cera para colorir belos desenhos.", isTrue: true, emoji: "🖍️", explanation: "Crayons make bright and colorful artwork!" },
+      { statement: "A ruler is used to drink orange juice.", pt: "Uma régua é usada para beber suco de laranja.", isTrue: false, emoji: "📏", explanation: "A ruler measures straight lines! You drink from a glass." },
+      { statement: "Glue helps stick paper together in art class.", pt: "A cola ajuda a colar papéis na aula de artes.", isTrue: true, emoji: "🧴", explanation: "Glue sticks paper and crafts together!" },
+      { statement: "A sharpener makes blunt pencils sharp again.", pt: "Um apontador deixa lápis sem ponta afiados novamente.", isTrue: true, emoji: sharpenerSvg, explanation: "A sharpener sharpens your pencil point!" }
+    ];
+
     // GAME — Sound Match
     let gi = 0, gs = 0, ga = false;
     const sq = [...gameData].sort(() => Math.random() - 0.5).slice(0, 8);

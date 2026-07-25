@@ -10,6 +10,7 @@ document.addEventListener('DOMContentLoaded', () => {
   const tabsContainer = document.getElementById('scenario-tabs') || document.querySelector('.scenario-tabs');
   if (tabsContainer) {
     tabsContainer.insertAdjacentHTML('beforeend', `
+      <button class="scenario-tab" data-tab="tellme">💬 Tell Me...</button>
       <button class="scenario-tab" data-tab="findmistake">🔍 Find the Mistake</button>
       <button class="scenario-tab" data-tab="truefalse">🤔 True or False</button>
       <button class="scenario-tab" data-tab="sentence">🧱 Build a Sentence</button>
@@ -21,6 +22,39 @@ document.addEventListener('DOMContentLoaded', () => {
   const container = document.querySelector('.scenario-container');
   if (container) {
     container.insertAdjacentHTML('beforeend', `
+      <!-- TAB: Tell Me -->
+      <div class="tab-panel" id="tab-tellme">
+        <div class="game-area" id="tm-game-area" style="text-align: center;">
+          <div class="game-score" id="tm-game-score">⭐ Question: <strong>1</strong> / <span>6</span></div>
+          <div class="game-progress"><div class="game-progress-bar" id="tm-progress-bar"></div></div>
+          
+          <div class="tm-card">
+            <div class="tm-emoji" id="tm-emoji">💬</div>
+            <div class="tm-question-box">
+              <div class="tm-question-title">💬 Tell Me...</div>
+              <div class="tm-question-text" id="tm-question-text">Loading...</div>
+            </div>
+            
+            <button class="tm-toggle-btn" id="tm-toggle-btn">🇧🇷 Show Translation</button>
+            
+            <div class="tm-translation-box" id="tm-translation-box">
+              <span id="tm-translation-text">...</span>
+            </div>
+
+            <div>
+              <button class="tm-next-btn" id="tm-next-btn">Next Question →</button>
+            </div>
+          </div>
+        </div>
+        
+        <div class="game-complete" id="tm-complete" style="display: none; flex-direction: column; align-items: center;">
+          <div class="game-complete-emoji">🗣️</div>
+          <h2 class="game-complete-title">Awesome Speaking Time!</h2>
+          <p class="game-complete-score" id="tm-final-score">You answered all the personal questions out loud!</p>
+          <div class="game-stars" style="font-size: 2rem; margin: 0.5rem 0 1rem;">⭐⭐⭐</div>
+          <button class="game-replay-btn" id="tm-replay-btn">🔄 Play Again!</button>
+        </div>
+      </div>
       <!-- TAB: Find the Mistake -->
       <div class="tab-panel" id="tab-findmistake">
         <div class="game-area" id="fm-game-area" style="text-align: center;">
@@ -751,9 +785,101 @@ document.addEventListener('DOMContentLoaded', () => {
     fmReplayBtn.addEventListener('click', initFindMistakeGame);
   }
 
+  // ==========================================
+  // GAME - TELL ME
+  // ==========================================
+  let tmIndex = 0;
+  let currentTMList = [];
+
+  const getTMQuestions = () => {
+    if (typeof tellMeQuestions !== 'undefined' && tellMeQuestions.length > 0) {
+      return tellMeQuestions;
+    }
+    if (typeof vocabulary !== 'undefined' && vocabulary.length > 0) {
+      const generated = [];
+      vocabulary.forEach((v) => {
+        generated.push({
+          q: `Tell me: Do you like ${v.word} (${v.pt})? Why or why not?`,
+          pt: `Me conte: Você gosta de ${v.pt}? Por que sim ou por que não?`,
+          emoji: v.emoji
+        });
+      });
+      return generated;
+    }
+    return [];
+  };
+
+  function initTellMeGame() {
+    const questions = getTMQuestions();
+    if (questions.length === 0) return;
+    currentTMList = [...questions];
+    tmIndex = 0;
+    const gameArea = document.getElementById('tm-game-area');
+    const completeArea = document.getElementById('tm-complete');
+    if (gameArea) gameArea.style.display = 'block';
+    if (completeArea) completeArea.style.display = 'none';
+    renderTMQuestion();
+  }
+
+  function renderTMQuestion() {
+    if (tmIndex >= currentTMList.length) {
+      const gameArea = document.getElementById('tm-game-area');
+      const completeArea = document.getElementById('tm-complete');
+      if (gameArea) gameArea.style.display = 'none';
+      if (completeArea) completeArea.style.display = 'flex';
+      return;
+    }
+
+    const q = currentTMList[tmIndex];
+    const emojiEl = document.getElementById('tm-emoji');
+    const questionEl = document.getElementById('tm-question-text');
+    const transTextEl = document.getElementById('tm-translation-text');
+    const transBox = document.getElementById('tm-translation-box');
+    const toggleBtn = document.getElementById('tm-toggle-btn');
+    const scoreEl = document.getElementById('tm-game-score');
+    const progressEl = document.getElementById('tm-progress-bar');
+
+    if (emojiEl) emojiEl.innerHTML = q.emoji || '💬';
+    if (questionEl) questionEl.textContent = q.q;
+    if (transTextEl) transTextEl.textContent = `🇧🇷 ${q.pt || ''}`;
+
+    if (transBox) transBox.style.display = 'none';
+    if (toggleBtn) {
+      toggleBtn.style.display = 'inline-block';
+      toggleBtn.textContent = '🇧🇷 Show Translation';
+    }
+
+    if (scoreEl) scoreEl.innerHTML = `⭐ Question: <strong>${tmIndex + 1}</strong> / <span>${currentTMList.length}</span>`;
+    if (progressEl) progressEl.style.width = (((tmIndex + 1) / currentTMList.length) * 100) + '%';
+  }
+
+  const tmNextBtn = document.getElementById('tm-next-btn');
+  const tmToggleBtn = document.getElementById('tm-toggle-btn');
+  const tmReplayBtn = document.getElementById('tm-replay-btn');
+
+  if (tmToggleBtn) {
+    tmToggleBtn.addEventListener('click', () => {
+      tmToggleBtn.style.display = 'none';
+      const transBox = document.getElementById('tm-translation-box');
+      if (transBox) transBox.style.display = 'block';
+    });
+  }
+
+  if (tmNextBtn) {
+    tmNextBtn.addEventListener('click', () => {
+      tmIndex++;
+      renderTMQuestion();
+    });
+  }
+
+  if (tmReplayBtn) {
+    tmReplayBtn.addEventListener('click', initTellMeGame);
+  }
+
   // Initialize games once the DOM is loaded
   initSentenceGame();
   initScrambleGame();
   initTFGame();
   initFindMistakeGame();
+  initTellMeGame();
 });

@@ -191,6 +191,15 @@
       { wrong: "Making funny faces and laughing means I am very angry.", correct: "Making funny faces means you are feeling SILLY and happy! 😜", pt: "Fazer caretas engraçadas e rir significa que estou com muita raiva.", emoji: "😜" }
     ];
 
+    const tellMeQuestions = [
+      { q: "Tell me: What makes you feel super happy and excited during the weekend?", pt: "Me conte: O que te deixa super feliz e empolgada durante o fim de semana?", emoji: "😄" },
+      { q: "Tell me: When you feel tired after school, how do you like to relax?", pt: "Me conte: Quando você se sente cansada depois da escola, como você gosta de relaxar?", emoji: "😴" },
+      { q: "Tell me about a time when you felt very proud of yourself!", pt: "Me conte sobre uma vez em que você se sentiu muito orgulhosa de si mesma!", emoji: "🏆" },
+      { q: "Tell me: What do you do when you feel brave? Have you ever tried something new?", pt: "Me conte: O que você faz quando se sente corajosa? Você já tentou algo novo?", emoji: "🦁" },
+      { q: "Tell me: What is your favorite food to eat when you are super hungry?", pt: "Me conte: Qual é a sua comida favorita para comer quando está com muita fome?", emoji: "🍔" },
+      { q: "Tell me: What funny face or joke makes you feel silly and laugh?", pt: "Me conte: Que careta ou piada te deixa engraçada e te faz rir?", emoji: "😜" }
+    ];
+
     // GAME — Sound Match
     let gi = 0, gs = 0, ga = false;
     const sq = [...gameData].sort(() => Math.random() - 0.5).slice(0, 8);

@@ -2353,6 +2353,106 @@
   transform: translateY(-2px) scale(1.03);
 }
 
+/* ============================================
+   TELL ME GAME STYLES
+   ============================================ */
+.tm-card {
+  background: var(--card-bg, #ffffff);
+  border: 2px solid var(--border-soft, #e2e8f0);
+  border-radius: 24px;
+  padding: 2.2rem 1.5rem;
+  max-width: 620px;
+  margin: 1.5rem auto;
+  box-shadow: 0 12px 28px rgba(0, 0, 0, 0.08);
+  text-align: center;
+  position: relative;
+}
+
+.tm-emoji {
+  font-size: 3.5rem;
+  margin-bottom: 1rem;
+  display: inline-block;
+  animation: bounceSlow 3s infinite ease-in-out;
+}
+
+.tm-question-box {
+  background: #f0f9ff;
+  border: 2px solid #bae6fd;
+  border-radius: 18px;
+  padding: 1.4rem 1.2rem;
+  margin-bottom: 1.25rem;
+}
+
+.tm-question-title {
+  font-size: 0.85rem;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: #0284c7;
+  margin-bottom: 0.5rem;
+}
+
+.tm-question-text {
+  font-size: 1.35rem;
+  font-weight: 700;
+  color: #0c4a6e;
+  line-height: 1.4;
+}
+
+.tm-toggle-btn {
+  background: var(--card-bg, #f8fafc);
+  border: 1.5px dashed var(--border-soft, #cbd5e1);
+  color: var(--text-secondary, #64748b);
+  padding: 0.4rem 1.1rem;
+  border-radius: 20px;
+  font-size: 0.92rem;
+  font-weight: 600;
+  cursor: pointer;
+  margin: 0.4rem auto 1.25rem;
+  display: inline-block;
+  transition: all 0.2s ease;
+}
+
+.tm-toggle-btn:hover {
+  background: #fef3c7;
+  color: #92400e;
+  border-color: #fde68a;
+}
+
+.tm-translation-box {
+  background: #fffbeb;
+  border: 1px solid #fef3c7;
+  border-radius: 14px;
+  padding: 0.9rem 1.2rem;
+  margin-bottom: 1.5rem;
+  font-size: 1.05rem;
+  font-weight: 600;
+  color: #78350f;
+  display: none;
+}
+
+.tm-next-btn {
+  background: linear-gradient(135deg, #8b5cf6, #6d28d9);
+  color: #ffffff;
+  font-size: 1.25rem;
+  font-weight: 700;
+  padding: 0.9rem 2.5rem;
+  border-radius: 50px;
+  border: none;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  box-shadow: 0 4px 15px rgba(109, 40, 217, 0.3);
+  display: inline-flex;
+  align-items: center;
+  gap: 0.6rem;
+  margin-top: 0.5rem;
+}
+
+.tm-next-btn:hover {
+  background: linear-gradient(135deg, #7c3aed, #5b21b6);
+  transform: translateY(-2px) scale(1.03);
+}
+
 .tf-buttons {
   display: flex;
   justify-content: center;

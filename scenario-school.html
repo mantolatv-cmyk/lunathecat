@@ -133,6 +133,10 @@
       { speaker: 'child', en: "I am ready for a fun day at school! ✨", pt: "Estou pronta para um dia divertido na escola! ✨" }
     ];
 
+    const sharpenerSvg = `<svg viewBox="0 0 64 64" width="1.2em" height="1.2em" style="vertical-align:-0.2em; display:inline-block;" aria-label="Sharpener"><rect x="10" y="14" width="44" height="36" rx="8" fill="#FF5252" stroke="#B71C1C" stroke-width="3"/><rect x="16" y="20" width="32" height="24" rx="4" fill="#D32F2F"/><polygon points="22,24 42,24 38,40 26,40" fill="#ECEFF1" stroke="#78909C" stroke-width="2"/><circle cx="32" cy="32" r="3.5" fill="#CFD8DC" stroke="#455A64" stroke-width="1.5"/><line x1="30" y1="32" x2="34" y2="32" stroke="#263238" stroke-width="1.5"/><ellipse cx="48" cy="32" rx="3.5" ry="8" fill="#1A1A1A"/></svg>`;
+
+    const deskSvg = `<svg viewBox="0 0 64 64" width="1.2em" height="1.2em" style="vertical-align:-0.2em; display:inline-block;" aria-label="Desk"><polygon points="4,22 60,22 52,34 12,34" fill="#F59E0B" stroke="#78350F" stroke-width="2.5"/><polygon points="12,34 52,34 49,42 15,42" fill="#D97706" stroke="#78350F" stroke-width="2"/><path d="M15 42 L13 58 M49 42 L51 58 M20 34 L20 56 M44 34 L44 56" stroke="#475569" stroke-width="3.5" stroke-linecap="round"/><ellipse cx="13" cy="58" rx="3.5" ry="2" fill="#0F172A"/><ellipse cx="51" cy="58" rx="3.5" ry="2" fill="#0F172A"/><path d="M26 19 L36 17 L42 19 L36 21 Z" fill="#3B82F6" stroke="#1D4ED8" stroke-width="1"/><path d="M26 19 L36 21 L36 22 L26 20 Z" fill="#1E40AF"/><circle cx="48" cy="18" r="1.5" fill="#EF4444"/><line x1="48" y1="18" x2="43" y2="23" stroke="#EF4444" stroke-width="2" stroke-linecap="round"/></svg>`;
+
     const vocabulary = [
       { emoji: '✏️', word: 'Pencil', pt: 'Lápis', sound: 'Write write!' },
       { emoji: '🧽', word: 'Eraser', pt: 'Borracha', sound: 'Erase mistakes!' },
@@ -144,8 +148,8 @@
       { emoji: '🧴', word: 'Glue', pt: 'Cola', sound: 'Stick together!' },
       { emoji: '👝', word: 'Pencil Case', pt: 'Estojo', sound: 'Hold pencils!' },
       { emoji: '🖊️', word: 'Marker', pt: 'Canetinha', sound: 'Bright colors!' },
-      { emoji: '⚙️', word: 'Sharpener', pt: 'Apontador', sound: 'Sharp pencil!' },
-      { emoji: '🏫', word: 'Desk', pt: 'Carteira / Mesa', sound: 'Sit and learn!' },
+      { emoji: sharpenerSvg, word: 'Sharpener', pt: 'Apontador', sound: 'Sharp pencil!' },
+      { emoji: deskSvg, word: 'Desk', pt: 'Carteira / Mesa', sound: 'Sit and learn!' },
       { emoji: '📁', word: 'Folder', pt: 'Pasta', sound: 'Keep papers!' },
       { emoji: '🍱', word: 'Lunchbox', pt: 'Lancheira', sound: 'Yummy lunch!' }
     ];
@@ -161,8 +165,8 @@
       { sound: '🧴 "Stick together!"', correct: 'Glue', emoji: '🧴' },
       { sound: '👝 "Hold pencils!"', correct: 'Pencil Case', emoji: '👝' },
       { sound: '🖊️ "Bright colors!"', correct: 'Marker', emoji: '🖊️' },
-      { sound: '⚙️ "Sharp pencil!"', correct: 'Sharpener', emoji: '⚙️' },
-      { sound: '🏫 "Sit and learn!"', correct: 'Desk', emoji: '🏫' },
+      { sound: `${sharpenerSvg} "Sharp pencil!"`, correct: 'Sharpener', emoji: sharpenerSvg },
+      { sound: `${deskSvg} "Sit and learn!"`, correct: 'Desk', emoji: deskSvg },
       { sound: '🍱 "Yummy lunch!"', correct: 'Lunchbox', emoji: '🍱' }
     ];
 

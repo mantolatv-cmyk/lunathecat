@@ -36,42 +36,17 @@ document.addEventListener('DOMContentLoaded', () => {
   const dialogueNextBtn = document.getElementById('dialogue-next-btn');
   const dialogueRestartBtn = document.getElementById('dialogue-restart-btn');
 
-  if (dialogueContainer && dialogueNextBtn && typeof dialogues !== 'undefined') {
-    let dialogueIndex = 0;
-
-    function renderNextDialogue() {
-      if (dialogueIndex >= dialogues.length) {
-        dialogueNextBtn.disabled = true;
-        dialogueNextBtn.textContent = '✅ Story Complete!';
-        if (dialogueRestartBtn) dialogueRestartBtn.classList.add('visible');
-        return;
-      }
-      const d = dialogues[dialogueIndex];
-      const bubble = document.createElement('div');
-      bubble.className = `dialogue-bubble ${d.speaker}`;
-      bubble.innerHTML = `<div class="dialogue-speaker"><span>${d.speaker === 'luna' ? '🐱' : '👧'}</span><span>${d.speaker === 'luna' ? 'Luna the Cat' : 'Little Friend'}</span></div><div class="dialogue-english">${d.en}</div><div class="dialogue-portuguese">🇧🇷 ${d.pt}</div>`;
-      bubble.addEventListener('click', () => bubble.classList.toggle('show-pt'));
-      dialogueContainer.appendChild(bubble);
-      requestAnimationFrame(() => bubble.classList.add('visible'));
-      dialogueIndex++;
-      bubble.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
-    }
-
-    dialogueNextBtn.addEventListener('click', renderNextDialogue);
-
-    if (dialogueRestartBtn) {
-      dialogueRestartBtn.addEventListener('click', () => {
-        dialogueIndex = 0;
-        dialogueContainer.innerHTML = '';
-        dialogueNextBtn.disabled = false;
-        dialogueNextBtn.textContent = 'Next Line →';
-        dialogueRestartBtn.classList.remove('visible');
-        renderNextDialogue();
+    if (dialogueContainer && typeof dialogues !== 'undefined') {
+      dialogues.forEach((d) => {
+        const bubble = document.createElement('div');
+        bubble.className = `dialogue-bubble ${d.speaker} visible`;
+        bubble.innerHTML = `<div class="dialogue-speaker"><span>${d.speaker === 'luna' ? '🐱' : '👧'}</span><span>${d.speaker === 'luna' ? 'Luna the Cat' : 'Little Friend'}</span></div><div class="dialogue-english">${d.en}</div><div class="dialogue-portuguese">${d.pt}</div>`;
+        bubble.addEventListener('click', () => bubble.classList.toggle('show-pt'));
+        dialogueContainer.appendChild(bubble);
       });
+      if (dialogueNextBtn) dialogueNextBtn.style.display = 'none';
+      if (dialogueRestartBtn) dialogueRestartBtn.style.display = 'none';
     }
-
-    renderNextDialogue();
-  }
 
   // ==========================================
   // MODULE: Vocabulary Grid (Flip Cards)
@@ -91,10 +66,10 @@ document.addEventListener('DOMContentLoaded', () => {
       else if (v.hex) frontExtra = `<div class="vocab-hint">tap to flip</div>`;
       else frontExtra = `<div class="vocab-hint">tap to flip</div>`;
 
-      // Determine display word
-      let displayWord = v.word;
-      if (v.letter) displayWord = `${v.letter} — ${v.word}`;
-      else if (v.num) displayWord = `${v.num} — ${v.word}`;
+      // Determine display word (Portuguese first)
+      let displayWord = v.pt;
+      if (v.letter) displayWord = `${v.letter} — ${v.pt}`;
+      else if (v.num) displayWord = `${v.num} — ${v.pt}`;
 
       // Determine front style (for colors scenario)
       let frontStyle = '';
@@ -104,7 +79,7 @@ document.addEventListener('DOMContentLoaded', () => {
       let backStyle = '';
       if (v.hex) backStyle = ` style="background: linear-gradient(135deg, ${v.hex}22, ${v.hex}11); border: 2px solid ${v.hex}44"`;
 
-      card.innerHTML = `<div class="vocab-card-inner"><div class="vocab-card-front"${frontStyle}><div class="vocab-emoji">${v.emoji}</div><div class="vocab-word">${displayWord}</div>${frontExtra}</div><div class="vocab-card-back"${backStyle}><div class="vocab-emoji">${v.emoji}</div><div class="vocab-translation">${v.pt}</div><div class="vocab-back-word">${v.word}</div></div></div>`;
+      card.innerHTML = `<div class="vocab-card-inner"><div class="vocab-card-front"${frontStyle}><div class="vocab-emoji">${v.emoji}</div><div class="vocab-word">${displayWord}</div>${frontExtra}</div><div class="vocab-card-back"${backStyle}><div class="vocab-emoji">${v.emoji}</div><div class="vocab-translation">${v.word}</div><div class="vocab-back-word">${v.pt}</div></div></div>`;
       card.addEventListener('click', () => card.classList.toggle('flipped'));
       vocabGrid.appendChild(card);
     });
@@ -127,25 +102,26 @@ document.addEventListener('DOMContentLoaded', () => {
       const v = vocabulary[flashcardIndex];
       seqEmoji.innerHTML = v.emoji;
       
-      // Hide the word element initially (we only want emoji + Show English button)
-      seqWord.style.display = 'none';
+      // Show the Portuguese word initially
+      seqWord.style.display = 'block';
+      seqWord.textContent = `${v.pt}`;
+      seqWord.style.cursor = 'pointer';
 
       if (seqTransText) {
         // English word to be revealed
-        seqTransText.textContent = `🇺🇸 ${v.word}`;
+        seqTransText.textContent = `${v.word}`;
         seqTransText.classList.remove('visible');
       }
       if (seqTransBtn) {
-        seqTransBtn.textContent = "Show English";
-        seqTransBtn.style.display = 'block';
+        // Hide the original button, we will click the text instead
+        seqTransBtn.style.display = 'none';
       }
       if (seqPrevBtn) seqPrevBtn.disabled = flashcardIndex === 0;
       if (seqNextBtn) seqNextBtn.disabled = flashcardIndex === vocabulary.length - 1;
     }
 
-    if (seqTransBtn) {
-      seqTransBtn.addEventListener('click', () => {
-        seqTransBtn.style.display = 'none';
+    if (seqWord) {
+      seqWord.addEventListener('click', () => {
         if (seqTransText) seqTransText.classList.add('visible');
       });
     }

@@ -6,8 +6,8 @@
   <title>🍽️ At the Restaurant — Learn with Luna</title>
   <meta name="description" content="Learn restaurant vocabulary and ordering food in English with Luna the Cat! Interactive story, flashcards, and fun games." />
   <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🐱</text></svg>" />
-  <link rel="stylesheet" href="styles.css" />
-  <link rel="stylesheet" href="scenario.css" />
+  <link rel="stylesheet" href="styles.css?v=1787856914248" />
+  <link rel="stylesheet" href="scenario.css?v=1787856914248" />
 </head>
 <body>
 
@@ -73,7 +73,7 @@
           <div class="seq-emoji" id="seq-emoji">🍕</div>
           <div class="seq-word" id="seq-word" style="display: none;"></div>
           <button class="seq-translation-btn" id="seq-translation-btn">Show English</button>
-          <div class="seq-translation-text" id="seq-translation-text">🇺🇸 Pizza</div>
+          <div class="seq-translation-text" id="seq-translation-text">Pizza</div>
         </div>
         <div class="seq-nav">
           <button class="seq-nav-btn" id="seq-prev-btn" aria-label="Previous">←</button>
@@ -88,7 +88,7 @@
         <div class="game-score" id="game-score">⭐ Score: <strong>0</strong> / <span>0</span></div>
         <div class="game-progress"><div class="game-progress-bar" id="game-progress-bar"></div></div>
         <div class="game-prompt">
-          <div class="game-prompt-label">Which restaurant item says...</div>
+          <div class="game-prompt-label">Read the clue:</div>
           <div class="game-prompt-content" id="game-prompt" style="font-size: 2rem;"></div>
         </div>
         <div class="game-options" id="game-options"></div>
@@ -140,9 +140,9 @@
   <script>
     const dialogues = [
       { speaker: 'luna', en: "Welcome to Luna's Restaurant! Here is your menu! 📋", pt: "Bem-vinda ao Restaurante da Luna! Aqui está o seu menu! 📋" },
-      { speaker: 'child', en: "Thank you! Can I see the delicious food options? 😋", pt: "Obrigada! Posso ver as opções de comida deliciosa? 😋" },
-      { speaker: 'luna', en: "What would you like to eat today? 🍕🍝", pt: "O que você gostaria de comer hoje? 🍕🍝" },
-      { speaker: 'child', en: "Can I have cheese pizza and orange juice, please? 🍕🍊", pt: "Posso pedir pizza de queijo e suco de laranja, por favor? 🍕🍊" },
+      { speaker: 'child', en: "Thank you! Can I see the food? 😋", pt: "Obrigada! Posso ver as opções de comida deliciosa? 😋" },
+      { speaker: 'luna', en: "What do you want to eat today? 🍕🍝", pt: "O que você gostaria de comer hoje? 🍕🍝" },
+      { speaker: 'child', en: "I want cheese pizza and orange juice, please. 🍕🍊", pt: "Posso pedir pizza de queijo e suco de laranja, por favor? 🍕🍊" },
       { speaker: 'luna', en: "Sure! And for dessert, chocolate ice cream! 🍦", pt: "Claro! E de sobremesa, sorvete de chocolate! 🍦" },
       { speaker: 'child', en: "Yummy! Everything looks so delicious! 😋", pt: "Gostoso! Tudo parece tão delicioso! 😋" },
       { speaker: 'luna', en: "Here is your plate, fork, and napkin! 🍽️", pt: "Aqui está seu prato, garfo e guardanapo! 🍽️" },
@@ -167,51 +167,56 @@
     ];
 
     const gameData = [
-      { sound: '📋 "Check food options!"', correct: 'Menu', emoji: '📋' },
-      { sound: '👨‍🍳 "May I take your order?"', correct: 'Waiter', emoji: '👨‍🍳' },
-      { sound: '🍕 "Cheesy slice!"', correct: 'Pizza', emoji: '🍕' },
-      { sound: '🍝 "Yummy spaghetti!"', correct: 'Pasta', emoji: '🍝' },
-      { sound: '🍔 "Juicy burger!"', correct: 'Burger', emoji: '🍔' },
-      { sound: '🍊 "Fresh juice!"', correct: 'Orange Juice', emoji: '🍊' },
-      { sound: '🍦 "Sweet dessert!"', correct: 'Ice Cream', emoji: '🍦' },
-      { sound: '🧾 "Pay for meal!"', correct: 'Check / Bill', emoji: '🧾' },
-      { sound: '😋 "So yummy!"', correct: 'Delicious', emoji: '😋' }
+      { sound: 'You read this to choose your food.', correct: 'Menu', emoji: '📋' },
+      { sound: 'This person brings the food to your table.', correct: 'Waiter', emoji: '👨‍🍳' },
+      { sound: 'This food is round and has cheese on top.', correct: 'Pizza', emoji: '🍕' },
+      { sound: 'This is long noodles, like spaghetti.', correct: 'Pasta', emoji: '🍝' },
+      { sound: 'This is meat and bread, you eat it with your hands.', correct: 'Burger', emoji: '🍔' },
+      { sound: 'This is a sweet drink made of fruit.', correct: 'Orange Juice', emoji: '🍊' },
+      { sound: 'This is a cold and sweet dessert.', correct: 'Ice Cream', emoji: '🍦' },
+      { sound: 'You ask for this when you want to pay.', correct: 'Check / Bill', emoji: '🧾' },
+      { sound: 'You say this when the food is very good.', correct: 'Delicious', emoji: '😋' }
     ];
 
     const gameSentences = [
-      { en: "Can I have pizza please", pt: "Posso pedir pizza por favor" },
-      { en: "The orange juice is very fresh", pt: "O suco de laranja é muito fresco" },
-      { en: "I like chocolate ice cream for dessert", pt: "Eu gosto de sorvete de chocolate de sobremesa" },
-      { en: "The friendly waiter brings the menu", pt: "O garçom amigável traz o cardápio" },
-      { en: "Thank you for the delicious food", pt: "Obrigada pela comida deliciosa" }
+      { en: "I look at the food menu", pt: "Eu olho para o cardápio de comida" },
+      { en: "We order a big cheese pizza", pt: "Nós pedimos uma grande pizza de queijo" },
+      { en: "The nice waiter brings the food", pt: "O garçom legal traz a comida" },
+      { en: "I eat salad with a fork", pt: "Eu como salada com um garfo" },
+      { en: "We drink cold orange juice now", pt: "Nós bebemos suco de laranja frio agora" },
+      { en: "She wants a sweet strawberry dessert", pt: "Ela quer uma doce sobremesa de morango" },
+      { en: "The hot soup is very good", pt: "A sopa quente é muito boa" },
+      { en: "I cut meat with a knife", pt: "Eu corto carne com uma faca" },
+      { en: "We pay the bill after dinner", pt: "Nós pagamos a conta depois do jantar" },
+      { en: "The restaurant has very tasty food", pt: "O restaurante tem comida muito saborosa" }
     ];
 
     const trueFalseQuestions = [
-      { statement: "A waiter brings the food menu to your restaurant table.", pt: "Um garçom traz o cardápio de comidas até a sua mesa no restaurante.", isTrue: true, emoji: "📋", explanation: "Waiters present the menu so you can order!" },
-      { statement: "We say 'Please' and 'Thank you' when ordering meals.", pt: "Dizemos 'Por favor' e 'Obrigado' ao pedir refeições.", isTrue: true, emoji: "😋", explanation: "Polite manners are super important at restaurants!" },
-      { statement: "Ice cream is served boiling hot in a soup bowl.", pt: "Sorvete é servido fervendo de quente em uma tigela de sopa.", isTrue: false, emoji: "🍦", explanation: "Ice cream is cold, sweet, and creamy!" },
-      { statement: "Fresh orange juice is a refreshing drink made from oranges.", pt: "Suco de laranja fresco é uma bebida refrescante feita de laranjas.", isTrue: true, emoji: "🍊", explanation: "Orange juice is sweet and natural!" },
-      { statement: "You ask for the check at the end to pay for your meal.", pt: "Você pede a conta no final para pagar pela sua refeição.", isTrue: true, emoji: "🧾", explanation: "The check lists the total meal price." },
-      { statement: "We brush our teeth with pizza slices.", pt: "Escovamos nossos dentes com fatias de pizza.", isTrue: false, emoji: "🍕", explanation: "Pizza is yummy food to eat, not a toothbrush!" },
-      { statement: "A menu lists all the delicious dishes and drinks you can order.", pt: "Um cardápio lista todos os pratos deliciosos e bebidas que você pode pedir.", isTrue: true, emoji: "📋", explanation: "The menu shows all restaurant options!" }
+      { statement: "The waiter brings the menu to the table.", pt: "O garçom traz o cardápio para a mesa.", isTrue: true, emoji: "📋", explanation: "Waiters present the menu so you can order!" },
+      { statement: "We say 'Please' and 'Thank you' at the restaurant.", pt: "Dizemos 'Por favor' e 'Obrigado' no restaurante.", isTrue: true, emoji: "😋", explanation: "Polite manners are super important at restaurants!" },
+      { statement: "Ice cream is served very hot.", pt: "Sorvete é servido muito quente.", isTrue: false, emoji: "🍦", explanation: "Ice cream is cold, sweet, and creamy!" },
+      { statement: "Orange juice is a drink made from oranges.", pt: "Suco de laranja é uma bebida feita de laranjas.", isTrue: true, emoji: "🍊", explanation: "Orange juice is sweet and natural!" },
+      { statement: "You ask for the bill to pay.", pt: "Você pede a conta para pagar.", isTrue: true, emoji: "🧾", explanation: "The check lists the total meal price." },
+      { statement: "We brush our teeth with pizza.", pt: "Nós escovamos os dentes com pizza.", isTrue: false, emoji: "🍕", explanation: "Pizza is yummy food to eat, not a toothbrush!" },
+      { statement: "The menu shows the food you can order.", pt: "O cardápio mostra a comida que você pode pedir.", isTrue: true, emoji: "📋", explanation: "The menu shows all restaurant options!" }
     ];
 
     const findMistakeQuestions = [
-      { wrong: "The friendly waiter brings a heavy backpack to our restaurant table.", correct: "The waiter brings a MENU and delicious food! 📋", pt: "O garçom amigável traz uma mochila pesada para nossa mesa no restaurante.", emoji: "👨‍🍳" },
-      { wrong: "We brush our teeth with hot cheese pizza slices.", correct: "Pizza is yummy food to eat for lunch or dinner! 🍕", pt: "Escovamos nossos dentes com fatias de pizza de queijo quente.", emoji: "🍕" },
-      { wrong: "I ask the waiter for a pencil case to pay for the meal.", correct: "You ask for the CHECK or BILL to pay! 🧾", pt: "Peço ao garçom um estojo para pagar pela refeição.", emoji: "🧾" },
-      { wrong: "Cold chocolate ice cream is served hot in a coffee mug.", correct: "Ice cream is a cold, sweet, and delicious dessert! 🍦", pt: "Sorvete frio de chocolate é servido quente em uma caneca de café.", emoji: "🍦" },
-      { wrong: "I drink fresh orange juice with my ears.", correct: "You drink orange juice with your mouth! 🍊", pt: "Eu bebo suco de laranja fresco com minhas orelhas.", emoji: "🍊" },
-      { wrong: "We read a notebook to order delicious pasta and drinks.", correct: "You read the MENU at the restaurant to order food! 📋", pt: "Lemos um caderno para pedir macarrão delicioso e bebidas.", emoji: "📋" }
+      { wrong: "The waiter brings a backpack.", correct: "The waiter brings a MENU! 📋", pt: "O garçom traz uma mochila.", emoji: "👨‍🍳" },
+      { wrong: "We brush our teeth with pizza.", correct: "We EAT pizza! 🍕", pt: "Nós escovamos os dentes com pizza.", emoji: "🍕" },
+      { wrong: "I ask for a pencil case to pay.", correct: "You ask for the BILL to pay! 🧾", pt: "Eu peço um estojo para pagar.", emoji: "🧾" },
+      { wrong: "Ice cream is served hot.", correct: "Ice cream is COLD! 🍦", pt: "Sorvete é servido quente.", emoji: "🍦" },
+      { wrong: "I drink juice with my ears.", correct: "You drink juice with your MOUTH! 🍊", pt: "Eu bebo suco com minhas orelhas.", emoji: "🍊" },
+      { wrong: "We read a notebook to order pasta.", correct: "We read the MENU to order food! 📋", pt: "Nós lemos um caderno para pedir macarrão.", emoji: "📋" }
     ];
 
     const tellMeQuestions = [
-      { q: "Tell me: What is your favorite food to order when you go to a restaurant with your family?", pt: "Me conte: Qual é a sua comida favorita para pedir quando vai a um restaurante com sua família?", emoji: "🍕" },
-      { q: "Tell me: Do you prefer cheesy pizza, yummy pasta, or a juicy burger?", pt: "Me conte: Você prefere pizza de queijo, macarrão gostoso ou hambúrguer suculento?", emoji: "🍝" },
-      { q: "Tell me: What flavor of ice cream is your top favorite for dessert?", pt: "Me conte: Qual sabor de sorvete é o seu favorito número um de sobremesa?", emoji: "🍦" },
-      { q: "Tell me: What drink do you like ordering: fresh orange juice, soda, or cold water?", pt: "Me conte: Que bebida você gosta de pedir: suco de laranja fresco, refrigerante ou água gelada?", emoji: "🍊" },
-      { q: "Tell me: Why is it important to say 'Please' and 'Thank you' to the waiter?", pt: "Me conte: Por que é importante dizer 'Por favor' e 'Obrigado' para o garçom?", emoji: "👨‍🍳" },
-      { q: "Tell me: If you created your own kids restaurant, what delicious food would be on the menu?", pt: "Me conte: Se você criasse seu próprio restaurante infantil, que comida deliciosa estaria no cardápio?", emoji: "📋" }
+      { q: "Tell me: You are at a restaurant. What food do you order?", pt: "Me conte: Você está em um restaurante. Qual comida você pede?", emoji: "🍕" },
+      { q: "Tell me: Do you like pizza, pasta, or burgers?", pt: "Me conte: Você gosta de pizza, macarrão ou hambúrgueres?", emoji: "🍝" },
+      { q: "Tell me: What is your favorite ice cream?", pt: "Me conte: Qual é o seu sorvete favorito?", emoji: "🍦" },
+      { q: "Tell me: What drink do you order: juice, soda, or water?", pt: "Me conte: Que bebida você pede: suco, refrigerante ou água?", emoji: "🍊" },
+      { q: "Tell me: Do you say 'Please' and 'Thank you' to the waiter?", pt: "Me conte: Você diz 'Por favor' e 'Obrigado' ao garçom?", emoji: "👨‍🍳" },
+      { q: "Tell me: You have a restaurant. What food is on the menu?", pt: "Me conte: Você tem um restaurante. Qual comida está no cardápio?", emoji: "📋" }
     ];
 
     // GAME — Sound Match
@@ -276,7 +281,7 @@
     });
     renderQ();
   </script>
-  <script src="scenario-engine.js"></script>
-  <script src="shared-games.js"></script>
+  <script src="scenario-engine.js?v=1787856914248"></script>
+  <script src="shared-games.js?v=1787856914248"></script>
 </body>
 </html>

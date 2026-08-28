@@ -6,8 +6,8 @@
   <title>🐾 Animal Friends — Learn with Luna</title>
   <meta name="description" content="Learn animal names in English with Luna the Cat! Interactive story, vocabulary flashcards, and fun sound matching games." />
   <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🐱</text></svg>" />
-  <link rel="stylesheet" href="styles.css" />
-  <link rel="stylesheet" href="scenario.css" />
+  <link rel="stylesheet" href="styles.css?v=1787856914242" />
+  <link rel="stylesheet" href="scenario.css?v=1787856914242" />
 </head>
 <body>
 
@@ -68,7 +68,7 @@
         <div class="game-score" id="game-score">⭐ Score: <strong>0</strong> / <span>0</span></div>
         <div class="game-progress"><div class="game-progress-bar" id="game-progress-bar"></div></div>
         <div class="game-prompt">
-          <div class="game-prompt-label">Which animal says...</div>
+          <div class="game-prompt-label">Which animal makes this sound?</div>
           <div class="game-prompt-content" id="game-prompt" style="font-size: 2rem;"></div>
         </div>
         <div class="game-options" id="game-options"></div>
@@ -132,7 +132,7 @@
       { speaker: 'luna', en: "Dogs say Woof! 🐾", pt: "Cachorros fazem Au au! 🐾" },
       { speaker: 'child', en: "Woof woof! Is that a CAT? 🐱", pt: "Au au! Aquilo é um CAT (Gato)? 🐱" },
       { speaker: 'luna', en: "Yes! Cats say Meow! Like me!", pt: "Sim! Gatos fazem Miau! Como eu!" },
-      { speaker: 'child', en: "Meow! And what is that big one?", pt: "Miau! E qual é aquele grandão?" },
+      { speaker: 'child', en: "Meow! And what is that big animal?", pt: "Miau! E qual é aquele animal grande?" },
       { speaker: 'luna', en: "That is a COW! 🐄", pt: "Aquela é uma COW (Vaca)! 🐄" },
       { speaker: 'child', en: "Moo! Cows say Moo!", pt: "Muu! Vacas fazem Muu!" },
       { speaker: 'luna', en: "And here is a PIG! 🐷", pt: "E aqui está um PIG (Porco)! 🐷" },
@@ -156,30 +156,19 @@
     ];
 
     const gameData = [
-      { sound: '🐶 "Woof woof!"', correct: 'Dog', emoji: '🐶' },
-      { sound: '🐱 "Meow!"', correct: 'Cat', emoji: '🐱' },
-      { sound: '🐄 "Moo!"', correct: 'Cow', emoji: '🐄' },
-      { sound: '🐴 "Neigh!"', correct: 'Horse', emoji: '🐴' },
-      { sound: '🐔 "Cluck cluck!"', correct: 'Chicken', emoji: '🐔' },
-      { sound: '🦆 "Quack quack!"', correct: 'Duck', emoji: '🦆' },
-      { sound: '🐦 "Tweet tweet!"', correct: 'Bird', emoji: '🐦' },
-      { sound: '🐷 "Oink oink!"', correct: 'Pig', emoji: '🐷' },
-      { sound: '🐸 "Ribbit!"', correct: 'Frog', emoji: '🐸' },
-      { sound: '🐟 "Blub blub!"', correct: 'Fish', emoji: '🐟' }
+      { sound: '"Woof woof!"', correct: 'Dog', emoji: '🐶' },
+      { sound: '"Meow!"', correct: 'Cat', emoji: '🐱' },
+      { sound: '"Moo!"', correct: 'Cow', emoji: '🐄' },
+      { sound: '"Neigh!"', correct: 'Horse', emoji: '🐴' },
+      { sound: '"Cluck cluck!"', correct: 'Chicken', emoji: '🐔' },
+      { sound: '"Quack quack!"', correct: 'Duck', emoji: '🦆' },
+      { sound: '"Tweet tweet!"', correct: 'Bird', emoji: '🐦' },
+      { sound: '"Oink oink!"', correct: 'Pig', emoji: '🐷' },
+      { sound: '"Ribbit!"', correct: 'Frog', emoji: '🐸' },
+      { sound: '"Blub blub!"', correct: 'Fish', emoji: '🐟' }
     ];
 
     const gameSentences = [
-      { en: "The friendly dog barks very happily", pt: "O cachorro amigável late muito feliz" },
-      { en: "The cute cat wants some milk", pt: "O gato fofo quer algum leite" },
-      { en: "Lions are big and very strong", pt: "Leões são grandes e muito fortes" },
-      { en: "The colorful fish swims very quickly", pt: "O peixe colorido nada muito rápido" },
-      { en: "Dogs are very good friends", pt: "Cachorros são muito bons amigos" },
-      { en: "The beautiful bird flies very high", pt: "O pássaro bonito voa muito alto" },
-      { en: "A fast horse runs very quickly", pt: "Um cavalo rápido corre muito rapidamente" },
-      { en: "The green frog jumps very high", pt: "O sapo verde pula muito alto" },
-      { en: "Pigs are pink and love mud", pt: "Porcos são rosas e amam lama" },
-      { en: "Monkeys love eating sweet yellow bananas", pt: "Macacos amam comer bananas doces e amarelas" },
-      { en: "The white cow gives fresh milk", pt: "A vaca branca nos dá leite fresco" },
       { en: "The little chicken looks for food", pt: "A galinhazinha procura por comida" },
       { en: "The yellow duck swims peacefully", pt: "O pato amarelo nada tranquilamente" },
       { en: "A tiny butterfly flutters its wings", pt: "Uma pequena borboleta bate suas asas" },
@@ -254,7 +243,7 @@
     });
     renderQ();
   </script>
-  <script src="scenario-engine.js"></script>
-  <script src="shared-games.js"></script>
+  <script src="scenario-engine.js?v=1787856914242"></script>
+  <script src="shared-games.js?v=1787856914242"></script>
 </body>
 </html>

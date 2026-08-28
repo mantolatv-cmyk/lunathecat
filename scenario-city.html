@@ -1,0 +1,277 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>🏙️ City & Places — Learn with Luna</title>
+  <meta name="description" content="Learn about city places and locations in English with Luna the Cat! Interactive story, flashcards, and fun games." />
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🐱</text></svg>" />
+  <link rel="stylesheet" href="styles.css?v=1787856914250" />
+  <link rel="stylesheet" href="scenario.css?v=1787856914250" />
+</head>
+<body>
+
+  <header class="header scrolled" id="app-header">
+    <div class="header-inner">
+      <a href="index.html" class="logo">
+        <img src="images/luna-logo.png" alt="Luna the Cat" class="logo-icon" />
+        <span class="logo-text">Learn with <span>Luna</span></span>
+      </a>
+      <nav class="nav-links">
+        <a href="index.html" class="nav-link">Home</a>
+        <a href="index.html#videos" class="nav-link active">Videos</a>
+        <a href="index.html#printables" class="nav-link">Printables</a>
+        <a href="index.html#about" class="nav-link">About</a>
+      </nav>
+      <button class="menu-toggle" id="menu-toggle" aria-label="Toggle menu"><span></span></button>
+    </div>
+    <nav class="nav-mobile" id="nav-mobile">
+      <a href="index.html" class="nav-link">Home</a>
+      <a href="index.html#videos" class="nav-link">Videos</a>
+      <a href="index.html#printables" class="nav-link">Printables</a>
+      <a href="index.html#about" class="nav-link">About</a>
+    </nav>
+  </header>
+
+  <section class="scenario-hero">
+    <img src="images/scene-city.jpg" alt="Luna exploring the city with colorful buildings" class="scenario-hero-img" loading="lazy" />
+    <div class="scenario-hero-overlay">
+      <div class="scenario-hero-icon">🏙️</div>
+      <h1 class="scenario-hero-title">City & Places</h1>
+      <p class="scenario-hero-subtitle">Let's explore the city with Luna!</p>
+    </div>
+  </section>
+
+  <div class="scenario-container">
+    <a href="index.html" class="back-btn">← Back to Home</a>
+
+    <div class="scenario-tabs" id="scenario-tabs">
+      <button class="scenario-tab active" data-tab="story">💬 Story Time</button>
+      <button class="scenario-tab" data-tab="vocab">📖 Word Garden</button>
+      <button class="scenario-tab" data-tab="learnwords">📖 Learn Words</button>
+      <button class="scenario-tab" data-tab="game">🎮 Play &amp; Learn</button>
+      <button class="scenario-tab" data-tab="memory">🃏 Matching Pairs</button>
+    </div>
+
+    <!-- TAB 1: Story -->
+    <div class="tab-panel active" id="tab-story">
+      <div class="dialogue-container" id="dialogue-container"></div>
+      <button class="dialogue-next-btn" id="dialogue-next-btn">Next Line →</button>
+      <button class="dialogue-restart-btn" id="dialogue-restart-btn">🔄 Start Over</button>
+    </div>
+
+    <!-- TAB 2: Vocabulary Grid -->
+    <div class="tab-panel" id="tab-vocab">
+      <div class="vocab-grid" id="vocab-grid"></div>
+    </div>
+
+    <!-- TAB 3: Learn Words -->
+    <div class="tab-panel" id="tab-learnwords">
+      <div class="seq-card-container">
+        <div class="seq-card" id="seq-card">
+          <div class="seq-emoji" id="seq-emoji">🏥</div>
+          <div class="seq-word" id="seq-word" style="display: none;"></div>
+          <button class="seq-translation-btn" id="seq-translation-btn">Show English</button>
+          <div class="seq-translation-text" id="seq-translation-text">Hospital</div>
+        </div>
+        <div class="seq-nav">
+          <button class="seq-nav-btn" id="seq-prev-btn" aria-label="Previous">←</button>
+          <button class="seq-nav-btn" id="seq-next-btn" aria-label="Next">→</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- TAB 4: Sound Match Game -->
+    <div class="tab-panel" id="tab-game">
+      <div class="game-area" id="game-area">
+        <div class="game-score" id="game-score">⭐ Score: <strong>0</strong> / <span>0</span></div>
+        <div class="game-progress"><div class="game-progress-bar" id="game-progress-bar"></div></div>
+        <div class="game-prompt">
+          <div class="game-prompt-label">Read the clue:</div>
+          <div class="game-prompt-content" id="game-prompt" style="font-size: 2rem;"></div>
+        </div>
+        <div class="game-options" id="game-options"></div>
+        <div class="game-feedback" id="game-feedback"></div>
+      </div>
+      <div class="game-complete" id="game-complete">
+        <div class="game-complete-emoji">🏙️</div>
+        <h2 class="game-complete-title">City Explorer!</h2>
+        <p class="game-complete-score" id="game-final-score"></p>
+        <div class="game-stars" id="game-stars"></div>
+        <button class="game-replay-btn" id="game-replay-btn">🔄 Play Again!</button>
+      </div>
+    </div>
+
+    <!-- TAB 5: Matching Pairs -->
+    <div class="tab-panel" id="tab-memory">
+      <div class="pairs-board" id="pairs-board"></div>
+      <div class="game-complete" id="pairs-complete" style="display: none; flex-direction: column; align-items: center;">
+        <div class="game-complete-emoji">🎉</div>
+        <h2 class="game-complete-title">You Did It!</h2>
+        <p class="game-complete-score" style="font-size:1.2rem; color:var(--text-secondary);">You matched all the city places!</p>
+        <button class="game-replay-btn" id="pairs-replay-btn">🔄 Play Again!</button>
+      </div>
+    </div>
+  </div>
+
+  <footer class="footer">
+    <div class="footer-inner">
+      <p class="footer-message">Luna loves exploring the city with you! <span class="paw-emoji">🐾</span></p>
+      <p class="footer-copy">Made with <span class="heart">♥</span> by Learn with Luna · © 2026</p>
+    </div>
+  </footer>
+
+  <script>
+    const dialogues = [
+      { speaker: 'luna', en: "Let's go for a walk around the city! 🏙️", pt: "Vamos dar uma volta pela cidade! 🏙️" },
+      { speaker: 'child', en: "Look! There's a hospital over there! 🏥", pt: "Olha! Tem um hospital ali! 🏥" },
+      { speaker: 'luna', en: "Doctors and nurses help sick people at the hospital.", pt: "Médicos e enfermeiros ajudam pessoas doentes no hospital." },
+      { speaker: 'child', en: "Can we go to the library? I love books! 📚", pt: "Podemos ir à biblioteca? Eu amo livros! 📚" },
+      { speaker: 'luna', en: "Of course! The library has thousands of amazing books! 📖", pt: "Claro! A biblioteca tem milhares de livros incríveis! 📖" },
+      { speaker: 'child', en: "I want to play at the park after! 🌳", pt: "Eu quero brincar no parque depois! 🌳" },
+      { speaker: 'luna', en: "Let's buy some bread at the bakery first! 🥖", pt: "Vamos comprar pão na padaria primeiro! 🥖" },
+      { speaker: 'child', en: "And then we go to the supermarket for groceries! 🛒", pt: "E depois vamos ao supermercado fazer compras! 🛒" },
+      { speaker: 'luna', en: "Our city has so many wonderful places to visit! ✨", pt: "Nossa cidade tem tantos lugares maravilhosos para visitar! ✨" },
+      { speaker: 'child', en: "I love exploring the city with you, Luna! 💖", pt: "Eu amo explorar a cidade com você, Luna! 💖" }
+    ];
+
+    const vocabulary = [
+      { emoji: '🏥', word: 'Hospital', pt: 'Hospital', sound: 'Help the sick!' },
+      { emoji: '📚', word: 'Library', pt: 'Biblioteca', sound: 'Read books!' },
+      { emoji: '🌳', word: 'Park', pt: 'Parque', sound: 'Play outside!' },
+      { emoji: '🏫', word: 'School', pt: 'Escola', sound: 'Learn and study!' },
+      { emoji: '🛒', word: 'Supermarket', pt: 'Supermercado', sound: 'Buy food!' },
+      { emoji: '🏦', word: 'Bank', pt: 'Banco', sound: 'Save money!' },
+      { emoji: '🚒', word: 'Fire Station', pt: 'Corpo de Bombeiros', sound: 'Put out fires!' },
+      { emoji: '🚔', word: 'Police Station', pt: 'Delegacia', sound: 'Keep us safe!' },
+      { emoji: '🥖', word: 'Bakery', pt: 'Padaria', sound: 'Fresh bread!' },
+      { emoji: '💊', word: 'Pharmacy', pt: 'Farmácia', sound: 'Buy medicine!' },
+      { emoji: '⛪', word: 'Church', pt: 'Igreja', sound: 'A quiet place!' },
+      { emoji: '🏛️', word: 'Museum', pt: 'Museu', sound: 'See art and history!' },
+      { emoji: '📮', word: 'Post Office', pt: 'Correio', sound: 'Send letters!' },
+      { emoji: '⛽', word: 'Gas Station', pt: 'Posto de Gasolina', sound: 'Fill the tank!' }
+    ];
+
+    const gameData = [
+      { sound: 'Doctors and nurses work here to help sick people.', correct: 'Hospital', emoji: '🏥' },
+      { sound: 'You go here to borrow and read many books.', correct: 'Library', emoji: '📚' },
+      { sound: 'Children play on swings and slides here.', correct: 'Park', emoji: '🌳' },
+      { sound: 'Students learn math, science, and English here.', correct: 'School', emoji: '🏫' },
+      { sound: 'You go here to buy fruits, vegetables, and food.', correct: 'Supermarket', emoji: '🛒' },
+      { sound: 'People save and withdraw money here.', correct: 'Bank', emoji: '🏦' },
+      { sound: 'Firefighters and their trucks stay here.', correct: 'Fire Station', emoji: '🚒' },
+      { sound: 'Police officers work here to keep the city safe.', correct: 'Police Station', emoji: '🚔' },
+      { sound: 'You can buy fresh bread, cakes, and pastries here.', correct: 'Bakery', emoji: '🥖' },
+      { sound: 'You buy medicine when you are sick here.', correct: 'Pharmacy', emoji: '💊' },
+      { sound: 'You go here to see paintings and old artifacts.', correct: 'Museum', emoji: '🏛️' },
+      { sound: 'You go here to send letters and packages.', correct: 'Post Office', emoji: '📮' },
+      { sound: 'Cars go here to get more fuel.', correct: 'Gas Station', emoji: '⛽' }
+    ];
+
+    const gameSentences = [
+      { en: "I go to the park to play", pt: "Eu vou ao parque para brincar" },
+      { en: "She reads books at the library", pt: "Ela lê livros na biblioteca" },
+      { en: "The doctor works at the hospital", pt: "O médico trabalha no hospital" },
+      { en: "We buy bread at the bakery", pt: "Nós compramos pão na padaria" },
+      { en: "Mom goes to the supermarket today", pt: "Mamãe vai ao supermercado hoje" },
+      { en: "The firefighter is at the station", pt: "O bombeiro está no quartel" },
+      { en: "I send a letter at the post office", pt: "Eu envio uma carta no correio" },
+      { en: "Dad saves money at the bank", pt: "Papai guarda dinheiro no banco" },
+      { en: "We visit the museum on Sunday", pt: "Nós visitamos o museu no domingo" },
+      { en: "She buys medicine at the pharmacy", pt: "Ela compra remédio na farmácia" }
+    ];
+
+    const trueFalseQuestions = [
+      { statement: "We buy bread at the bakery.", pt: "Nós compramos pão na padaria.", isTrue: true, emoji: "🥖", explanation: "Bakeries make and sell delicious bread and cakes!" },
+      { statement: "We read books at the gas station.", pt: "Nós lemos livros no posto de gasolina.", isTrue: false, emoji: "⛽", explanation: "We read books at the LIBRARY! Gas stations sell fuel for cars." },
+      { statement: "Doctors work at the hospital.", pt: "Médicos trabalham no hospital.", isTrue: true, emoji: "🏥", explanation: "Hospitals are where doctors help sick people get better!" },
+      { statement: "We play on swings at the park.", pt: "Nós brincamos nos balanços do parque.", isTrue: true, emoji: "🌳", explanation: "Parks have swings, slides, and lots of fun!" },
+      { statement: "We buy groceries at the church.", pt: "Nós compramos comida na igreja.", isTrue: false, emoji: "⛪", explanation: "We buy groceries at the SUPERMARKET! Churches are for worship." },
+      { statement: "Firefighters work at the fire station.", pt: "Bombeiros trabalham no corpo de bombeiros.", isTrue: true, emoji: "🚒", explanation: "Fire stations house firefighters and their trucks!" },
+      { statement: "We send letters at the bakery.", pt: "Nós enviamos cartas na padaria.", isTrue: false, emoji: "🥖", explanation: "We send letters at the POST OFFICE! Bakeries sell bread." }
+    ];
+
+    const findMistakeQuestions = [
+      { wrong: "I read books at the hospital.", correct: "I read books at the LIBRARY! 📚", pt: "Eu leio livros no hospital.", emoji: "🏥" },
+      { wrong: "We buy bread at the police station.", correct: "We buy bread at the BAKERY! 🥖", pt: "Nós compramos pão na delegacia.", emoji: "🚔" },
+      { wrong: "The doctor works at the park.", correct: "The doctor works at the HOSPITAL! 🏥", pt: "O médico trabalha no parque.", emoji: "🌳" },
+      { wrong: "I send letters at the supermarket.", correct: "I send letters at the POST OFFICE! 📮", pt: "Eu envio cartas no supermercado.", emoji: "🛒" },
+      { wrong: "We save money at the pharmacy.", correct: "We save money at the BANK! 🏦", pt: "Nós guardamos dinheiro na farmácia.", emoji: "💊" },
+      { wrong: "Cars get fuel at the library.", correct: "Cars get fuel at the GAS STATION! ⛽", pt: "Carros abastecem na biblioteca.", emoji: "📚" }
+    ];
+
+    const tellMeQuestions = [
+      { q: "Tell me: What is your favorite place in the city? Why?", pt: "Me conte: Qual é o seu lugar favorito na cidade? Por quê?", emoji: "🏙️" },
+      { q: "Tell me: Do you like going to the park? What do you do there?", pt: "Me conte: Você gosta de ir ao parque? O que você faz lá?", emoji: "🌳" },
+      { q: "Tell me: Do you visit museums? What do you see there?", pt: "Me conte: Você visita museus? O que você vê lá?", emoji: "🏛️" },
+      { q: "Tell me: Where does your family buy food?", pt: "Me conte: Onde a sua família compra comida?", emoji: "🛒" },
+      { q: "Tell me: What is near your house? A park? A school?", pt: "Me conte: O que tem perto da sua casa? Um parque? Uma escola?", emoji: "🏫" },
+      { q: "Tell me: What places do you walk by on the way to school?", pt: "Me conte: Por quais lugares você passa no caminho da escola?", emoji: "🚶" }
+    ];
+
+    // GAME — Sound Match
+    let gi = 0, gs = 0, ga = false;
+    const sq = [...gameData].sort(() => Math.random() - 0.5).slice(0, 8);
+    const tq = sq.length;
+    const allNames = gameData.map(g => g.correct);
+
+    function renderQ() {
+      ga = false;
+      const q = sq[gi];
+      document.getElementById('game-prompt').textContent = q.sound;
+      document.getElementById('game-score').innerHTML = `⭐ Score: <strong>${gs}</strong> / <span>${tq}</span>`;
+      document.getElementById('game-progress-bar').style.width = ((gi / tq) * 100) + '%';
+      document.getElementById('game-feedback').textContent = '';
+      document.getElementById('game-feedback').className = 'game-feedback';
+
+      const wrongs = allNames.filter(n => n !== q.correct).sort(() => Math.random() - 0.5).slice(0, 3);
+      const opts = [...wrongs, q.correct].sort(() => Math.random() - 0.5);
+
+      const oe = document.getElementById('game-options');
+      oe.innerHTML = '';
+      opts.forEach(opt => {
+        const btn = document.createElement('button');
+        btn.className = 'game-option';
+        btn.textContent = opt;
+        btn.addEventListener('click', () => handleA(btn, opt, q.correct));
+        oe.appendChild(btn);
+      });
+    }
+
+    function handleA(btn, sel, cor) {
+      if (ga) return; ga = true;
+      const fb = document.getElementById('game-feedback');
+      document.querySelectorAll('.game-option').forEach(o => o.classList.add('disabled'));
+      if (sel === cor) {
+        gs++; btn.classList.add('correct');
+        fb.textContent = '🎉 Correct! You know your city!'; fb.className = 'game-feedback correct-msg';
+      } else {
+        btn.classList.add('wrong');
+        document.querySelectorAll('.game-option').forEach(o => { if (o.textContent.includes(cor)) o.classList.add('correct'); });
+        fb.textContent = `❌ That's a ${cor}!`; fb.className = 'game-feedback wrong-msg';
+      }
+      document.getElementById('game-score').innerHTML = `⭐ Score: <strong>${gs}</strong> / <span>${tq}</span>`;
+      setTimeout(() => { gi++; if (gi < tq) renderQ(); else showComplete(); }, 1500);
+    }
+
+    function showComplete() {
+      document.getElementById('game-area').style.display = 'none';
+      document.getElementById('game-complete').classList.add('active');
+      const p = Math.round((gs / tq) * 100);
+      document.getElementById('game-final-score').textContent = `You got ${gs} out of ${tq} correct! (${p}%)`;
+      document.getElementById('game-stars').textContent = p >= 90 ? '⭐⭐⭐' : p >= 60 ? '⭐⭐' : '⭐';
+      document.getElementById('game-progress-bar').style.width = '100%';
+    }
+
+    document.getElementById('game-replay-btn').addEventListener('click', () => {
+      gi = 0; gs = 0; sq.sort(() => Math.random() - 0.5);
+      document.getElementById('game-area').style.display = 'block';
+      document.getElementById('game-complete').classList.remove('active');
+      renderQ();
+    });
+    renderQ();
+  </script>
+  <script src="scenario-engine.js?v=1787856914250"></script>
+  <script src="shared-games.js?v=1787856914250"></script>
+</body>
+</html>

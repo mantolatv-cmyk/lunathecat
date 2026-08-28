@@ -6,8 +6,8 @@
   <title>🌈 Weather &amp; Seasons — Learn with Luna</title>
   <meta name="description" content="Learn about weather and seasons in English with Luna the Cat! Interactive story, vocabulary flashcards, and fun games." />
   <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🐱</text></svg>" />
-  <link rel="stylesheet" href="styles.css" />
-  <link rel="stylesheet" href="scenario.css" />
+  <link rel="stylesheet" href="styles.css?v=1787856914251" />
+  <link rel="stylesheet" href="scenario.css?v=1787856914251" />
 </head>
 <body>
 
@@ -70,7 +70,7 @@
           <div class="seq-emoji" id="seq-emoji">☀️</div>
           <div class="seq-word" id="seq-word" style="display: none;"></div>
           <button class="seq-translation-btn" id="seq-translation-btn">Show English</button>
-          <div class="seq-translation-text" id="seq-translation-text">🇺🇸 Summer</div>
+          <div class="seq-translation-text" id="seq-translation-text">Summer</div>
         </div>
         <div class="seq-nav">
           <button class="seq-nav-btn" id="seq-prev-btn" aria-label="Previous">←</button>
@@ -84,7 +84,7 @@
         <div class="game-score" id="game-score">⭐ Score: <strong>0</strong> / <span>0</span></div>
         <div class="game-progress"><div class="game-progress-bar" id="game-progress-bar"></div></div>
         <div class="game-prompt">
-          <div class="game-prompt-label">Which weather sounds like...</div>
+          <div class="game-prompt-label">Read the clue:</div>
           <div class="game-prompt-content" id="game-prompt" style="font-size: 2rem;"></div>
         </div>
         <div class="game-options" id="game-options"></div>
@@ -124,14 +124,14 @@
       { speaker: 'child', en: "Wow, look at the beautiful sky! 🌈", pt: "Uau, olhe para o lindo céu! 🌈" },
       { speaker: 'luna', en: "In Spring, we see beautiful flowers. 🌸", pt: "Na Primavera, nós vemos lindas flores. 🌸" },
       { speaker: 'child', en: "And in Summer it is very sunny and hot! 🌞", pt: "E no Verão é muito ensolarado e quente! 🌞" },
-      { speaker: 'luna', en: "Yes! But when it is cloudy and rainy, we use an umbrella. ☔", pt: "Sim! Mas quando está nublado e chuvoso, nós usamos um guarda-chuva. ☔" },
-      { speaker: 'child', en: "I love jumping in a puddle! 💧", pt: "Eu amo pular numa poça! 💧" },
+      { speaker: 'luna', en: "Yes! When it rains, we use an umbrella. ☔", pt: "Sim! Mas quando está nublado e chuvoso, nós usamos um guarda-chuva. ☔" },
+      { speaker: 'child', en: "I jump in puddles! 💧", pt: "Eu amo pular numa poça! 💧" },
       { speaker: 'luna', en: "In Autumn, there is a cool breeze. 🍃", pt: "No Outono, tem uma brisa fresca. 🍃" },
-      { speaker: 'child', en: "And in Winter, we can see a snowflake! ❄️", pt: "E no Inverno, nós podemos ver um floco de neve! ❄️" },
+      { speaker: 'child', en: "In Winter, we see snow! ❄️", pt: "E no Inverno, nós podemos ver um floco de neve! ❄️" },
       { speaker: 'luna', en: "Brrr! The temperature is very icy! 🌡️", pt: "Brrr! A temperatura está muito congelante! 🌡️" },
       { speaker: 'child', en: "Sometimes there is thunder and lightning! ⚡", pt: "Às vezes tem trovão e raio! ⚡" },
-      { speaker: 'luna', en: "That is a very stormy day! 🌩️", pt: "Esse é um dia muito tempestuoso! 🌩️" },
-      { speaker: 'child', en: "Weather is so magical! ✨", pt: "O clima é tão mágico! ✨" }
+      { speaker: 'luna', en: "That is a stormy day! 🌩️", pt: "Esse é um dia muito tempestuoso! 🌩️" },
+      { speaker: 'child', en: "Weather is so cool to learn! 🌤️", pt: "O clima é tão legal de aprender! 🌤️" }
     ];
 
     const vocabulary = [
@@ -158,41 +158,31 @@
     ];
 
     const gameData = [
-      { sound: '☀️ "Hot hot!"', correct: 'Summer', emoji: '☀️' },
-      { sound: '⛄ "Brrr!"', correct: 'Winter', emoji: '⛄' },
-      { sound: '🌸 "Flowers!"', correct: 'Spring', emoji: '🌸' },
-      { sound: '🍂 "Falling leaves!"', correct: 'Autumn', emoji: '🍂' },
-      { sound: '🌞 "Shine shine!"', correct: 'Sunny', emoji: '🌞' },
-      { sound: '🌧️ "Pitter patter!"', correct: 'Rainy', emoji: '🌧️' },
-      { sound: '☁️ "Grey sky!"', correct: 'Cloudy', emoji: '☁️' },
-      { sound: '🌨️ "Soft snow!"', correct: 'Snowy', emoji: '🌨️' },
-      { sound: '🌬️ "Whoosh!"', correct: 'Windy', emoji: '🌬️' },
-      { sound: '🌩️ "Crash!"', correct: 'Stormy', emoji: '🌩️' },
-      { sound: '🌫️ "Can\'t see!"', correct: 'Foggy', emoji: '🌫️' },
-      { sound: '🧊 "Slip!"', correct: 'Icy', emoji: '🧊' },
-      { sound: '🌈 "Beautiful colors!"', correct: 'Rainbow', emoji: '🌈' },
-      { sound: '⛈️ "Boom!"', correct: 'Thunder', emoji: '⛈️' },
-      { sound: '⚡ "Flash!"', correct: 'Lightning', emoji: '⚡' },
-      { sound: '❄️ "Falling soft!"', correct: 'Snowflake', emoji: '❄️' },
-      { sound: '☔ "Pop open!"', correct: 'Umbrella', emoji: '☔' },
-      { sound: '💧 "Splash!"', correct: 'Puddle', emoji: '💧' },
-      { sound: '🍃 "Gentle wind!"', correct: 'Breeze', emoji: '🍃' },
-      { sound: '🌡️ "Hot or cold!"', correct: 'Temperature', emoji: '🌡️' }
+      { sound: 'It is very hot and you go to the beach.', correct: 'Summer', emoji: '☀️' },
+      { sound: 'It is very cold and you wear a jacket.', correct: 'Winter', emoji: '⛄' },
+      { sound: 'The flowers grow and the sun shines.', correct: 'Spring', emoji: '🌸' },
+      { sound: 'The leaves fall from the trees.', correct: 'Autumn', emoji: '🍂' },
+      { sound: 'The sun is bright in the sky.', correct: 'Sunny', emoji: '🌞' },
+      { sound: 'Water falls from the sky and you use an umbrella.', correct: 'Rainy', emoji: '🌧️' },
+      { sound: 'You see many grey clouds in the sky.', correct: 'Cloudy', emoji: '☁️' },
+      { sound: 'White snow falls and everything is cold.', correct: 'Snowy', emoji: '🌨️' },
+      { sound: 'The air moves very fast.', correct: 'Windy', emoji: '🌬️' },
+      { sound: 'You hear loud thunder and see lightning.', correct: 'Stormy', emoji: '🌩️' },
+      { sound: 'The air is thick and it is hard to see.', correct: 'Foggy', emoji: '🌫️' },
+      { sound: 'The ground is slippery and cold.', correct: 'Icy', emoji: '🧊' }
     ];
 
     const gameSentences = [
-      { en: "The sunny summer is very hot", pt: "O verão ensolarado é muito quente" },
-      { en: "I love the beautiful rainbow", pt: "Eu amo o lindo arco-íris" },
-      { en: "A stormy day has loud thunder", pt: "Um dia tempestuoso tem trovão alto" },
-      { en: "We use an umbrella in the rainy weather", pt: "Nós usamos um guarda-chuva no clima chuvoso" },
-      { en: "The snowflake falls in the icy winter", pt: "O floco de neve cai no inverno congelado" },
-      { en: "Kids jump in the puddle", pt: "As crianças pulam na poça" },
-      { en: "Lightning flashes in the sky", pt: "O raio brilha no céu" },
-      { en: "A cool breeze blows in autumn", pt: "Uma brisa fresca sopra no outono" },
-      { en: "The foggy morning is very quiet", pt: "A manhã com neblina é muito quieta" },
-      { en: "The temperature drops in the snow", pt: "A temperatura cai na neve" },
-      { en: "Spring brings beautiful blooming flowers", pt: "A primavera traz lindas flores desabrochando" },
-      { en: "A windy day is good for kites", pt: "Um dia ventoso é bom para pipas" }
+      { en: "The sun shines in the sky", pt: "O sol brilha no céu" },
+      { en: "We use an umbrella for rain", pt: "Nós usamos um guarda-chuva para a chuva" },
+      { en: "I see a beautiful colorful rainbow", pt: "Eu vejo um lindo arco-íris colorido" },
+      { en: "She jumps in a big puddle", pt: "Ela pula em uma grande poça" },
+      { en: "The cold snow falls in winter", pt: "A neve fria cai no inverno" },
+      { en: "We feel a cool autumn breeze", pt: "Nós sentimos uma brisa fria de outono" },
+      { en: "It is very hot in summer", pt: "É muito quente no verão" },
+      { en: "The stormy wind blows very fast", pt: "O vento tempestuoso sopra muito rápido" },
+      { en: "They look at a white cloud", pt: "Eles olham para uma nuvem branca" },
+      { en: "A loud thunder scares the dog", pt: "Um trovão alto assusta o cachorro" }
     ];
 
     // GAME — Sound Match
@@ -258,7 +248,7 @@
     });
     renderQ();
   </script>
-  <script src="scenario-engine.js"></script>
-  <script src="shared-games.js"></script>
+  <script src="scenario-engine.js?v=1787856914251"></script>
+  <script src="shared-games.js?v=1787856914251"></script>
 </body>
 </html>

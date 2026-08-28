@@ -1,0 +1,277 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>👗 Clothes & Accessories — Learn with Luna</title>
+  <meta name="description" content="Learn about clothes and accessories in English with Luna the Cat! Interactive story, flashcards, and fun games." />
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🐱</text></svg>" />
+  <link rel="stylesheet" href="styles.css?v=1787856914250" />
+  <link rel="stylesheet" href="scenario.css?v=1787856914250" />
+</head>
+<body>
+
+  <header class="header scrolled" id="app-header">
+    <div class="header-inner">
+      <a href="index.html" class="logo">
+        <img src="images/luna-logo.png" alt="Luna the Cat" class="logo-icon" />
+        <span class="logo-text">Learn with <span>Luna</span></span>
+      </a>
+      <nav class="nav-links">
+        <a href="index.html" class="nav-link">Home</a>
+        <a href="index.html#videos" class="nav-link active">Videos</a>
+        <a href="index.html#printables" class="nav-link">Printables</a>
+        <a href="index.html#about" class="nav-link">About</a>
+      </nav>
+      <button class="menu-toggle" id="menu-toggle" aria-label="Toggle menu"><span></span></button>
+    </div>
+    <nav class="nav-mobile" id="nav-mobile">
+      <a href="index.html" class="nav-link">Home</a>
+      <a href="index.html#videos" class="nav-link">Videos</a>
+      <a href="index.html#printables" class="nav-link">Printables</a>
+      <a href="index.html#about" class="nav-link">About</a>
+    </nav>
+  </header>
+
+  <section class="scenario-hero">
+    <img src="images/scene-clothes.jpg" alt="Luna trying on different clothes and accessories" class="scenario-hero-img" loading="lazy" />
+    <div class="scenario-hero-overlay">
+      <div class="scenario-hero-icon">👗</div>
+      <h1 class="scenario-hero-title">Clothes & Accessories</h1>
+      <p class="scenario-hero-subtitle">Let's get dressed with Luna!</p>
+    </div>
+  </section>
+
+  <div class="scenario-container">
+    <a href="index.html" class="back-btn">← Back to Home</a>
+
+    <div class="scenario-tabs" id="scenario-tabs">
+      <button class="scenario-tab active" data-tab="story">💬 Story Time</button>
+      <button class="scenario-tab" data-tab="vocab">📖 Word Garden</button>
+      <button class="scenario-tab" data-tab="learnwords">📖 Learn Words</button>
+      <button class="scenario-tab" data-tab="game">🎮 Play &amp; Learn</button>
+      <button class="scenario-tab" data-tab="memory">🃏 Matching Pairs</button>
+    </div>
+
+    <!-- TAB 1: Story -->
+    <div class="tab-panel active" id="tab-story">
+      <div class="dialogue-container" id="dialogue-container"></div>
+      <button class="dialogue-next-btn" id="dialogue-next-btn">Next Line →</button>
+      <button class="dialogue-restart-btn" id="dialogue-restart-btn">🔄 Start Over</button>
+    </div>
+
+    <!-- TAB 2: Vocabulary Grid -->
+    <div class="tab-panel" id="tab-vocab">
+      <div class="vocab-grid" id="vocab-grid"></div>
+    </div>
+
+    <!-- TAB 3: Learn Words -->
+    <div class="tab-panel" id="tab-learnwords">
+      <div class="seq-card-container">
+        <div class="seq-card" id="seq-card">
+          <div class="seq-emoji" id="seq-emoji">👕</div>
+          <div class="seq-word" id="seq-word" style="display: none;"></div>
+          <button class="seq-translation-btn" id="seq-translation-btn">Show English</button>
+          <div class="seq-translation-text" id="seq-translation-text">T-Shirt</div>
+        </div>
+        <div class="seq-nav">
+          <button class="seq-nav-btn" id="seq-prev-btn" aria-label="Previous">←</button>
+          <button class="seq-nav-btn" id="seq-next-btn" aria-label="Next">→</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- TAB 4: Sound Match Game -->
+    <div class="tab-panel" id="tab-game">
+      <div class="game-area" id="game-area">
+        <div class="game-score" id="game-score">⭐ Score: <strong>0</strong> / <span>0</span></div>
+        <div class="game-progress"><div class="game-progress-bar" id="game-progress-bar"></div></div>
+        <div class="game-prompt">
+          <div class="game-prompt-label">Read the clue:</div>
+          <div class="game-prompt-content" id="game-prompt" style="font-size: 2rem;"></div>
+        </div>
+        <div class="game-options" id="game-options"></div>
+        <div class="game-feedback" id="game-feedback"></div>
+      </div>
+      <div class="game-complete" id="game-complete">
+        <div class="game-complete-emoji">👗</div>
+        <h2 class="game-complete-title">Fashion Star!</h2>
+        <p class="game-complete-score" id="game-final-score"></p>
+        <div class="game-stars" id="game-stars"></div>
+        <button class="game-replay-btn" id="game-replay-btn">🔄 Play Again!</button>
+      </div>
+    </div>
+
+    <!-- TAB 5: Matching Pairs -->
+    <div class="tab-panel" id="tab-memory">
+      <div class="pairs-board" id="pairs-board"></div>
+      <div class="game-complete" id="pairs-complete" style="display: none; flex-direction: column; align-items: center;">
+        <div class="game-complete-emoji">🎉</div>
+        <h2 class="game-complete-title">You Did It!</h2>
+        <p class="game-complete-score" style="font-size:1.2rem; color:var(--text-secondary);">You matched all the clothes!</p>
+        <button class="game-replay-btn" id="pairs-replay-btn">🔄 Play Again!</button>
+      </div>
+    </div>
+  </div>
+
+  <footer class="footer">
+    <div class="footer-inner">
+      <p class="footer-message">Luna loves picking outfits with you! <span class="paw-emoji">🐾</span></p>
+      <p class="footer-copy">Made with <span class="heart">♥</span> by Learn with Luna · © 2026</p>
+    </div>
+  </footer>
+
+  <script>
+    const dialogues = [
+      { speaker: 'luna', en: "Good morning! What do you want to wear today? 👗", pt: "Bom dia! O que você quer vestir hoje? 👗" },
+      { speaker: 'child', en: "I want to wear my favorite blue T-shirt! 👕", pt: "Eu quero vestir minha camiseta azul favorita! 👕" },
+      { speaker: 'luna', en: "Nice! Don't forget your pants and shoes! 👖👟", pt: "Legal! Não se esqueça da calça e dos sapatos! 👖👟" },
+      { speaker: 'child', en: "It's cold outside. I need my jacket! 🧥", pt: "Está frio lá fora. Eu preciso da minha jaqueta! 🧥" },
+      { speaker: 'luna', en: "And a warm scarf and gloves for your hands! 🧣🧤", pt: "E um cachecol quentinho e luvas para as mãos! 🧣🧤" },
+      { speaker: 'child', en: "Can I wear my pretty dress to the party? 👗", pt: "Posso vestir meu vestido bonito para a festa? 👗" },
+      { speaker: 'luna', en: "Of course! And don't forget a cute hat! 🎩", pt: "Claro! E não se esqueça de um chapéu fofo! 🎩" },
+      { speaker: 'child', en: "At night I wear my cozy pajamas! 🌙", pt: "De noite eu visto meu pijama aconchegante! 🌙" },
+      { speaker: 'luna', en: "You look amazing in all your outfits! ✨", pt: "Você fica incrível em todas as suas roupas! ✨" },
+      { speaker: 'child', en: "Thank you, Luna! I love getting dressed! 💖", pt: "Obrigada, Luna! Eu amo me vestir! 💖" }
+    ];
+
+    const vocabulary = [
+      { emoji: '👕', word: 'T-Shirt', pt: 'Camiseta', sound: 'Cool and comfy!' },
+      { emoji: '👖', word: 'Pants', pt: 'Calça', sound: 'Cover your legs!' },
+      { emoji: '👗', word: 'Dress', pt: 'Vestido', sound: 'Spin around!' },
+      { emoji: '👟', word: 'Shoes', pt: 'Sapatos', sound: 'Walk and run!' },
+      { emoji: '🧦', word: 'Socks', pt: 'Meias', sound: 'Keep feet warm!' },
+      { emoji: '🎩', word: 'Hat', pt: 'Chapéu', sound: 'On your head!' },
+      { emoji: '🧥', word: 'Jacket', pt: 'Jaqueta', sound: 'Stay warm!' },
+      { emoji: '🧣', word: 'Scarf', pt: 'Cachecol', sound: 'Wrap your neck!' },
+      { emoji: '🧤', word: 'Gloves', pt: 'Luvas', sound: 'Warm hands!' },
+      { emoji: '🥾', word: 'Boots', pt: 'Botas', sound: 'For rain and snow!' },
+      { emoji: '🩳', word: 'Shorts', pt: 'Shorts', sound: 'For hot days!' },
+      { emoji: '🧶', word: 'Sweater', pt: 'Suéter', sound: 'Soft and warm!' },
+      { emoji: '😴', word: 'Pajamas', pt: 'Pijama', sound: 'Time to sleep!' },
+      { emoji: '👒', word: 'Skirt', pt: 'Saia', sound: 'Twirl around!' }
+    ];
+
+    const gameData = [
+      { sound: 'You wear this on top. It has short sleeves.', correct: 'T-Shirt', emoji: '👕' },
+      { sound: 'You wear these on your legs. They are long.', correct: 'Pants', emoji: '👖' },
+      { sound: 'Girls often wear this pretty outfit to parties.', correct: 'Dress', emoji: '👗' },
+      { sound: 'You put these on your feet to walk outside.', correct: 'Shoes', emoji: '👟' },
+      { sound: 'You wear these inside your shoes to keep feet warm.', correct: 'Socks', emoji: '🧦' },
+      { sound: 'You wear this on your head to block the sun.', correct: 'Hat', emoji: '🎩' },
+      { sound: 'You wear this over your shirt when it is cold outside.', correct: 'Jacket', emoji: '🧥' },
+      { sound: 'You wrap this around your neck in winter.', correct: 'Scarf', emoji: '🧣' },
+      { sound: 'You wear these on your hands when it is freezing.', correct: 'Gloves', emoji: '🧤' },
+      { sound: 'These are heavy shoes for rain, mud, or snow.', correct: 'Boots', emoji: '🥾' },
+      { sound: 'You wear these short pants on hot summer days.', correct: 'Shorts', emoji: '🩳' },
+      { sound: 'This is a warm, soft top you wear in winter.', correct: 'Sweater', emoji: '🧶' },
+      { sound: 'You wear these comfortable clothes to sleep at night.', correct: 'Pajamas', emoji: '😴' }
+    ];
+
+    const gameSentences = [
+      { en: "I wear my blue T-shirt today", pt: "Eu visto minha camiseta azul hoje" },
+      { en: "She puts on her warm jacket", pt: "Ela veste sua jaqueta quente" },
+      { en: "He wears boots when it rains", pt: "Ele usa botas quando chove" },
+      { en: "We need gloves in the winter", pt: "Nós precisamos de luvas no inverno" },
+      { en: "I love my pink dress very much", pt: "Eu amo muito o meu vestido rosa" },
+      { en: "Mom buys new shoes at the store", pt: "Mamãe compra sapatos novos na loja" },
+      { en: "I put on pajamas before sleeping", pt: "Eu visto pijama antes de dormir" },
+      { en: "The hat protects me from the sun", pt: "O chapéu me protege do sol" },
+      { en: "She wears a pretty scarf today", pt: "Ela usa um cachecol bonito hoje" },
+      { en: "He likes shorts on hot sunny days", pt: "Ele gosta de shorts em dias quentes" }
+    ];
+
+    const trueFalseQuestions = [
+      { statement: "We wear a jacket when it is cold.", pt: "Nós vestimos uma jaqueta quando está frio.", isTrue: true, emoji: "🧥", explanation: "Jackets keep us warm on cold days!" },
+      { statement: "We wear boots on our hands.", pt: "Nós usamos botas nas mãos.", isTrue: false, emoji: "🥾", explanation: "Boots go on your FEET! Gloves go on your hands." },
+      { statement: "Pajamas are for sleeping at night.", pt: "Pijamas são para dormir à noite.", isTrue: true, emoji: "😴", explanation: "We put on cozy pajamas before bed!" },
+      { statement: "We wear a hat on our head.", pt: "Nós usamos um chapéu na cabeça.", isTrue: true, emoji: "🎩", explanation: "Hats sit on top of your head!" },
+      { statement: "We wear socks over our shoes.", pt: "Nós usamos meias por cima dos sapatos.", isTrue: false, emoji: "🧦", explanation: "Socks go INSIDE your shoes, not on top!" },
+      { statement: "A scarf keeps your neck warm.", pt: "Um cachecol mantém seu pescoço quente.", isTrue: true, emoji: "🧣", explanation: "Scarves wrap around your neck in winter!" },
+      { statement: "We wear shorts when it is snowing.", pt: "Nós usamos shorts quando está nevando.", isTrue: false, emoji: "🩳", explanation: "Shorts are for HOT days! In the snow, we wear pants and jackets." }
+    ];
+
+    const findMistakeQuestions = [
+      { wrong: "I put my gloves on my feet.", correct: "I put my gloves on my HANDS! 🧤", pt: "Eu coloco minhas luvas nos pés.", emoji: "🧤" },
+      { wrong: "She wears a scarf on her head.", correct: "She wears a scarf on her NECK! 🧣", pt: "Ela usa um cachecol na cabeça.", emoji: "🧣" },
+      { wrong: "He wears pajamas to school.", correct: "He wears a UNIFORM or T-shirt to school! 🏫", pt: "Ele usa pijama para ir à escola.", emoji: "😴" },
+      { wrong: "We wear boots when it is very hot.", correct: "We wear SANDALS or shorts when it's hot! ☀️", pt: "Nós usamos botas quando está muito quente.", emoji: "🥾" },
+      { wrong: "I put socks on my ears.", correct: "I put socks on my FEET! 🧦", pt: "Eu coloco meias nas orelhas.", emoji: "🧦" },
+      { wrong: "She wears a swimsuit to go to school.", correct: "She wears a swimsuit to go SWIMMING! 🏊", pt: "Ela usa maiô para ir à escola.", emoji: "👗" }
+    ];
+
+    const tellMeQuestions = [
+      { q: "Tell me: What is your favorite outfit? Describe it!", pt: "Me conte: Qual é sua roupa favorita? Descreva!", emoji: "👗" },
+      { q: "Tell me: What do you wear when it is cold outside?", pt: "Me conte: O que você veste quando está frio?", emoji: "🧥" },
+      { q: "Tell me: What color are your favorite shoes?", pt: "Me conte: De que cor são seus sapatos favoritos?", emoji: "👟" },
+      { q: "Tell me: Do you like dresses or pants better? Why?", pt: "Me conte: Você gosta mais de vestidos ou calças? Por quê?", emoji: "👖" },
+      { q: "Tell me: What pajamas do you have? What color are they?", pt: "Me conte: Que pijamas você tem? De que cor são?", emoji: "😴" },
+      { q: "Tell me: What do you wear to play at the park?", pt: "Me conte: O que você veste para brincar no parque?", emoji: "🌳" }
+    ];
+
+    // GAME — Sound Match
+    let gi = 0, gs = 0, ga = false;
+    const sq = [...gameData].sort(() => Math.random() - 0.5).slice(0, 8);
+    const tq = sq.length;
+    const allNames = gameData.map(g => g.correct);
+
+    function renderQ() {
+      ga = false;
+      const q = sq[gi];
+      document.getElementById('game-prompt').textContent = q.sound;
+      document.getElementById('game-score').innerHTML = `⭐ Score: <strong>${gs}</strong> / <span>${tq}</span>`;
+      document.getElementById('game-progress-bar').style.width = ((gi / tq) * 100) + '%';
+      document.getElementById('game-feedback').textContent = '';
+      document.getElementById('game-feedback').className = 'game-feedback';
+
+      const wrongs = allNames.filter(n => n !== q.correct).sort(() => Math.random() - 0.5).slice(0, 3);
+      const opts = [...wrongs, q.correct].sort(() => Math.random() - 0.5);
+
+      const oe = document.getElementById('game-options');
+      oe.innerHTML = '';
+      opts.forEach(opt => {
+        const btn = document.createElement('button');
+        btn.className = 'game-option';
+        btn.textContent = opt;
+        btn.addEventListener('click', () => handleA(btn, opt, q.correct));
+        oe.appendChild(btn);
+      });
+    }
+
+    function handleA(btn, sel, cor) {
+      if (ga) return; ga = true;
+      const fb = document.getElementById('game-feedback');
+      document.querySelectorAll('.game-option').forEach(o => o.classList.add('disabled'));
+      if (sel === cor) {
+        gs++; btn.classList.add('correct');
+        fb.textContent = '🎉 Correct! You know your clothes!'; fb.className = 'game-feedback correct-msg';
+      } else {
+        btn.classList.add('wrong');
+        document.querySelectorAll('.game-option').forEach(o => { if (o.textContent.includes(cor)) o.classList.add('correct'); });
+        fb.textContent = `❌ That's a ${cor}!`; fb.className = 'game-feedback wrong-msg';
+      }
+      document.getElementById('game-score').innerHTML = `⭐ Score: <strong>${gs}</strong> / <span>${tq}</span>`;
+      setTimeout(() => { gi++; if (gi < tq) renderQ(); else showComplete(); }, 1500);
+    }
+
+    function showComplete() {
+      document.getElementById('game-area').style.display = 'none';
+      document.getElementById('game-complete').classList.add('active');
+      const p = Math.round((gs / tq) * 100);
+      document.getElementById('game-final-score').textContent = `You got ${gs} out of ${tq} correct! (${p}%)`;
+      document.getElementById('game-stars').textContent = p >= 90 ? '⭐⭐⭐' : p >= 60 ? '⭐⭐' : '⭐';
+      document.getElementById('game-progress-bar').style.width = '100%';
+    }
+
+    document.getElementById('game-replay-btn').addEventListener('click', () => {
+      gi = 0; gs = 0; sq.sort(() => Math.random() - 0.5);
+      document.getElementById('game-area').style.display = 'block';
+      document.getElementById('game-complete').classList.remove('active');
+      renderQ();
+    });
+    renderQ();
+  </script>
+  <script src="scenario-engine.js?v=1787856914250"></script>
+  <script src="shared-games.js?v=1787856914250"></script>
+</body>
+</html>

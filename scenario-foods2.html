@@ -9,8 +9,8 @@
     content="Learn about even more yummy foods and drinks in English with Luna the Cat! Interactive stories, flashcards, and a feeding game." />
   <link rel="icon"
     href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🐱</text></svg>" />
-  <link rel="stylesheet" href="styles.css" />
-  <link rel="stylesheet" href="scenario.css" />
+  <link rel="stylesheet" href="styles.css?v=1787856914246" />
+  <link rel="stylesheet" href="scenario.css?v=1787856914246" />
 </head>
 
 <body>
@@ -71,7 +71,7 @@
           <div class="seq-emoji" id="seq-emoji">🍎</div>
           <div class="seq-word" id="seq-word" style="display: none;"></div>
           <button class="seq-translation-btn" id="seq-translation-btn">Show English</button>
-          <div class="seq-translation-text" id="seq-translation-text">🇺🇸 Apple</div>
+          <div class="seq-translation-text" id="seq-translation-text">Apple</div>
         </div>
         <div class="seq-nav">
           <button class="seq-nav-btn" id="seq-prev-btn" aria-label="Previous">←</button>
@@ -160,7 +160,7 @@
       { speaker: 'luna', en: "We have 25 new delicious foods today!", pt: "Temos 25 novas comidas deliciosas hoje!" },
       { speaker: 'child', en: "Wow! Do you have a BURGER 🍔?", pt: "Uau! Vocês têm HAMBÚRGUER 🍔?" },
       { speaker: 'luna', en: "Yes! And we also have HOT DOGS 🌭 and TACOS 🌮!", pt: "Sim! E também temos CACHORROS-QUENTES 🌭 e TACOS 🌮!" },
-      { speaker: 'child', en: "I want to eat everything! Do you have sweets?", pt: "Eu quero comer tudo! Vocês têm doces?" },
+      { speaker: 'child', en: "I want to eat all the food! Do you have sweets?", pt: "Eu quero comer tudo! Vocês têm doces?" },
       { speaker: 'luna', en: "Of course! We have CAKE 🍰, COOKIES 🍪, and DONUTS 🍩!", pt: "Claro! Temos BOLO 🍰, BISCOITOS 🍪 e ROSQUINHAS 🍩!" },
       { speaker: 'child', en: "Yummy! Let's learn all these new foods!", pt: "Que delícia! Vamos aprender todas essas novas comidas!" }
     ];
@@ -194,26 +194,16 @@
     ];
 
     const gameSentences = [
-      { en: "I really like eating big burgers", pt: "Eu gosto muito de comer hambúrgueres grandes" },
-      { en: "The yellow lemon is very sour", pt: "O limão amarelo é muito azedo" },
-      { en: "I eat a tasty ham sandwich", pt: "Eu como um sanduíche saboroso de presunto" },
-      { en: "The Swiss cheese has many holes", pt: "O queijo suíço tem muitos buraquinhos" },
-      { en: "Luna absolutely loves sweet pink donuts", pt: "Luna ama muito rosquinhas doces rosa" },
-      { en: "I want a large chocolate cookie", pt: "Eu quero um grande biscoito de chocolate" },
-      { en: "Dark chocolate is sweet and delicious", pt: "Chocolate amargo é doce e delicioso" },
-      { en: "The toasted bread is very crunchy", pt: "O pão torrado é quente e crocante" },
-      { en: "Fresh purple grapes grow very fast", pt: "Uvas roxas frescas crescem muito rápido" },
-      { en: "We always eat sweet buttery popcorn", pt: "Sempre comemos pipoca amanteigada doce" },
-      { en: "A warm hot dog is fun", pt: "Um cachorro-quente morno é muito divertido" },
-      { en: "The spicy taco is very good", pt: "O taco picante é muito bom" },
-      { en: "I love eating sweet warm pancakes", pt: "Eu amo comer panquecas doces quentes" },
-      { en: "A slice of cake is good", pt: "Uma fatia de bolo é muito boa" },
-      { en: "The tropical pineapple is very sweet", pt: "O abacaxi tropical é muito doce" },
-      { en: "Sweet red cherries are very perfect", pt: "Cerejas vermelhas doces são muito perfeitas" },
-      { en: "I spread green avocado on toast", pt: "Eu espalho abacate verde na torrada" },
-      { en: "The red tomato is very juicy", pt: "O tomate vermelho é muito suculento" },
-      { en: "We bake a hot delicious potato", pt: "Nós assamos uma batata quente deliciosa" },
-      { en: "The brown mushroom grows very fast", pt: "O cogumelo marrom cresce muito rápido" }
+      { en: "We eat a big hot dog", pt: "Nós comemos um cachorro-quente grande" },
+      { en: "She wants a taco for dinner", pt: "Ela quer um taco para o jantar" },
+      { en: "I love to eat sweet cookies", pt: "Eu amo comer biscoitos doces" },
+      { en: "They make a fresh green salad", pt: "Eles fazem uma salada verde fresca" },
+      { en: "The cold ice cream is sweet", pt: "O sorvete frio é doce" },
+      { en: "He cooks a nice beef burger", pt: "Ele cozinha um hambúrguer de carne bom" },
+      { en: "We drink hot soup in winter", pt: "Nós bebemos sopa quente no inverno" },
+      { en: "I want some chicken with rice", pt: "Eu quero um pouco de frango com arroz" },
+      { en: "The fresh fruit is very healthy", pt: "A fruta fresca é muito saudável" },
+      { en: "She drinks milk with chocolate cake", pt: "Ela bebe leite com bolo de chocolate" }
     ];
 
     // GAME — Do You Like (unique to foods)
@@ -262,8 +252,8 @@
 
     initLikeGame();
   </script>
-  <script src="scenario-engine.js"></script>
-  <script src="shared-games.js"></script>
+  <script src="scenario-engine.js?v=1787856914246"></script>
+  <script src="shared-games.js?v=1787856914246"></script>
 </body>
 
 </html>

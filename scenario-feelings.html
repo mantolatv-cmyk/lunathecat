@@ -6,8 +6,8 @@
   <title>😊 Feelings &amp; Emotions — Learn with Luna</title>
   <meta name="description" content="Express feelings and emotions in English with Luna the Cat! Interactive story, flashcards, and fun games for kids." />
   <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🐱</text></svg>" />
-  <link rel="stylesheet" href="styles.css" />
-  <link rel="stylesheet" href="scenario.css" />
+  <link rel="stylesheet" href="styles.css?v=1787856914244" />
+  <link rel="stylesheet" href="scenario.css?v=1787856914244" />
 </head>
 <body>
 
@@ -72,7 +72,7 @@
           <div class="seq-emoji" id="seq-emoji">😄</div>
           <div class="seq-word" id="seq-word" style="display: none;"></div>
           <button class="seq-translation-btn" id="seq-translation-btn">Show English</button>
-          <div class="seq-translation-text" id="seq-translation-text">🇺🇸 Happy</div>
+          <div class="seq-translation-text" id="seq-translation-text">Happy</div>
         </div>
         <div class="seq-nav">
           <button class="seq-nav-btn" id="seq-prev-btn" aria-label="Previous">←</button>
@@ -87,7 +87,7 @@
         <div class="game-score" id="game-score">⭐ Score: <strong>0</strong> / <span>0</span></div>
         <div class="game-progress"><div class="game-progress-bar" id="game-progress-bar"></div></div>
         <div class="game-prompt">
-          <div class="game-prompt-label">Which feeling says...</div>
+          <div class="game-prompt-label">Read the clue:</div>
           <div class="game-prompt-content" id="game-prompt" style="font-size: 2rem;"></div>
         </div>
         <div class="game-options" id="game-options"></div>
@@ -123,14 +123,14 @@
 
   <script>
     const dialogues = [
-      { speaker: 'luna', en: "Hello! How are you feeling today? 😊", pt: "Olá! Como você está se sentindo hoje? 😊" },
+      { speaker: 'luna', en: "Hello! How are you today? 😊", pt: "Olá! Como você está se sentindo hoje? 😊" },
       { speaker: 'child', en: "I am happy and excited to play! 😄", pt: "Eu estou feliz e empolgada para brincar! 😄" },
-      { speaker: 'luna', en: "That is great! When I play, I am excited too! ✨", pt: "Isso é ótimo! Quando brinco, eu fico empolgada também! ✨" },
-      { speaker: 'child', en: "Sometimes I feel tired after school. 😴", pt: "Às vezes me sinto cansada depois da escola. 😴" },
-      { speaker: 'luna', en: "When you are tired, take a nice rest! 💤", pt: "Quando você estiver cansada, descanse bastante! 💤" },
-      { speaker: 'child', en: "I felt brave when I spoke in English! 🦁", pt: "Me senti corajosa quando falei em inglês! 🦁" },
-      { speaker: 'luna', en: "I am so proud of you! You are very brave! 💖", pt: "Estou tão orgulhosa de você! Você é muito corajosa! 💖" },
-      { speaker: 'child', en: "Learning English makes me feel silly and happy! 😜", pt: "Aprender inglês me deixa engraçada e feliz! 😜" }
+      { speaker: 'luna', en: "That is great! I am excited too! ✨", pt: "Isso é ótimo! Quando brinco, eu fico empolgada também! ✨" },
+      { speaker: 'child', en: "Sometimes I am tired after school. 😴", pt: "Às vezes me sinto cansada depois da escola. 😴" },
+      { speaker: 'luna', en: "When you are tired, you sleep! 💤", pt: "Quando você estiver cansada, descanse bastante! 💤" },
+      { speaker: 'child', en: "I am brave when I speak English! 🦁", pt: "Me senti corajosa quando falei em inglês! 🦁" },
+      { speaker: 'luna', en: "I am proud of you! You are very brave! 💖", pt: "Estou tão orgulhosa de você! Você é muito corajosa! 💖" },
+      { speaker: 'child', en: "I feel silly and happy! 😜", pt: "Aprender inglês me deixa engraçada e feliz! 😜" }
     ];
 
     const vocabulary = [
@@ -151,53 +151,58 @@
     ];
 
     const gameData = [
-      { sound: '😄 "Big smile!"', correct: 'Happy', emoji: '😄' },
-      { sound: '😢 "Wipe tear!"', correct: 'Sad', emoji: '😢' },
-      { sound: '😡 "Grrr!"', correct: 'Angry', emoji: '😡' },
-      { sound: '🤩 "Yay star eyes!"', correct: 'Excited', emoji: '🤩' },
-      { sound: '😴 "Yawn bedtime!"', correct: 'Tired', emoji: '😴' },
-      { sound: '😱 "Oh no!"', correct: 'Scared', emoji: '😱' },
-      { sound: '😲 "Wow!"', correct: 'Surprised', emoji: '😲' },
-      { sound: '🧘 "Deep breath!"', correct: 'Calm', emoji: '🧘' },
-      { sound: '🏆 "I did it!"', correct: 'Proud', emoji: '🏆' },
-      { sound: '🦁 "Strong heart!"', correct: 'Brave', emoji: '🦁' },
-      { sound: '😜 "Funny face!"', correct: 'Silly', emoji: '😜' }
+      { sound: 'I have a big smile on my face!', correct: 'Happy', emoji: '😄' },
+      { sound: 'I am crying and wiping a tear.', correct: 'Sad', emoji: '😢' },
+      { sound: 'I am mad and want to say grrr!', correct: 'Angry', emoji: '😡' },
+      { sound: 'I have stars in my eyes!', correct: 'Excited', emoji: '🤩' },
+      { sound: 'I yawn and want to sleep.', correct: 'Tired', emoji: '😴' },
+      { sound: 'I say oh no! and run away.', correct: 'Scared', emoji: '😱' },
+      { sound: 'I say wow! I did not know that!', correct: 'Surprised', emoji: '😲' },
+      { sound: 'I take a deep breath and relax.', correct: 'Calm', emoji: '🧘' },
+      { sound: 'I did it! I am very good!', correct: 'Proud', emoji: '🏆' },
+      { sound: 'I am strong like a lion!', correct: 'Brave', emoji: '🦁' },
+      { sound: 'I make a funny face!', correct: 'Silly', emoji: '😜' }
     ];
 
     const gameSentences = [
-      { en: "I am happy when I play games", pt: "Eu estou feliz quando jogo jogos" },
-      { en: "Luna feels excited about the adventure", pt: "Luna se sente empolgada com a aventura" },
-      { en: "She is brave and very smart", pt: "Ela é corajosa e muito esperta" },
-      { en: "I am tired after playing outside", pt: "Estou cansada depois de brincar lá fora" },
-      { en: "We are proud of your English progress", pt: "Estamos orgulhosos do seu progresso no inglês" }
+      { en: "I am happy when I play", pt: "Eu fico feliz quando brinco" },
+      { en: "She is sad about the rain", pt: "Ela está triste por causa da chuva" },
+      { en: "We are excited for the trip", pt: "Nós estamos empolgados com a viagem" },
+      { en: "You are brave in the dark", pt: "Você é corajoso no escuro" },
+      { en: "I feel calm in my bed", pt: "Eu me sinto calmo na minha cama" },
+      { en: "They are angry at the dog", pt: "Eles estão bravos com o cachorro" },
+      { en: "He feels tired after hard work", pt: "Ele se sente cansado depois de trabalhar duro" },
+      { en: "I feel proud of my friends", pt: "Eu me sinto orgulhoso dos meus amigos" },
+      { en: "We are hungry for some pizza", pt: "Nós estamos com fome de pizza" },
+      { en: "You act silly all the time", pt: "Você age de forma boba o tempo todo" }
     ];
 
     const trueFalseQuestions = [
-      { statement: "When you smile and laugh, you feel happy!", pt: "Quando você sorri e dá risada, você se sente feliz!", isTrue: true, emoji: "😄", explanation: "Big smiles mean you are happy!" },
-      { statement: "When you are sleepy, you have lots of energy to run around.", pt: "Quando você está com sono, você tem muita energia para sair correndo.", isTrue: false, emoji: "😴", explanation: "When you are sleepy, your body needs rest and sleep!" },
-      { statement: "When you win a trophy or complete a goal, you feel proud!", pt: "Quando você ganha um troféu ou completa um objective, você se sente orgulhosa!", isTrue: true, emoji: "🏆", explanation: "Achieving goals makes us feel proud of ourselves!" },
-      { statement: "If you feel scared, a warm hug can make you feel safer.", pt: "Se você se sente com medo, um abraço quentinho pode fazer você se sentir mais segura.", isTrue: true, emoji: "😱", explanation: "Hugs bring comfort when feeling scared." },
-      { statement: "Being brave means trying new things even if you feel nervous.", pt: "Ser corajosa significa tentar coisas novas mesmo se sentir nervosa.", isTrue: true, emoji: "🦁", explanation: "Speaking English takes bravery and courage!" },
-      { statement: "When your tummy rumbles loudly, you are feeling calm.", pt: "Quando sua barriga ronca alto, você está se sentindo calma.", isTrue: false, emoji: "🍔", explanation: "When your tummy rumbles, it means you are hungry!" },
-      { statement: "Making funny faces and laughing is something you do when feeling silly.", pt: "Fazer caretas engraçadas e rir é algo que você faz quando se sente engraçada/boba.", isTrue: true, emoji: "😜", explanation: "Silly faces bring laughter and joy!" }
+      { statement: "You smile when you are happy.", pt: "Você sorri quando está feliz.", isTrue: true, emoji: "😄", explanation: "Big smiles mean you are happy!" },
+      { statement: "You run fast when you are tired.", pt: "Você corre rápido quando está cansado.", isTrue: false, emoji: "😴", explanation: "When you are tired, your body needs rest!" },
+      { statement: "You are proud when you win a trophy.", pt: "Você fica orgulhoso quando ganha um troféu.", isTrue: true, emoji: "🏆", explanation: "Winning a trophy makes us proud!" },
+      { statement: "A hug is good when you are scared.", pt: "Um abraço é bom quando você está com medo.", isTrue: true, emoji: "😱", explanation: "Hugs bring comfort when feeling scared." },
+      { statement: "A brave person tries new things.", pt: "Uma pessoa corajosa tenta coisas novas.", isTrue: true, emoji: "🦁", explanation: "Trying new things takes bravery!" },
+      { statement: "You are calm when you are hungry.", pt: "Você fica calmo quando está com fome.", isTrue: false, emoji: "🍔", explanation: "When you are hungry, you want to eat!" },
+      { statement: "You make funny faces when you are silly.", pt: "Você faz caretas quando está bobo/engraçado.", isTrue: true, emoji: "😜", explanation: "Funny faces bring laughter and joy!" }
     ];
 
     const findMistakeQuestions = [
-      { wrong: "When I win a shiny gold trophy, I feel very sad and cry.", correct: "When you win a trophy, you feel PROUD and HAPPY! 🏆", pt: "Quando ganho um troféu de ouro brilhante, fico muito triste e choro.", emoji: "🏆" },
-      { wrong: "When I am sleepy at night, I run fast and play soccer.", correct: "When you are sleepy, you feel TIRED and need sleep! 😴", pt: "Quando estou com sono à noite, corro rápido e jogo futebol.", emoji: "😴" },
-      { wrong: "She cries loudly because she feels super excited and joyful.", correct: "She smiles and cheers because she is EXCITED! 🤩", pt: "Ela chora alto porque se sente super empolgada e alegre.", emoji: "🤩" },
-      { wrong: "When my tummy rumbles loudly, I feel calm and relaxed.", correct: "When your tummy rumbles, you feel HUNGRY for food! 🍔", pt: "Quando minha barriga ronca alto, me sinto calma e relaxada.", emoji: "🍔" },
-      { wrong: "Being brave means hiding under the bed all day long.", correct: "Being brave means facing challenges with courage! 🦁", pt: "Ser corajosa significa se esconder debaixo da cama o dia todo.", emoji: "🦁" },
-      { wrong: "Making funny faces and laughing means I am very angry.", correct: "Making funny faces means you are feeling SILLY and happy! 😜", pt: "Fazer caretas engraçadas e rir significa que estou com muita raiva.", emoji: "😜" }
+      { wrong: "I win a trophy and I am sad.", correct: "You win a trophy, you are PROUD! 🏆", pt: "Eu ganho um troféu e fico triste.", emoji: "🏆" },
+      { wrong: "I am tired and I run fast.", correct: "You are tired, you SLEEP! 😴", pt: "Estou cansado e corro rápido.", emoji: "😴" },
+      { wrong: "She cries because she is happy.", correct: "She smiles when she is HAPPY! 😄", pt: "Ela chora porque está feliz.", emoji: "🤩" },
+      { wrong: "I am hungry and I am calm.", correct: "You are hungry, you EAT! 🍔", pt: "Estou com fome e estou calmo.", emoji: "🍔" },
+      { wrong: "A brave person hides under the bed.", correct: "A brave person is STRONG! 🦁", pt: "Uma pessoa corajosa se esconde debaixo da cama.", emoji: "🦁" },
+      { wrong: "I make funny faces and I am angry.", correct: "You make funny faces, you are SILLY! 😜", pt: "Eu faço caretas e estou bravo.", emoji: "😜" }
     ];
 
     const tellMeQuestions = [
-      { q: "Tell me: What makes you feel super happy and excited during the weekend?", pt: "Me conte: O que te deixa super feliz e empolgada durante o fim de semana?", emoji: "😄" },
-      { q: "Tell me: When you feel tired after school, how do you like to relax?", pt: "Me conte: Quando você se sente cansada depois da escola, como você gosta de relaxar?", emoji: "😴" },
-      { q: "Tell me about a time when you felt very proud of yourself!", pt: "Me conte sobre uma vez em que você se sentiu muito orgulhosa de si mesma!", emoji: "🏆" },
-      { q: "Tell me: What do you do when you feel brave? Have you ever tried something new?", pt: "Me conte: O que você faz quando se sente corajosa? Você já tentou algo novo?", emoji: "🦁" },
-      { q: "Tell me: What is your favorite food to eat when you are super hungry?", pt: "Me conte: Qual é a sua comida favorita para comer quando está com muita fome?", emoji: "🍔" },
-      { q: "Tell me: What funny face or joke makes you feel silly and laugh?", pt: "Me conte: Que careta ou piada te deixa engraçada e te faz rir?", emoji: "😜" }
+      { q: "Tell me: What makes you happy on the weekend?", pt: "Me conte: O que te deixa feliz no fim de semana?", emoji: "😄" },
+      { q: "Tell me: You are tired after school. What do you do?", pt: "Me conte: Você está cansada depois da escola. O que você faz?", emoji: "😴" },
+      { q: "Tell me: When do you feel proud of yourself?", pt: "Me conte: Quando você se sente orgulhosa de si mesma?", emoji: "🏆" },
+      { q: "Tell me: When do you feel brave? Do you try new things?", pt: "Me conte: Quando você se sente corajosa? Você tenta coisas novas?", emoji: "🦁" },
+      { q: "Tell me: You are very hungry. What is your favorite food?", pt: "Me conte: Você está com muita fome. Qual é a sua comida favorita?", emoji: "🍔" },
+      { q: "Tell me: What makes you laugh?", pt: "Me conte: O que te faz rir?", emoji: "😜" }
     ];
 
     // GAME — Sound Match
@@ -262,7 +267,7 @@
     });
     renderQ();
   </script>
-  <script src="scenario-engine.js"></script>
-  <script src="shared-games.js"></script>
+  <script src="scenario-engine.js?v=1787856914244"></script>
+  <script src="shared-games.js?v=1787856914244"></script>
 </body>
 </html>

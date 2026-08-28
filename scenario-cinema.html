@@ -6,8 +6,8 @@
   <title>🍿 Movie Magic &amp; Cartoons — Learn with Luna</title>
   <meta name="description" content="Explore Disney princesses, animated movies, cartoons, and theater magic in English with Luna the Cat!" />
   <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🐱</text></svg>" />
-  <link rel="stylesheet" href="styles.css" />
-  <link rel="stylesheet" href="scenario.css" />
+  <link rel="stylesheet" href="styles.css?v=1787856914243" />
+  <link rel="stylesheet" href="scenario.css?v=1787856914243" />
 </head>
 <body>
 
@@ -72,7 +72,7 @@
           <div class="seq-emoji" id="seq-emoji">👸</div>
           <div class="seq-word" id="seq-word" style="display: none;"></div>
           <button class="seq-translation-btn" id="seq-translation-btn">Show English</button>
-          <div class="seq-translation-text" id="seq-translation-text">🇺🇸 Princess</div>
+          <div class="seq-translation-text" id="seq-translation-text">Princess</div>
         </div>
         <div class="seq-nav">
           <button class="seq-nav-btn" id="seq-prev-btn" aria-label="Previous">←</button>
@@ -87,7 +87,7 @@
         <div class="game-score" id="game-score">⭐ Score: <strong>0</strong> / <span>0</span></div>
         <div class="game-progress"><div class="game-progress-bar" id="game-progress-bar"></div></div>
         <div class="game-prompt">
-          <div class="game-prompt-label">Which movie magic word says...</div>
+          <div class="game-prompt-label">Read the clue:</div>
           <div class="game-prompt-content" id="game-prompt" style="font-size: 2rem;"></div>
         </div>
         <div class="game-options" id="game-options"></div>
@@ -127,10 +127,10 @@
       { speaker: 'child', en: "I love animated movies and cartoons! 🎬", pt: "Eu amo filmes de animação e desenhos animados! 🎬" },
       { speaker: 'luna', en: "Look! A beautiful princess in a magical castle! 🏰", pt: "Olhe! Uma linda princesa em um castelo mágico! 🏰" },
       { speaker: 'child', en: "She has a shiny golden crown and magic powers! 👑", pt: "Ela tem uma coroa de ouro brilhante e poderes mágicos! 👑" },
-      { speaker: 'luna', en: "The fairy godmother uses her magic wand! ✨", pt: "A fada madrinha usa sua varinha mágica! ✨" },
-      { speaker: 'child', en: "Put on your cool 3D glasses for the big screen! 👓", pt: "Coloque seus óculos 3D descolados para a tela grande! 👓" },
+      { speaker: 'luna', en: "The fairy uses her magic wand! ✨", pt: "A fada madrinha usa sua varinha mágica! ✨" },
+      { speaker: 'child', en: "Wear your 3D glasses for the big screen! 👓", pt: "Coloque seus óculos 3D descolados para a tela grande! 👓" },
       { speaker: 'luna', en: "The hero saves the kingdom from the friendly dragon! 🐲", pt: "O herói salva o reino do dragão amigável! 🐲" },
-      { speaker: 'child', en: "That was the best movie ever! I love cinema magic! 💖", pt: "Aquele foi o melhor filme de todos! Eu amo a magia do cinema! 💖" }
+      { speaker: 'child', en: "This movie is great! I love cinema magic! 💖", pt: "Aquele foi o melhor filme de todos! Eu amo a magia do cinema! 💖" }
     ];
 
     const vocabulary = [
@@ -151,53 +151,58 @@
     ];
 
     const gameData = [
-      { sound: '🍿 "Crunchy snack!"', correct: 'Popcorn', emoji: '🍿' },
-      { sound: '👸 "Royal crown!"', correct: 'Princess', emoji: '👸' },
-      { sound: '🏰 "Magical kingdom!"', correct: 'Castle', emoji: '🏰' },
-      { sound: '👑 "Golden crown!"', correct: 'Crown', emoji: '👑' },
-      { sound: '🪄 "Bloop magic!"', correct: 'Magic Wand', emoji: '🪄' },
-      { sound: '🐲 "Roar flame!"', correct: 'Dragon', emoji: '🐲' },
-      { sound: '🦸‍♀️ "Save the day!"', correct: 'Hero', emoji: '🦸‍♀️' },
-      { sound: '🎬 "Lights camera action!"', correct: 'Movie', emoji: '🎬' },
-      { sound: '🎟️ "Admit one!"', correct: 'Ticket', emoji: '🎟️' },
-      { sound: '👓 "Pop out screen!"', correct: '3D Glasses', emoji: '👓' },
-      { sound: '🧚‍♀️ "Wings and glitter!"', correct: 'Fairy', emoji: '🧚‍♀️' }
+      { sound: 'You eat this at the cinema.', correct: 'Popcorn', emoji: '🍿' },
+      { sound: 'She wears a beautiful dress and a crown.', correct: 'Princess', emoji: '👸' },
+      { sound: 'This is a big house for a king and queen.', correct: 'Castle', emoji: '🏰' },
+      { sound: 'A king or princess wears this on their head.', correct: 'Crown', emoji: '👑' },
+      { sound: 'A fairy uses this to make magic.', correct: 'Magic Wand', emoji: '🪄' },
+      { sound: 'This big animal flies and breathes fire.', correct: 'Dragon', emoji: '🐲' },
+      { sound: 'This brave person saves people.', correct: 'Hero', emoji: '🦸‍♀️' },
+      { sound: 'You go to the cinema to watch this.', correct: 'Movie', emoji: '🎬' },
+      { sound: 'You need this paper to enter the cinema.', correct: 'Ticket', emoji: '🎟️' },
+      { sound: 'You wear these on your eyes to see 3D magic.', correct: '3D Glasses', emoji: '👓' },
+      { sound: 'This tiny magical person has wings.', correct: 'Fairy', emoji: '🧚‍♀️' }
     ];
 
     const gameSentences = [
-      { en: "The princess lives in a magical castle", pt: "A princesa mora em um castelo mágico" },
-      { en: "I eat yummy popcorn at the cinema", pt: "Eu como pipoca gostosa no cinema" },
-      { en: "The fairy uses her magic wand", pt: "A fada usa sua varinha mágica" },
-      { en: "We wear 3D glasses to watch the cartoon", pt: "Nós usamos óculos 3D para assistir ao desenho" },
-      { en: "The brave hero saves the kingdom", pt: "O herói corajoso salva o reino" }
+      { en: "I eat popcorn at the cinema", pt: "Eu como pipoca no cinema" },
+      { en: "We watch a fun animated movie", pt: "Nós assistimos a um divertido filme de animação" },
+      { en: "A princess lives in a castle", pt: "Uma princesa mora em um castelo" },
+      { en: "The fairy uses a magic wand", pt: "A fada usa uma varinha mágica" },
+      { en: "We wear cool glasses for movies", pt: "Nós usamos óculos legais para filmes" },
+      { en: "A brave hero saves the day", pt: "Um herói corajoso salva o dia" },
+      { en: "The magic dragon flies very high", pt: "O dragão mágico voa muito alto" },
+      { en: "We buy a ticket to enter", pt: "Nós compramos um ingresso para entrar" },
+      { en: "I sit down to watch movies", pt: "Eu me sento para assistir filmes" },
+      { en: "The fun cartoon makes me laugh", pt: "O desenho divertido me faz rir" }
     ];
 
     const trueFalseQuestions = [
-      { statement: "We eat crunchy popcorn while watching movies at the cinema.", pt: "Comemos pipoca crocante enquanto assistimos a filmes no cinema.", isTrue: true, emoji: "🍿", explanation: "Popcorn is the most famous cinema snack!" },
-      { statement: "A fairy godmother uses a wooden ruler to cast magical spells.", pt: "Uma fada madrinha usa uma régua de madeira para lançar feitiços mágicos.", isTrue: false, emoji: "🪄", explanation: "Fairies use a sparkly magic wand, not a ruler!" },
-      { statement: "A Disney princess often lives in a beautiful magical castle.", pt: "Uma princesa da Disney geralmente mora em um lindo castelo mágico.", isTrue: true, emoji: "🏰", explanation: "Castles are iconic homes for fairy tale princesses!" },
-      { statement: "3D glasses help make movie effects pop out on screen.", pt: "Óculos 3D ajudam a fazer os efeitos do filme saltarem na tela.", isTrue: true, emoji: "👓", explanation: "3D glasses give realistic depth in theaters!" },
-      { statement: "A hero in animated movies tries to make everyone sad.", pt: "Um herói nos filmes de animação tenta deixar todo mundo triste.", isTrue: false, emoji: "🦸‍♀️", explanation: "Heroes save the day and bring joy!" },
-      { statement: "A dragon in fantasy tales can breathe bright flames of fire.", pt: "Um dragão em contos de fadas pode soltar chamas brilhantes de fogo.", isTrue: true, emoji: "🐲", explanation: "Dragons are famous for breathing fire!" },
-      { statement: "Cartoons are animated movies with fun characters and music.", pt: "Desenhos animados são filmes de animação com personagens e músicas divertidas.", isTrue: true, emoji: "🎬", explanation: "Cartoons bring vibrant magic to the big screen!" }
+      { statement: "We eat popcorn at the cinema.", pt: "Nós comemos pipoca no cinema.", isTrue: true, emoji: "🍿", explanation: "Popcorn is a great cinema snack!" },
+      { statement: "A fairy uses a ruler for magic.", pt: "Uma fada usa uma régua para mágica.", isTrue: false, emoji: "🪄", explanation: "Fairies use a magic wand, not a ruler!" },
+      { statement: "A princess lives in a castle.", pt: "Uma princesa mora em um castelo.", isTrue: true, emoji: "🏰", explanation: "Castles are big homes for princesses!" },
+      { statement: "We wear 3D glasses to see 3D movies.", pt: "Usamos óculos 3D para ver filmes 3D.", isTrue: true, emoji: "👓", explanation: "3D glasses make movies pop out!" },
+      { statement: "A hero makes people sad.", pt: "Um herói deixa as pessoas tristes.", isTrue: false, emoji: "🦸‍♀️", explanation: "Heroes save the day and make people happy!" },
+      { statement: "A dragon breathes fire.", pt: "Um dragão cospe fogo.", isTrue: true, emoji: "🐲", explanation: "Dragons are famous for breathing fire!" },
+      { statement: "Cartoons are fun animated movies.", pt: "Desenhos são filmes animados divertidos.", isTrue: true, emoji: "🎬", explanation: "Cartoons have fun characters!" }
     ];
 
     const findMistakeQuestions = [
-      { wrong: "I put on my 3D glasses to eat popcorn with a silver fork.", correct: "3D glasses are for watching 3D movie pictures pop out! 👓", pt: "Eu coloco meus óculos 3D para comer pipoca com um garfo de prata.", emoji: "👓" },
-      { wrong: "The Disney princess lives inside a small pencil sharpener.", correct: "A princess lives in a grand magical CASTLE! 🏰", pt: "A princesa da Disney mora dentro de um apontador de lápis pequeno.", emoji: "🏰" },
-      { wrong: "The fairy godmother uses a heavy shoe to cast magic spells.", correct: "The fairy uses a sparkly MAGIC WAND! 🪄", pt: "A fada madrinha usa um sapato pesado para fazer feitiços mágicos.", emoji: "🪄" },
-      { wrong: "The movie hero tries to make all the children sad and cry.", correct: "The hero saves the day and brings happiness! 🦸‍♀️", pt: "O herói do filme tenta fazer todas as crianças ficarem tristes e chorarem.", emoji: "🦸‍♀️" },
-      { wrong: "We buy our movie tickets at the swimming pool.", correct: "We buy movie tickets at the cinema / theater box office! 🎟️", pt: "Compramos nossos ingressos de filme na piscina.", emoji: "🎟️" },
-      { wrong: "A dragon in fairy tales flies around drinking soup.", correct: "A dragon flies around breathing fiery flames! 🐲", pt: "Um dragão em contos de fadas voa bebendo sopa.", emoji: "🐲" }
+      { wrong: "I wear 3D glasses to eat soup.", correct: "You wear 3D glasses for 3D movies! 👓", pt: "Eu uso óculos 3D para comer sopa.", emoji: "👓" },
+      { wrong: "The princess lives in a pencil.", correct: "The princess lives in a CASTLE! 🏰", pt: "A princesa mora em um lápis.", emoji: "🏰" },
+      { wrong: "The fairy uses a shoe for magic.", correct: "The fairy uses a MAGIC WAND! 🪄", pt: "A fada usa um sapato para magia.", emoji: "🪄" },
+      { wrong: "The hero makes children cry.", correct: "The hero saves people! 🦸‍♀️", pt: "O herói faz as crianças chorarem.", emoji: "🦸‍♀️" },
+      { wrong: "We buy movie tickets at the pool.", correct: "We buy tickets at the cinema! 🎟️", pt: "Compramos ingressos de cinema na piscina.", emoji: "🎟️" },
+      { wrong: "The dragon drinks juice.", correct: "The dragon breathes fire! 🐲", pt: "O dragão bebe suco.", emoji: "🐲" }
     ];
 
     const tellMeQuestions = [
-      { q: "Tell me: Who is your absolute favorite Disney princess or cartoon hero?", pt: "Me conte: Quem é a sua princesa da Disney ou herói de desenho favorito de todos?", emoji: "👸" },
-      { q: "Tell me: Do you like salty butter popcorn or sweet chocolate popcorn when watching movies?", pt: "Me conte: Você gosta de pipoca salgada com manteiga ou pipoca doce de chocolate ao assistir filmes?", emoji: "🍿" },
-      { q: "Tell me: If you had a magic wand like a fairy godmother, what magic spell would you do?", pt: "Me conte: Se você tivesse uma varinha mágica como uma fada madrinha, que feitiço mágico você faria?", emoji: "🪄" },
-      { q: "Tell me: Have you ever watched a 3D movie with special 3D glasses at the cinema?", pt: "Me conte: Você já assistiu a um filme 3D com óculos 3D especiais no cinema?", emoji: "👓" },
-      { q: "Tell me: If you lived in a magical fairy tale castle, what color would your royal room be?", pt: "Me conte: Se você morasse em um castelo mágico de contos de fadas, de que cor seria o seu quarto real?", emoji: "🏰" },
-      { q: "Tell me: What animated movie or cartoon can you watch over and over again?", pt: "Me conte: Qual filme de animação ou desenho animado você pode assistir de novo e de novo?", emoji: "🎬" }
+      { q: "Tell me: Who is your favorite princess or hero?", pt: "Me conte: Quem é a sua princesa ou herói favorito?", emoji: "👸" },
+      { q: "Tell me: Do you like salty popcorn or sweet popcorn?", pt: "Me conte: Você gosta de pipoca salgada ou pipoca doce?", emoji: "🍿" },
+      { q: "Tell me: You have a magic wand. What do you do?", pt: "Me conte: Você tem uma varinha mágica. O que você faz?", emoji: "🪄" },
+      { q: "Tell me: Do you watch 3D movies at the cinema?", pt: "Me conte: Você assiste a filmes 3D no cinema?", emoji: "👓" },
+      { q: "Tell me: You live in a magic castle. What color is your room?", pt: "Me conte: Você mora em um castelo mágico. Que cor é o seu quarto?", emoji: "🏰" },
+      { q: "Tell me: What movie do you watch every day?", pt: "Me conte: Qual filme você assiste todos os dias?", emoji: "🎬" }
     ];
 
     // GAME — Sound Match
@@ -262,7 +267,7 @@
     });
     renderQ();
   </script>
-  <script src="scenario-engine.js"></script>
-  <script src="shared-games.js"></script>
+  <script src="scenario-engine.js?v=1787856914243"></script>
+  <script src="shared-games.js?v=1787856914243"></script>
 </body>
 </html>

@@ -6,8 +6,8 @@
   <title>🔤 Alphabet Adventure — Learn with Luna</title>
   <meta name="description" content="Learn the English alphabet with Luna the Cat! Interactive story, vocabulary flashcards, and fun letter matching games." />
   <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🐱</text></svg>" />
-  <link rel="stylesheet" href="styles.css" />
-  <link rel="stylesheet" href="scenario.css" />
+  <link rel="stylesheet" href="styles.css?v=1787856914242" />
+  <link rel="stylesheet" href="scenario.css?v=1787856914242" />
 </head>
 <body>
 
@@ -140,7 +140,7 @@
     // ==========================================
     const dialogues = [
       { speaker: 'luna', en: "Hello! 🐾 I am Luna.", pt: "Olá! 🐾 Eu sou a Luna." },
-      { speaker: 'child', en: "Hi Luna! What are we doing today?", pt: "Oi Luna! O que vamos fazer hoje?" },
+      { speaker: 'child', en: "Hi Luna! What do we do today?", pt: "Oi Luna! O que vamos fazer hoje?" },
       { speaker: 'luna', en: "Let's learn the ABCs! 🎵", pt: "Vamos aprender o ABC! 🎵" },
       { speaker: 'child', en: "Yay! How does it start?", pt: "Eba! Como começa?" },
       { speaker: 'luna', en: "A is for Apple! 🍎", pt: "A é de Apple (Maçã)! 🍎" },
@@ -148,7 +148,7 @@
       { speaker: 'luna', en: "B is for Ball! ⚽", pt: "B é de Ball (Bola)! ⚽" },
       { speaker: 'child', en: "C is for Cat! Like you, Luna! 🐱", pt: "C é de Cat (Gato)! Como você, Luna! 🐱" },
       { speaker: 'luna', en: "Yes! Good job! 🌟", pt: "Sim! Muito bem! 🌟" },
-      { speaker: 'child', en: "This is fun! What's next?", pt: "Isso é divertido! Qual é a próxima?" },
+      { speaker: 'child', en: "This is fun! What is next?", pt: "Isso é divertido! Qual é a próxima?" },
       { speaker: 'luna', en: "D is for Dog! 🐶", pt: "D é de Dog (Cachorro)! 🐶" },
       { speaker: 'child', en: "Woof! Let's learn them all!", pt: "Au au! Vamos aprender todas!" }
     ];
@@ -199,26 +199,16 @@
 
     // Sentence Builder data
     const gameSentences = [
-      { en: "A is for the red apple", pt: "A é para a maçã vermelha" },
-      { en: "B is for the brown bear", pt: "B é para o urso marrom" },
-      { en: "C is for the cute cat", pt: "C é para o gato fofo" },
-      { en: "D is for the happy dog", pt: "D é para o cachorro feliz" },
-      { en: "E is for the huge elephant", pt: "E é para o enorme elefante" },
-      { en: "F is for the small fish", pt: "F é para o peixe pequeno" },
-      { en: "G is for the tall giraffe", pt: "G é para a girafa alta" },
-      { en: "H is for the fast horse", pt: "H é para o cavalo rápido" },
-      { en: "I is for the cold igloo", pt: "I é para o iglu frio" },
-      { en: "J is for the sweet juice", pt: "J é para o doce suco" },
-      { en: "K is for the colorful kite", pt: "K é para a pipa colorida" },
-      { en: "L is for the brave lion", pt: "L é para o bravo leão" },
-      { en: "M is for the bright moon", pt: "M é para a lua brilhante" },
-      { en: "N is for the cozy nest", pt: "N é para o ninho aconchegante" },
-      { en: "O is for the round orange", pt: "O é para a laranja redonda" },
-      { en: "P is for the funny penguin", pt: "P é para o pinguim engraçado" },
-      { en: "Q is for the beautiful queen", pt: "Q é para a bela rainha" },
-      { en: "R is for the lovely rabbit", pt: "R é para o coelho adorável" },
-      { en: "S is for the shining star", pt: "S é para a estrela brilhante" },
-      { en: "T is for the slow turtle", pt: "T é para a tartaruga lenta" }
+      { en: "I eat a red sweet apple", pt: "Eu como uma maçã doce vermelha" },
+      { en: "We kick the big soccer ball", pt: "Nós chutamos a grande bola de futebol" },
+      { en: "A cute cat sleeps all day", pt: "Um gato fofo dorme o dia todo" },
+      { en: "The happy dog runs very fast", pt: "O cachorro feliz corre muito rápido" },
+      { en: "An elephant has a long nose", pt: "Um elefante tem um nariz longo" },
+      { en: "A small fish swims under water", pt: "Um peixe pequeno nada debaixo da água" },
+      { en: "We eat sweet grapes for lunch", pt: "Nós comemos uvas doces no almoço" },
+      { en: "You have a big red heart", pt: "Você tem um grande coração vermelho" },
+      { en: "I want cold ice cream now", pt: "Eu quero sorvete gelado agora" },
+      { en: "The king wears a gold crown", pt: "O rei veste uma coroa de ouro" }
     ];
 
     // ==========================================
@@ -290,7 +280,7 @@
 
     renderQuestion();
   </script>
-  <script src="scenario-engine.js"></script>
-  <script src="shared-games.js"></script>
+  <script src="scenario-engine.js?v=1787856914241"></script>
+  <script src="shared-games.js?v=1787856914241"></script>
 </body>
 </html>

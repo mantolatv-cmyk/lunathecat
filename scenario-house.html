@@ -1,0 +1,277 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>🏠 My House — Learn with Luna</title>
+  <meta name="description" content="Learn about rooms, furniture, and parts of the house in English with Luna the Cat! Interactive story, flashcards, and fun games." />
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🐱</text></svg>" />
+  <link rel="stylesheet" href="styles.css?v=1787856914250" />
+  <link rel="stylesheet" href="scenario.css?v=1787856914250" />
+</head>
+<body>
+
+  <header class="header scrolled" id="app-header">
+    <div class="header-inner">
+      <a href="index.html" class="logo">
+        <img src="images/luna-logo.png" alt="Luna the Cat" class="logo-icon" />
+        <span class="logo-text">Learn with <span>Luna</span></span>
+      </a>
+      <nav class="nav-links">
+        <a href="index.html" class="nav-link">Home</a>
+        <a href="index.html#videos" class="nav-link active">Videos</a>
+        <a href="index.html#printables" class="nav-link">Printables</a>
+        <a href="index.html#about" class="nav-link">About</a>
+      </nav>
+      <button class="menu-toggle" id="menu-toggle" aria-label="Toggle menu"><span></span></button>
+    </div>
+    <nav class="nav-mobile" id="nav-mobile">
+      <a href="index.html" class="nav-link">Home</a>
+      <a href="index.html#videos" class="nav-link">Videos</a>
+      <a href="index.html#printables" class="nav-link">Printables</a>
+      <a href="index.html#about" class="nav-link">About</a>
+    </nav>
+  </header>
+
+  <section class="scenario-hero">
+    <img src="images/scene-house.jpg" alt="Luna inside a cozy colorful house" class="scenario-hero-img" loading="lazy" />
+    <div class="scenario-hero-overlay">
+      <div class="scenario-hero-icon">🏠</div>
+      <h1 class="scenario-hero-title">My House</h1>
+      <p class="scenario-hero-subtitle">Let's explore Luna's house!</p>
+    </div>
+  </section>
+
+  <div class="scenario-container">
+    <a href="index.html" class="back-btn">← Back to Home</a>
+
+    <div class="scenario-tabs" id="scenario-tabs">
+      <button class="scenario-tab active" data-tab="story">💬 Story Time</button>
+      <button class="scenario-tab" data-tab="vocab">📖 Word Garden</button>
+      <button class="scenario-tab" data-tab="learnwords">📖 Learn Words</button>
+      <button class="scenario-tab" data-tab="game">🎮 Play &amp; Learn</button>
+      <button class="scenario-tab" data-tab="memory">🃏 Matching Pairs</button>
+    </div>
+
+    <!-- TAB 1: Story -->
+    <div class="tab-panel active" id="tab-story">
+      <div class="dialogue-container" id="dialogue-container"></div>
+      <button class="dialogue-next-btn" id="dialogue-next-btn">Next Line →</button>
+      <button class="dialogue-restart-btn" id="dialogue-restart-btn">🔄 Start Over</button>
+    </div>
+
+    <!-- TAB 2: Vocabulary Grid -->
+    <div class="tab-panel" id="tab-vocab">
+      <div class="vocab-grid" id="vocab-grid"></div>
+    </div>
+
+    <!-- TAB 3: Learn Words -->
+    <div class="tab-panel" id="tab-learnwords">
+      <div class="seq-card-container">
+        <div class="seq-card" id="seq-card">
+          <div class="seq-emoji" id="seq-emoji">🍳</div>
+          <div class="seq-word" id="seq-word" style="display: none;"></div>
+          <button class="seq-translation-btn" id="seq-translation-btn">Show English</button>
+          <div class="seq-translation-text" id="seq-translation-text">Kitchen</div>
+        </div>
+        <div class="seq-nav">
+          <button class="seq-nav-btn" id="seq-prev-btn" aria-label="Previous">←</button>
+          <button class="seq-nav-btn" id="seq-next-btn" aria-label="Next">→</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- TAB 4: Sound Match Game -->
+    <div class="tab-panel" id="tab-game">
+      <div class="game-area" id="game-area">
+        <div class="game-score" id="game-score">⭐ Score: <strong>0</strong> / <span>0</span></div>
+        <div class="game-progress"><div class="game-progress-bar" id="game-progress-bar"></div></div>
+        <div class="game-prompt">
+          <div class="game-prompt-label">Read the clue:</div>
+          <div class="game-prompt-content" id="game-prompt" style="font-size: 2rem;"></div>
+        </div>
+        <div class="game-options" id="game-options"></div>
+        <div class="game-feedback" id="game-feedback"></div>
+      </div>
+      <div class="game-complete" id="game-complete">
+        <div class="game-complete-emoji">🏠</div>
+        <h2 class="game-complete-title">Home Expert!</h2>
+        <p class="game-complete-score" id="game-final-score"></p>
+        <div class="game-stars" id="game-stars"></div>
+        <button class="game-replay-btn" id="game-replay-btn">🔄 Play Again!</button>
+      </div>
+    </div>
+
+    <!-- TAB 5: Matching Pairs -->
+    <div class="tab-panel" id="tab-memory">
+      <div class="pairs-board" id="pairs-board"></div>
+      <div class="game-complete" id="pairs-complete" style="display: none; flex-direction: column; align-items: center;">
+        <div class="game-complete-emoji">🎉</div>
+        <h2 class="game-complete-title">You Did It!</h2>
+        <p class="game-complete-score" style="font-size:1.2rem; color:var(--text-secondary);">You matched all the house items!</p>
+        <button class="game-replay-btn" id="pairs-replay-btn">🔄 Play Again!</button>
+      </div>
+    </div>
+  </div>
+
+  <footer class="footer">
+    <div class="footer-inner">
+      <p class="footer-message">Luna loves showing you around her house! <span class="paw-emoji">🐾</span></p>
+      <p class="footer-copy">Made with <span class="heart">♥</span> by Learn with Luna · © 2026</p>
+    </div>
+  </footer>
+
+  <script>
+    const dialogues = [
+      { speaker: 'luna', en: "Welcome to my house! Let me show you around! 🏠", pt: "Bem-vinda à minha casa! Deixe eu te mostrar! 🏠" },
+      { speaker: 'child', en: "Wow, your kitchen smells delicious! 🍳", pt: "Uau, sua cozinha cheira delicioso! 🍳" },
+      { speaker: 'luna', en: "I love cooking in the kitchen! The refrigerator has yummy food! 🧊", pt: "Eu amo cozinhar na cozinha! A geladeira tem comida gostosa! 🧊" },
+      { speaker: 'child', en: "Your bedroom is so cozy! I love the bed! 🛏️", pt: "Seu quarto é tão aconchegante! Eu amo a cama! 🛏️" },
+      { speaker: 'luna', en: "The living room has a big sofa for watching movies! 🛋️", pt: "A sala tem um sofá grande para assistir filmes! 🛋️" },
+      { speaker: 'child', en: "Can I wash my hands in the bathroom? 🚿", pt: "Posso lavar as mãos no banheiro? 🚿" },
+      { speaker: 'luna', en: "Of course! There's soap and a clean towel for you! 🧼", pt: "Claro! Tem sabonete e uma toalha limpa para você! 🧼" },
+      { speaker: 'child', en: "Let's play in the garden! I see beautiful flowers! 🌻", pt: "Vamos brincar no jardim! Eu vejo flores bonitas! 🌻" },
+      { speaker: 'luna', en: "My house is full of love and happy memories! 💖", pt: "Minha casa é cheia de amor e memórias felizes! 💖" },
+      { speaker: 'child', en: "I love your house, Luna! It's so beautiful! ✨", pt: "Eu amo sua casa, Luna! É tão bonita! ✨" }
+    ];
+
+    const vocabulary = [
+      { emoji: '🍳', word: 'Kitchen', pt: 'Cozinha', sound: 'Cook yummy food!' },
+      { emoji: '🛏️', word: 'Bedroom', pt: 'Quarto', sound: 'Sleep and dream!' },
+      { emoji: '🚿', word: 'Bathroom', pt: 'Banheiro', sound: 'Wash and brush!' },
+      { emoji: '🛋️', word: 'Living Room', pt: 'Sala de Estar', sound: 'Watch TV here!' },
+      { emoji: '🌻', word: 'Garden', pt: 'Jardim', sound: 'Flowers and trees!' },
+      { emoji: '🚗', word: 'Garage', pt: 'Garagem', sound: 'Park the car!' },
+      { emoji: '🚪', word: 'Door', pt: 'Porta', sound: 'Open and close!' },
+      { emoji: '🪟', word: 'Window', pt: 'Janela', sound: 'Look outside!' },
+      { emoji: '🛋️', word: 'Sofa', pt: 'Sofá', sound: 'Sit and relax!' },
+      { emoji: '🛌', word: 'Bed', pt: 'Cama', sound: 'Zzz sleep tight!' },
+      { emoji: '🪑', word: 'Chair', pt: 'Cadeira', sound: 'Have a seat!' },
+      { emoji: '💡', word: 'Lamp', pt: 'Lâmpada / Abajur', sound: 'Light up the room!' },
+      { emoji: '🧊', word: 'Refrigerator', pt: 'Geladeira', sound: 'Keep food cold!' },
+      { emoji: '🍽️', word: 'Table', pt: 'Mesa', sound: 'Eat your meals!' }
+    ];
+
+    const gameData = [
+      { sound: 'You cook food and make meals in this room.', correct: 'Kitchen', emoji: '🍳' },
+      { sound: 'You sleep in your cozy bed in this room.', correct: 'Bedroom', emoji: '🛏️' },
+      { sound: 'You take a shower and brush your teeth here.', correct: 'Bathroom', emoji: '🚿' },
+      { sound: 'The whole family watches TV on the sofa here.', correct: 'Living Room', emoji: '🛋️' },
+      { sound: 'Beautiful flowers and trees grow outside in this area.', correct: 'Garden', emoji: '🌻' },
+      { sound: 'You park the car inside this part of the house.', correct: 'Garage', emoji: '🚗' },
+      { sound: 'You open and close this to enter a room.', correct: 'Door', emoji: '🚪' },
+      { sound: 'You look through this to see outside from inside.', correct: 'Window', emoji: '🪟' },
+      { sound: 'You sit on this soft furniture to watch movies.', correct: 'Sofa', emoji: '🛋️' },
+      { sound: 'You lie down and sleep on this every night.', correct: 'Bed', emoji: '🛌' },
+      { sound: 'You sit on this at the table to eat dinner.', correct: 'Chair', emoji: '🪑' },
+      { sound: 'This shines light so you can see in the dark.', correct: 'Lamp', emoji: '💡' },
+      { sound: 'This keeps your food cold and fresh.', correct: 'Refrigerator', emoji: '🧊' }
+    ];
+
+    const gameSentences = [
+      { en: "Mom cooks dinner in the kitchen", pt: "Mamãe cozinha o jantar na cozinha" },
+      { en: "I sleep in my cozy warm bed", pt: "Eu durmo na minha cama aconchegante" },
+      { en: "We watch movies in the living room", pt: "Nós assistimos filmes na sala" },
+      { en: "She waters the flowers in the garden", pt: "Ela rega as flores no jardim" },
+      { en: "I brush my teeth in the bathroom", pt: "Eu escovo os dentes no banheiro" },
+      { en: "Dad parks the car in the garage", pt: "Papai estaciona o carro na garagem" },
+      { en: "Please close the door behind you now", pt: "Por favor feche a porta atrás de você" },
+      { en: "I sit on the soft chair to read", pt: "Eu sento na cadeira macia para ler" },
+      { en: "The lamp gives light at night time", pt: "A lâmpada dá luz durante a noite" },
+      { en: "We eat dinner at the big table", pt: "Nós jantamos na mesa grande" }
+    ];
+
+    const trueFalseQuestions = [
+      { statement: "We cook food in the kitchen.", pt: "Nós cozinhamos comida na cozinha.", isTrue: true, emoji: "🍳", explanation: "The kitchen is where we prepare delicious meals!" },
+      { statement: "We sleep in the garage.", pt: "Nós dormimos na garagem.", isTrue: false, emoji: "🚗", explanation: "We sleep in the BEDROOM! The garage is for parking cars." },
+      { statement: "We take a shower in the bathroom.", pt: "Nós tomamos banho no banheiro.", isTrue: true, emoji: "🚿", explanation: "The bathroom has a shower, sink, and toilet!" },
+      { statement: "We watch TV in the living room.", pt: "Nós assistimos TV na sala de estar.", isTrue: true, emoji: "🛋️", explanation: "The living room has a sofa and TV for the family!" },
+      { statement: "The refrigerator keeps food hot.", pt: "A geladeira mantém a comida quente.", isTrue: false, emoji: "🧊", explanation: "The refrigerator keeps food COLD and fresh!" },
+      { statement: "Flowers grow in the garden.", pt: "Flores crescem no jardim.", isTrue: true, emoji: "🌻", explanation: "Gardens are full of beautiful flowers and plants!" },
+      { statement: "We park the car in the bedroom.", pt: "Nós estacionamos o carro no quarto.", isTrue: false, emoji: "🛏️", explanation: "We park the car in the GARAGE! The bedroom is for sleeping." }
+    ];
+
+    const findMistakeQuestions = [
+      { wrong: "I cook dinner in the bathroom.", correct: "I cook dinner in the KITCHEN! 🍳", pt: "Eu cozinho o jantar no banheiro.", emoji: "🚿" },
+      { wrong: "We sleep on the table.", correct: "We sleep in the BED! 🛏️", pt: "Nós dormimos na mesa.", emoji: "🍽️" },
+      { wrong: "Dad parks the car in the kitchen.", correct: "Dad parks the car in the GARAGE! 🚗", pt: "Papai estaciona o carro na cozinha.", emoji: "🍳" },
+      { wrong: "I brush my teeth in the living room.", correct: "I brush my teeth in the BATHROOM! 🚿", pt: "Eu escovo os dentes na sala.", emoji: "🛋️" },
+      { wrong: "We water flowers in the bedroom.", correct: "We water flowers in the GARDEN! 🌻", pt: "Nós regamos flores no quarto.", emoji: "🛏️" },
+      { wrong: "The lamp keeps our food cold.", correct: "The REFRIGERATOR keeps food cold! The lamp gives light! 💡", pt: "A lâmpada mantém nossa comida fria.", emoji: "💡" }
+    ];
+
+    const tellMeQuestions = [
+      { q: "Tell me: What is your favorite room in your house? Why?", pt: "Me conte: Qual é o seu cômodo favorito na sua casa? Por quê?", emoji: "🏠" },
+      { q: "Tell me: What color is your bedroom? What is in it?", pt: "Me conte: De que cor é o seu quarto? O que tem nele?", emoji: "🛏️" },
+      { q: "Tell me: Do you have a garden? What grows there?", pt: "Me conte: Você tem um jardim? O que cresce lá?", emoji: "🌻" },
+      { q: "Tell me: What do you like to eat in the kitchen?", pt: "Me conte: O que você gosta de comer na cozinha?", emoji: "🍳" },
+      { q: "Tell me: What do you do in the living room with your family?", pt: "Me conte: O que você faz na sala com a sua família?", emoji: "🛋️" },
+      { q: "Tell me: How many rooms does your house have?", pt: "Me conte: Quantos cômodos a sua casa tem?", emoji: "🚪" }
+    ];
+
+    // GAME — Sound Match
+    let gi = 0, gs = 0, ga = false;
+    const sq = [...gameData].sort(() => Math.random() - 0.5).slice(0, 8);
+    const tq = sq.length;
+    const allNames = gameData.map(g => g.correct);
+
+    function renderQ() {
+      ga = false;
+      const q = sq[gi];
+      document.getElementById('game-prompt').textContent = q.sound;
+      document.getElementById('game-score').innerHTML = `⭐ Score: <strong>${gs}</strong> / <span>${tq}</span>`;
+      document.getElementById('game-progress-bar').style.width = ((gi / tq) * 100) + '%';
+      document.getElementById('game-feedback').textContent = '';
+      document.getElementById('game-feedback').className = 'game-feedback';
+
+      const wrongs = allNames.filter(n => n !== q.correct).sort(() => Math.random() - 0.5).slice(0, 3);
+      const opts = [...wrongs, q.correct].sort(() => Math.random() - 0.5);
+
+      const oe = document.getElementById('game-options');
+      oe.innerHTML = '';
+      opts.forEach(opt => {
+        const btn = document.createElement('button');
+        btn.className = 'game-option';
+        btn.textContent = opt;
+        btn.addEventListener('click', () => handleA(btn, opt, q.correct));
+        oe.appendChild(btn);
+      });
+    }
+
+    function handleA(btn, sel, cor) {
+      if (ga) return; ga = true;
+      const fb = document.getElementById('game-feedback');
+      document.querySelectorAll('.game-option').forEach(o => o.classList.add('disabled'));
+      if (sel === cor) {
+        gs++; btn.classList.add('correct');
+        fb.textContent = '🎉 Correct! You know your house!'; fb.className = 'game-feedback correct-msg';
+      } else {
+        btn.classList.add('wrong');
+        document.querySelectorAll('.game-option').forEach(o => { if (o.textContent.includes(cor)) o.classList.add('correct'); });
+        fb.textContent = `❌ That's a ${cor}!`; fb.className = 'game-feedback wrong-msg';
+      }
+      document.getElementById('game-score').innerHTML = `⭐ Score: <strong>${gs}</strong> / <span>${tq}</span>`;
+      setTimeout(() => { gi++; if (gi < tq) renderQ(); else showComplete(); }, 1500);
+    }
+
+    function showComplete() {
+      document.getElementById('game-area').style.display = 'none';
+      document.getElementById('game-complete').classList.add('active');
+      const p = Math.round((gs / tq) * 100);
+      document.getElementById('game-final-score').textContent = `You got ${gs} out of ${tq} correct! (${p}%)`;
+      document.getElementById('game-stars').textContent = p >= 90 ? '⭐⭐⭐' : p >= 60 ? '⭐⭐' : '⭐';
+      document.getElementById('game-progress-bar').style.width = '100%';
+    }
+
+    document.getElementById('game-replay-btn').addEventListener('click', () => {
+      gi = 0; gs = 0; sq.sort(() => Math.random() - 0.5);
+      document.getElementById('game-area').style.display = 'block';
+      document.getElementById('game-complete').classList.remove('active');
+      renderQ();
+    });
+    renderQ();
+  </script>
+  <script src="scenario-engine.js?v=1787856914250"></script>
+  <script src="shared-games.js?v=1787856914250"></script>
+</body>
+</html>

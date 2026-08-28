@@ -6,8 +6,8 @@
   <title>⏰ Daily Routines — Learn with Luna</title>
   <meta name="description" content="Learn daily routines in English with Luna the Cat! Interactive story, vocabulary flashcards, and fun games." />
   <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🐱</text></svg>" />
-  <link rel="stylesheet" href="styles.css" />
-  <link rel="stylesheet" href="scenario.css" />
+  <link rel="stylesheet" href="styles.css?v=1787856914249" />
+  <link rel="stylesheet" href="scenario.css?v=1787856914249" />
 </head>
 <body>
 
@@ -70,7 +70,7 @@
           <div class="seq-emoji" id="seq-emoji">🌅</div>
           <div class="seq-word" id="seq-word" style="display: none;"></div>
           <button class="seq-translation-btn" id="seq-translation-btn">Show English</button>
-          <div class="seq-translation-text" id="seq-translation-text">🇺🇸 Wake up</div>
+          <div class="seq-translation-text" id="seq-translation-text">Wake up</div>
         </div>
         <div class="seq-nav">
           <button class="seq-nav-btn" id="seq-prev-btn" aria-label="Previous">←</button>
@@ -84,7 +84,7 @@
         <div class="game-score" id="game-score">⭐ Score: <strong>0</strong> / <span>0</span></div>
         <div class="game-progress"><div class="game-progress-bar" id="game-progress-bar"></div></div>
         <div class="game-prompt">
-          <div class="game-prompt-label">Which routine sounds like...</div>
+          <div class="game-prompt-label">Read the clue:</div>
           <div class="game-prompt-content" id="game-prompt" style="font-size: 2rem;"></div>
         </div>
         <div class="game-options" id="game-options"></div>
@@ -158,49 +158,31 @@
     ];
 
     const gameData = [
-      { sound: '🌅 "Yawn!"', correct: 'Wake up', emoji: '🌅' },
-      { sound: '🪥 "Brush brush!"', correct: 'Brush teeth', emoji: '🪥' },
-      { sound: '🧼 "Splash!"', correct: 'Wash face', emoji: '🧼' },
-      { sound: '🪮 "Swish!"', correct: 'Comb hair', emoji: '🪮' },
-      { sound: '👕 "Zip!"', correct: 'Get dressed', emoji: '👕' },
-      { sound: '🥞 "Munch!"', correct: 'Eat breakfast', emoji: '🥞' },
-      { sound: '🎒 "Bye bye!"', correct: 'Go to school', emoji: '🎒' },
-      { sound: '🥪 "Yum yum!"', correct: 'Eat lunch', emoji: '🥪' },
-      { sound: '⚽ "Yay!"', correct: 'Play', emoji: '⚽' },
-      { sound: '🛏️ "Zzzz!"', correct: 'Sleep', emoji: '🛏️' },
-      { sound: '🍪 "Crunch!"', correct: 'Have a snack', emoji: '🍪' },
-      { sound: '📝 "Write write!"', correct: 'Study', emoji: '📝' },
-      { sound: '🌳 "Run!"', correct: 'Play outside', emoji: '🌳' },
-      { sound: '📺 "Click!"', correct: 'Watch TV', emoji: '📺' },
-      { sound: '💻 "Type type!"', correct: 'Use the computer', emoji: '💻' },
-      { sound: '🎒 "Zip zip!"', correct: 'Pack my backpack', emoji: '🎒' },
-      { sound: '🏫 "Hello!"', correct: 'Arrive at school', emoji: '🏫' },
-      { sound: '🏠 "I am home!"', correct: 'Come home', emoji: '🏠' },
-      { sound: '🐶 "Here boy!"', correct: 'Feed the pet', emoji: '🐶' }
+      { sound: 'You do this in the morning when you open your eyes.', correct: 'Wake up', emoji: '🌅' },
+      { sound: 'You do this to keep your mouth clean.', correct: 'Brush teeth', emoji: '🪥' },
+      { sound: 'You do this with water and soap in the morning.', correct: 'Wash face', emoji: '🧼' },
+      { sound: 'You use a brush to make your hair look nice.', correct: 'Comb hair', emoji: '🪮' },
+      { sound: 'You put on your clothes.', correct: 'Get dressed', emoji: '👕' },
+      { sound: 'You eat this meal in the morning.', correct: 'Eat breakfast', emoji: '🥞' },
+      { sound: 'You take your backpack and leave the house.', correct: 'Go to school', emoji: '🎒' },
+      { sound: 'You eat this meal in the middle of the day.', correct: 'Eat lunch', emoji: '🥪' },
+      { sound: 'You do this with your toys or your friends.', correct: 'Play', emoji: '⚽' },
+      { sound: 'You close your eyes and rest in your bed at night.', correct: 'Sleep', emoji: '🛏️' },
+      { sound: 'You eat a small food like a cookie or an apple.', correct: 'Have a snack', emoji: '🍪' },
+      { sound: 'You read books and do your homework.', correct: 'Study', emoji: '📝' }
     ];
 
     const gameSentences = [
-      { en: "I wake up early in the morning", pt: "Eu acordo cedo de manhã" },
-      { en: "Luna brushes her teeth carefully", pt: "Luna escova os dentes com cuidado" },
-      { en: "We wash our faces every day", pt: "Nós lavamos o rosto todo dia" },
-      { en: "I comb my hair to look nice", pt: "Eu penteio meu cabelo para ficar bonito" },
-      { en: "She gets dressed for school", pt: "Ela se veste para a escola" },
-      { en: "We eat breakfast together", pt: "Nós tomamos café da manhã juntos" },
-      { en: "The students go to school", pt: "Os alunos vão para a escola" },
-      { en: "He eats a sandwich for lunch", pt: "Ele come um sanduíche de almoço" },
-      { en: "Kids love to play outside", pt: "Crianças amam brincar lá fora" },
-      { en: "I do my homework carefully", pt: "Eu faço minha lição com cuidado" },
-      { en: "My family eats dinner at night", pt: "Minha família janta de noite" },
-      { en: "Luna sleeps in a soft bed", pt: "Luna dorme numa cama macia" },
-      { en: "I like to have a snack", pt: "Eu gosto de fazer um lanche" },
-      { en: "Luna has to study everyday", pt: "Luna tem que estudar todo dia" },
-      { en: "We love to play outside", pt: "Nós amamos brincar lá fora" },
-      { en: "I watch TV after school", pt: "Eu assisto TV depois da escola" },
-      { en: "I use the computer carefully", pt: "Eu uso o computador com cuidado" },
-      { en: "I pack my backpack fast", pt: "Eu arrumo minha mochila rápido" },
-      { en: "We arrive at school early", pt: "Nós chegamos na escola cedo" },
-      { en: "I come home and rest", pt: "Eu chego em casa e descanso" },
-      { en: "Luna helps feed the pet", pt: "Luna ajuda a alimentar o pet" }
+      { en: "I wake up in the morning", pt: "Eu acordo de manhã" },
+      { en: "She brushes her teeth every day", pt: "Ela escova os dentes todo dia" },
+      { en: "We wash our face with water", pt: "Nós lavamos nosso rosto com água" },
+      { en: "I eat a big healthy breakfast", pt: "Eu como um grande café da manhã saudável" },
+      { en: "He combs his hair very well", pt: "Ele penteia o cabelo dele muito bem" },
+      { en: "We put on our school clothes", pt: "Nós vestimos nossas roupas de escola" },
+      { en: "They go to school by bus", pt: "Eles vão para a escola de ônibus" },
+      { en: "I eat lunch with my friends", pt: "Eu almoço com meus amigos" },
+      { en: "We play games in the park", pt: "Nós jogamos jogos no parque" },
+      { en: "I go to sleep at night", pt: "Eu vou dormir de noite" }
     ];
 
     // GAME — Sound Match
@@ -265,7 +247,7 @@
     });
     renderQ();
   </script>
-  <script src="scenario-engine.js"></script>
-  <script src="shared-games.js"></script>
+  <script src="scenario-engine.js?v=1787856914249"></script>
+  <script src="shared-games.js?v=1787856914249"></script>
 </body>
 </html>

@@ -6,8 +6,8 @@
   <title>💼 Jobs &amp; Professions — Learn with Luna</title>
   <meta name="description" content="Learn about jobs and professions in English with Luna the Cat! Interactive story, vocabulary flashcards, and fun games." />
   <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🐱</text></svg>" />
-  <link rel="stylesheet" href="styles.css" />
-  <link rel="stylesheet" href="scenario.css" />
+  <link rel="stylesheet" href="styles.css?v=1787856914246" />
+  <link rel="stylesheet" href="scenario.css?v=1787856914246" />
 </head>
 <body>
 
@@ -70,7 +70,7 @@
           <div class="seq-emoji" id="seq-emoji">👩‍🏫</div>
           <div class="seq-word" id="seq-word" style="display: none;"></div>
           <button class="seq-translation-btn" id="seq-translation-btn">Show English</button>
-          <div class="seq-translation-text" id="seq-translation-text">🇺🇸 Teacher</div>
+          <div class="seq-translation-text" id="seq-translation-text">Teacher</div>
         </div>
         <div class="seq-nav">
           <button class="seq-nav-btn" id="seq-prev-btn" aria-label="Previous">←</button>
@@ -84,7 +84,7 @@
         <div class="game-score" id="game-score">⭐ Score: <strong>0</strong> / <span>0</span></div>
         <div class="game-progress"><div class="game-progress-bar" id="game-progress-bar"></div></div>
         <div class="game-prompt">
-          <div class="game-prompt-label">Which job says...</div>
+          <div class="game-prompt-label">Read the clue:</div>
           <div class="game-prompt-content" id="game-prompt" style="font-size: 2rem;"></div>
         </div>
         <div class="game-options" id="game-options"></div>
@@ -156,41 +156,39 @@
     ];
 
     const gameData = [
-      { sound: '👩‍🏫 "A B C!"', correct: 'Teacher', emoji: '👩‍🏫' },
-      { sound: '👨‍⚕️ "Stethoscope!"', correct: 'Doctor', emoji: '👨‍⚕️' },
-      { sound: '👨‍🍳 "Chop chop!"', correct: 'Chef', emoji: '👨‍🍳' },
-      { sound: '👮 "Stop!"', correct: 'Police Officer', emoji: '👮' },
-      { sound: '🧑‍🚒 "Siren!"', correct: 'Firefighter', emoji: '🧑‍🚒' },
-      { sound: '📐 "Draw plans!"', correct: 'Architect', emoji: '📐' },
-      { sound: '💻 "Code code!"', correct: 'Programmer', emoji: '💻' },
-      { sound: '🐶 "Healthy pets!"', correct: 'Veterinarian', emoji: '🐶' },
-      { sound: '🔬 "Experiment!"', correct: 'Scientist', emoji: '🔬' },
-      { sound: '🏗️ "Build things!"', correct: 'Engineer', emoji: '🏗️' },
-      { sound: '⚖️ "Objection!"', correct: 'Lawyer', emoji: '⚖️' },
-      { sound: '📰 "Breaking news!"', correct: 'Journalist', emoji: '📰' },
-      { sound: '📷 "Say cheese!"', correct: 'Photographer', emoji: '📷' },
-      { sound: '🎨 "Beautiful art!"', correct: 'Designer', emoji: '🎨' },
-      { sound: '🎸 "Play music!"', correct: 'Musician', emoji: '🎸' },
-      { sound: '🎭 "Action!"', correct: 'Actor', emoji: '🎭' },
-      { sound: '🦷 "Open wide!"', correct: 'Dentist', emoji: '🦷' },
-      { sound: '✈️ "Take off!"', correct: 'Pilot', emoji: '✈️' },
-      { sound: '🛫 "Welcome aboard!"', correct: 'Flight Attendant', emoji: '🛫' },
-      { sound: '🚜 "Tractor!"', correct: 'Farmer', emoji: '🚜' }
+      { sound: 'I teach children in a school.', correct: 'Teacher', emoji: '👩‍🏫' },
+      { sound: 'I help sick people in a hospital.', correct: 'Doctor', emoji: '👨‍⚕️' },
+      { sound: 'I cook food in a restaurant.', correct: 'Chef', emoji: '👨‍🍳' },
+      { sound: 'I protect people on the street.', correct: 'Police Officer', emoji: '👮' },
+      { sound: 'I put out fires and drive a red truck.', correct: 'Firefighter', emoji: '🧑‍🚒' },
+      { sound: 'I draw plans for houses.', correct: 'Architect', emoji: '📐' },
+      { sound: 'I write code on a computer.', correct: 'Programmer', emoji: '💻' },
+      { sound: 'I help sick animals.', correct: 'Veterinarian', emoji: '🐶' },
+      { sound: 'I do experiments in a lab.', correct: 'Scientist', emoji: '🔬' },
+      { sound: 'I build bridges and machines.', correct: 'Engineer', emoji: '🏗️' },
+      { sound: 'I work in a court with laws.', correct: 'Lawyer', emoji: '⚖️' },
+      { sound: 'I write news for the newspaper.', correct: 'Journalist', emoji: '📰' },
+      { sound: 'I take pictures with a camera.', correct: 'Photographer', emoji: '📷' },
+      { sound: 'I make beautiful art.', correct: 'Designer', emoji: '🎨' },
+      { sound: 'I play the guitar and sing.', correct: 'Musician', emoji: '🎸' },
+      { sound: 'I work in movies and theater.', correct: 'Actor', emoji: '🎭' },
+      { sound: 'I look at your teeth.', correct: 'Dentist', emoji: '🦷' },
+      { sound: 'I fly an airplane in the sky.', correct: 'Pilot', emoji: '✈️' },
+      { sound: 'I help passengers on a plane.', correct: 'Flight Attendant', emoji: '🛫' },
+      { sound: 'I grow food on a farm.', correct: 'Farmer', emoji: '🚜' }
     ];
 
     const gameSentences = [
-      { en: "The teacher reads a book", pt: "A professora lê um livro" },
-      { en: "A good doctor helps sick people", pt: "Um bom médico ajuda pessoas doentes" },
-      { en: "The chef cooks delicious pasta", pt: "O cozinheiro cozinha macarrão delicioso" },
-      { en: "The programmer writes code everyday", pt: "O programador escreve código todo dia" },
-      { en: "A brave firefighter puts out fires", pt: "Um bombeiro corajoso apaga incêndios" },
-      { en: "The veterinarian loves dogs and cats", pt: "O veterinário ama cachorros e gatos" },
-      { en: "The architect draws a big house", pt: "O arquiteto desenha uma grande casa" },
-      { en: "A smart scientist does an experiment", pt: "Um cientista inteligente faz um experimento" },
-      { en: "The musician plays the guitar well", pt: "O músico toca violão bem" },
-      { en: "A happy photographer takes a picture", pt: "Um fotógrafo feliz tira uma foto" },
-      { en: "The fast pilot flies the airplane", pt: "O piloto rápido voa o avião" },
-      { en: "A friendly dentist cleans my teeth", pt: "Um dentista amigável limpa meus dentes" }
+      { en: "The smart doctor helps sick people", pt: "O médico inteligente ajuda pessoas doentes" },
+      { en: "A nice teacher works at school", pt: "Uma professora legal trabalha na escola" },
+      { en: "The pilot flies a big airplane", pt: "O piloto voa um grande avião" },
+      { en: "A brave firefighter puts out fires", pt: "Um bombeiro corajoso apaga fogos" },
+      { en: "The busy chef cooks nice food", pt: "O chef ocupado cozinha comida boa" },
+      { en: "A police officer keeps us safe", pt: "Um policial nos mantém seguros" },
+      { en: "The artist paints a beautiful picture", pt: "O artista pinta um quadro bonito" },
+      { en: "A scientist works in a lab", pt: "Um cientista trabalha em um laboratório" },
+      { en: "The farmer grows food for us", pt: "O fazendeiro cultiva comida para nós" },
+      { en: "An astronaut flies to the moon", pt: "Um astronauta voa para a lua" }
     ];
 
     // GAME — Sound Match
@@ -256,7 +254,7 @@
     });
     renderQ();
   </script>
-  <script src="scenario-engine.js"></script>
-  <script src="shared-games.js"></script>
+  <script src="scenario-engine.js?v=1787856914246"></script>
+  <script src="shared-games.js?v=1787856914246"></script>
 </body>
 </html>

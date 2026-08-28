@@ -6,8 +6,8 @@
   <title>🎡 Theme Park Adventure — Learn with Luna</title>
   <meta name="description" content="Explore Disney & Universal theme parks, roller coasters, magic, and fireworks in English with Luna the Cat!" />
   <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🐱</text></svg>" />
-  <link rel="stylesheet" href="styles.css" />
-  <link rel="stylesheet" href="scenario.css" />
+  <link rel="stylesheet" href="styles.css?v=1787856914248" />
+  <link rel="stylesheet" href="scenario.css?v=1787856914248" />
 </head>
 <body>
 
@@ -72,7 +72,7 @@
           <div class="seq-emoji" id="seq-emoji">🎢</div>
           <div class="seq-word" id="seq-word" style="display: none;"></div>
           <button class="seq-translation-btn" id="seq-translation-btn">Show English</button>
-          <div class="seq-translation-text" id="seq-translation-text">🇺🇸 Roller Coaster</div>
+          <div class="seq-translation-text" id="seq-translation-text">Roller Coaster</div>
         </div>
         <div class="seq-nav">
           <button class="seq-nav-btn" id="seq-prev-btn" aria-label="Previous">←</button>
@@ -87,7 +87,7 @@
         <div class="game-score" id="game-score">⭐ Score: <strong>0</strong> / <span>0</span></div>
         <div class="game-progress"><div class="game-progress-bar" id="game-progress-bar"></div></div>
         <div class="game-prompt">
-          <div class="game-prompt-label">Which theme park attraction says...</div>
+          <div class="game-prompt-label">Read the clue:</div>
           <div class="game-prompt-content" id="game-prompt" style="font-size: 2rem;"></div>
         </div>
         <div class="game-options" id="game-options"></div>
@@ -124,13 +124,13 @@
   <script>
     const dialogues = [
       { speaker: 'luna', en: "Welcome to the magical theme park! Look at the big castle! 🏰", pt: "Bem-vinda ao parque temático mágico! Olhe para o grande castelo! 🏰" },
-      { speaker: 'child', en: "Wow! Can we ride the fast roller coaster first? 🎢", pt: "Uau! Podemos ir na montanha-russa rápida primeiro? 🎢" },
+      { speaker: 'child', en: "Wow! Do we ride the roller coaster first? 🎢", pt: "Uau! Podemos ir na montanha-russa rápida primeiro? 🎢" },
       { speaker: 'luna', en: "Yes! Use your Fast Pass to skip the long line! 🎫", pt: "Sim! Use seu Fast Pass para pular a fila longa! 🎫" },
       { speaker: 'child', en: "Look at the big Ferris wheel and spinning carousel! 🎡🎠", pt: "Olhe para a grande roda-gigante e o carrossel giratório! 🎡🎠" },
       { speaker: 'luna', en: "Let's eat sweet pink cotton candy! 🍧", pt: "Vamos comer algodão-doce rosa bem docinho! 🍧" },
       { speaker: 'child', en: "Look! A parade with our favorite Disney and Universal characters! 🤡", pt: "Olhe! Um desfile com nossos personagens favoritos da Disney e Universal! 🤡" },
-      { speaker: 'luna', en: "At night, we will watch the magical fireworks show! 🎆", pt: "À noite, nós vamos assistir ao show mágico de fogos de artifício! 🎆" },
-      { speaker: 'child', en: "This is the most exciting theme park day ever! ✨", pt: "Este é o dia de parque temático mais emocionante de todos! ✨" }
+      { speaker: 'luna', en: "At night, we watch the fireworks show! 🎆", pt: "À noite, nós vamos assistir ao show mágico de fogos de artifício! 🎆" },
+      { speaker: 'child', en: "This park is very fun! ✨", pt: "Este é o dia de parque temático mais emocionante de todos! ✨" }
     ];
 
     const vocabulary = [
@@ -149,52 +149,57 @@
     ];
 
     const gameData = [
-      { sound: '🎢 "Whoosh fast speed!"', correct: 'Roller Coaster', emoji: '🎢' },
-      { sound: '🎡 "Up in the sky!"', correct: 'Ferris Wheel', emoji: '🎡' },
-      { sound: '🎠 "Spin around!"', correct: 'Carousel', emoji: '🎠' },
-      { sound: '🏰 "Kingdom center!"', correct: 'Magic Castle', emoji: '🏰' },
-      { sound: '🎆 "Boom sparkle night!"', correct: 'Fireworks', emoji: '🎆' },
-      { sound: '🍧 "Sweet pink treat!"', correct: 'Cotton Candy', emoji: '🍧' },
-      { sound: '🎫 "Skip the line!"', correct: 'Ticket / Fast Pass', emoji: '🎫' },
-      { sound: '🎪 "Music and dancers!"', correct: 'Parade', emoji: '🎪' },
-      { sound: '🌊 "Splash down!"', correct: 'Water Slide', emoji: '🌊' },
-      { sound: '🚗 "Bump bump!"', correct: 'Bumper Cars', emoji: '🚗' }
+      { sound: 'This ride goes very fast.', correct: 'Roller Coaster', emoji: '🎢' },
+      { sound: 'This big wheel takes you up in the sky.', correct: 'Ferris Wheel', emoji: '🎡' },
+      { sound: 'You ride horses in a circle on this.', correct: 'Carousel', emoji: '🎠' },
+      { sound: 'This is a big beautiful house in the park.', correct: 'Magic Castle', emoji: '🏰' },
+      { sound: 'These are bright lights in the sky at night.', correct: 'Fireworks', emoji: '🎆' },
+      { sound: 'This is a sweet pink treat.', correct: 'Cotton Candy', emoji: '🍧' },
+      { sound: 'You use this to enter the park.', correct: 'Ticket / Fast Pass', emoji: '🎫' },
+      { sound: 'People dance and play music in the street.', correct: 'Parade', emoji: '🎪' },
+      { sound: 'You go down this into the water.', correct: 'Water Slide', emoji: '🌊' },
+      { sound: 'You drive these cars and bump into friends.', correct: 'Bumper Cars', emoji: '🚗' }
     ];
 
     const gameSentences = [
-      { en: "The roller coaster goes very fast", pt: "A montanha-russa vai muito rápido" },
-      { en: "We watch beautiful fireworks over the castle", pt: "Nós assistimos aos belos fogos de artifício sobre o castelo" },
-      { en: "I eat sweet cotton candy at the theme park", pt: "Eu como algodão-doce doce no parque temático" },
-      { en: "The carousel spins around with happy music", pt: "O carrossel gira com música alegre" },
-      { en: "Use the fast pass for the best rides", pt: "Use o fast pass para os melhores brinquedos" }
+      { en: "I ride a fast roller coaster", pt: "Eu ando em uma montanha-russa rápida" },
+      { en: "We eat sweet pink cotton candy", pt: "Nós comemos algodão-doce rosa doce" },
+      { en: "The big Ferris wheel goes up", pt: "A grande roda-gigante sobe" },
+      { en: "A clown makes the kids laugh", pt: "Um palhaço faz as crianças rirem" },
+      { en: "We watch a nice fireworks show", pt: "Nós assistimos a um lindo show de fogos" },
+      { en: "The fun carousel spins very fast", pt: "O carrossel divertido gira muito rápido" },
+      { en: "I see a cute park mascot", pt: "Eu vejo um mascote de parque fofo" },
+      { en: "We play in the water slide", pt: "Nós brincamos no toboágua" },
+      { en: "I buy a ticket to enter", pt: "Eu compro um ingresso para entrar" },
+      { en: "The magical castle is very tall", pt: "O castelo mágico é muito alto" }
     ];
 
     const trueFalseQuestions = [
-      { statement: "A roller coaster goes super fast with exciting turns and drops.", pt: "Uma montanha-russa vai super rápido com curvas e descidas emocionantes.", isTrue: true, emoji: "🎢", explanation: "Roller coasters are famous high-speed rides!" },
-      { statement: "Cotton candy is a salty vegetable grown on farm trees.", pt: "Algodão-doce é um vegetal salgado cultivado em árvores de fazenda.", isTrue: false, emoji: "🍧", explanation: "Cotton candy is a fluffy, sweet pink carnival candy!" },
-      { statement: "Fireworks light up the night sky over the fairy tale castle.", pt: "Fogos de artifício iluminam o céu noturno sobre o castelo de fadas.", isTrue: true, emoji: "🎆", explanation: "Fireworks create magical night spectacles in Disney & Universal parks!" },
-      { statement: "A Fast Pass makes you wait in the longest line in the park.", pt: "Um Fast Pass faz você esperar na fila mais longa do parque.", isTrue: false, emoji: "🎫", explanation: "A Fast Pass skips long lines so you get on rides quickly!" },
-      { statement: "A carousel spins gently with colorful horses and happy music.", pt: "Um carrossel gira suavemente com cavalinhos coloridos e música alegre.", isTrue: true, emoji: "🎠", explanation: "Carousels are delightful, classic theme park rides!" },
-      { statement: "You can meet favorite mascots and take photos in theme parks.", pt: "Você pode encontrar mascotes favoritos e tirar fotos em parques temáticos.", isTrue: true, emoji: "🤡", explanation: "Characters love giving high fives and hugs!" },
-      { statement: "Water slides let you splash into refreshing pools of water.", pt: "Tobogãs de água permitem que você faça um splash em piscinas refrescantes.", isTrue: true, emoji: "🌊", explanation: "Water slides are super fun on warm sunny days!" }
+      { statement: "A roller coaster goes very fast.", pt: "Uma montanha-russa vai muito rápido.", isTrue: true, emoji: "🎢", explanation: "Roller coasters are famous high-speed rides!" },
+      { statement: "Cotton candy is a salty vegetable.", pt: "Algodão-doce é um vegetal salgado.", isTrue: false, emoji: "🍧", explanation: "Cotton candy is a fluffy, sweet pink carnival candy!" },
+      { statement: "Fireworks light up the night sky.", pt: "Fogos de artifício iluminam o céu noturno.", isTrue: true, emoji: "🎆", explanation: "Fireworks create magical night spectacles in Disney & Universal parks!" },
+      { statement: "A Fast Pass makes you wait in line.", pt: "Um Fast Pass faz você esperar na fila.", isTrue: false, emoji: "🎫", explanation: "A Fast Pass skips long lines so you get on rides quickly!" },
+      { statement: "A carousel spins with horses.", pt: "Um carrossel gira com cavalos.", isTrue: true, emoji: "🎠", explanation: "Carousels are delightful, classic theme park rides!" },
+      { statement: "You can take photos with mascots.", pt: "Você pode tirar fotos com mascotes.", isTrue: true, emoji: "🤡", explanation: "Characters love giving high fives and hugs!" },
+      { statement: "You splash in the water on a water slide.", pt: "Você espirra água no tobogã de água.", isTrue: true, emoji: "🌊", explanation: "Water slides are super fun on warm sunny days!" }
     ];
 
     const findMistakeQuestions = [
-      { wrong: "A roller coaster moves very slow like a sleepy turtle.", correct: "A roller coaster goes super FAST with big drops and loops! 🎢", pt: "Uma montanha-russa se move muito devagar como uma tartaruga com sono.", emoji: "🎢" },
-      { wrong: "Cotton candy is a salty green vegetable grown under the soil.", correct: "Cotton candy is a sweet, fluffy pink carnival treat! 🍧", pt: "Algodão-doce é um vegetal verde salgado cultivado debaixo do solo.", emoji: "🍧" },
-      { wrong: "Fireworks happen under the water inside the ocean.", correct: "Fireworks light up the night sky over the magical castle! 🎆", pt: "Fogos de artifício acontecem debaixo da água dentro do oceano.", emoji: "🎆" },
-      { wrong: "A Fast Pass makes you wait 5 extra hours in line.", correct: "A Fast Pass lets you skip the long line! 🎫", pt: "Um Fast Pass faz você esperar 5 horas extras na fila.", emoji: "🎫" },
-      { wrong: "The carousel flies up into space like a space rocket.", correct: "The carousel spins gently around with wooden horses! 🎠", pt: "O carrossel voa para o espaço como um foguete espacial.", emoji: "🎠" },
-      { wrong: "We meet theme park mascots to wash our dirty dishes.", correct: "We meet mascots to take photos and give high fives! 🤡", pt: "Encontramos mascotes de parque temático para lavar nossa louça suja.", emoji: "🤡" }
+      { wrong: "A roller coaster moves very slow.", correct: "A roller coaster is very FAST! 🎢", pt: "Uma montanha-russa se move muito devagar.", emoji: "🎢" },
+      { wrong: "Cotton candy is a green vegetable.", correct: "Cotton candy is SWEET! 🍧", pt: "Algodão-doce é um vegetal verde.", emoji: "🍧" },
+      { wrong: "Fireworks happen under the water.", correct: "Fireworks are in the SKY! 🎆", pt: "Fogos de artifício acontecem debaixo da água.", emoji: "🎆" },
+      { wrong: "A Fast Pass makes you wait.", correct: "A Fast Pass is FAST! 🎫", pt: "Um Fast Pass faz você esperar.", emoji: "🎫" },
+      { wrong: "The carousel flies into space.", correct: "The carousel goes in a CIRCLE! 🎠", pt: "O carrossel voa para o espaço.", emoji: "🎠" },
+      { wrong: "We meet mascots to wash dishes.", correct: "We meet mascots to play and TAKE PHOTOS! 🤡", pt: "Encontramos mascotes para lavar louça.", emoji: "🤡" }
     ];
 
     const tellMeQuestions = [
-      { q: "Tell me: Have you ever been to a theme park? Which ride is your absolute favorite?", pt: "Me conte: Você já foi a um parque de diversões? Qual brinquedo é o seu favorito de todos?", emoji: "🎡" },
-      { q: "Tell me: Do you like fast roller coasters or gentle carousel rides with horses?", pt: "Me conte: Você gosta de montanhas-russas rápidas ou de andar no carrossel suave com cavalinhos?", emoji: "🎢" },
-      { q: "Tell me: What character would you love to meet and take a picture with at Disney or Universal?", pt: "Me conte: Que personagem você amaria encontrar e tirar uma foto na Disney ou Universal?", emoji: "🤡" },
-      { q: "Tell me: Do you enjoy watching colorful fireworks light up the night sky?", pt: "Me conte: Você gosta de assistir aos fogos de artifício coloridos iluminarem o céu noturno?", emoji: "🎆" },
-      { q: "Tell me: If you could eat fluffy pink cotton candy right now, would you share it with Luna?", pt: "Me conte: Se você pudesse comer algodão-doce rosa bem fofinho agora mesmo, você dividiria com a Luna?", emoji: "🍧" },
-      { q: "Tell me: If you had a Fast Pass, which park attraction would you go on first?", pt: "Me conte: Se você tivesse um Fast Pass, em qual atração do parque iria primeiro?", emoji: "🎫" }
+      { q: "Tell me: Do you go to theme parks? What is your favorite ride?", pt: "Me conte: Você vai a parques de diversões? Qual é o seu brinquedo favorito?", emoji: "🎡" },
+      { q: "Tell me: Do you like roller coasters or carousels?", pt: "Me conte: Você gosta de montanhas-russas ou carrosséis?", emoji: "🎢" },
+      { q: "Tell me: What character do you want to meet at Disney?", pt: "Me conte: Que personagem você quer encontrar na Disney?", emoji: "🤡" },
+      { q: "Tell me: Do you like colorful fireworks at night?", pt: "Me conte: Você gosta de fogos de artifício coloridos à noite?", emoji: "🎆" },
+      { q: "Tell me: Do you like cotton candy? Do you share it with Luna?", pt: "Me conte: Você gosta de algodão-doce? Você divide com a Luna?", emoji: "🍧" },
+      { q: "Tell me: You have a Fast Pass. What attraction do you visit first?", pt: "Me conte: Você tem um Fast Pass. Qual atração você visita primeiro?", emoji: "🎫" }
     ];
 
     // GAME — Sound Match
@@ -259,7 +264,7 @@
     });
     renderQ();
   </script>
-  <script src="scenario-engine.js"></script>
-  <script src="shared-games.js"></script>
+  <script src="scenario-engine.js?v=1787856914248"></script>
+  <script src="shared-games.js?v=1787856914248"></script>
 </body>
 </html>

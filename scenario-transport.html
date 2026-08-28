@@ -1,0 +1,277 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>🚗 Transport — Learn with Luna</title>
+  <meta name="description" content="Learn about transportation and vehicles in English with Luna the Cat! Interactive story, flashcards, and fun games." />
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🐱</text></svg>" />
+  <link rel="stylesheet" href="styles.css?v=1787856914250" />
+  <link rel="stylesheet" href="scenario.css?v=1787856914250" />
+</head>
+<body>
+
+  <header class="header scrolled" id="app-header">
+    <div class="header-inner">
+      <a href="index.html" class="logo">
+        <img src="images/luna-logo.png" alt="Luna the Cat" class="logo-icon" />
+        <span class="logo-text">Learn with <span>Luna</span></span>
+      </a>
+      <nav class="nav-links">
+        <a href="index.html" class="nav-link">Home</a>
+        <a href="index.html#videos" class="nav-link active">Videos</a>
+        <a href="index.html#printables" class="nav-link">Printables</a>
+        <a href="index.html#about" class="nav-link">About</a>
+      </nav>
+      <button class="menu-toggle" id="menu-toggle" aria-label="Toggle menu"><span></span></button>
+    </div>
+    <nav class="nav-mobile" id="nav-mobile">
+      <a href="index.html" class="nav-link">Home</a>
+      <a href="index.html#videos" class="nav-link">Videos</a>
+      <a href="index.html#printables" class="nav-link">Printables</a>
+      <a href="index.html#about" class="nav-link">About</a>
+    </nav>
+  </header>
+
+  <section class="scenario-hero">
+    <img src="images/scene-transport.jpg" alt="Luna traveling in different vehicles" class="scenario-hero-img" loading="lazy" />
+    <div class="scenario-hero-overlay">
+      <div class="scenario-hero-icon">🚗</div>
+      <h1 class="scenario-hero-title">Transport</h1>
+      <p class="scenario-hero-subtitle">Let's travel the world with Luna!</p>
+    </div>
+  </section>
+
+  <div class="scenario-container">
+    <a href="index.html" class="back-btn">← Back to Home</a>
+
+    <div class="scenario-tabs" id="scenario-tabs">
+      <button class="scenario-tab active" data-tab="story">💬 Story Time</button>
+      <button class="scenario-tab" data-tab="vocab">📖 Word Garden</button>
+      <button class="scenario-tab" data-tab="learnwords">📖 Learn Words</button>
+      <button class="scenario-tab" data-tab="game">🎮 Play &amp; Learn</button>
+      <button class="scenario-tab" data-tab="memory">🃏 Matching Pairs</button>
+    </div>
+
+    <!-- TAB 1: Story -->
+    <div class="tab-panel active" id="tab-story">
+      <div class="dialogue-container" id="dialogue-container"></div>
+      <button class="dialogue-next-btn" id="dialogue-next-btn">Next Line →</button>
+      <button class="dialogue-restart-btn" id="dialogue-restart-btn">🔄 Start Over</button>
+    </div>
+
+    <!-- TAB 2: Vocabulary Grid -->
+    <div class="tab-panel" id="tab-vocab">
+      <div class="vocab-grid" id="vocab-grid"></div>
+    </div>
+
+    <!-- TAB 3: Learn Words -->
+    <div class="tab-panel" id="tab-learnwords">
+      <div class="seq-card-container">
+        <div class="seq-card" id="seq-card">
+          <div class="seq-emoji" id="seq-emoji">🚗</div>
+          <div class="seq-word" id="seq-word" style="display: none;"></div>
+          <button class="seq-translation-btn" id="seq-translation-btn">Show English</button>
+          <div class="seq-translation-text" id="seq-translation-text">Car</div>
+        </div>
+        <div class="seq-nav">
+          <button class="seq-nav-btn" id="seq-prev-btn" aria-label="Previous">←</button>
+          <button class="seq-nav-btn" id="seq-next-btn" aria-label="Next">→</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- TAB 4: Sound Match Game -->
+    <div class="tab-panel" id="tab-game">
+      <div class="game-area" id="game-area">
+        <div class="game-score" id="game-score">⭐ Score: <strong>0</strong> / <span>0</span></div>
+        <div class="game-progress"><div class="game-progress-bar" id="game-progress-bar"></div></div>
+        <div class="game-prompt">
+          <div class="game-prompt-label">Read the clue:</div>
+          <div class="game-prompt-content" id="game-prompt" style="font-size: 2rem;"></div>
+        </div>
+        <div class="game-options" id="game-options"></div>
+        <div class="game-feedback" id="game-feedback"></div>
+      </div>
+      <div class="game-complete" id="game-complete">
+        <div class="game-complete-emoji">🚗</div>
+        <h2 class="game-complete-title">Transport Expert!</h2>
+        <p class="game-complete-score" id="game-final-score"></p>
+        <div class="game-stars" id="game-stars"></div>
+        <button class="game-replay-btn" id="game-replay-btn">🔄 Play Again!</button>
+      </div>
+    </div>
+
+    <!-- TAB 5: Matching Pairs -->
+    <div class="tab-panel" id="tab-memory">
+      <div class="pairs-board" id="pairs-board"></div>
+      <div class="game-complete" id="pairs-complete" style="display: none; flex-direction: column; align-items: center;">
+        <div class="game-complete-emoji">🎉</div>
+        <h2 class="game-complete-title">You Did It!</h2>
+        <p class="game-complete-score" style="font-size:1.2rem; color:var(--text-secondary);">You matched all the vehicles!</p>
+        <button class="game-replay-btn" id="pairs-replay-btn">🔄 Play Again!</button>
+      </div>
+    </div>
+  </div>
+
+  <footer class="footer">
+    <div class="footer-inner">
+      <p class="footer-message">Luna loves traveling with you! <span class="paw-emoji">🐾</span></p>
+      <p class="footer-copy">Made with <span class="heart">♥</span> by Learn with Luna · © 2026</p>
+    </div>
+  </footer>
+
+  <script>
+    const dialogues = [
+      { speaker: 'luna', en: "Let's learn about all the ways we can travel! 🚗", pt: "Vamos aprender sobre todos os meios de transporte! 🚗" },
+      { speaker: 'child', en: "My dad drives a car to work every day! 🚙", pt: "Meu pai dirige um carro para o trabalho todo dia! 🚙" },
+      { speaker: 'luna', en: "Many people take the bus to school and work! 🚌", pt: "Muitas pessoas pegam ônibus para a escola e o trabalho! 🚌" },
+      { speaker: 'child', en: "I ride my bicycle to the park! 🚲", pt: "Eu ando de bicicleta até o parque! 🚲" },
+      { speaker: 'luna', en: "For long trips, we can fly in an airplane! ✈️", pt: "Para viagens longas, podemos voar de avião! ✈️" },
+      { speaker: 'child', en: "Wow! Look at that big train! Choo choo! 🚂", pt: "Uau! Olha aquele trem grande! Chu chu! 🚂" },
+      { speaker: 'luna', en: "Boats sail on the water across rivers and seas! ⛵", pt: "Barcos navegam na água por rios e mares! ⛵" },
+      { speaker: 'child', en: "Helicopters can fly up, down, and hover in the air! 🚁", pt: "Helicópteros podem voar para cima, para baixo e pairar no ar! 🚁" },
+      { speaker: 'luna', en: "And ambulances take sick people to the hospital fast! 🚑", pt: "E ambulâncias levam pessoas doentes ao hospital rápido! 🚑" },
+      { speaker: 'child', en: "There are so many cool vehicles! I want to try them all! ✨", pt: "Existem tantos veículos legais! Eu quero experimentar todos! ✨" }
+    ];
+
+    const vocabulary = [
+      { emoji: '🚗', word: 'Car', pt: 'Carro', sound: 'Vroom vroom!' },
+      { emoji: '🚌', word: 'Bus', pt: 'Ônibus', sound: 'Beep beep!' },
+      { emoji: '🚲', word: 'Bicycle', pt: 'Bicicleta', sound: 'Ring ring!' },
+      { emoji: '✈️', word: 'Airplane', pt: 'Avião', sound: 'Zoom through the sky!' },
+      { emoji: '🚂', word: 'Train', pt: 'Trem', sound: 'Choo choo!' },
+      { emoji: '⛵', word: 'Boat', pt: 'Barco', sound: 'Sail away!' },
+      { emoji: '🚁', word: 'Helicopter', pt: 'Helicóptero', sound: 'Chop chop chop!' },
+      { emoji: '🏍️', word: 'Motorcycle', pt: 'Moto', sound: 'Vroom vroom!' },
+      { emoji: '🚚', word: 'Truck', pt: 'Caminhão', sound: 'Carry big loads!' },
+      { emoji: '🚇', word: 'Subway', pt: 'Metrô', sound: 'Underground train!' },
+      { emoji: '🚕', word: 'Taxi', pt: 'Táxi', sound: 'Take me there!' },
+      { emoji: '🚑', word: 'Ambulance', pt: 'Ambulância', sound: 'Wee woo wee woo!' },
+      { emoji: '🚒', word: 'Fire Truck', pt: 'Caminhão de Bombeiro', sound: 'Rush to the fire!' },
+      { emoji: '🛴', word: 'Scooter', pt: 'Patinete', sound: 'Kick and glide!' }
+    ];
+
+    const gameData = [
+      { sound: 'This vehicle has four wheels and your family drives it.', correct: 'Car', emoji: '🚗' },
+      { sound: 'This big vehicle carries many people on city routes.', correct: 'Bus', emoji: '🚌' },
+      { sound: 'You pedal this with two wheels and no engine.', correct: 'Bicycle', emoji: '🚲' },
+      { sound: 'This flies very high in the sky to distant countries.', correct: 'Airplane', emoji: '✈️' },
+      { sound: 'This runs on rails and says choo choo!', correct: 'Train', emoji: '🚂' },
+      { sound: 'This travels on water across rivers and oceans.', correct: 'Boat', emoji: '⛵' },
+      { sound: 'This flies with spinning blades on top.', correct: 'Helicopter', emoji: '🚁' },
+      { sound: 'This is like a car but with only two wheels and an engine.', correct: 'Motorcycle', emoji: '🏍️' },
+      { sound: 'This very big vehicle carries heavy things.', correct: 'Truck', emoji: '🚚' },
+      { sound: 'This train runs underground beneath the city.', correct: 'Subway', emoji: '🚇' },
+      { sound: 'You call this to take you somewhere for a fare.', correct: 'Taxi', emoji: '🚕' },
+      { sound: 'This takes sick people to the hospital with sirens.', correct: 'Ambulance', emoji: '🚑' },
+      { sound: 'Firefighters drive this red vehicle to put out fires.', correct: 'Fire Truck', emoji: '🚒' }
+    ];
+
+    const gameSentences = [
+      { en: "Dad drives the car to work", pt: "Papai dirige o carro para o trabalho" },
+      { en: "I take the bus to my school", pt: "Eu pego o ônibus para a escola" },
+      { en: "She rides her bicycle every day", pt: "Ela anda de bicicleta todo dia" },
+      { en: "The airplane flies above the clouds", pt: "O avião voa acima das nuvens" },
+      { en: "The train goes very fast on rails", pt: "O trem vai muito rápido nos trilhos" },
+      { en: "We sail the boat on the lake", pt: "Nós navegamos o barco no lago" },
+      { en: "The helicopter lands on the roof", pt: "O helicóptero pousa no telhado" },
+      { en: "The big truck carries many boxes", pt: "O caminhão grande carrega muitas caixas" },
+      { en: "I ride my scooter to the park", pt: "Eu ando de patinete até o parque" },
+      { en: "The ambulance rushes to the hospital", pt: "A ambulância corre para o hospital" }
+    ];
+
+    const trueFalseQuestions = [
+      { statement: "A car has four wheels.", pt: "Um carro tem quatro rodas.", isTrue: true, emoji: "🚗", explanation: "Most cars have exactly four wheels!" },
+      { statement: "Airplanes travel under the water.", pt: "Aviões viajam debaixo d'água.", isTrue: false, emoji: "✈️", explanation: "Airplanes fly in the SKY! Submarines go under water." },
+      { statement: "Trains run on rails.", pt: "Trens andam sobre trilhos.", isTrue: true, emoji: "🚂", explanation: "Trains follow rail tracks — choo choo!" },
+      { statement: "A bicycle has an engine.", pt: "Uma bicicleta tem motor.", isTrue: false, emoji: "🚲", explanation: "Bicycles have no engine — you use your LEGS to pedal!" },
+      { statement: "Boats travel on water.", pt: "Barcos viajam na água.", isTrue: true, emoji: "⛵", explanation: "Boats float and sail on rivers, lakes, and oceans!" },
+      { statement: "An ambulance helps sick people.", pt: "Uma ambulância ajuda pessoas doentes.", isTrue: true, emoji: "🚑", explanation: "Ambulances rush sick people to the hospital!" },
+      { statement: "A subway train flies in the sky.", pt: "O metrô voa no céu.", isTrue: false, emoji: "🚇", explanation: "Subways run UNDERGROUND beneath the city!" }
+    ];
+
+    const findMistakeQuestions = [
+      { wrong: "I ride my car to fly in the sky.", correct: "You drive a car on ROADS! Airplanes fly in the sky! ✈️", pt: "Eu ando de carro para voar no céu.", emoji: "🚗" },
+      { wrong: "The train sails on the ocean.", correct: "The train runs on RAILS! Boats sail on the ocean! ⛵", pt: "O trem navega no oceano.", emoji: "🚂" },
+      { wrong: "The helicopter has four wheels.", correct: "Helicopters have SPINNING BLADES on top! 🚁", pt: "O helicóptero tem quatro rodas.", emoji: "🚁" },
+      { wrong: "I pedal the airplane to go to school.", correct: "You pedal a BICYCLE! Airplanes have engines! 🚲", pt: "Eu pedalo o avião para ir à escola.", emoji: "✈️" },
+      { wrong: "The fire truck carries sick people.", correct: "AMBULANCES carry sick people! Fire trucks put out fires! 🚑", pt: "O caminhão de bombeiro carrega pessoas doentes.", emoji: "🚒" },
+      { wrong: "The subway flies above the buildings.", correct: "The subway runs UNDERGROUND! Airplanes fly above buildings! 🚇", pt: "O metrô voa acima dos prédios.", emoji: "🚇" }
+    ];
+
+    const tellMeQuestions = [
+      { q: "Tell me: How do you go to school? By car, bus, or walking?", pt: "Me conte: Como você vai para a escola? De carro, ônibus ou andando?", emoji: "🚌" },
+      { q: "Tell me: Do you travel by airplane? Where do you go?", pt: "Me conte: Você viaja de avião? Para onde você vai?", emoji: "✈️" },
+      { q: "Tell me: Do you have a bicycle? What color is it?", pt: "Me conte: Você tem uma bicicleta? De que cor é?", emoji: "🚲" },
+      { q: "Tell me: What is your favorite vehicle? Why?", pt: "Me conte: Qual é o seu veículo favorito? Por quê?", emoji: "🚗" },
+      { q: "Tell me: Do you see fire trucks in your city? What color are they?", pt: "Me conte: Você vê caminhões de bombeiro na sua cidade? De que cor eles são?", emoji: "🚒" },
+      { q: "Tell me: Do you want to ride in a helicopter or a boat?", pt: "Me conte: Você quer andar de helicóptero ou de barco?", emoji: "🚁" }
+    ];
+
+    // GAME — Sound Match
+    let gi = 0, gs = 0, ga = false;
+    const sq = [...gameData].sort(() => Math.random() - 0.5).slice(0, 8);
+    const tq = sq.length;
+    const allNames = gameData.map(g => g.correct);
+
+    function renderQ() {
+      ga = false;
+      const q = sq[gi];
+      document.getElementById('game-prompt').textContent = q.sound;
+      document.getElementById('game-score').innerHTML = `⭐ Score: <strong>${gs}</strong> / <span>${tq}</span>`;
+      document.getElementById('game-progress-bar').style.width = ((gi / tq) * 100) + '%';
+      document.getElementById('game-feedback').textContent = '';
+      document.getElementById('game-feedback').className = 'game-feedback';
+
+      const wrongs = allNames.filter(n => n !== q.correct).sort(() => Math.random() - 0.5).slice(0, 3);
+      const opts = [...wrongs, q.correct].sort(() => Math.random() - 0.5);
+
+      const oe = document.getElementById('game-options');
+      oe.innerHTML = '';
+      opts.forEach(opt => {
+        const btn = document.createElement('button');
+        btn.className = 'game-option';
+        btn.textContent = opt;
+        btn.addEventListener('click', () => handleA(btn, opt, q.correct));
+        oe.appendChild(btn);
+      });
+    }
+
+    function handleA(btn, sel, cor) {
+      if (ga) return; ga = true;
+      const fb = document.getElementById('game-feedback');
+      document.querySelectorAll('.game-option').forEach(o => o.classList.add('disabled'));
+      if (sel === cor) {
+        gs++; btn.classList.add('correct');
+        fb.textContent = '🎉 Correct! You know your vehicles!'; fb.className = 'game-feedback correct-msg';
+      } else {
+        btn.classList.add('wrong');
+        document.querySelectorAll('.game-option').forEach(o => { if (o.textContent.includes(cor)) o.classList.add('correct'); });
+        fb.textContent = `❌ That's a ${cor}!`; fb.className = 'game-feedback wrong-msg';
+      }
+      document.getElementById('game-score').innerHTML = `⭐ Score: <strong>${gs}</strong> / <span>${tq}</span>`;
+      setTimeout(() => { gi++; if (gi < tq) renderQ(); else showComplete(); }, 1500);
+    }
+
+    function showComplete() {
+      document.getElementById('game-area').style.display = 'none';
+      document.getElementById('game-complete').classList.add('active');
+      const p = Math.round((gs / tq) * 100);
+      document.getElementById('game-final-score').textContent = `You got ${gs} out of ${tq} correct! (${p}%)`;
+      document.getElementById('game-stars').textContent = p >= 90 ? '⭐⭐⭐' : p >= 60 ? '⭐⭐' : '⭐';
+      document.getElementById('game-progress-bar').style.width = '100%';
+    }
+
+    document.getElementById('game-replay-btn').addEventListener('click', () => {
+      gi = 0; gs = 0; sq.sort(() => Math.random() - 0.5);
+      document.getElementById('game-area').style.display = 'block';
+      document.getElementById('game-complete').classList.remove('active');
+      renderQ();
+    });
+    renderQ();
+  </script>
+  <script src="scenario-engine.js?v=1787856914250"></script>
+  <script src="shared-games.js?v=1787856914250"></script>
+</body>
+</html>

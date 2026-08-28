@@ -6,8 +6,8 @@
   <title>🎒 School Supplies — Learn with Luna</title>
   <meta name="description" content="Learn school supplies and classroom vocabulary in English with Luna the Cat! Interactive story, flashcards, and fun games." />
   <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🐱</text></svg>" />
-  <link rel="stylesheet" href="styles.css" />
-  <link rel="stylesheet" href="scenario.css" />
+  <link rel="stylesheet" href="styles.css?v=1787856914250" />
+  <link rel="stylesheet" href="scenario.css?v=1787856914250" />
 </head>
 <body>
 
@@ -72,7 +72,7 @@
           <div class="seq-emoji" id="seq-emoji">✏️</div>
           <div class="seq-word" id="seq-word" style="display: none;"></div>
           <button class="seq-translation-btn" id="seq-translation-btn">Show English</button>
-          <div class="seq-translation-text" id="seq-translation-text">🇺🇸 Pencil</div>
+          <div class="seq-translation-text" id="seq-translation-text">Pencil</div>
         </div>
         <div class="seq-nav">
           <button class="seq-nav-btn" id="seq-prev-btn" aria-label="Previous">←</button>
@@ -87,7 +87,7 @@
         <div class="game-score" id="game-score">⭐ Score: <strong>0</strong> / <span>0</span></div>
         <div class="game-progress"><div class="game-progress-bar" id="game-progress-bar"></div></div>
         <div class="game-prompt">
-          <div class="game-prompt-label">Which school item says...</div>
+          <div class="game-prompt-label">Read the clue:</div>
           <div class="game-prompt-content" id="game-prompt" style="font-size: 2rem;"></div>
         </div>
         <div class="game-options" id="game-options"></div>
@@ -155,55 +155,60 @@
     ];
 
     const gameData = [
-      { sound: '✏️ "Write write!"', correct: 'Pencil', emoji: '✏️' },
-      { sound: '🧽 "Erase mistakes!"', correct: 'Eraser', emoji: '🧽' },
-      { sound: '📓 "Write notes!"', correct: 'Notebook', emoji: '📓' },
-      { sound: '🎒 "Carry my books!"', correct: 'Backpack', emoji: '🎒' },
-      { sound: '✂️ "Cut paper!"', correct: 'Scissors', emoji: '✂️' },
-      { sound: '📏 "Measure lines!"', correct: 'Ruler', emoji: '📏' },
-      { sound: '🖍️ "Color pictures!"', correct: 'Crayons', emoji: '🖍️' },
-      { sound: '🧴 "Stick together!"', correct: 'Glue', emoji: '🧴' },
-      { sound: '👝 "Hold pencils!"', correct: 'Pencil Case', emoji: '👝' },
-      { sound: '🖊️ "Bright colors!"', correct: 'Marker', emoji: '🖊️' },
-      { sound: `${sharpenerSvg} "Sharp pencil!"`, correct: 'Sharpener', emoji: sharpenerSvg },
-      { sound: `${deskSvg} "Sit and learn!"`, correct: 'Desk', emoji: deskSvg },
-      { sound: '🍱 "Yummy lunch!"', correct: 'Lunchbox', emoji: '🍱' }
+      { sound: 'You use this to write words on paper.', correct: 'Pencil', emoji: '✏️' },
+      { sound: 'You use this to clean your mistakes.', correct: 'Eraser', emoji: '🧽' },
+      { sound: 'You write your school notes in this.', correct: 'Notebook', emoji: '📓' },
+      { sound: 'You carry your books in this.', correct: 'Backpack', emoji: '🎒' },
+      { sound: 'You use this to cut paper.', correct: 'Scissors', emoji: '✂️' },
+      { sound: 'You use this to draw straight lines.', correct: 'Ruler', emoji: '📏' },
+      { sound: 'You use these to color pictures.', correct: 'Crayons', emoji: '🖍️' },
+      { sound: 'You use this to stick papers together.', correct: 'Glue', emoji: '🧴' },
+      { sound: 'You keep your pencils in this small bag.', correct: 'Pencil Case', emoji: '👝' },
+      { sound: 'You use this to draw with bright colors.', correct: 'Marker', emoji: '🖊️' },
+      { sound: 'You use this when your pencil breaks.', correct: 'Sharpener', emoji: sharpenerSvg },
+      { sound: 'You sit at this table to learn and study.', correct: 'Desk', emoji: deskSvg },
+      { sound: 'You bring your school snack in this.', correct: 'Lunchbox', emoji: '🍱' }
     ];
 
     const gameSentences = [
-      { en: "The yellow pencil is in my backpack", pt: "O lápis amarelo está na minha mochila" },
-      { en: "I draw with colorful crayons", pt: "Eu desenho com gizes de cera coloridos" },
-      { en: "Use scissors to cut paper", pt: "Use a tesoura para cortar papel" },
-      { en: "The eraser removes my mistake", pt: "A borracha remove meu erro" },
-      { en: "My notebook is full of drawings", pt: "Meu caderno está cheio de desenhos" }
+      { en: "I write notes with a pencil", pt: "Eu escrevo anotações com um lápis" },
+      { en: "We carry books in a backpack", pt: "Nós carregamos livros em uma mochila" },
+      { en: "The teacher reads a fun book", pt: "A professora lê um livro divertido" },
+      { en: "I cut paper with the scissors", pt: "Eu corto papel com a tesoura" },
+      { en: "We draw pictures with colorful crayons", pt: "Nós desenhamos com gizes de cera coloridos" },
+      { en: "She measures lines with a ruler", pt: "Ela mede linhas com uma régua" },
+      { en: "They eat a sandwich at school", pt: "Eles comem um sanduíche na escola" },
+      { en: "I sit at my desk now", pt: "Eu me sento na minha mesa agora" },
+      { en: "We play with friends at recess", pt: "Nós brincamos com amigos no recreio" },
+      { en: "He writes on the black board", pt: "Ele escreve na lousa negra" }
     ];
 
     const trueFalseQuestions = [
-      { statement: "We use a pencil to write notes in our notebook.", pt: "Usamos um lápis para escrever anotações no caderno.", isTrue: true, emoji: "✏️", explanation: "Pencils are made for writing and drawing!" },
-      { statement: "Scissors are used to erase pencil mistakes.", pt: "A tesoura é usada para apagar erros de lápis.", isTrue: false, emoji: "✂️", explanation: "Scissors cut paper! Erasers remove pencil mistakes." },
-      { statement: "A backpack is used to carry books and school items.", pt: "A mochila é usada para carregar livros e itens escolares.", isTrue: true, emoji: "🎒", explanation: "Backpacks hold all our school supplies!" },
-      { statement: "We use crayons to color beautiful pictures.", pt: "Nós usamos giz de cera para colorir belos desenhos.", isTrue: true, emoji: "🖍️", explanation: "Crayons make bright and colorful artwork!" },
-      { statement: "A ruler is used to drink orange juice.", pt: "Uma régua é usada para beber suco de laranja.", isTrue: false, emoji: "📏", explanation: "A ruler measures straight lines! You drink from a glass." },
-      { statement: "Glue helps stick paper together in art class.", pt: "A cola ajuda a colar papéis na aula de artes.", isTrue: true, emoji: "🧴", explanation: "Glue sticks paper and crafts together!" },
-      { statement: "A sharpener makes blunt pencils sharp again.", pt: "Um apontador deixa lápis sem ponta afiados novamente.", isTrue: true, emoji: sharpenerSvg, explanation: "A sharpener sharpens your pencil point!" }
+      { statement: "We write notes with a pencil.", pt: "Nós escrevemos anotações com um lápis.", isTrue: true, emoji: "✏️", explanation: "Pencils are made for writing and drawing!" },
+      { statement: "We use scissors to fix mistakes.", pt: "Usamos tesoura para consertar erros.", isTrue: false, emoji: "✂️", explanation: "Scissors cut paper! Erasers remove pencil mistakes." },
+      { statement: "We carry books in a backpack.", pt: "Nós carregamos livros em uma mochila.", isTrue: true, emoji: "🎒", explanation: "Backpacks hold all our school supplies!" },
+      { statement: "We color pictures with crayons.", pt: "Nós colorimos desenhos com giz de cera.", isTrue: true, emoji: "🖍️", explanation: "Crayons make bright and colorful artwork!" },
+      { statement: "We use a ruler to drink juice.", pt: "Usamos uma régua para beber suco.", isTrue: false, emoji: "📏", explanation: "A ruler measures straight lines! You drink from a glass." },
+      { statement: "Glue sticks paper together.", pt: "A cola gruda papel.", isTrue: true, emoji: "🧴", explanation: "Glue sticks paper and crafts together!" },
+      { statement: "A sharpener makes pencils sharp.", pt: "Um apontador deixa os lápis afiados.", isTrue: true, emoji: sharpenerSvg, explanation: "A sharpener sharpens your pencil point!" }
     ];
 
     const findMistakeQuestions = [
-      { wrong: "I use my yellow pencil to cut paper into pieces.", correct: "I use scissors to cut paper! (Pencils write and draw!)", pt: "Eu uso meu lápis amarelo para cortar papel em pedaços.", emoji: "✏️" },
-      { wrong: "My soft eraser is for drinking cold water.", correct: "An eraser removes pencil mistakes! (Glasses hold cold water!)", pt: "Minha borracha macia é para beber água gelada.", emoji: "🧽" },
-      { wrong: "I carry my heavy notebooks inside a small sharpener.", correct: "You carry books inside a backpack! (Sharpeners sharpen pencils!)", pt: "Eu carrego meus cadernos pesados dentro de um apontador pequeno.", emoji: sharpenerSvg },
-      { wrong: "We use a ruler to color a rainbow picture.", correct: "We use crayons or markers to color! (Rulers measure lines!)", pt: "Usamos uma régua para colorir um desenho de arco-íris.", emoji: "📏" },
-      { wrong: "The teacher writes ABC on the lunchbox.", correct: "The teacher writes on the board or in a notebook! (Lunchbox holds food!)", pt: "A professora escreve ABC na lancheira.", emoji: "🍱" },
-      { wrong: "I use sticky glue to erase my math mistake.", correct: "An eraser removes mistakes! (Glue sticks crafts together!)", pt: "Eu uso cola pegajosa para apagar meu erro de matemática.", emoji: "🧴" }
+      { wrong: "I use my pencil to cut paper.", correct: "I use SCISSORS to cut paper! ✂️", pt: "Eu uso meu lápis para cortar papel.", emoji: "✏️" },
+      { wrong: "My eraser is for drinking water.", correct: "You drink water from a GLASS! 🥛", pt: "Minha borracha é para beber água.", emoji: "🧽" },
+      { wrong: "I carry notebooks in a sharpener.", correct: "You carry notebooks in a BACKPACK! 🎒", pt: "Eu carrego cadernos em um apontador.", emoji: sharpenerSvg },
+      { wrong: "We use a ruler to color a rainbow.", correct: "We use CRAYONS to color! 🖍️", pt: "Usamos uma régua para colorir um arco-íris.", emoji: "📏" },
+      { wrong: "The teacher writes on the lunchbox.", correct: "The teacher writes on the BOARD! 🏫", pt: "A professora escreve na lancheira.", emoji: "🍱" },
+      { wrong: "I use glue to erase my mistake.", correct: "You use an ERASER to fix mistakes! 🧽", pt: "Eu uso cola para apagar meu erro.", emoji: "🧴" }
     ];
 
     const tellMeQuestions = [
-      { q: "Tell me: What color is your favorite pencil or crayon, and what do you love to draw with it?", pt: "Me conte: Qual a cor do seu lápis ou giz de cera favorito, e o que você ama desenhar com ele?", emoji: "✏️" },
-      { q: "Tell me: What items do you carry inside your school backpack every day?", pt: "Me conte: Quais itens você carrega dentro da sua mochila da escola todos os dias?", emoji: "🎒" },
-      { q: "Tell me: Do you prefer writing with a pencil or drawing with bright markers?", pt: "Me conte: Você prefere escrever com lápis ou desenhar com canetinhas brilhantes?", emoji: "🖊️" },
-      { q: "Tell me: What is your favorite snack to bring in your lunchbox for school break?", pt: "Me conte: Qual é o seu lanche favorito para levar na lancheira no recreio da escola?", emoji: "🍱" },
-      { q: "Tell me: What is your favorite school subject or activity in class?", pt: "Me conte: Qual é a sua matéria ou atividade favorita na sala de aula?", emoji: "🏫" },
-      { q: "Tell me: Do you have a favorite notebook? What is on the cover?", pt: "Me conte: Você tem um caderno favorito? O que tem na capa dele?", emoji: "📓" }
+      { q: "Tell me: What color is your pencil? What do you draw?", pt: "Me conte: De que cor é o seu lápis? O que você desenha?", emoji: "✏️" },
+      { q: "Tell me: What is in your school backpack?", pt: "Me conte: O que tem na sua mochila da escola?", emoji: "🎒" },
+      { q: "Tell me: Do you write with a pencil or draw with markers?", pt: "Me conte: Você escreve com lápis ou desenha com canetinhas?", emoji: "🖊️" },
+      { q: "Tell me: What is your favorite snack for school?", pt: "Me conte: Qual é o seu lanche favorito para a escola?", emoji: "🍱" },
+      { q: "Tell me: What is your favorite class activity?", pt: "Me conte: Qual é a sua atividade favorita na aula?", emoji: "🏫" },
+      { q: "Tell me: Do you have a favorite notebook?", pt: "Me conte: Você tem um caderno favorito?", emoji: "📓" }
     ];
 
     // GAME — Sound Match
@@ -268,7 +273,7 @@
     });
     renderQ();
   </script>
-  <script src="scenario-engine.js"></script>
-  <script src="shared-games.js"></script>
+  <script src="scenario-engine.js?v=1787856914250"></script>
+  <script src="shared-games.js?v=1787856914250"></script>
 </body>
 </html>

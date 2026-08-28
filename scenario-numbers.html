@@ -6,8 +6,8 @@
   <title>🔢 Number Adventure — Learn with Luna</title>
   <meta name="description" content="Learn numbers in English with Luna the Cat! Interactive story, vocabulary flashcards, and fun counting games." />
   <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🐱</text></svg>" />
-  <link rel="stylesheet" href="styles.css" />
-  <link rel="stylesheet" href="scenario.css" />
+  <link rel="stylesheet" href="styles.css?v=1787856914247" />
+  <link rel="stylesheet" href="scenario.css?v=1787856914247" />
 </head>
 <body>
 
@@ -241,26 +241,16 @@
     ];
 
     const gameSentences = [
-      { en: "I have two cute sleeping cats", pt: "Eu tenho dois gatos fofos dormindo" },
-      { en: "There are three fresh red apples", pt: "Existem três maçãs vermelhas frescas" },
-      { en: "Please give me five shiny coins", pt: "Por favor me dê cinco moedas brilhantes" },
-      { en: "One big brown dog is barking", pt: "Um grande cachorro marrom está latindo" },
-      { en: "I see four small swimming fish", pt: "Eu vejo quatro pequenos peixes nadando" },
-      { en: "We bought six bright yellow balloons", pt: "Compramos seis balões amarelos brilhantes" },
-      { en: "Seven green frogs are jumping around", pt: "Sete sapos verdes estão pulando ao redor" },
-      { en: "Eight brown bears are catching fish", pt: "Oito ursos marrons estão pegando peixes" },
-      { en: "Nine beautiful pink flowers are blooming", pt: "Nove belas flores rosas estão florescendo" },
-      { en: "Ten little bright stars are twinkling", pt: "Dez pequenas estrelas brilhantes estão piscando" },
-      { en: "Eleven fast cars are racing together", pt: "Onze carros rápidos estão correndo juntos" },
-      { en: "Twelve fresh eggs are resting safely", pt: "Doze ovos frescos estão descansando em segurança" },
-      { en: "Thirteen colorful butterflies flutter around happily", pt: "Treze borboletas coloridas voam ao redor felizes" },
-      { en: "Fourteen small birds are singing sweetly", pt: "Quatorze passarinhos estão cantando docemente" },
-      { en: "Fifteen red apples fell down today", pt: "Quinze maçãs vermelhas caíram hoje" },
-      { en: "Sixteen happy children are playing together", pt: "Dezesseis crianças felizes estão brincando juntas" },
-      { en: "Seventeen shiny shells were found today", pt: "Dezessete conchas brilhantes foram encontradas hoje" },
-      { en: "Eighteen white clouds are floating slowly", pt: "Dezoito nuvens brancas estão flutuando lentamente" },
-      { en: "Nineteen tall trees provide cool shade", pt: "Dezenove árvores altas dão sombra fresca" },
-      { en: "Twenty colorful blocks are scattered around", pt: "Vinte blocos coloridos estão espalhados ao redor" }
+      { en: "I see one big red apple", pt: "Eu vejo uma grande maçã vermelha" },
+      { en: "We have two small brown dogs", pt: "Nós temos dois pequenos cães marrons" },
+      { en: "She wants three sweet pink flowers", pt: "Ela quer três doces flores rosas" },
+      { en: "He eats four small green grapes", pt: "Ele come quatro pequenas uvas verdes" },
+      { en: "They find five round shiny coins", pt: "Eles encontram cinco moedas redondas e brilhantes" },
+      { en: "I read six fun short books", pt: "Eu leio seis livros curtos divertidos" },
+      { en: "We need seven big yellow bananas", pt: "Nós precisamos de sete grandes bananas amarelas" },
+      { en: "She buys eight fresh white eggs", pt: "Ela compra oito ovos brancos frescos" },
+      { en: "I count nine tall green trees", pt: "Eu conto nove árvores altas verdes" },
+      { en: "We see ten bright yellow stars", pt: "Nós vemos dez estrelas amarelas brilhantes" }
     ];
 
     const emojis = ['⭐','🌟','❤️','🌸','🦋','🐟','🎈','🍀'];
@@ -449,7 +439,7 @@
       jumpCard.innerHTML = `
         <div class="jump-card-action">${a.emoji}</div>
         <div class="jump-card-text">${a.action} <strong>${a.word}</strong> times!</div>
-        <div class="jump-card-pt">🇧🇷 ${a.pt}</div>
+        <div class="jump-card-pt">${a.pt}</div>
         <div class="jump-card-hint">Do it and tap to continue →</div>
       `;
     }
@@ -640,7 +630,7 @@
     renderHelpTask();
 
   </script>
-  <script src="scenario-engine.js"></script>
-  <script src="shared-games.js"></script>
+  <script src="scenario-engine.js?v=1787856914247"></script>
+  <script src="shared-games.js?v=1787856914247"></script>
 </body>
 </html>

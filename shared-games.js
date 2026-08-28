@@ -35,7 +35,7 @@ document.addEventListener('DOMContentLoaded', () => {
               <div class="tm-question-text" id="tm-question-text">Loading...</div>
             </div>
             
-            <button class="tm-toggle-btn" id="tm-toggle-btn">🇧🇷 Show Translation</button>
+            <button class="tm-toggle-btn" id="tm-toggle-btn">Show Translation</button>
             
             <div class="tm-translation-box" id="tm-translation-box">
               <span id="tm-translation-text">...</span>
@@ -98,7 +98,7 @@ document.addEventListener('DOMContentLoaded', () => {
           <div class="tf-card">
             <div class="tf-emoji" id="tf-emoji">🤔</div>
             <div class="tf-statement-en" id="tf-statement-en">Loading...</div>
-            <button class="tf-show-translation-btn" id="tf-show-translation-btn">🇧🇷 Show Translation</button>
+            <button class="tf-show-translation-btn" id="tf-show-translation-btn">Show Translation</button>
             <div class="tf-statement-pt" id="tf-statement-pt" style="display: none;">...</div>
             <div class="tf-buttons">
               <button class="tf-btn tf-btn-true" id="tf-btn-true">✅ TRUE</button>
@@ -207,7 +207,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const currentSentence = sentences[sentenceIndex];
     const sentenceHintContainer = document.getElementById('sentence-hint');
     if (sentenceHintContainer) {
-      sentenceHintContainer.innerHTML = `<button class="tf-show-translation-btn" id="sentence-hint-btn">🇧🇷 Show Translation Hint</button><div id="sentence-hint-text" style="display: none; margin-bottom: 1rem;">🇧🇷 Hint: "${currentSentence.pt}"</div>`;
+      sentenceHintContainer.innerHTML = `<button class="tf-show-translation-btn" id="sentence-hint-btn">Show Translation Hint</button><div id="sentence-hint-text" style="display: none; margin-bottom: 1rem;">Hint: "${currentSentence.pt}"</div>`;
       const hintBtn = document.getElementById('sentence-hint-btn');
       if (hintBtn) {
         hintBtn.addEventListener('click', () => {
@@ -389,7 +389,7 @@ document.addEventListener('DOMContentLoaded', () => {
     
     const currentWord = scrambleWords[scrambleIndex];
     document.getElementById('scramble-emoji').textContent = currentWord.emoji;
-    document.getElementById('scramble-hint').textContent = `🇧🇷 Hint: ${currentWord.pt}`;
+    document.getElementById('scramble-hint').textContent = `Hint: ${currentWord.pt}`;
     document.getElementById('scramble-game-score').innerHTML = `⭐ Score: <strong>${scrambleScore}</strong> / <span>${scrambleWords.length}</span>`;
     document.getElementById('scramble-progress-bar').style.width = ((scrambleIndex / scrambleWords.length) * 100) + '%';
     
@@ -622,12 +622,12 @@ document.addEventListener('DOMContentLoaded', () => {
     if (emojiEl) emojiEl.innerHTML = q.emoji || '🤔';
     if (enEl) enEl.textContent = q.statement;
     if (ptEl) {
-      ptEl.textContent = `🇧🇷 ${q.pt}`;
+      ptEl.textContent = `${q.pt}`;
       ptEl.style.display = 'none';
     }
     if (showTransBtn) {
       showTransBtn.style.display = 'inline-block';
-      showTransBtn.textContent = '🇧🇷 Show Translation';
+      showTransBtn.textContent = 'Show Translation';
     }
     if (scoreEl) scoreEl.innerHTML = `⭐ Score: <strong>${tfScore}</strong> / <span>${currentTFList.length}</span>`;
     if (progressEl) progressEl.style.width = ((tfIndex / currentTFList.length) * 100) + '%';
@@ -750,7 +750,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     if (emojiEl) emojiEl.innerHTML = q.emoji || '🔍';
     if (wrongEl) wrongEl.textContent = `"${q.wrong}"`;
-    if (correctEl) correctEl.innerHTML = `✨ <strong>Correct:</strong> "${q.correct}"<br/><span style="font-size:0.95rem; font-weight:500; color:#475569; margin-top:0.4rem; display:block;">🇧🇷 ${q.pt || ''}</span>`;
+    if (correctEl) correctEl.innerHTML = `✨ <strong>Correct:</strong> "${q.correct}"<br/><span style="font-size:0.95rem; font-weight:500; color:#475569; margin-top:0.4rem; display:block;">${q.pt || ''}</span>`;
 
     if (correctBox) correctBox.style.display = 'none';
     if (toggleBtn) {
@@ -841,12 +841,12 @@ document.addEventListener('DOMContentLoaded', () => {
 
     if (emojiEl) emojiEl.innerHTML = q.emoji || '💬';
     if (questionEl) questionEl.textContent = q.q;
-    if (transTextEl) transTextEl.textContent = `🇧🇷 ${q.pt || ''}`;
+    if (transTextEl) transTextEl.textContent = `${q.pt || ''}`;
 
     if (transBox) transBox.style.display = 'none';
     if (toggleBtn) {
       toggleBtn.style.display = 'inline-block';
-      toggleBtn.textContent = '🇧🇷 Show Translation';
+      toggleBtn.textContent = 'Show Translation';
     }
 
     if (scoreEl) scoreEl.innerHTML = `⭐ Question: <strong>${tmIndex + 1}</strong> / <span>${currentTMList.length}</span>`;

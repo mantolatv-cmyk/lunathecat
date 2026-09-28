@@ -1,0 +1,284 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>🍓 Fresh Fruits — Learn with Luna</title>
+  <meta name="description" content="Learn names of yummy fresh fruits in English with Luna the Cat! Jaca, kiwi, jabuticaba, berries, and more with interactive games!" />
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🐱</text></svg>" />
+  <link rel="stylesheet" href="styles.css?v=1787856914251" />
+  <link rel="stylesheet" href="scenario.css?v=1787856914251" />
+</head>
+<body>
+
+  <header class="header scrolled" id="app-header">
+    <div class="header-inner">
+      <a href="index.html" class="logo">
+        <img src="images/luna-logo.png" alt="Luna the Cat" class="logo-icon" />
+        <span class="logo-text">Learn with <span>Luna</span></span>
+      </a>
+      <nav class="nav-links">
+        <a href="index.html" class="nav-link">Home</a>
+        <a href="index.html#videos" class="nav-link active">Videos</a>
+        <a href="index.html#printables" class="nav-link">Printables</a>
+        <a href="index.html#about" class="nav-link">About</a>
+      </nav>
+      <button class="menu-toggle" id="menu-toggle" aria-label="Toggle menu"><span></span></button>
+    </div>
+    <nav class="nav-mobile" id="nav-mobile">
+      <a href="index.html" class="nav-link">Home</a>
+      <a href="index.html#videos" class="nav-link">Videos</a>
+      <a href="index.html#printables" class="nav-link">Printables</a>
+      <a href="index.html#about" class="nav-link">About</a>
+    </nav>
+  </header>
+
+  <section class="scenario-hero">
+    <img src="images/scene-fruits.jpg" alt="Luna in a magical orchard with fresh delicious fruits" class="scenario-hero-img" loading="lazy" />
+    <div class="scenario-hero-overlay">
+      <div class="scenario-hero-icon">🍓</div>
+      <h1 class="scenario-hero-title">Fresh Fruits Orchard</h1>
+      <p class="scenario-hero-subtitle">Taste the magic of delicious fruits with Luna!</p>
+    </div>
+  </section>
+
+  <div class="scenario-container">
+    <a href="index.html" class="back-btn">← Back to Home</a>
+
+    <div class="scenario-tabs" id="scenario-tabs">
+      <button class="scenario-tab active" data-tab="story">💬 Story Time</button>
+      <button class="scenario-tab" data-tab="vocab">📖 Word Garden</button>
+      <button class="scenario-tab" data-tab="feed">🐱 Feed Luna</button>
+      <button class="scenario-tab" data-tab="game">🎮 Play &amp; Learn</button>
+      <button class="scenario-tab" data-tab="memory">🃏 Matching Pairs</button>
+    </div>
+
+    <!-- TAB 1: Story -->
+    <div class="tab-panel active" id="tab-story">
+      <div class="dialogue-container" id="dialogue-container"></div>
+      <button class="dialogue-next-btn" id="dialogue-next-btn">Next Line →</button>
+      <button class="dialogue-restart-btn" id="dialogue-restart-btn">🔄 Start Over</button>
+    </div>
+
+    <!-- TAB 2: Word Garden -->
+    <div class="tab-panel" id="tab-vocab">
+      <div class="vocab-grid" id="vocab-grid"></div>
+    </div>
+
+    <!-- TAB 3: Feed Luna Game -->
+    <div class="tab-panel" id="tab-feed">
+      <div class="game-area" id="feed-game-area">
+        <div class="game-score" id="feed-game-score">⭐ Fed: <strong>0</strong> / <span>0</span></div>
+        <div class="game-progress"><div class="game-progress-bar" id="feed-progress-bar"></div></div>
+        <div class="game-feedback" id="feed-game-feedback">Drag fruits to feed Luna! 🐱</div>
+        <div class="feed-game-area">
+          <div class="feed-scene">
+            <div class="feed-cat" id="feed-cat">🐱</div>
+            <div class="feed-items-container" id="feed-items-container"></div>
+          </div>
+        </div>
+      </div>
+      <div class="game-complete" id="feed-complete">
+        <div class="game-complete-emoji">😻</div>
+        <h2 class="game-complete-title">Fruit Feast!</h2>
+        <p class="game-complete-score" id="feed-final-score">Luna loved all the delicious fruits!</p>
+        <div class="game-stars">⭐⭐⭐</div>
+        <button class="game-replay-btn" id="feed-replay-btn">🔄 Play Again!</button>
+      </div>
+    </div>
+
+    <!-- TAB 4: Sound / Clue Match Game -->
+    <div class="tab-panel" id="tab-game">
+      <div class="game-area" id="game-area">
+        <div class="game-score" id="game-score">⭐ Score: <strong>0</strong> / <span>0</span></div>
+        <div class="game-progress"><div class="game-progress-bar" id="game-progress-bar"></div></div>
+        <div class="game-prompt">
+          <div class="game-prompt-label">Read the clue: Which fruit is this?</div>
+          <div class="game-prompt-content" id="game-prompt" style="font-size: 1.8rem;"></div>
+        </div>
+        <div class="game-options" id="game-options"></div>
+        <div class="game-feedback" id="game-feedback"></div>
+      </div>
+      <div class="game-complete" id="game-complete">
+        <div class="game-complete-emoji">🍓</div>
+        <h2 class="game-complete-title">Fruit Expert!</h2>
+        <p class="game-complete-score" id="game-final-score"></p>
+        <div class="game-stars" id="game-stars"></div>
+        <button class="game-replay-btn" id="game-replay-btn">🔄 Play Again!</button>
+      </div>
+    </div>
+
+    <!-- TAB 5: Matching Pairs -->
+    <div class="tab-panel" id="tab-memory">
+      <div class="pairs-board" id="pairs-board"></div>
+      <div class="game-complete" id="pairs-complete" style="display: none; flex-direction: column; align-items: center;">
+        <div class="game-complete-emoji">🎉</div>
+        <h2 class="game-complete-title">You Did It!</h2>
+        <p class="game-complete-score" style="font-size:1.2rem; color:var(--text-secondary);">You matched all the fruit pairs!</p>
+        <button class="game-replay-btn" id="pairs-replay-btn">🔄 Play Again!</button>
+      </div>
+    </div>
+  </div>
+
+  <footer class="footer">
+    <div class="footer-inner">
+      <p class="footer-message">Luna loves eating healthy fruits with you! <span class="paw-emoji">🐾</span></p>
+      <p class="footer-copy">Made with <span class="heart">♥</span> by Learn with Luna · © 2026</p>
+    </div>
+  </footer>
+
+  <script>
+    const dialogues = [
+      { speaker: 'luna', en: "Welcome to my magical fruit orchard! Look at all these yummy fruits! 🌳🍎", pt: "Bem-vinda ao meu pomar mágico de frutas! Olhe todas essas frutas gostosas! 🌳🍎" },
+      { speaker: 'child', en: "Wow Luna! I see bright red APPLES and sweet yellow BANANAS! 🍎🍌", pt: "Uau Luna! Eu vejo MAÇÃS vermelhas e BANANAS amarelas docinhas! 🍎🍌" },
+      { speaker: 'luna', en: "Yes! And look up in that big tree, that is a huge JACKFRUIT! 🍈", pt: "Sim! E olhe lá no alto daquela árvore grande, aquela é uma JACA enorme! 🍈" },
+      { speaker: 'child', en: "It is so big! And what are those shiny purple pearls on the tree trunk? 🟣", pt: "Ela é tão grande! E o que são aquelas pérolas roxas brilhantes no tronco da árvore? 🟣" },
+      { speaker: 'luna', en: "Those are JABUTICABAS! Sweet, juicy, and famous in Brazil! 🇧🇷✨", pt: "Aquelas são JABUTICABAS! Doces, suculentas e famosas no Brasil! 🇧🇷✨" },
+      { speaker: 'child', en: "Can we make fruit salad? We have KIWI, PAPAYA, and MELON! 🥝🥭🍈", pt: "Podemos fazer salada de frutas? Nós temos KIWI, MAMÃO e MELÃO! 🥝🥭🍈" },
+      { speaker: 'luna', en: "Yummy! And let's peel a sweet TANGERINE and squeeze a fresh LEMON! 🍊🍋", pt: "Que delícia! E vamos descascar uma MEXIRICA doce e espremer um LIMÃO fresquinho! 🍊🍋" },
+      { speaker: 'child', en: "Don't forget the berries! BLUEBERRIES, RASPBERRIES, and BLACKBERRIES! 🫐🍓", pt: "Não se esqueça das frutinhas! MIRTILOS, FRAMBOESAS e AMORAS! 🫐🍓" },
+      { speaker: 'luna', en: "And a delicious bunch of purple GRAPES too! Fruits give you super energy! 🍇💖", pt: "E um cacho delicioso de UVAS roxas também! Frutas dão super energia! 🍇💖" },
+      { speaker: 'child', en: "Thank you Luna! Learning fruit names in English is delicious! ✨🐾", pt: "Obrigada Luna! Aprender nomes de frutas em inglês é uma delícia! ✨🐾" }
+    ];
+
+    const vocabulary = [
+      { emoji: '🍎', word: 'Apple', pt: 'Maçã', sound: 'Crunchy and sweet!' },
+      { emoji: '🍌', word: 'Banana', pt: 'Banana', sound: 'Yellow and full of energy!' },
+      { emoji: '🍇', word: 'Grape', pt: 'Uva', sound: 'Sweet purple juice drops!' },
+      { emoji: '🍋', word: 'Lemon', pt: 'Limão', sound: 'Sour and refreshing!' },
+      { emoji: '🍊', word: 'Tangerine', pt: 'Mexirica', sound: 'Sweet and easy to peel!' },
+      { emoji: '🥝', word: 'Kiwi', pt: 'Kiwi', sound: 'Fuzzy outside, green inside!' },
+      { emoji: '🥭', word: 'Papaya', pt: 'Mamão', sound: 'Soft, orange and delicious!' },
+      { emoji: '🍈', word: 'Melon', pt: 'Melão', sound: 'Juicy, sweet and fresh!' },
+      { emoji: '🌳🍈', word: 'Jackfruit', pt: 'Jaca', sound: 'Huge tropical tree fruit!' },
+      { emoji: '🟣', word: 'Jabuticaba', pt: 'Jabuticaba', sound: 'Sweet Brazilian dark berries!' },
+      { emoji: '🫐', word: 'Blueberry', pt: 'Mirtilo', sound: 'Tiny, blue and yummy!' },
+      { emoji: '🍓', word: 'Raspberry', pt: 'Framboesa', sound: 'Bright red and delicate!' },
+      { emoji: '🖤🍇', word: 'Blackberry', pt: 'Amora', sound: 'Dark, juicy wild berry!' }
+    ];
+
+    const gameData = [
+      { sound: 'This huge tropical fruit has sweet yellow pods inside.', correct: 'Jackfruit', emoji: '🌳🍈' },
+      { sound: 'A sweet and juicy green melon that is so refreshing.', correct: 'Melon', emoji: '🍈' },
+      { sound: 'Dark sweet berries that grow right on tree trunks in Brazil.', correct: 'Jabuticaba', emoji: '🟣' },
+      { sound: 'Fuzzy brown on the outside, bright green on the inside.', correct: 'Kiwi', emoji: '🥝' },
+      { sound: 'Soft orange tropical fruit with small black seeds in the center.', correct: 'Papaya', emoji: '🥭' },
+      { sound: 'A sweet citrus fruit that is very easy to peel with your fingers.', correct: 'Tangerine', emoji: '🍊' },
+      { sound: 'A tiny, round berry with a beautiful deep blue color.', correct: 'Blueberry', emoji: '🫐' },
+      { sound: 'A delicate bright red berry that is sweet and delicious.', correct: 'Raspberry', emoji: '🍓' },
+      { sound: 'A juicy dark purple-black wild berry that grows on bushes.', correct: 'Blackberry', emoji: '🖤🍇' },
+      { sound: 'A bunch of small sweet round purple or green juicy fruits.', correct: 'Grape', emoji: '🍇' },
+      { sound: 'A long yellow fruit that gives lots of healthy energy.', correct: 'Banana', emoji: '🍌' },
+      { sound: 'A crunchy, sweet red fruit that grows on apple trees.', correct: 'Apple', emoji: '🍎' },
+      { sound: 'A sour yellow citrus fruit used to make cold lemonade.', correct: 'Lemon', emoji: '🍋' }
+    ];
+
+    const gameSentences = [
+      { en: "The sweet red apple tastes crunchy", pt: "A maçã vermelha doce é crocante" },
+      { en: "Luna peels a ripe yellow banana", pt: "Luna descasca uma banana amarela madura" },
+      { en: "The green kiwi has tiny seeds", pt: "O kiwi verde tem sementes pequenininhas" },
+      { en: "A huge jackfruit hangs from the tree", pt: "Uma jaca enorme está pendurada na árvore" },
+      { en: "Jabuticaba grows right on the trunk", pt: "A jabuticaba cresce direto no tronco" },
+      { en: "Sweet blueberries are deep blue and small", pt: "Mirtilos doces são azul-escuro e pequenos" },
+      { en: "Mom cuts the juicy orange papaya", pt: "A mamãe corta o mamão laranja suculento" },
+      { en: "We pick fresh blackberries in the garden", pt: "Nós colhemos amoras frescas no jardim" },
+      { en: "Cold lemonade needs fresh yellow lemons", pt: "Limonada gelada precisa de limões amarelos frescos" },
+      { en: "I love eating sweet purple grapes", pt: "Eu amo comer uvas roxas doces" }
+    ];
+
+    const trueFalseQuestions = [
+      { statement: "Apples can be sweet, crunchy, and bright red.", pt: "Maçãs podem ser doces, crocantes e vermelho-brilhantes.", isTrue: true, emoji: "🍎", explanation: "Apples are delicious, crunchy, and often red or green!" },
+      { statement: "Lemons are very sweet like sugar and candy.", pt: "Limões são muito doces como açúcar e balas.", isTrue: false, emoji: "🍋", explanation: "Lemons are SOUR (azedos), not sweet like candy!" },
+      { statement: "Jabuticaba is a dark berry that grows directly on tree trunks in Brazil.", pt: "Jabuticaba é uma frutinha escura que cresce direto no tronco das árvores no Brasil.", isTrue: true, emoji: "🟣", explanation: "Jabuticaba is famous for growing right on the tree trunk!" },
+      { statement: "A jackfruit is tiny like a small blueberry.", pt: "Uma jaca é minúscula como um pequeno mirtilo.", isTrue: false, emoji: "🌳🍈", explanation: "Jackfruit is ENORMOUS (enorme), one of the biggest tree fruits in the world!" },
+      { statement: "Bananas are yellow and easy to peel with your hands.", pt: "Bananas são amarelas e fáceis de descascar com as mãos.", isTrue: true, emoji: "🍌", explanation: "Bananas have a soft yellow peel that is easy to remove!" },
+      { statement: "Kiwi is bright green inside with tiny black seeds.", pt: "Kiwi é verde brilhante por dentro com sementes pretas pequenas.", isTrue: true, emoji: "🥝", explanation: "Kiwi has lovely bright green flesh and tiny black seeds!" },
+      { statement: "Blueberries are bright yellow.", pt: "Mirtilos são amarelo brilhante.", isTrue: false, emoji: "🫐", explanation: "Blueberries are BLUE or dark purple, not yellow!" }
+    ];
+
+    const findMistakeQuestions = [
+      { wrong: "Lemons are very sweet and red.", correct: "Lemons are SOUR and YELLOW! 🍋", pt: "Limões são azedos e amarelos!", emoji: "🍋" },
+      { wrong: "I eat the hard yellow peel of the banana.", correct: "You PEEL the banana and eat the sweet inside! 🍌", pt: "Você descasca a banana e come a parte doce por dentro!", emoji: "🍌" },
+      { wrong: "A jackfruit is smaller than a single grape.", correct: "A jackfruit is ENORMOUS and much bigger than a grape! 🍈", pt: "Uma jaca é enorme e muito maior do que uma uva!", emoji: "🌳🍈" },
+      { wrong: "Blueberries are bright red berries.", correct: "Blueberries are BLUE! Raspberries are bright red! 🫐", pt: "Mirtilos são azuis! Framboesas são vermelhas!", emoji: "🫐" },
+      { wrong: "Jabuticabas grow under the soil like potatoes.", correct: "Jabuticabas grow on the TREE TRUNK! 🟣", pt: "Jabuticabas crescem no tronco da árvore!", emoji: "🟣" },
+      { wrong: "Tangerines are impossible to peel with your hands.", correct: "Tangerines are very EASY to peel with your fingers! 🍊", pt: "Mexiricas são muito fáceis de descascar com as mãos!", emoji: "🍊" }
+    ];
+
+    const tellMeQuestions = [
+      { q: "Tell me: What is your favorite fruit of all? Why do you love it?", pt: "Me conte: Qual é a sua fruta favorita de todas? Por que você a ama?", emoji: "🍎" },
+      { q: "Tell me: Have you ever tasted a Jackfruit (Jaca) or Jabuticaba? What was it like?", pt: "Me conte: Você já provou Jaca ou Jabuticaba? Como foi?", emoji: "🟣" },
+      { q: "Tell me: Do you like sour lemons or sweet melons better?", pt: "Me conte: Você gosta mais de limões azedos ou de melões doces?", emoji: "🍋" },
+      { q: "Tell me: Which berry do you prefer: Blueberry, Raspberry, or Blackberry?", pt: "Me conte: Qual frutinha você prefere: Mirtilo, Framboesa ou Amora?", emoji: "🍓" },
+      { q: "Tell me: What fruits do you put in your magical fruit salad?", pt: "Me conte: Quais frutas você coloca na sua salada de frutas mágica?", emoji: "🥝" },
+      { q: "Tell me: Do you like to drink fresh orange or tangerine juice?", pt: "Me conte: Você gosta de beber suco fresco de laranja ou mexirica?", emoji: "🍊" }
+    ];
+
+    // GAME — Clue Match
+    let gi = 0, gs = 0, ga = false;
+    const sq = [...gameData].sort(() => Math.random() - 0.5).slice(0, 8);
+    const tq = sq.length;
+    const allNames = gameData.map(g => g.correct);
+
+    function renderQ() {
+      ga = false;
+      const q = sq[gi];
+      document.getElementById('game-prompt').textContent = q.sound;
+      document.getElementById('game-score').innerHTML = `⭐ Score: <strong>${gs}</strong> / <span>${tq}</span>`;
+      document.getElementById('game-progress-bar').style.width = ((gi / tq) * 100) + '%';
+      document.getElementById('game-feedback').textContent = '';
+      document.getElementById('game-feedback').className = 'game-feedback';
+
+      const wrongs = allNames.filter(n => n !== q.correct).sort(() => Math.random() - 0.5).slice(0, 3);
+      const opts = [...wrongs, q.correct].sort(() => Math.random() - 0.5);
+
+      const oe = document.getElementById('game-options');
+      oe.innerHTML = '';
+      opts.forEach(opt => {
+        const itemObj = gameData.find(g => g.correct === opt);
+        const emoji = itemObj ? itemObj.emoji : '🍎';
+        const btn = document.createElement('button');
+        btn.className = 'game-option';
+        btn.textContent = `${emoji} ${opt}`;
+        btn.addEventListener('click', () => handleA(btn, opt, q.correct));
+        oe.appendChild(btn);
+      });
+    }
+
+    function handleA(btn, sel, cor) {
+      if (ga) return; ga = true;
+      const fb = document.getElementById('game-feedback');
+      document.querySelectorAll('.game-option').forEach(o => o.classList.add('disabled'));
+      if (sel === cor) {
+        gs++; btn.classList.add('correct');
+        fb.textContent = '🎉 Correct! You know your fruits!'; fb.className = 'game-feedback correct-msg';
+      } else {
+        btn.classList.add('wrong');
+        document.querySelectorAll('.game-option').forEach(o => { if (o.textContent.includes(cor)) o.classList.add('correct'); });
+        fb.textContent = `❌ That's the ${cor}!`; fb.className = 'game-feedback wrong-msg';
+      }
+      document.getElementById('game-score').innerHTML = `⭐ Score: <strong>${gs}</strong> / <span>${tq}</span>`;
+      setTimeout(() => { gi++; if (gi < tq) renderQ(); else showComplete(); }, 1500);
+    }
+
+    function showComplete() {
+      document.getElementById('game-area').style.display = 'none';
+      document.getElementById('game-complete').classList.add('active');
+      const p = Math.round((gs / tq) * 100);
+      document.getElementById('game-final-score').textContent = `You got ${gs} out of ${tq} correct! (${p}%)`;
+      document.getElementById('game-stars').textContent = p >= 90 ? '⭐⭐⭐' : p >= 60 ? '⭐⭐' : '⭐';
+      document.getElementById('game-progress-bar').style.width = '100%';
+    }
+
+    document.getElementById('game-replay-btn').addEventListener('click', () => {
+      gi = 0; gs = 0; sq.sort(() => Math.random() - 0.5);
+      document.getElementById('game-area').style.display = 'block';
+      document.getElementById('game-complete').classList.remove('active');
+      renderQ();
+    });
+    renderQ();
+  </script>
+  <script src="scenario-engine.js?v=1787856914251"></script>
+  <script src="shared-games.js?v=1787856914251"></script>
+</body>
+</html>

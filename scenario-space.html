@@ -1,0 +1,276 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>🚀 Space &amp; Planets — Learn with Luna</title>
+  <meta name="description" content="Explore outer space, planets, stars, and rockets in English with Luna the Cat! Interactive story, flashcards, and fun cosmic games." />
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🐱</text></svg>" />
+  <link rel="stylesheet" href="styles.css?v=1787856914258" />
+  <link rel="stylesheet" href="scenario.css?v=1787856914258" />
+</head>
+<body>
+
+  <header class="header scrolled" id="app-header">
+    <div class="header-inner">
+      <a href="index.html" class="logo">
+        <img src="images/luna-logo.png" alt="Luna the Cat" class="logo-icon" />
+        <span class="logo-text">Learn with <span>Luna</span></span>
+      </a>
+      <nav class="nav-links">
+        <a href="index.html" class="nav-link">Home</a>
+        <a href="index.html#videos" class="nav-link active">Videos</a>
+        <a href="index.html#printables" class="nav-link">Printables</a>
+        <a href="index.html#about" class="nav-link">About</a>
+      </nav>
+      <button class="menu-toggle" id="menu-toggle" aria-label="Toggle menu"><span></span></button>
+    </div>
+    <nav class="nav-mobile" id="nav-mobile">
+      <a href="index.html" class="nav-link">Home</a>
+      <a href="index.html#videos" class="nav-link">Videos</a>
+      <a href="index.html#printables" class="nav-link">Printables</a>
+      <a href="index.html#about" class="nav-link">About</a>
+    </nav>
+  </header>
+
+  <section class="scenario-hero">
+    <img src="images/scene-space.jpg" alt="Luna floating in space near spaceship observation window with Earth, Moon, and Saturn" class="scenario-hero-img" loading="lazy" />
+    <div class="scenario-hero-overlay">
+      <div class="scenario-hero-icon">🚀</div>
+      <h1 class="scenario-hero-title">Space &amp; Planets Adventure</h1>
+      <p class="scenario-hero-subtitle">Blast off into the cosmos and explore the stars with Luna!</p>
+    </div>
+  </section>
+
+  <div class="scenario-container">
+    <a href="index.html" class="back-btn">← Back to Home</a>
+
+    <div class="scenario-tabs" id="scenario-tabs">
+      <button class="scenario-tab active" data-tab="story">💬 Story Time</button>
+      <button class="scenario-tab" data-tab="vocab">📖 Word Garden</button>
+      <button class="scenario-tab" data-tab="learnwords">📖 Learn Words</button>
+      <button class="scenario-tab" data-tab="game">🎮 Play &amp; Learn</button>
+      <button class="scenario-tab" data-tab="memory">🃏 Matching Pairs</button>
+    </div>
+
+    <!-- TAB 1: Story -->
+    <div class="tab-panel active" id="tab-story">
+      <div class="dialogue-container" id="dialogue-container"></div>
+      <button class="dialogue-next-btn" id="dialogue-next-btn">Next Line →</button>
+      <button class="dialogue-restart-btn" id="dialogue-restart-btn">🔄 Start Over</button>
+    </div>
+
+    <!-- TAB 2: Word Garden -->
+    <div class="tab-panel" id="tab-vocab">
+      <div class="vocab-grid" id="vocab-grid"></div>
+    </div>
+
+    <!-- TAB 3: Learn Words -->
+    <div class="tab-panel" id="tab-learnwords">
+      <div class="seq-card-container">
+        <div class="seq-card" id="seq-card">
+          <div class="seq-emoji" id="seq-emoji">🚀</div>
+          <div class="seq-word" id="seq-word" style="display: none;"></div>
+          <button class="seq-translation-btn" id="seq-translation-btn">Show English</button>
+          <div class="seq-translation-text" id="seq-translation-text">Rocket</div>
+        </div>
+        <div class="seq-nav">
+          <button class="seq-nav-btn" id="seq-prev-btn" aria-label="Previous">←</button>
+          <button class="seq-nav-btn" id="seq-next-btn" aria-label="Next">→</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- TAB 4: Clue Match Game -->
+    <div class="tab-panel" id="tab-game">
+      <div class="game-area" id="game-area">
+        <div class="game-score" id="game-score">⭐ Score: <strong>0</strong> / <span>0</span></div>
+        <div class="game-progress"><div class="game-progress-bar" id="game-progress-bar"></div></div>
+        <div class="game-prompt">
+          <div class="game-prompt-label">Read the clue: Which space item is this?</div>
+          <div class="game-prompt-content" id="game-prompt" style="font-size: 1.8rem;"></div>
+        </div>
+        <div class="game-options" id="game-options"></div>
+        <div class="game-feedback" id="game-feedback"></div>
+      </div>
+      <div class="game-complete" id="game-complete">
+        <div class="game-complete-emoji">🌌</div>
+        <h2 class="game-complete-title">Cosmic Explorer!</h2>
+        <p class="game-complete-score" id="game-final-score"></p>
+        <div class="game-stars" id="game-stars"></div>
+        <button class="game-replay-btn" id="game-replay-btn">🔄 Play Again!</button>
+      </div>
+    </div>
+
+    <!-- TAB 5: Matching Pairs -->
+    <div class="tab-panel" id="tab-memory">
+      <div class="pairs-board" id="pairs-board"></div>
+      <div class="game-complete" id="pairs-complete" style="display: none; flex-direction: column; align-items: center;">
+        <div class="game-complete-emoji">🎉</div>
+        <h2 class="game-complete-title">You Did It!</h2>
+        <p class="game-complete-score" style="font-size:1.2rem; color:var(--text-secondary);">You matched all the space items!</p>
+        <button class="game-replay-btn" id="pairs-replay-btn">🔄 Play Again!</button>
+      </div>
+    </div>
+  </div>
+
+  <footer class="footer">
+    <div class="footer-inner">
+      <p class="footer-message">Luna loves exploring the universe with you! <span class="paw-emoji">🐾</span></p>
+      <p class="footer-copy">Made with <span class="heart">♥</span> by Learn with Luna · © 2026</p>
+    </div>
+  </footer>
+
+  <script>
+    const dialogues = [
+      { speaker: 'luna', en: "Three, two, one... BLAST OFF! Welcome to outer space! 🚀✨", pt: "Três, dois, um... DECOLAR! Bem-vinda ao espaço sideral! 🚀✨" },
+      { speaker: 'child', en: "Luna, we are floating in zero gravity! Look outside our SPACESHIP! 🛸👩‍🚀", pt: "Luna, nós estamos flutuando em gravidade zero! Olhe fora da nossa NAVE ESPACIAL! 🛸👩‍🚀" },
+      { speaker: 'luna', en: "Look down at planet EARTH! It shines like a blue and green marble! 🌍💙", pt: "Olhe para baixo no planeta TERRA! Ele brilha como uma bolinha de gude azul e verde! 🌍💙" },
+      { speaker: 'child', en: "And right there is the MOON with all its crater shadows! 🌙", pt: "E bem ali está a LUA com todas as sombras das suas crateras! 🌙" },
+      { speaker: 'luna', en: "Look through the TELESCOPE! Do you see the PLANET with giant rings? 🔭🪐", pt: "Olhe através do TELESCÓPIO! Você vê o PLANETA com anéis gigantes? 🔭🪐" },
+      { speaker: 'child', en: "That is Saturn! Its rings are so sparkly! And the SUN gives bright light! ☀️✨", pt: "Aquele é Saturno! Seus anéis são tão brilhantes! E o SOL dá luz brilhante! ☀️✨" },
+      { speaker: 'luna', en: "Look quick! A fast COMET is flying by with a long glowing tail! ☄️", pt: "Olhe rápido! Um COMETA veloz está passando com uma cauda brilhante e longa! ☄️" },
+      { speaker: 'child', en: "Make a wish, Luna! I see a SHOOTING STAR racing across the GALAXY! 🌠🌌", pt: "Faça um pedido, Luna! Eu vejo uma ESTRELA CADENTE correndo pela GALÁXIA! 🌠🌌" },
+      { speaker: 'luna', en: "Astronauts wear a protective SPACE HELMET to explore far away! 👨‍🚀", pt: "Astronautas usam um CAPACETE ESPACIAL protetor para explorar bem longe! 👨‍🚀" },
+      { speaker: 'child', en: "Traveling among the stars with you is out of this world, Luna! 🚀💖🐾", pt: "Viajar entre as estrelas com você é de outro mundo, Luna! 🚀💖🐾" }
+    ];
+
+    const vocabulary = [
+      { emoji: '🚀', word: 'Rocket', pt: 'Foguete', sound: 'Blasts off to the stars!' },
+      { emoji: '👩‍🚀', word: 'Astronaut', pt: 'Astronauta', sound: 'Explores outer space!' },
+      { emoji: '🌍', word: 'Earth', pt: 'Terra', sound: 'Our blue home planet!' },
+      { emoji: '🌙', word: 'Moon', pt: 'Lua', sound: 'Shines in the night sky!' },
+      { emoji: '☀️', word: 'Sun', pt: 'Sol', sound: 'Warm star giving light!' },
+      { emoji: '⭐', word: 'Star', pt: 'Estrela', sound: 'Sparkles in the cosmos!' },
+      { emoji: '🪐', word: 'Planet', pt: 'Planeta', sound: 'Orbits in solar system!' },
+      { emoji: '🔭', word: 'Telescope', pt: 'Telescópio', sound: 'See faraway galaxies!' },
+      { emoji: '☄️', word: 'Comet', pt: 'Cometa', sound: 'Ice and dust with glowing tail!' },
+      { emoji: '🛸', word: 'Spaceship', pt: 'Nave Espacial', sound: 'Cruises through the stars!' },
+      { emoji: '🛰️', word: 'Satellite', pt: 'Satélite', sound: 'Orbits Earth sending signals!' },
+      { emoji: '🌌', word: 'Galaxy', pt: 'Galáxia', sound: 'Billions of swirling stars!' },
+      { emoji: '👨‍🚀', word: 'Space Helmet', pt: 'Capacete Espacial', sound: 'Protects the astronaut!' },
+      { emoji: '🌠', word: 'Shooting Star', pt: 'Estrela Cadente', sound: 'Make a magical wish!' }
+    ];
+
+    const gameData = [
+      { sound: 'A powerful vehicle with roaring engines that blasts straight into space.', correct: 'Rocket', emoji: '🚀' },
+      { sound: 'A brave scientist who travels and works in space wearing a spacesuit.', correct: 'Astronaut', emoji: '👩‍🚀' },
+      { sound: 'The beautiful blue and green planet where humans and animals live.', correct: 'Earth', emoji: '🌍' },
+      { sound: 'The natural satellite that orbits Earth and lights up our night sky.', correct: 'Moon', emoji: '🌙' },
+      { sound: 'The giant hot star at the center of our solar system that gives daylight.', correct: 'Sun', emoji: '☀️' },
+      { sound: 'An optical tube with lenses you look through to see faraway stars.', correct: 'Telescope', emoji: '🔭' },
+      { sound: 'A cosmic body with colorful rings of ice that orbits the Sun.', correct: 'Planet', emoji: '🪐' },
+      { sound: 'A flying cosmic snowball of ice and rock that leaves a glowing tail.', correct: 'Comet', emoji: '☄️' },
+      { sound: 'A high-tech vehicle built for astronauts to fly through outer space.', correct: 'Spaceship', emoji: '🛸' },
+      { sound: 'A huge swirling system containing billions of glowing stars and dust.', correct: 'Galaxy', emoji: '🌌' }
+    ];
+
+    const gameSentences = [
+      { en: "The powerful rocket launches into outer space", pt: "O poderoso foguete decola para o espaço sideral" },
+      { en: "The astronaut floats gently in zero gravity", pt: "O astronauta flutua suavemente em gravidade zero" },
+      { en: "Planet Earth looks so blue from above", pt: "O planeta Terra parece tão azul lá de cima" },
+      { en: "The full moon shines brightly in the night", pt: "A lua cheia brilha intensamente na noite" },
+      { en: "The hot yellow sun warms our planet", pt: "O sol amarelo e quente aquece o nosso planeta" },
+      { en: "I look at faraway stars through my telescope", pt: "Eu olho estrelas distantes através do meu telescópio" },
+      { en: "Saturn is a magnificent planet with bright rings", pt: "Saturno é um planeta magnífico com anéis brilhantes" },
+      { en: "A fast comet streaks across the dark sky", pt: "Um cometa veloz cruza o céu escuro" },
+      { en: "The spaceship flies smoothly between the planets", pt: "A nave espacial voa suavemente entre os planetas" },
+      { en: "Make a wish on the bright shooting star", pt: "Faça um pedido na estrela cadente brilhante" }
+    ];
+
+    const trueFalseQuestions = [
+      { statement: "Earth is the third planet from the Sun and is our home.", pt: "A Terra é o terceiro planeta a partir do Sol e é a nossa casa.", isTrue: true, emoji: "🌍", explanation: "Earth has water, air, and is our wonderful home planet!" },
+      { statement: "The Moon is made of delicious yellow Swiss cheese.", pt: "A Lua é feita de queijo suíço amarelo delicioso.", isTrue: false, emoji: "🌙", explanation: "The Moon is made of rock and dust with impact craters, not cheese!" },
+      { statement: "A telescope helps us see faraway planets, moons, and stars.", pt: "Um telescópio nos ajuda a enxergar planetas, luas e estrelas distantes.", isTrue: true, emoji: "🔭", explanation: "Telescopes magnify light from distant cosmic objects!" },
+      { statement: "Astronauts can breathe in deep space without wearing any helmet.", pt: "Astronautas podem respirar no espaço profundo sem usar nenhum capacete.", isTrue: false, emoji: "👨‍🚀", explanation: "Outer space has no air to breathe, so astronauts need special helmets with oxygen!" },
+      { statement: "The Sun is a giant star that provides light and heat to Earth.", pt: "O Sol é uma estrela gigante que fornece luz e calor para a Terra.", isTrue: true, emoji: "☀️", explanation: "Without the Sun, Earth would be freezing dark and cold!" },
+      { statement: "A rocket travels through space slower than a walking snail.", pt: "Um foguete viaja pelo espaço mais devagar do que um caracol andando.", isTrue: false, emoji: "🚀", explanation: "Rockets travel at thousands of kilometers per hour!" },
+      { statement: "Our galaxy is called the Milky Way and has billions of stars.", pt: "Nossa galáxia se chama Via Láctea e possui bilhões de estrelas.", isTrue: true, emoji: "🌌", explanation: "The Milky Way is our cosmic neighborhood with billions of stars!" }
+    ];
+
+    const findMistakeQuestions = [
+      { wrong: "Astronauts ride bicycles to travel to the Moon.", correct: "Astronauts fly in powerful ROCKETS and SPACESHIPS! 🚀", pt: "Astronautas voam em foguetes e naves espaciais!", emoji: "🚀" },
+      { wrong: "The Sun rises only in the middle of the night.", correct: "The Sun shines during the DAY and gives us daylight! ☀️", pt: "O Sol brilha durante o dia e nos dá a luz do dia!", emoji: "☀️" },
+      { wrong: "We look at the stars using a microwave oven.", correct: "We look at faraway stars through a TELESCOPE! 🔭", pt: "Nós olhamos para as estrelas distantes através de um telescópio!", emoji: "🔭" },
+      { wrong: "Planet Earth is a flat square made of purple jelly.", correct: "Planet Earth is a ROUND sphere with blue oceans and green land! 🌍", pt: "O planeta Terra é uma esfera redonda com oceanos azuis e terras verdes!", emoji: "🌍" },
+      { wrong: "The astronaut takes off her helmet to eat an ice cream in space vacuum.", correct: "The astronaut KEEPS her space helmet on to breathe oxygen! 👨‍🚀", pt: "A astronauta mantém o capacete para respirar oxigênio!", emoji: "👨‍🚀" },
+      { wrong: "Comets are made of hot french fries flying in grease.", correct: "Comets are cosmic balls of ICE and DUST with glowing tails! ☄️", pt: "Cometas são bolas cósmicas de gelo e poeira com caudas brilhantes!", emoji: "☄️" }
+    ];
+
+    const tellMeQuestions = [
+      { q: "Tell me: Would you like to travel to the Moon or Mars in a rocket? Why?", pt: "Me conte: Você gostaria de viajar para a Lua ou para Marte em um foguete? Por quê?", emoji: "🚀" },
+      { q: "Tell me: What is your favorite planet in the solar system? What do you know about it?", pt: "Me conte: Qual é o seu planeta favorito no sistema solar? O que você sabe sobre ele?", emoji: "🪐" },
+      { q: "Tell me: Have you ever looked through a telescope at the night sky?", pt: "Me conte: Você já olhou através de um telescópio para o céu da noite?", emoji: "🔭" },
+      { q: "Tell me: What would you bring with you if you went to live in a space station for a week?", pt: "Me conte: O que você levaria com você se fosse morar em uma estação espacial por uma semana?", emoji: "👩‍🚀" },
+      { q: "Tell me: Have you ever seen a shooting star and made a secret wish?", pt: "Me conte: Você já viu uma estrela cadente e fez um pedido secreto?", emoji: "🌠" },
+      { q: "Tell me: What do you think floating in zero gravity feels like?", pt: "Me conte: Como você acha que é a sensação de flutuar em gravidade zero?", emoji: "🛸" }
+    ];
+
+    // GAME — Clue Match
+    let gi = 0, gs = 0, ga = false;
+    const sq = [...gameData].sort(() => Math.random() - 0.5).slice(0, 8);
+    const tq = sq.length;
+    const allNames = gameData.map(g => g.correct);
+
+    function renderQ() {
+      ga = false;
+      const q = sq[gi];
+      document.getElementById('game-prompt').textContent = q.sound;
+      document.getElementById('game-score').innerHTML = `⭐ Score: <strong>${gs}</strong> / <span>${tq}</span>`;
+      document.getElementById('game-progress-bar').style.width = ((gi / tq) * 100) + '%';
+      document.getElementById('game-feedback').textContent = '';
+      document.getElementById('game-feedback').className = 'game-feedback';
+
+      const wrongs = allNames.filter(n => n !== q.correct).sort(() => Math.random() - 0.5).slice(0, 3);
+      const opts = [...wrongs, q.correct].sort(() => Math.random() - 0.5);
+
+      const oe = document.getElementById('game-options');
+      oe.innerHTML = '';
+      opts.forEach(opt => {
+        const itemObj = gameData.find(g => g.correct === opt);
+        const emoji = itemObj ? itemObj.emoji : '🚀';
+        const btn = document.createElement('button');
+        btn.className = 'game-option';
+        btn.textContent = `${emoji} ${opt}`;
+        btn.addEventListener('click', () => handleA(btn, opt, q.correct));
+        oe.appendChild(btn);
+      });
+    }
+
+    function handleA(btn, sel, cor) {
+      if (ga) return; ga = true;
+      const fb = document.getElementById('game-feedback');
+      document.querySelectorAll('.game-option').forEach(o => o.classList.add('disabled'));
+      if (sel === cor) {
+        gs++; btn.classList.add('correct');
+        fb.textContent = '🎉 Correct! Out of this world knowledge!'; fb.className = 'game-feedback correct-msg';
+      } else {
+        btn.classList.add('wrong');
+        document.querySelectorAll('.game-option').forEach(o => { if (o.textContent.includes(cor)) o.classList.add('correct'); });
+        fb.textContent = `❌ That's the ${cor}!`; fb.className = 'game-feedback wrong-msg';
+      }
+      document.getElementById('game-score').innerHTML = `⭐ Score: <strong>${gs}</strong> / <span>${tq}</span>`;
+      setTimeout(() => { gi++; if (gi < tq) renderQ(); else showComplete(); }, 1500);
+    }
+
+    function showComplete() {
+      document.getElementById('game-area').style.display = 'none';
+      document.getElementById('game-complete').classList.add('active');
+      const p = Math.round((gs / tq) * 100);
+      document.getElementById('game-final-score').textContent = `You got ${gs} out of ${tq} correct! (${p}%)`;
+      document.getElementById('game-stars').textContent = p >= 90 ? '⭐⭐⭐' : p >= 60 ? '⭐⭐' : '⭐';
+      document.getElementById('game-progress-bar').style.width = '100%';
+    }
+
+    document.getElementById('game-replay-btn').addEventListener('click', () => {
+      gi = 0; gs = 0; sq.sort(() => Math.random() - 0.5);
+      document.getElementById('game-area').style.display = 'block';
+      document.getElementById('game-complete').classList.remove('active');
+      renderQ();
+    });
+    renderQ();
+  </script>
+  <script src="scenario-engine.js?v=1787856914258"></script>
+  <script src="shared-games.js?v=1787856914258"></script>
+</body>
+</html>

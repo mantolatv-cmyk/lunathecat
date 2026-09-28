@@ -1,0 +1,276 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>🎂 Birthday Party Magic — Learn with Luna</title>
+  <meta name="description" content="Celebrate a magical birthday party in English with Luna the Cat! Birthday cake, candles, gifts, balloons, and fun games." />
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🐱</text></svg>" />
+  <link rel="stylesheet" href="styles.css?v=1787856914256" />
+  <link rel="stylesheet" href="scenario.css?v=1787856914256" />
+</head>
+<body>
+
+  <header class="header scrolled" id="app-header">
+    <div class="header-inner">
+      <a href="index.html" class="logo">
+        <img src="images/luna-logo.png" alt="Luna the Cat" class="logo-icon" />
+        <span class="logo-text">Learn with <span>Luna</span></span>
+      </a>
+      <nav class="nav-links">
+        <a href="index.html" class="nav-link">Home</a>
+        <a href="index.html#videos" class="nav-link active">Videos</a>
+        <a href="index.html#printables" class="nav-link">Printables</a>
+        <a href="index.html#about" class="nav-link">About</a>
+      </nav>
+      <button class="menu-toggle" id="menu-toggle" aria-label="Toggle menu"><span></span></button>
+    </div>
+    <nav class="nav-mobile" id="nav-mobile">
+      <a href="index.html" class="nav-link">Home</a>
+      <a href="index.html#videos" class="nav-link">Videos</a>
+      <a href="index.html#printables" class="nav-link">Printables</a>
+      <a href="index.html#about" class="nav-link">About</a>
+    </nav>
+  </header>
+
+  <section class="scenario-hero">
+    <img src="images/scene-birthday.jpg" alt="Luna celebrating birthday with cake, candles, presents and balloons" class="scenario-hero-img" loading="lazy" />
+    <div class="scenario-hero-overlay">
+      <div class="scenario-hero-icon">🎂</div>
+      <h1 class="scenario-hero-title">Birthday Party Magic</h1>
+      <p class="scenario-hero-subtitle">Make a wish, blow out the candles, and open presents!</p>
+    </div>
+  </section>
+
+  <div class="scenario-container">
+    <a href="index.html" class="back-btn">← Back to Home</a>
+
+    <div class="scenario-tabs" id="scenario-tabs">
+      <button class="scenario-tab active" data-tab="story">💬 Story Time</button>
+      <button class="scenario-tab" data-tab="vocab">📖 Word Garden</button>
+      <button class="scenario-tab" data-tab="learnwords">📖 Learn Words</button>
+      <button class="scenario-tab" data-tab="game">🎮 Play &amp; Learn</button>
+      <button class="scenario-tab" data-tab="memory">🃏 Matching Pairs</button>
+    </div>
+
+    <!-- TAB 1: Story -->
+    <div class="tab-panel active" id="tab-story">
+      <div class="dialogue-container" id="dialogue-container"></div>
+      <button class="dialogue-next-btn" id="dialogue-next-btn">Next Line →</button>
+      <button class="dialogue-restart-btn" id="dialogue-restart-btn">🔄 Start Over</button>
+    </div>
+
+    <!-- TAB 2: Word Garden -->
+    <div class="tab-panel" id="tab-vocab">
+      <div class="vocab-grid" id="vocab-grid"></div>
+    </div>
+
+    <!-- TAB 3: Learn Words -->
+    <div class="tab-panel" id="tab-learnwords">
+      <div class="seq-card-container">
+        <div class="seq-card" id="seq-card">
+          <div class="seq-emoji" id="seq-emoji">🎂</div>
+          <div class="seq-word" id="seq-word" style="display: none;"></div>
+          <button class="seq-translation-btn" id="seq-translation-btn">Show English</button>
+          <div class="seq-translation-text" id="seq-translation-text">Birthday Cake</div>
+        </div>
+        <div class="seq-nav">
+          <button class="seq-nav-btn" id="seq-prev-btn" aria-label="Previous">←</button>
+          <button class="seq-nav-btn" id="seq-next-btn" aria-label="Next">→</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- TAB 4: Clue Match Game -->
+    <div class="tab-panel" id="tab-game">
+      <div class="game-area" id="game-area">
+        <div class="game-score" id="game-score">⭐ Score: <strong>0</strong> / <span>0</span></div>
+        <div class="game-progress"><div class="game-progress-bar" id="game-progress-bar"></div></div>
+        <div class="game-prompt">
+          <div class="game-prompt-label">Read the clue: Which party item is this?</div>
+          <div class="game-prompt-content" id="game-prompt" style="font-size: 1.8rem;"></div>
+        </div>
+        <div class="game-options" id="game-options"></div>
+        <div class="game-feedback" id="game-feedback"></div>
+      </div>
+      <div class="game-complete" id="game-complete">
+        <div class="game-complete-emoji">🎉</div>
+        <h2 class="game-complete-title">Party Master!</h2>
+        <p class="game-complete-score" id="game-final-score"></p>
+        <div class="game-stars" id="game-stars"></div>
+        <button class="game-replay-btn" id="game-replay-btn">🔄 Play Again!</button>
+      </div>
+    </div>
+
+    <!-- TAB 5: Matching Pairs -->
+    <div class="tab-panel" id="tab-memory">
+      <div class="pairs-board" id="pairs-board"></div>
+      <div class="game-complete" id="pairs-complete" style="display: none; flex-direction: column; align-items: center;">
+        <div class="game-complete-emoji">🎉</div>
+        <h2 class="game-complete-title">You Did It!</h2>
+        <p class="game-complete-score" style="font-size:1.2rem; color:var(--text-secondary);">You matched all the party items!</p>
+        <button class="game-replay-btn" id="pairs-replay-btn">🔄 Play Again!</button>
+      </div>
+    </div>
+  </div>
+
+  <footer class="footer">
+    <div class="footer-inner">
+      <p class="footer-message">Luna loves celebrating special birthdays with you! <span class="paw-emoji">🐾</span></p>
+      <p class="footer-copy">Made with <span class="heart">♥</span> by Learn with Luna · © 2026</p>
+    </div>
+  </footer>
+
+  <script>
+    const dialogues = [
+      { speaker: 'luna', en: "Happy Birthday! Welcome to our magical party room! 🎂🎉", pt: "Feliz Aniversário! Bem-vinda à nossa sala mágica de festa! 🎂🎉" },
+      { speaker: 'child', en: "SURPRISE Luna! Look at all the colorful BALLOONS floating! 🎈✨", pt: "SURPRESA Luna! Olhe todos os BALÕES coloridos flutuando! 🎈✨" },
+      { speaker: 'luna', en: "Here is your sparkly PARTY HAT! You look like a princess! 🥳👑", pt: "Aqui está o seu CHAPÉU DE FESTA brilhante! Você parece uma princesa! 🥳👑" },
+      { speaker: 'child', en: "Thank you! Look at the giant BIRTHDAY CAKE with glowing CANDLES! 🎂🕯️", pt: "Obrigada! Olhe o BOLO DE ANIVERSÁRIO gigante com VELAS brilhando! 🎂🕯️" },
+      { speaker: 'luna', en: "Close your eyes, MAKE A WISH, and blow out the candles! 🪄💫", pt: "Feche os olhos, FAÇA UM PEDIDO e assopre as velas! 🪄💫" },
+      { speaker: 'child', en: "Fffff! I made a magical wish! And look at all the wrapped PRESENTS! 🎁", pt: "Fffff! Fiz um pedido mágico! E olhe todos os PRESENTES embrulhados! 🎁" },
+      { speaker: 'luna', en: "This big gift box has a shiny satin RIBBON! Open it gently! 🎀", pt: "Esta caixa de presente grande tem um LAÇO DE FITA de cetim brilhante! Abra com cuidado! 🎀" },
+      { speaker: 'child', en: "Yay! Let's eat sweet CUPCAKES and throw sparkling CONFETTI! 🧁🎊", pt: "Eba! Vamos comer CUPCAKES doces e jogar CONFETE brilhante! 🧁🎊" },
+      { speaker: 'luna', en: "Turn on the PARTY MUSIC! Let's dance with all our BEST FRIENDS! 🎶💃", pt: "Ligue a MÚSICA DE FESTA! Vamos dançar com todos os nossos MELHORES AMIGOS! 🎶💃" },
+      { speaker: 'child', en: "This is the happiest birthday party ever, Luna! 💖🐾", pt: "Esta é a festa de aniversário mais feliz de todas, Luna! 💖🐾" }
+    ];
+
+    const vocabulary = [
+      { emoji: '🎂', word: 'Birthday Cake', pt: 'Bolo de Aniversário', sound: 'Sweet cake with frosting!' },
+      { emoji: '🕯️', word: 'Candles', pt: 'Velas', sound: 'Blow them out and wish!' },
+      { emoji: '🎈', word: 'Balloons', pt: 'Balões / Bexigas', sound: 'Floating colorful balloons!' },
+      { emoji: '🎁', word: 'Present', pt: 'Presente', sound: 'Wrapped gift with a bow!' },
+      { emoji: '🥳', word: 'Party Hat', pt: 'Chapéu de Festa', sound: 'Fun pointy hat!' },
+      { emoji: '💌', word: 'Invitation', pt: 'Convite', sound: 'Invite all your friends!' },
+      { emoji: '🎊', word: 'Confetti', pt: 'Confete', sound: 'Colorful paper sparkles!' },
+      { emoji: '🧁', word: 'Cupcake', pt: 'Cupcake', sound: 'Mini cake with cream!' },
+      { emoji: '🎀', word: 'Ribbon', pt: 'Laço de Fita', sound: 'Pretty decorative bow!' },
+      { emoji: '🎶', word: 'Party Music', pt: 'Música de Festa', sound: 'Dance and sing along!' },
+      { emoji: '🪄', word: 'Make a Wish', pt: 'Fazer um Pedido', sound: 'Dream for your special day!' },
+      { emoji: '🎉', word: 'Surprise', pt: 'Surpresa', sound: 'Everyone shouts with joy!' },
+      { emoji: '🍭', word: 'Lollipop', pt: 'Pirulito', sound: 'Sweet spiral candy!' },
+      { emoji: '👭', word: 'Best Friends', pt: 'Melhores Amigos', sound: 'Playing and laughing together!' }
+    ];
+
+    const gameData = [
+      { sound: 'A delicious dessert decorated with sweet frosting and burning candles.', correct: 'Birthday Cake', emoji: '🎂' },
+      { sound: 'You blow these out after you make your secret birthday wish.', correct: 'Candles', emoji: '🕯️' },
+      { sound: 'Colorful rubber shapes filled with air that float around the room.', correct: 'Balloons', emoji: '🎈' },
+      { sound: 'A special surprise gift wrapped in shiny paper with a ribbon.', correct: 'Present', emoji: '🎁' },
+      { sound: 'A cone-shaped festive paper hat you wear on your head during parties.', correct: 'Party Hat', emoji: '🥳' },
+      { sound: 'A pretty card sent to invite your friends to come celebrate.', correct: 'Invitation', emoji: '💌' },
+      { sound: 'Tiny pieces of shiny colored paper thrown in the air to celebrate.', correct: 'Confetti', emoji: '🎊' },
+      { sound: 'A small individual cake topped with fluffy sweet frosting.', correct: 'Cupcake', emoji: '🧁' },
+      { sound: 'A silky fabric bow tied around a birthday gift box.', correct: 'Ribbon', emoji: '🎀' },
+      { sound: 'Upbeat songs played loudly so everyone can dance and sing.', correct: 'Party Music', emoji: '🎶' }
+    ];
+
+    const gameSentences = [
+      { en: "We celebrate with a delicious birthday cake", pt: "Nós comemoramos com um delicioso bolo de aniversário" },
+      { en: "Please blow out the bright glowing candles", pt: "Por favor assopre as velas acesas brilhantes" },
+      { en: "Luna wears a sparkly pink party hat", pt: "Luna usa um chapéu de festa rosa brilhante" },
+      { en: "Colorful balloons float all over the room", pt: "Balões coloridos flutuam por toda a sala" },
+      { en: "I open my big wrapped birthday present", pt: "Eu abro o meu grande presente de aniversário embrulhado" },
+      { en: "She throws shiny confetti into the air", pt: "Ela joga confete brilhante no ar" },
+      { en: "We dance happily to the party music", pt: "Nós dançamos felizes ao som da música de festa" },
+      { en: "Close your eyes and make a wish", pt: "Feche seus olhos e faça um pedido" },
+      { en: "Everyone shouts surprise with big happy smiles", pt: "Todos gritam surpresa com grandes sorrisos felizes" },
+      { en: "I love celebrating with my best friends", pt: "Eu amo comemorar com meus melhores amigos" }
+    ];
+
+    const trueFalseQuestions = [
+      { statement: "You blow out candles after making a birthday wish.", pt: "Você assopra as velas depois de fazer um pedido de aniversário.", isTrue: true, emoji: "🕯️", explanation: "Blowing out candles is a classic birthday tradition!" },
+      { statement: "Presents are always wrapped in old smelly newspapers.", pt: "Presentes são sempre embrulhados em jornais velhos e fedidos.", isTrue: false, emoji: "🎁", explanation: "Presents are wrapped in beautiful shiny paper with pretty ribbons!" },
+      { statement: "Balloons can be filled with air or helium to float.", pt: "Balões podem ser cheios de ar ou hélio para flutuar.", isTrue: true, emoji: "🎈", explanation: "Helium balloons float high up in the party room!" },
+      { statement: "A cupcake is as big as a family car.", pt: "Um cupcake é do tamanho de um carro de família.", isTrue: false, emoji: "🧁", explanation: "A cupcake is a small, individual mini cake!" },
+      { statement: "Friends sing Happy Birthday to celebrate someone's special day.", pt: "Amigos cantam Parabéns a Você para celebrar o dia especial de alguém.", isTrue: true, emoji: "🎶", explanation: "Singing Happy Birthday is a joyful moment for everyone!" },
+      { statement: "Confetti is made of tiny colorful pieces of paper.", pt: "Confete é feito de pedacinhos de papel coloridos.", isTrue: true, emoji: "🎊", explanation: "Confetti sparkles and makes celebrations magical!" },
+      { statement: "You wear a party hat on your foot like a boot.", pt: "Você usa um chapéu de festa no seu pé como uma bota.", isTrue: false, emoji: "🥳", explanation: "You wear a party hat on your HEAD!" }
+    ];
+
+    const findMistakeQuestions = [
+      { wrong: "We light the birthday cake on fire with water.", correct: "We light the CANDLES on the cake and blow them out! 🕯️", pt: "Nós acendemos as velas no bolo e as assopramos!", emoji: "🕯️" },
+      { wrong: "I wear a heavy iron pan as a party hat.", correct: "You wear a colorful, fun PARTY HAT! 🥳", pt: "Você usa um chapéu de festa colorido e divertido!", emoji: "🥳" },
+      { wrong: "We throw wet mud into the air to celebrate.", correct: "We throw colorful shiny CONFETTI into the air! 🎊", pt: "Nós jogamos confete colorido e brilhante no ar!", emoji: "🎊" },
+      { wrong: "Balloons are made of solid rock and never float.", correct: "Balloons are LIGHT and float in the air! 🎈", pt: "Balões são leves e flutuam no ar!", emoji: "🎈" },
+      { wrong: "You eat the cardboard box of the present.", correct: "You OPEN the box and enjoy your lovely PRESENT! 🎁", pt: "Você abre a caixa e aproveita seu lindo presente!", emoji: "🎁" },
+      { wrong: "Party music is made by silent vacuum cleaners.", correct: "Party music is FUN songs you dance to! 🎶", pt: "Música de festa são canções divertidas para dançar!", emoji: "🎶" }
+    ];
+
+    const tellMeQuestions = [
+      { q: "Tell me: When is your birthday? How do you celebrate it?", pt: "Me conte: Quando é o seu aniversário? Como você comemora?", emoji: "🎂" },
+      { q: "Tell me: What kind of birthday cake is your favorite: chocolate, strawberry, or vanilla?", pt: "Me conte: Qual tipo de bolo de aniversário é o seu favorito: chocolate, morango ou baunilha?", emoji: "🧁" },
+      { q: "Tell me: What was the best birthday present you have ever received?", pt: "Me conte: Qual foi o melhor presente de aniversário que você já ganhou?", emoji: "🎁" },
+      { q: "Tell me: What games do you like to play at parties with your friends?", pt: "Me conte: Quais jogos você gosta de jogar em festas com seus amigos?", emoji: "🎈" },
+      { q: "Tell me: What colors of balloons would you choose for your dream party?", pt: "Me conte: Que cores de balões você escolheria para a festa dos seus sonhos?", emoji: "🎊" },
+      { q: "Tell me: If you could make one wish right now, what would you wish for?", pt: "Me conte: Se você pudesse fazer um pedido agora mesmo, o que pediria?", emoji: "🪄" }
+    ];
+
+    // GAME — Clue Match
+    let gi = 0, gs = 0, ga = false;
+    const sq = [...gameData].sort(() => Math.random() - 0.5).slice(0, 8);
+    const tq = sq.length;
+    const allNames = gameData.map(g => g.correct);
+
+    function renderQ() {
+      ga = false;
+      const q = sq[gi];
+      document.getElementById('game-prompt').textContent = q.sound;
+      document.getElementById('game-score').innerHTML = `⭐ Score: <strong>${gs}</strong> / <span>${tq}</span>`;
+      document.getElementById('game-progress-bar').style.width = ((gi / tq) * 100) + '%';
+      document.getElementById('game-feedback').textContent = '';
+      document.getElementById('game-feedback').className = 'game-feedback';
+
+      const wrongs = allNames.filter(n => n !== q.correct).sort(() => Math.random() - 0.5).slice(0, 3);
+      const opts = [...wrongs, q.correct].sort(() => Math.random() - 0.5);
+
+      const oe = document.getElementById('game-options');
+      oe.innerHTML = '';
+      opts.forEach(opt => {
+        const itemObj = gameData.find(g => g.correct === opt);
+        const emoji = itemObj ? itemObj.emoji : '🎉';
+        const btn = document.createElement('button');
+        btn.className = 'game-option';
+        btn.textContent = `${emoji} ${opt}`;
+        btn.addEventListener('click', () => handleA(btn, opt, q.correct));
+        oe.appendChild(btn);
+      });
+    }
+
+    function handleA(btn, sel, cor) {
+      if (ga) return; ga = true;
+      const fb = document.getElementById('game-feedback');
+      document.querySelectorAll('.game-option').forEach(o => o.classList.add('disabled'));
+      if (sel === cor) {
+        gs++; btn.classList.add('correct');
+        fb.textContent = '🎉 Correct! Happy Birthday Expert!'; fb.className = 'game-feedback correct-msg';
+      } else {
+        btn.classList.add('wrong');
+        document.querySelectorAll('.game-option').forEach(o => { if (o.textContent.includes(cor)) o.classList.add('correct'); });
+        fb.textContent = `❌ That's the ${cor}!`; fb.className = 'game-feedback wrong-msg';
+      }
+      document.getElementById('game-score').innerHTML = `⭐ Score: <strong>${gs}</strong> / <span>${tq}</span>`;
+      setTimeout(() => { gi++; if (gi < tq) renderQ(); else showComplete(); }, 1500);
+    }
+
+    function showComplete() {
+      document.getElementById('game-area').style.display = 'none';
+      document.getElementById('game-complete').classList.add('active');
+      const p = Math.round((gs / tq) * 100);
+      document.getElementById('game-final-score').textContent = `You got ${gs} out of ${tq} correct! (${p}%)`;
+      document.getElementById('game-stars').textContent = p >= 90 ? '⭐⭐⭐' : p >= 60 ? '⭐⭐' : '⭐';
+      document.getElementById('game-progress-bar').style.width = '100%';
+    }
+
+    document.getElementById('game-replay-btn').addEventListener('click', () => {
+      gi = 0; gs = 0; sq.sort(() => Math.random() - 0.5);
+      document.getElementById('game-area').style.display = 'block';
+      document.getElementById('game-complete').classList.remove('active');
+      renderQ();
+    });
+    renderQ();
+  </script>
+  <script src="scenario-engine.js?v=1787856914256"></script>
+  <script src="shared-games.js?v=1787856914256"></script>
+</body>
+</html>

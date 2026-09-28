@@ -1,0 +1,276 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>🏖️ Beach &amp; Ocean Fun — Learn with Luna</title>
+  <meta name="description" content="Explore sunny beach and ocean life in English with Luna the Cat! Sandcastles, dolphins, seashells, and fun interactive games." />
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🐱</text></svg>" />
+  <link rel="stylesheet" href="styles.css?v=1787856914255" />
+  <link rel="stylesheet" href="scenario.css?v=1787856914255" />
+</head>
+<body>
+
+  <header class="header scrolled" id="app-header">
+    <div class="header-inner">
+      <a href="index.html" class="logo">
+        <img src="images/luna-logo.png" alt="Luna the Cat" class="logo-icon" />
+        <span class="logo-text">Learn with <span>Luna</span></span>
+      </a>
+      <nav class="nav-links">
+        <a href="index.html" class="nav-link">Home</a>
+        <a href="index.html#videos" class="nav-link active">Videos</a>
+        <a href="index.html#printables" class="nav-link">Printables</a>
+        <a href="index.html#about" class="nav-link">About</a>
+      </nav>
+      <button class="menu-toggle" id="menu-toggle" aria-label="Toggle menu"><span></span></button>
+    </div>
+    <nav class="nav-mobile" id="nav-mobile">
+      <a href="index.html" class="nav-link">Home</a>
+      <a href="index.html#videos" class="nav-link">Videos</a>
+      <a href="index.html#printables" class="nav-link">Printables</a>
+      <a href="index.html#about" class="nav-link">About</a>
+    </nav>
+  </header>
+
+  <section class="scenario-hero">
+    <img src="images/scene-beach.jpg" alt="Luna on a sunny tropical beach with sandcastle and dolphin" class="scenario-hero-img" loading="lazy" />
+    <div class="scenario-hero-overlay">
+      <div class="scenario-hero-icon">🏖️</div>
+      <h1 class="scenario-hero-title">Beach &amp; Ocean Fun</h1>
+      <p class="scenario-hero-subtitle">Let's build sandcastles and swim with dolphins!</p>
+    </div>
+  </section>
+
+  <div class="scenario-container">
+    <a href="index.html" class="back-btn">← Back to Home</a>
+
+    <div class="scenario-tabs" id="scenario-tabs">
+      <button class="scenario-tab active" data-tab="story">💬 Story Time</button>
+      <button class="scenario-tab" data-tab="vocab">📖 Word Garden</button>
+      <button class="scenario-tab" data-tab="learnwords">📖 Learn Words</button>
+      <button class="scenario-tab" data-tab="game">🎮 Play &amp; Learn</button>
+      <button class="scenario-tab" data-tab="memory">🃏 Matching Pairs</button>
+    </div>
+
+    <!-- TAB 1: Story -->
+    <div class="tab-panel active" id="tab-story">
+      <div class="dialogue-container" id="dialogue-container"></div>
+      <button class="dialogue-next-btn" id="dialogue-next-btn">Next Line →</button>
+      <button class="dialogue-restart-btn" id="dialogue-restart-btn">🔄 Start Over</button>
+    </div>
+
+    <!-- TAB 2: Word Garden -->
+    <div class="tab-panel" id="tab-vocab">
+      <div class="vocab-grid" id="vocab-grid"></div>
+    </div>
+
+    <!-- TAB 3: Learn Words -->
+    <div class="tab-panel" id="tab-learnwords">
+      <div class="seq-card-container">
+        <div class="seq-card" id="seq-card">
+          <div class="seq-emoji" id="seq-emoji">🏰</div>
+          <div class="seq-word" id="seq-word" style="display: none;"></div>
+          <button class="seq-translation-btn" id="seq-translation-btn">Show English</button>
+          <div class="seq-translation-text" id="seq-translation-text">Sandcastle</div>
+        </div>
+        <div class="seq-nav">
+          <button class="seq-nav-btn" id="seq-prev-btn" aria-label="Previous">←</button>
+          <button class="seq-nav-btn" id="seq-next-btn" aria-label="Next">→</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- TAB 4: Clue Match Game -->
+    <div class="tab-panel" id="tab-game">
+      <div class="game-area" id="game-area">
+        <div class="game-score" id="game-score">⭐ Score: <strong>0</strong> / <span>0</span></div>
+        <div class="game-progress"><div class="game-progress-bar" id="game-progress-bar"></div></div>
+        <div class="game-prompt">
+          <div class="game-prompt-label">Read the clue: Which beach item is this?</div>
+          <div class="game-prompt-content" id="game-prompt" style="font-size: 1.8rem;"></div>
+        </div>
+        <div class="game-options" id="game-options"></div>
+        <div class="game-feedback" id="game-feedback"></div>
+      </div>
+      <div class="game-complete" id="game-complete">
+        <div class="game-complete-emoji">🏖️</div>
+        <h2 class="game-complete-title">Beach Expert!</h2>
+        <p class="game-complete-score" id="game-final-score"></p>
+        <div class="game-stars" id="game-stars"></div>
+        <button class="game-replay-btn" id="game-replay-btn">🔄 Play Again!</button>
+      </div>
+    </div>
+
+    <!-- TAB 5: Matching Pairs -->
+    <div class="tab-panel" id="tab-memory">
+      <div class="pairs-board" id="pairs-board"></div>
+      <div class="game-complete" id="pairs-complete" style="display: none; flex-direction: column; align-items: center;">
+        <div class="game-complete-emoji">🎉</div>
+        <h2 class="game-complete-title">You Did It!</h2>
+        <p class="game-complete-score" style="font-size:1.2rem; color:var(--text-secondary);">You matched all the beach items!</p>
+        <button class="game-replay-btn" id="pairs-replay-btn">🔄 Play Again!</button>
+      </div>
+    </div>
+  </div>
+
+  <footer class="footer">
+    <div class="footer-inner">
+      <p class="footer-message">Luna loves sunny beach days with you! <span class="paw-emoji">🐾</span></p>
+      <p class="footer-copy">Made with <span class="heart">♥</span> by Learn with Luna · © 2026</p>
+    </div>
+  </footer>
+
+  <script>
+    const dialogues = [
+      { speaker: 'luna', en: "Welcome to the sunny beach! The ocean is so blue and warm today! 🏖️🌊", pt: "Bem-vinda à praia ensolarada! O oceano está tão azul e quentinho hoje! 🏖️🌊" },
+      { speaker: 'child', en: "Look Luna! Let's build a giant SANDCASTLE with shiny shells! 🏰🐚", pt: "Olha Luna! Vamos construir um CASTELO DE AREIA gigante com conchas brilhantes! 🏰🐚" },
+      { speaker: 'luna', en: "First, put on your SUNSCREEN and cool SUNGLASSES to protect your skin! 🧴🕶️", pt: "Primeiro, passe o seu PROTETOR SOLAR e óculos de sol para proteger sua pele! 🧴🕶️" },
+      { speaker: 'child', en: "All done! Wow, look out at the waves! Is that a DOLPHIN? 🐬", pt: "Prontinho! Uau, olhe lá nas ondas! Aquilo é um GOLFINHO? 🐬" },
+      { speaker: 'luna', en: "Yes! The dolphin is jumping happily! And a SEA TURTLE is swimming near the reef! 🐢✨", pt: "Sim! O golfinho está pulando feliz! E uma TARTARUGA MARINHA está nadando perto dos corais! 🐢✨" },
+      { speaker: 'child', en: "A cute little CRAB is walking sideways on the warm sand! 🦀", pt: "Um CARANGUEJINHO fofo está andando de lado na areia quentinha! 🦀" },
+      { speaker: 'luna', en: "And here is a bright orange STARFISH in the shallow tide pool! ⭐", pt: "E aqui tem uma ESTRELA-DO-MAR laranja brilhante na pocinha de maré! ⭐" },
+      { speaker: 'child', en: "Can we drink fresh sweet COCONUT water under the beach UMBRELLA? 🥥⛱️", pt: "Podemos beber água de COCO fresquinha e doce debaixo do GUARDA-SOL? 🥥⛱️" },
+      { speaker: 'luna', en: "Of course! Sit on your colorful BEACH TOWEL and enjoy the sea breeze! 🏖️💕", pt: "Claro! Sente-se na sua TOALHA DE PRAIA colorida e aproveite a brisa do mar! 🏖️💕" },
+      { speaker: 'child', en: "This is the best beach vacation ever with you, Luna! 💖🐾", pt: "Estas são as melhores férias na praia de todas com você, Luna! 💖🐾" }
+    ];
+
+    const vocabulary = [
+      { emoji: '🏰', word: 'Sandcastle', pt: 'Castelo de Areia', sound: 'Build with sand and water!' },
+      { emoji: '🐚', word: 'Seashell', pt: 'Concha', sound: 'Listen to the ocean!' },
+      { emoji: '🐬', word: 'Dolphin', pt: 'Golfinho', sound: 'Friendly ocean jumper!' },
+      { emoji: '⭐', word: 'Starfish', pt: 'Estrela-do-mar', sound: 'Five arms on the seabed!' },
+      { emoji: '🕶️', word: 'Sunglasses', pt: 'Óculos de Sol', sound: 'Cool shade for eyes!' },
+      { emoji: '🧴', word: 'Sunscreen', pt: 'Protetor Solar', sound: 'Protects skin from the sun!' },
+      { emoji: '🌊', word: 'Wave', pt: 'Onda', sound: 'Splashing blue water!' },
+      { emoji: '🏖️', word: 'Beach Towel', pt: 'Toalha de Praia', sound: 'Soft towel to dry off!' },
+      { emoji: '⛱️', word: 'Umbrella', pt: 'Guarda-sol', sound: 'Cool shade on hot sand!' },
+      { emoji: '🦀', word: 'Crab', pt: 'Caranguejo', sound: 'Walks sideways on sand!' },
+      { emoji: '🐢', word: 'Sea Turtle', pt: 'Tartaruga Marinha', sound: 'Swims gently in the sea!' },
+      { emoji: '🥥', word: 'Coconut', pt: 'Coco', sound: 'Sweet cold coconut water!' },
+      { emoji: '🩴', word: 'Flip-flops', pt: 'Chinelos', sound: 'Walk easily on warm sand!' },
+      { emoji: '🏄', word: 'Surfboard', pt: 'Prancha de Surfe', sound: 'Ride the ocean waves!' }
+    ];
+
+    const gameData = [
+      { sound: 'You build this tall magical fort on the beach using sand and water.', correct: 'Sandcastle', emoji: '🏰' },
+      { sound: 'A playful and intelligent marine friend that jumps high out of waves.', correct: 'Dolphin', emoji: '🐬' },
+      { sound: 'You put this cream on your skin so you do not get a sunburn.', correct: 'Sunscreen', emoji: '🧴' },
+      { sound: 'You wear these dark glasses to protect your eyes from bright sunlight.', correct: 'Sunglasses', emoji: '🕶️' },
+      { sound: 'A pretty hard shell you find on the beach and hold to your ear.', correct: 'Seashell', emoji: '🐚' },
+      { sound: 'A creature with five arms that rests gently on the ocean bottom.', correct: 'Starfish', emoji: '⭐' },
+      { sound: 'A small sea animal with claws that walks sideways on the sand.', correct: 'Crab', emoji: '🦀' },
+      { sound: 'A gentle sea reptile with a hard shell that swims gracefully.', correct: 'Sea Turtle', emoji: '🐢' },
+      { sound: 'A big colorful canopy that provides cool shade on the sunny beach.', correct: 'Umbrella', emoji: '⛱️' },
+      { sound: 'A long board you use to balance and ride big ocean waves.', correct: 'Surfboard', emoji: '🏄' }
+    ];
+
+    const gameSentences = [
+      { en: "I build a big sandcastle on the beach", pt: "Eu construo um grande castelo de areia na praia" },
+      { en: "The playful dolphin jumps over the blue waves", pt: "O golfinho brincalhão pula sobre as ondas azuis" },
+      { en: "Please put on sunscreen before you swim", pt: "Por favor passe protetor solar antes de nadar" },
+      { en: "She finds a beautiful pink seashell today", pt: "Ela encontra uma linda concha rosa hoje" },
+      { en: "A friendly sea turtle swims very gently", pt: "Uma tartaruga marinha amigável nada com muita suavidade" },
+      { en: "We sit under the colorful beach umbrella", pt: "Nós sentamos debaixo do guarda-sol colorido" },
+      { en: "Luna wears cute sunglasses on sunny days", pt: "Luna usa óculos de sol fofos em dias ensolarados" },
+      { en: "Cold coconut water is sweet and delicious", pt: "Água de coco gelada é doce e deliciosa" },
+      { en: "The tiny crab walks sideways on sand", pt: "O pequeno caranguejo anda de lado na areia" },
+      { en: "I dry my hands with my beach towel", pt: "Eu seco minhas mãos com a minha toalha de praia" }
+    ];
+
+    const trueFalseQuestions = [
+      { statement: "Sunscreen protects your skin from getting sunburned at the beach.", pt: "O protetor solar protege sua pele de queimaduras de sol na praia.", isTrue: true, emoji: "🧴", explanation: "Sunscreen keeps your skin safe and healthy in the sun!" },
+      { statement: "Dolphins live in trees like birds.", pt: "Golfinhos vivem em árvores como passarinhos.", isTrue: false, emoji: "🐬", explanation: "Dolphins live and swim in the OCEAN, not in trees!" },
+      { statement: "You can build sandcastles with wet sand and buckets.", pt: "Você pode construir castelos de areia com areia molhada e baldinhos.", isTrue: true, emoji: "🏰", explanation: "Sand and water make great sandcastles!" },
+      { statement: "Starfish have eight long furry tails.", pt: "Estrelas-do-mar têm oito caudas longas e peludas.", isTrue: false, emoji: "⭐", explanation: "Starfish have five arms, not furry tails!" },
+      { statement: "Sunglasses help protect your eyes on very bright sunny days.", pt: "Óculos de sol ajudam a proteger seus olhos em dias muito ensolarados.", isTrue: true, emoji: "🕶️", explanation: "Sunglasses block bright UV rays so you see clearly!" },
+      { statement: "Crabs walk sideways across the sand.", pt: "Caranguejos andam de lado pela areia.", isTrue: true, emoji: "🦀", explanation: "Crabs have a special sideways walk!" },
+      { statement: "The beach umbrella is made of heavy solid stone.", pt: "O guarda-sol de praia é feito de pedra sólida e pesada.", isTrue: false, emoji: "⛱️", explanation: "Beach umbrellas are made of fabric to provide shade and be easy to carry!" }
+    ];
+
+    const findMistakeQuestions = [
+      { wrong: "We build sandcastles using hot soup.", correct: "We build sandcastles using SAND and WATER! 🏰", pt: "Nós construímos castelos de areia usando areia e água!", emoji: "🏰" },
+      { wrong: "The dolphin flies high in the sky with wings.", correct: "The dolphin SWIMS and jumps in the ocean! 🐬", pt: "O golfinho nada e pula no oceano!", emoji: "🐬" },
+      { wrong: "I put sunscreen on my toast for breakfast.", correct: "You put sunscreen on your SKIN for sun protection! 🧴", pt: "Você passa protetor solar na sua pele para proteção do sol!", emoji: "🧴" },
+      { wrong: "We wear heavy winter coats on the hot beach.", correct: "We wear SWIMSUITS and cool clothes at the beach! 🏖️", pt: "Nós usamos roupas de banho e roupas leves na praia!", emoji: "🩴" },
+      { wrong: "Sea turtles run fast on motorcycles.", correct: "Sea turtles SWIM gracefully in the ocean! 🐢", pt: "Tartarugas marinhas nadam graciosamente no oceano!", emoji: "🐢" },
+      { wrong: "You drink warm sand from a coconut.", correct: "You drink sweet cold COCONUT WATER! 🥥", pt: "Você bebe água de coco docinha e gelada!", emoji: "🥥" }
+    ];
+
+    const tellMeQuestions = [
+      { q: "Tell me: Do you like swimming in the ocean or in a swimming pool? Why?", pt: "Me conte: Você gosta mais de nadar no oceano ou na piscina? Por quê?", emoji: "🌊" },
+      { q: "Tell me: Have you ever built a sandcastle? What did it look like?", pt: "Me conte: Você já construiu um castelo de areia? Como ele era?", emoji: "🏰" },
+      { q: "Tell me: What sea animal is your favorite: dolphin, turtle, or starfish?", pt: "Me conte: Qual animal marinho é o seu favorito: golfinho, tartaruga ou estrela-do-mar?", emoji: "🐬" },
+      { q: "Tell me: What do you always pack in your beach bag before going to the beach?", pt: "Me conte: O que você sempre coloca na sua bolsa de praia antes de ir para a praia?", emoji: "🧴" },
+      { q: "Tell me: What is your favorite beach snack or cold drink?", pt: "Me conte: Qual é o seu lanche ou bebida geladinha favorita na praia?", emoji: "🥥" },
+      { q: "Tell me: Do you like collecting seashells on the shore? What colors do you like?", pt: "Me conte: Você gosta de catar conchas na beira do mar? De que cores você gosta?", emoji: "🐚" }
+    ];
+
+    // GAME — Clue Match
+    let gi = 0, gs = 0, ga = false;
+    const sq = [...gameData].sort(() => Math.random() - 0.5).slice(0, 8);
+    const tq = sq.length;
+    const allNames = gameData.map(g => g.correct);
+
+    function renderQ() {
+      ga = false;
+      const q = sq[gi];
+      document.getElementById('game-prompt').textContent = q.sound;
+      document.getElementById('game-score').innerHTML = `⭐ Score: <strong>${gs}</strong> / <span>${tq}</span>`;
+      document.getElementById('game-progress-bar').style.width = ((gi / tq) * 100) + '%';
+      document.getElementById('game-feedback').textContent = '';
+      document.getElementById('game-feedback').className = 'game-feedback';
+
+      const wrongs = allNames.filter(n => n !== q.correct).sort(() => Math.random() - 0.5).slice(0, 3);
+      const opts = [...wrongs, q.correct].sort(() => Math.random() - 0.5);
+
+      const oe = document.getElementById('game-options');
+      oe.innerHTML = '';
+      opts.forEach(opt => {
+        const itemObj = gameData.find(g => g.correct === opt);
+        const emoji = itemObj ? itemObj.emoji : '🏖️';
+        const btn = document.createElement('button');
+        btn.className = 'game-option';
+        btn.textContent = `${emoji} ${opt}`;
+        btn.addEventListener('click', () => handleA(btn, opt, q.correct));
+        oe.appendChild(btn);
+      });
+    }
+
+    function handleA(btn, sel, cor) {
+      if (ga) return; ga = true;
+      const fb = document.getElementById('game-feedback');
+      document.querySelectorAll('.game-option').forEach(o => o.classList.add('disabled'));
+      if (sel === cor) {
+        gs++; btn.classList.add('correct');
+        fb.textContent = '🎉 Correct! You know your beach words!'; fb.className = 'game-feedback correct-msg';
+      } else {
+        btn.classList.add('wrong');
+        document.querySelectorAll('.game-option').forEach(o => { if (o.textContent.includes(cor)) o.classList.add('correct'); });
+        fb.textContent = `❌ That's the ${cor}!`; fb.className = 'game-feedback wrong-msg';
+      }
+      document.getElementById('game-score').innerHTML = `⭐ Score: <strong>${gs}</strong> / <span>${tq}</span>`;
+      setTimeout(() => { gi++; if (gi < tq) renderQ(); else showComplete(); }, 1500);
+    }
+
+    function showComplete() {
+      document.getElementById('game-area').style.display = 'none';
+      document.getElementById('game-complete').classList.add('active');
+      const p = Math.round((gs / tq) * 100);
+      document.getElementById('game-final-score').textContent = `You got ${gs} out of ${tq} correct! (${p}%)`;
+      document.getElementById('game-stars').textContent = p >= 90 ? '⭐⭐⭐' : p >= 60 ? '⭐⭐' : '⭐';
+      document.getElementById('game-progress-bar').style.width = '100%';
+    }
+
+    document.getElementById('game-replay-btn').addEventListener('click', () => {
+      gi = 0; gs = 0; sq.sort(() => Math.random() - 0.5);
+      document.getElementById('game-area').style.display = 'block';
+      document.getElementById('game-complete').classList.remove('active');
+      renderQ();
+    });
+    renderQ();
+  </script>
+  <script src="scenario-engine.js?v=1787856914255"></script>
+  <script src="shared-games.js?v=1787856914255"></script>
+</body>
+</html>

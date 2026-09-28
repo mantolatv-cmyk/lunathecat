@@ -1,0 +1,276 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>🎨 Arts, Crafts &amp; Music — Learn with Luna</title>
+  <meta name="description" content="Discover creative arts, painting, ballet, music, and crafts in English with Luna the Cat! Interactive story, flashcards, and fun games." />
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🐱</text></svg>" />
+  <link rel="stylesheet" href="styles.css?v=1787856914257" />
+  <link rel="stylesheet" href="scenario.css?v=1787856914257" />
+</head>
+<body>
+
+  <header class="header scrolled" id="app-header">
+    <div class="header-inner">
+      <a href="index.html" class="logo">
+        <img src="images/luna-logo.png" alt="Luna the Cat" class="logo-icon" />
+        <span class="logo-text">Learn with <span>Luna</span></span>
+      </a>
+      <nav class="nav-links">
+        <a href="index.html" class="nav-link">Home</a>
+        <a href="index.html#videos" class="nav-link active">Videos</a>
+        <a href="index.html#printables" class="nav-link">Printables</a>
+        <a href="index.html#about" class="nav-link">About</a>
+      </nav>
+      <button class="menu-toggle" id="menu-toggle" aria-label="Toggle menu"><span></span></button>
+    </div>
+    <nav class="nav-mobile" id="nav-mobile">
+      <a href="index.html" class="nav-link">Home</a>
+      <a href="index.html#videos" class="nav-link">Videos</a>
+      <a href="index.html#printables" class="nav-link">Printables</a>
+      <a href="index.html#about" class="nav-link">About</a>
+    </nav>
+  </header>
+
+  <section class="scenario-hero">
+    <img src="images/scene-hobbies.jpg" alt="Luna painting a rainbow on an easel surrounded by musical instruments and art supplies" class="scenario-hero-img" loading="lazy" />
+    <div class="scenario-hero-overlay">
+      <div class="scenario-hero-icon">🎨</div>
+      <h1 class="scenario-hero-title">Arts, Crafts &amp; Music</h1>
+      <p class="scenario-hero-subtitle">Let's paint rainbows, dance ballet, and play happy music!</p>
+    </div>
+  </section>
+
+  <div class="scenario-container">
+    <a href="index.html" class="back-btn">← Back to Home</a>
+
+    <div class="scenario-tabs" id="scenario-tabs">
+      <button class="scenario-tab active" data-tab="story">💬 Story Time</button>
+      <button class="scenario-tab" data-tab="vocab">📖 Word Garden</button>
+      <button class="scenario-tab" data-tab="learnwords">📖 Learn Words</button>
+      <button class="scenario-tab" data-tab="game">🎮 Play &amp; Learn</button>
+      <button class="scenario-tab" data-tab="memory">🃏 Matching Pairs</button>
+    </div>
+
+    <!-- TAB 1: Story -->
+    <div class="tab-panel active" id="tab-story">
+      <div class="dialogue-container" id="dialogue-container"></div>
+      <button class="dialogue-next-btn" id="dialogue-next-btn">Next Line →</button>
+      <button class="dialogue-restart-btn" id="dialogue-restart-btn">🔄 Start Over</button>
+    </div>
+
+    <!-- TAB 2: Word Garden -->
+    <div class="tab-panel" id="tab-vocab">
+      <div class="vocab-grid" id="vocab-grid"></div>
+    </div>
+
+    <!-- TAB 3: Learn Words -->
+    <div class="tab-panel" id="tab-learnwords">
+      <div class="seq-card-container">
+        <div class="seq-card" id="seq-card">
+          <div class="seq-emoji" id="seq-emoji">🖌️</div>
+          <div class="seq-word" id="seq-word" style="display: none;"></div>
+          <button class="seq-translation-btn" id="seq-translation-btn">Show English</button>
+          <div class="seq-translation-text" id="seq-translation-text">Paintbrush</div>
+        </div>
+        <div class="seq-nav">
+          <button class="seq-nav-btn" id="seq-prev-btn" aria-label="Previous">←</button>
+          <button class="seq-nav-btn" id="seq-next-btn" aria-label="Next">→</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- TAB 4: Clue Match Game -->
+    <div class="tab-panel" id="tab-game">
+      <div class="game-area" id="game-area">
+        <div class="game-score" id="game-score">⭐ Score: <strong>0</strong> / <span>0</span></div>
+        <div class="game-progress"><div class="game-progress-bar" id="game-progress-bar"></div></div>
+        <div class="game-prompt">
+          <div class="game-prompt-label">Read the clue: Which creative hobby item is this?</div>
+          <div class="game-prompt-content" id="game-prompt" style="font-size: 1.8rem;"></div>
+        </div>
+        <div class="game-options" id="game-options"></div>
+        <div class="game-feedback" id="game-feedback"></div>
+      </div>
+      <div class="game-complete" id="game-complete">
+        <div class="game-complete-emoji">🎨</div>
+        <h2 class="game-complete-title">Creative Genius!</h2>
+        <p class="game-complete-score" id="game-final-score"></p>
+        <div class="game-stars" id="game-stars"></div>
+        <button class="game-replay-btn" id="game-replay-btn">🔄 Play Again!</button>
+      </div>
+    </div>
+
+    <!-- TAB 5: Matching Pairs -->
+    <div class="tab-panel" id="tab-memory">
+      <div class="pairs-board" id="pairs-board"></div>
+      <div class="game-complete" id="pairs-complete" style="display: none; flex-direction: column; align-items: center;">
+        <div class="game-complete-emoji">🎉</div>
+        <h2 class="game-complete-title">You Did It!</h2>
+        <p class="game-complete-score" style="font-size:1.2rem; color:var(--text-secondary);">You matched all the creative items!</p>
+        <button class="game-replay-btn" id="pairs-replay-btn">🔄 Play Again!</button>
+      </div>
+    </div>
+  </div>
+
+  <footer class="footer">
+    <div class="footer-inner">
+      <p class="footer-message">Luna loves creating art and music with you! <span class="paw-emoji">🐾</span></p>
+      <p class="footer-copy">Made with <span class="heart">♥</span> by Learn with Luna · © 2026</p>
+    </div>
+  </footer>
+
+  <script>
+    const dialogues = [
+      { speaker: 'luna', en: "Welcome to my creative studio! Let's make wonderful art and music today! 🎨✨", pt: "Bem-vinda ao meu estúdio criativo! Vamos fazer arte e música maravilhosa hoje! 🎨✨" },
+      { speaker: 'child', en: "I love this room, Luna! Can I paint a rainbow on the CANVAS with this PAINTBRUSH? 🖌️🖼️", pt: "Eu amo esta sala, Luna! Posso pintar um arco-íris na TELA com este PINCEL? 🖌️🖼️" },
+      { speaker: 'luna', en: "Yes! Dip your brush into the PALETTE and add lots of sparkling GLITTER! 🎨✨", pt: "Sim! Mergulhe o pincel na PALETA e adicione muito GLITTER brilhante! 🎨✨" },
+      { speaker: 'child', en: "Look! I also have cute heart STICKERS and GLUE for our paper craft! ⭐🧴", pt: "Olha! Eu também tenho ADESIVOS fofos de coração e COLA para o nosso trabalho manual! ⭐🧴" },
+      { speaker: 'luna', en: "Put on your pink BALLET SHOES! Let's spin and DANCE gracefully! 🩰💃", pt: "Coloque suas SAPATILHAS DE BALÉ cor-de-rosa! Vamos girar e DANÇAR com graça! 🩰💃" },
+      { speaker: 'child', en: "One, two, three... twirl! Now let's play the PIANO and strum the GUITAR! 🎹🎸", pt: "Um, dois, três... rodopio! Agora vamos tocar o PIANO e dedilhar o VIOLÃO! 🎹🎸" },
+      { speaker: 'luna', en: "Grab the MICROPHONE and sing your favorite happy melody! 🎤🎶", pt: "Pegue o MICROFONE e cante a sua melodia alegre favorita! 🎤🎶" },
+      { speaker: 'child', en: "Say cheese! I will take a picture of you with my CAMERA! 📷✨", pt: "Diga xis! Vou tirar uma foto de você com a minha CÂMERA! 📷✨" },
+      { speaker: 'luna', en: "And before bedtime, we can read an enchanting STORYBOOK together! 📚💖", pt: "E antes de dormir, podemos ler um LIVRO DE HISTÓRIAS encantador juntas! 📚💖" },
+      { speaker: 'child', en: "Creating art and music with you is pure magic, Luna! 🐾💕", pt: "Criar arte e música com você é pura magia, Luna! 🐾💕" }
+    ];
+
+    const vocabulary = [
+      { emoji: '🖌️', word: 'Paintbrush', pt: 'Pincel', sound: 'Dip in paint and create!' },
+      { emoji: '🎨', word: 'Palette', pt: 'Paleta de Cores', sound: 'Mix all bright colors!' },
+      { emoji: '🖼️', word: 'Canvas', pt: 'Tela de Pintura', sound: 'Paint your masterpiece!' },
+      { emoji: '✨', word: 'Glitter', pt: 'Glitter / Brilho', sound: 'Sparkles and magic shine!' },
+      { emoji: '✂️', word: 'Scissors', pt: 'Tesoura', sound: 'Cut paper shapes safely!' },
+      { emoji: '🧴', word: 'Glue', pt: 'Cola', sound: 'Stick craft pieces together!' },
+      { emoji: '⭐', word: 'Stickers', pt: 'Adesivos', sound: 'Peel and stick pretty stars!' },
+      { emoji: '🩰', word: 'Ballet Shoes', pt: 'Sapatilhas de Balé', sound: 'Spin and jump on tiptoes!' },
+      { emoji: '🎸', word: 'Guitar', pt: 'Violão', sound: 'Strum sweet musical chords!' },
+      { emoji: '🎹', word: 'Piano', pt: 'Piano', sound: 'Press black and white keys!' },
+      { emoji: '🎤', word: 'Microphone', pt: 'Microfone', sound: 'Sing loud and clear!' },
+      { emoji: '📷', word: 'Camera', pt: 'Câmera', sound: 'Click and capture moments!' },
+      { emoji: '💃', word: 'Dance', pt: 'Dança', sound: 'Move with the music beat!' },
+      { emoji: '📚', word: 'Storybook', pt: 'Livro de Histórias', sound: 'Read magical adventures!' }
+    ];
+
+    const gameData = [
+      { sound: 'You use this soft bristle tool dipped in color to paint pictures on paper.', correct: 'Paintbrush', emoji: '🖌️' },
+      { sound: 'A wooden board an artist uses to hold and mix different colors of paint.', correct: 'Palette', emoji: '🎨' },
+      { sound: 'A stretched fabric frame where artists paint their colorful masterpieces.', correct: 'Canvas', emoji: '🖼️' },
+      { sound: 'Tiny shiny particles that make your crafts and paintings sparkle like magic.', correct: 'Glitter', emoji: '✨' },
+      { sound: 'Soft pink slippers worn by dancers to twirl and leap across the stage.', correct: 'Ballet Shoes', emoji: '🩰' },
+      { sound: 'A musical instrument with six strings you strum with your fingers.', correct: 'Guitar', emoji: '🎸' },
+      { sound: 'A large musical instrument with eighty-eight black and white keys.', correct: 'Piano', emoji: '🎹' },
+      { sound: 'You hold this near your mouth so everyone can hear you sing your song.', correct: 'Microphone', emoji: '🎤' },
+      { sound: 'A device with a lens that snaps beautiful photographs of your friends.', correct: 'Camera', emoji: '📷' },
+      { sound: 'You use this white sticky liquid to paste colored paper together.', correct: 'Glue', emoji: '🧴' }
+    ];
+
+    const gameSentences = [
+      { en: "I paint a colorful rainbow on the canvas", pt: "Eu pinto um arco-íris colorido na tela" },
+      { en: "Luna plays gentle chords on the acoustic guitar", pt: "Luna toca acordes suaves no violão acústico" },
+      { en: "She wears pretty pink ballet shoes to dance", pt: "Ela usa lindas sapatilhas de balé cor-de-rosa para dançar" },
+      { en: "We mix bright yellow and blue on the palette", pt: "Nós misturamos amarelo e azul brilhante na paleta" },
+      { en: "Please cut the paper carefully with the scissors", pt: "Por favor corte o papel com cuidado com a tesoura" },
+      { en: "Sparkling glitter makes the craft shine bright", pt: "O glitter brilhante faz o trabalho manual reluzir" },
+      { en: "He plays a lovely melody on the piano", pt: "Ele toca uma linda melodia no piano" },
+      { en: "She sings into the microphone with a clear voice", pt: "Ela canta no microfone com uma voz límpida" },
+      { en: "I take a sweet photo with my camera", pt: "Eu tiro uma foto fofa com a minha câmera" },
+      { en: "We read an exciting storybook before bed", pt: "Nós lemos um livro de histórias emocionante antes de dormir" }
+    ];
+
+    const trueFalseQuestions = [
+      { statement: "You use a paintbrush to apply colorful paint to a canvas.", pt: "Você usa um pincel para passar tinta colorida em uma tela.", isTrue: true, emoji: "🖌️", explanation: "A paintbrush is the main tool artists use to paint!" },
+      { statement: "Ballet shoes are made of heavy iron for hiking on mountains.", pt: "Sapatilhas de balé são feitas de ferro pesado para trilhas em montanhas.", isTrue: false, emoji: "🩰", explanation: "Ballet shoes are soft, lightweight slippers made for dancing gracefully!" },
+      { statement: "A piano has black and white keys that produce musical notes.", pt: "Um piano tem teclas pretas e brancas que produzem notas musicais.", isTrue: true, emoji: "🎹", explanation: "Pressing piano keys makes wonderful melodies!" },
+      { statement: "Glitter makes art projects sparkle and shine in the light.", pt: "O glitter faz projetos de arte brilharem e reluzirem na luz.", isTrue: true, emoji: "✨", explanation: "Glitter adds lovely sparkling effects to artwork!" },
+      { statement: "You play the guitar by kicking it with your soccer shoes.", pt: "Você toca violão chutando-o com suas chuteiras de futebol.", isTrue: false, emoji: "🎸", explanation: "You strum guitar strings with your fingers or a pick!" },
+      { statement: "A camera captures photos of memories and happy moments.", pt: "Uma câmera captura fotos de memórias e momentos felizes.", isTrue: true, emoji: "📷", explanation: "Cameras take pictures of people, places, and pets!" },
+      { statement: "Glue is used to make paper completely disappear into thin air.", pt: "A cola é usada para fazer o papel desaparecer no ar completamente.", isTrue: false, emoji: "🧴", explanation: "Glue sticks things together so they stay in place!" }
+    ];
+
+    const findMistakeQuestions = [
+      { wrong: "I paint the wall using a broom and peanut butter.", correct: "You paint pictures using a PAINTBRUSH and COLORFUL PAINT! 🖌️", pt: "Você pinta quadros usando um pincel e tintas coloridas!", emoji: "🖌️" },
+      { wrong: "She wears heavy ski boots to dance gentle ballet.", correct: "She wears soft BALLET SHOES to dance gracefully! 🩰", pt: "Ela usa sapatilhas de balé macias para dançar com graça!", emoji: "🩰" },
+      { wrong: "We play the piano by jumping on it with muddy boots.", correct: "We play the piano by pressing keys with our FINGERS! 🎹", pt: "Nós tocamos piano pressionando as teclas com os dedos!", emoji: "🎹" },
+      { wrong: "Scissors are used to drink cold water.", correct: "Scissors are used to CUT paper and fabric! ✂️", pt: "Tesouras são usadas para cortar papel e tecidos!", emoji: "✂️" },
+      { wrong: "You speak into a camera lens to hear music.", correct: "You sing into a MICROPHONE to amplify your voice! 🎤", pt: "Você canta no microfone para amplificar a sua voz!", emoji: "🎤" },
+      { wrong: "A storybook is meant to be boiled in a cooking pot.", correct: "A storybook is meant to be READ and enjoyed! 📚", pt: "Um livro de histórias serve para ser lido e apreciado!", emoji: "📚" }
+    ];
+
+    const tellMeQuestions = [
+      { q: "Tell me: What is your favorite creative hobby: painting, dancing, or playing music?", pt: "Me conte: Qual é o seu passatempo criativo favorito: pintar, dançar ou tocar música?", emoji: "🎨" },
+      { q: "Tell me: What kind of pictures do you like to draw or paint the most?", pt: "Me conte: Que tipo de desenhos você mais gosta de desenhar ou pintar?", emoji: "🖼️" },
+      { q: "Tell me: Have you ever tried dancing ballet, hip hop, or jazz? How did it feel?", pt: "Me conte: Você já experimentou dançar balé, hip hop ou jazz? Como foi?", emoji: "🩰" },
+      { q: "Tell me: What musical instrument would you love to learn to play?", pt: "Me conte: Qual instrumento musical você adoraria aprender a tocar?", emoji: "🎸" },
+      { q: "Tell me: Do you like using glitter, stickers, and colorful tape in your crafts?", pt: "Me conte: Você gosta de usar glitter, adesivos e fitas coloridas nas suas colagens?", emoji: "✨" },
+      { q: "Tell me: What is your favorite storybook to read before sleeping?", pt: "Me conte: Qual é o seu livro de histórias favorito para ler antes de dormir?", emoji: "📚" }
+    ];
+
+    // GAME — Clue Match
+    let gi = 0, gs = 0, ga = false;
+    const sq = [...gameData].sort(() => Math.random() - 0.5).slice(0, 8);
+    const tq = sq.length;
+    const allNames = gameData.map(g => g.correct);
+
+    function renderQ() {
+      ga = false;
+      const q = sq[gi];
+      document.getElementById('game-prompt').textContent = q.sound;
+      document.getElementById('game-score').innerHTML = `⭐ Score: <strong>${gs}</strong> / <span>${tq}</span>`;
+      document.getElementById('game-progress-bar').style.width = ((gi / tq) * 100) + '%';
+      document.getElementById('game-feedback').textContent = '';
+      document.getElementById('game-feedback').className = 'game-feedback';
+
+      const wrongs = allNames.filter(n => n !== q.correct).sort(() => Math.random() - 0.5).slice(0, 3);
+      const opts = [...wrongs, q.correct].sort(() => Math.random() - 0.5);
+
+      const oe = document.getElementById('game-options');
+      oe.innerHTML = '';
+      opts.forEach(opt => {
+        const itemObj = gameData.find(g => g.correct === opt);
+        const emoji = itemObj ? itemObj.emoji : '🎨';
+        const btn = document.createElement('button');
+        btn.className = 'game-option';
+        btn.textContent = `${emoji} ${opt}`;
+        btn.addEventListener('click', () => handleA(btn, opt, q.correct));
+        oe.appendChild(btn);
+      });
+    }
+
+    function handleA(btn, sel, cor) {
+      if (ga) return; ga = true;
+      const fb = document.getElementById('game-feedback');
+      document.querySelectorAll('.game-option').forEach(o => o.classList.add('disabled'));
+      if (sel === cor) {
+        gs++; btn.classList.add('correct');
+        fb.textContent = '🎉 Correct! You are a creative artist!'; fb.className = 'game-feedback correct-msg';
+      } else {
+        btn.classList.add('wrong');
+        document.querySelectorAll('.game-option').forEach(o => { if (o.textContent.includes(cor)) o.classList.add('correct'); });
+        fb.textContent = `❌ That's the ${cor}!`; fb.className = 'game-feedback wrong-msg';
+      }
+      document.getElementById('game-score').innerHTML = `⭐ Score: <strong>${gs}</strong> / <span>${tq}</span>`;
+      setTimeout(() => { gi++; if (gi < tq) renderQ(); else showComplete(); }, 1500);
+    }
+
+    function showComplete() {
+      document.getElementById('game-area').style.display = 'none';
+      document.getElementById('game-complete').classList.add('active');
+      const p = Math.round((gs / tq) * 100);
+      document.getElementById('game-final-score').textContent = `You got ${gs} out of ${tq} correct! (${p}%)`;
+      document.getElementById('game-stars').textContent = p >= 90 ? '⭐⭐⭐' : p >= 60 ? '⭐⭐' : '⭐';
+      document.getElementById('game-progress-bar').style.width = '100%';
+    }
+
+    document.getElementById('game-replay-btn').addEventListener('click', () => {
+      gi = 0; gs = 0; sq.sort(() => Math.random() - 0.5);
+      document.getElementById('game-area').style.display = 'block';
+      document.getElementById('game-complete').classList.remove('active');
+      renderQ();
+    });
+    renderQ();
+  </script>
+  <script src="scenario-engine.js?v=1787856914257"></script>
+  <script src="shared-games.js?v=1787856914257"></script>
+</body>
+</html>
